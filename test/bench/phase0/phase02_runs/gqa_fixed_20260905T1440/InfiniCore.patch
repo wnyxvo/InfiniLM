@@ -1,0 +1,49 @@
+diff --git a/src/infiniop/ops/paged_attention/cuda/kernel_v2.cuh b/src/infiniop/ops/paged_attention/cuda/kernel_v2.cuh
+index 6ed767ad..464be4e5 100644
+--- a/src/infiniop/ops/paged_attention/cuda/kernel_v2.cuh
++++ b/src/infiniop/ops/paged_attention/cuda/kernel_v2.cuh
+@@ -1010,6 +1010,14 @@ __device__ void flashAttentionDecodeSplitKvCtaKernel(
+                 acc3 = acc3 * alpha + sum_wv3;
+             }
+ 
++            // All threads consume sh_k/sh_v above; synchronize before producers
++            // overwrite this stage with the tile STAGES steps ahead.
++            if constexpr (NUM_WARPS == 1) {
++                __syncwarp();
++            } else {
++                __syncthreads();
++            }
++
+             const int prefetch_tile = tile_idx + STAGES;
+             if (prefetch_tile < num_tiles) {
+                 const int token_prefetch = token_begin + prefetch_tile * TOKENS_PER_TILE;
+@@ -1633,6 +1641,14 @@ __device__ void flashAttentionDecodeCtaKernel(
+             }
+ 
+             // Prefetch the tile that will reuse this buffer (STAGES steps ahead).
++            // All threads consume sh_k/sh_v above; synchronize before producers
++            // overwrite this stage with the tile STAGES steps ahead.
++            if constexpr (NUM_WARPS == 1) {
++                __syncwarp();
++            } else {
++                __syncthreads();
++            }
++
+             const int prefetch_tile = tile_idx + STAGES;
+             if (prefetch_tile < num_tiles) {
+                 const int token_prefetch = prefetch_tile * TOKENS_PER_TILE;
+@@ -2052,6 +2068,14 @@ __device__ void flashAttentionDecodeCtaGqaKernel(
+                 acc1[g] = acc1[g] * alpha[g] + sum_wv1[g];
+             }
+ 
++            // All threads consume sh_k/sh_v above; synchronize before producers
++            // overwrite this stage with the tile STAGES steps ahead.
++            if constexpr (NUM_WARPS == 1) {
++                __syncwarp();
++            } else {
++                __syncthreads();
++            }
++
+             const int prefetch_tile = tile_idx + STAGES;
+             if (prefetch_tile < num_tiles) {
+                 const int token_prefetch = prefetch_tile * TOKENS_PER_TILE;

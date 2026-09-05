@@ -1,0 +1,57 @@
+diff --git a/test/bench/phase0/split_control_probe.py b/test/bench/phase0/split_control_probe.py
+index a19001e..427aa7c 100644
+--- a/test/bench/phase0/split_control_probe.py
++++ b/test/bench/phase0/split_control_probe.py
+@@ -6,10 +6,10 @@ from correctness_support import Run, Native, SEED, PAGE, configure, reference, c
+ 
+ 
+ def main():
+-    p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--variant',choices=['default','gqa'],default='default');a=p.parse_args()
+-    torch.manual_seed(SEED);run=Run(a.output)
++    p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--variant',choices=['default','gqa'],default='default');p.add_argument('--repeats',type=int,default=30);p.add_argument('--seed',type=int,default=SEED);p.add_argument('--lengths',default='1,7,8,9,255,256,257,2049,1,7,8,9,255,256,257,2049');a=p.parse_args()
++    torch.manual_seed(a.seed);run=Run(a.output)
+     try:
+-        lengths=[1,7,8,9,255,256,257,2049]*2;batch=16;capacity=9
++        lengths=[int(x) for x in a.lengths.split(',')];batch=len(lengths);capacity=max(9, (max(lengths)+PAGE-1)//PAGE)
+         q=torch.randn(batch,32,128,device='cuda',dtype=torch.float16)
+         k=torch.randn(batch*capacity,8,PAGE,128,device='cuda',dtype=q.dtype)
+         v=torch.randn_like(k)
+@@ -20,7 +20,7 @@ def main():
+         ref=reference(q,k,v,table,lengths)
+         config,dispatch,trace=trace_call(call,a.variant)
+         (run.path/'dispatch.log').write_text(trace)
+-        for repeat in range(30):
++        for repeat in range(a.repeats):
+             out.fill_(float('nan'));call();torch.cuda.synchronize()
+             result=check_output(out,ref)
+             run.add(dtype=str(q.dtype),variant=a.variant,mode='eager',repeat=repeat,
+diff --git a/test/bench/phase0/test_summarize.py b/test/bench/phase0/test_summarize.py
+index 075257c..24bcfe8 100644
+--- a/test/bench/phase0/test_summarize.py
++++ b/test/bench/phase0/test_summarize.py
+@@ -18,6 +18,25 @@ class SummaryTest(unittest.TestCase):
+             self.assertIn('INCOMPLETE',result.stderr)
+             self.assertFalse(Path(tmp,'summary').exists())
+ 
++    def test_target_compare_negative_and_not_run_are_separate(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            root=Path(tmp);(root/'manifest.json').write_text('{}')
++            rows=[
++                {'dtype':'fp16','variant':'gqa','mode':'eager','result':'PASS','attention_correctness':'PASS','crosscheck_split4':'FAIL'},
++                {'dtype':'fp16','variant':'gqa','mode':'eager','result':'FAIL','attention_correctness':'FAIL','crosscheck_split4':'PASS'},
++                {'dtype':'fp16','variant':'gqa','mode':'eager','negative_control':'skip_append','detected':'True','result':'PASS'},
++                {'dtype':'bf16','variant':'gqa','mode':'graph','result':'NOT_RUN','attention_correctness':'NOT_RUN'},
++            ]
++            (root/'results.json').write_text(json.dumps(rows))
++            subprocess.run([sys.executable,str(Path(__file__).with_name('summarize.py')),
++                '--run-dir',str(root),'--output',str(root/'summary')],check=True,capture_output=True)
++            summary=json.loads((root/'summary/summary.json').read_text())
++            counts={(r['test_kind'],r['dtype'],r['variant'],r['mode'],r['result']):r['count'] for r in summary['correctness_counts']}
++            self.assertEqual(counts[('positive','fp16','gqa','eager','PASS')],1)
++            self.assertEqual(counts[('positive','fp16','gqa','eager','FAIL')],1)
++            self.assertEqual(counts[('negative_control','fp16','gqa','eager','PASS')],1)
++            self.assertEqual(counts[('positive','bf16','gqa','graph','NOT_RUN')],1)
++
+     def test_raw_immutable_and_graph_pass_not_inferred(self):
+         with tempfile.TemporaryDirectory() as tmp:
+             root=Path(tmp);(root/'manifest.json').write_text('{"historical_hash":"UNKNOWN"}')

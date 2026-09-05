@@ -18,25 +18,6 @@ class SummaryTest(unittest.TestCase):
             self.assertIn('INCOMPLETE',result.stderr)
             self.assertFalse(Path(tmp,'summary').exists())
 
-    def test_target_compare_negative_and_not_run_are_separate(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            root=Path(tmp);(root/'manifest.json').write_text('{}')
-            rows=[
-                {'dtype':'fp16','variant':'gqa','mode':'eager','result':'PASS','attention_correctness':'PASS','crosscheck_split4':'FAIL'},
-                {'dtype':'fp16','variant':'gqa','mode':'eager','result':'FAIL','attention_correctness':'FAIL','crosscheck_split4':'PASS'},
-                {'dtype':'fp16','variant':'gqa','mode':'eager','negative_control':'skip_append','detected':'True','result':'PASS'},
-                {'dtype':'bf16','variant':'gqa','mode':'graph','result':'NOT_RUN','attention_correctness':'NOT_RUN'},
-            ]
-            (root/'results.json').write_text(json.dumps(rows))
-            subprocess.run([sys.executable,str(Path(__file__).with_name('summarize.py')),
-                '--run-dir',str(root),'--output',str(root/'summary')],check=True,capture_output=True)
-            summary=json.loads((root/'summary/summary.json').read_text())
-            counts={(r['test_kind'],r['dtype'],r['variant'],r['mode'],r['result']):r['count'] for r in summary['correctness_counts']}
-            self.assertEqual(counts[('positive','fp16','gqa','eager','PASS')],1)
-            self.assertEqual(counts[('positive','fp16','gqa','eager','FAIL')],1)
-            self.assertEqual(counts[('negative_control','fp16','gqa','eager','PASS')],1)
-            self.assertEqual(counts[('positive','bf16','gqa','graph','NOT_RUN')],1)
-
     def test_raw_immutable_and_graph_pass_not_inferred(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);(root/'manifest.json').write_text('{"historical_hash":"UNKNOWN"}')

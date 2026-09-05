@@ -6,10 +6,10 @@ from correctness_support import Run, Native, SEED, PAGE, configure, reference, c
 
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--variant',choices=['default','gqa'],default='default');p.add_argument('--repeats',type=int,default=30);p.add_argument('--seed',type=int,default=SEED);p.add_argument('--lengths',default='1,7,8,9,255,256,257,2049,1,7,8,9,255,256,257,2049');a=p.parse_args()
-    torch.manual_seed(a.seed);run=Run(a.output)
+    p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--variant',choices=['default','gqa'],default='default');p.add_argument('--repeats',type=int,default=30);a=p.parse_args()
+    torch.manual_seed(SEED);run=Run(a.output)
     try:
-        lengths=[int(x) for x in a.lengths.split(',')];batch=len(lengths);capacity=max(9, (max(lengths)+PAGE-1)//PAGE)
+        lengths=[1,7,8,9,255,256,257,2049]*2;batch=16;capacity=9
         q=torch.randn(batch,32,128,device='cuda',dtype=torch.float16)
         k=torch.randn(batch*capacity,8,PAGE,128,device='cuda',dtype=q.dtype)
         v=torch.randn_like(k)

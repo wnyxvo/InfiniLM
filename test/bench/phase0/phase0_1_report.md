@@ -5,7 +5,7 @@
 
 ## 结论
 
-修复前的 GQA 错误已独立复现。修复后，独立 append reference、native/Flash provider、InfiniCore Graph、memcheck、racecheck 和 30 次稳定性回归通过；完整 bounded matrix 为 215/216 PASS。仍有一个完整回归中观察到的 FP16 `auto/eager` 失败（同一 mixed16 诊断复跑通过），`synccheck` 运行在 instrumentation 下出现数值失败，且既有 Split-KV（Split4）在旧库和修复库都存在残余失败。因此本阶段总体为 **PARTIAL**，不进入下一阶段优化；需先收敛剩余数值问题。
+修复前的 GQA 错误已独立复现。修复后，独立 append reference、native/Flash provider、InfiniCore Graph、memcheck、racecheck 和 30 次稳定性回归通过；完整 bounded matrix 为 215/216 PASS。完整回归唯一失败行实际是 FP16 mixed16 auto/eager 的 Split4 对照失败；该行 `attention_correctness=PASS`、`eager_correctness=PASS`，不能归因于被测 GQA/auto 输出。，`synccheck` 运行在 instrumentation 下出现数值失败，且既有 Split-KV（Split4）在旧库和修复库都存在残余失败。因此本阶段总体为 **PARTIAL**，不进入下一阶段优化；需先收敛剩余数值问题。
 
 ## 修复
 
@@ -29,7 +29,7 @@ Phase 0 原始 JSON/log 未改写；归档清单和 SHA256 在 `phase01_runs/arc
 | 检查 | 结果 | 证据 |
 |---|---:|---|
 | 修复前 GQA | **REPRODUCED**（manifest exit 1） | `pre_fix_20260905T1218` |
-| 修复后 bounded GQA | **PARTIAL**，215/216 PASS；另有 `gqa_stability` 30/30 PASS | `post_fix_20260905T1237`, `gqa_stability_20260905T1305`, `mixed16_diagnostic_20260905T1243` |
+| 修复后 bounded GQA | **PASS**，目标 attention 216/216 PASS；综合 215/216 是 Split4 对照失败；另有 `gqa_stability` 30/30 PASS | `post_fix_20260905T1237`, `gqa_stability_20260905T1305`, `mixed16_diagnostic_20260905T1243` |
 | 独立 append native | **PASS**，80/80（40 eager、40 InfiniCore Graph） | `provider_fixed_20260905T1240` |
 | Flash provider | **PASS**，16/16（8 eager、8 Graph） | `provider_flash_20260905T1255` |
 | 负对照 | **PASS**，skip-append 12/12、corrupt-write 12/12 被检出 | provider runs |
@@ -52,3 +52,8 @@ Phase 0.1 的修复和独立验证可以作为后续工作的 correctness prereq
 
 - InfiniCore：`fix(paged-attention): publish GQA normalization factors from owner thread`
 - InfiniLM：`test(phase0): harden GQA and append reference provenance`
+
+
+## Phase 0.2 归因勘误
+
+Phase 0.1 的唯一综合失败被重新核对为对照 kernel（Split4）失败，目标 GQA attention 与 eager 输出均 PASS。Phase 0.2 固定输入 100 次旧库 69/100、加入消费者完成同步后的全实例化修复库 100/100，见 `phase02_runs/`。

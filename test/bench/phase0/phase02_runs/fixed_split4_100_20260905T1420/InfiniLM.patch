@@ -1,0 +1,22 @@
+diff --git a/test/bench/phase0/split_control_probe.py b/test/bench/phase0/split_control_probe.py
+index a19001e..0827bd0 100644
+--- a/test/bench/phase0/split_control_probe.py
++++ b/test/bench/phase0/split_control_probe.py
+@@ -6,7 +6,7 @@ from correctness_support import Run, Native, SEED, PAGE, configure, reference, c
+ 
+ 
+ def main():
+-    p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--variant',choices=['default','gqa'],default='default');a=p.parse_args()
++    p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--variant',choices=['default','gqa'],default='default');p.add_argument('--repeats',type=int,default=30);a=p.parse_args()
+     torch.manual_seed(SEED);run=Run(a.output)
+     try:
+         lengths=[1,7,8,9,255,256,257,2049]*2;batch=16;capacity=9
+@@ -20,7 +20,7 @@ def main():
+         ref=reference(q,k,v,table,lengths)
+         config,dispatch,trace=trace_call(call,a.variant)
+         (run.path/'dispatch.log').write_text(trace)
+-        for repeat in range(30):
++        for repeat in range(a.repeats):
+             out.fill_(float('nan'));call();torch.cuda.synchronize()
+             result=check_output(out,ref)
+             run.add(dtype=str(q.dtype),variant=a.variant,mode='eager',repeat=repeat,
