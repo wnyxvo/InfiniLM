@@ -1,4 +1,4 @@
-"""Recompile all NVIDIA paged-attention translation units using kernel_v2.cuh and relink into a NEW prefix.
+"""Recompile only hd128 and relink from existing XMake objects into a NEW prefix.
 
 No install, dependency download, global override, or mutation of old build objects.
 The existing XMake .d files are used as recorded compiler/linker flags.

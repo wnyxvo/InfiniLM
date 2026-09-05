@@ -1,4 +1,4 @@
-"""Recompile all NVIDIA paged-attention translation units using kernel_v2.cuh and relink into a NEW prefix.
+"""Recompile only hd128 and relink from existing XMake objects into a NEW prefix.
 
 No install, dependency download, global override, or mutation of old build objects.
 The existing XMake .d files are used as recorded compiler/linker flags.
@@ -40,17 +40,10 @@ def main():
         if lib.name!='libinfiniop.so':(libdir/lib.name).symlink_to(lib)
     dep=core/'build/.deps'
     stem='infiniop-nvidia/linux/x86_64/release'
-    cus=[
-        'src/infiniop/ops/paged_attention/nvidia/paged_attention_hd64.cu',
-        'src/infiniop/ops/paged_attention/nvidia/paged_attention_hd128.cu',
-        'src/infiniop/ops/paged_attention/nvidia/paged_attention_hd192.cu',
-        'src/infiniop/ops/paged_attention/nvidia/paged_attention_hd256.cu',
-        'src/infiniop/ops/paged_attention/nvidia/paged_attention_hd576.cu',
-        'src/infiniop/ops/paged_attention/nvidia/paged_attention_mla_hd576_v512.cu',
-    ]
+    cu='src/infiniop/ops/paged_attention/nvidia/paged_attention_hd128.cu'
     dlink='rules/cuda/devlink/infiniop-nvidia_gpucode.cu.o'
-    oldobjs=['build/.objs/'+stem+'/'+cu+'.o' for cu in cus]
-    newobjs=[objdir/(Path(cu).name+'.o') for cu in cus]
+    oldobj='build/.objs/'+stem+'/'+cu+'.o'
+    newobj=objdir/'paged_attention_hd128.cu.o'
     newlink=objdir/'infiniop-nvidia_gpucode.cu.o'
     manifest={'command':[sys.executable,*sys.argv],'core':str(core),'prefix':str(prefix),
               'core_sha':subprocess.check_output(['git','rev-parse','HEAD'],cwd=core,text=True).strip(),
@@ -65,20 +58,17 @@ def main():
         manifest['commands'].append({'argv':cmd,'exit_code':proc.returncode})
         (a.evidence/'build.json').write_text(json.dumps(manifest,indent=2))
         proc.check_returncode()
-    arch_flags=[]
-    for cu,newobj in zip(cus,newobjs):
-        _,flags=recipe(dep/stem/(cu+'.o.d'))
-        if not arch_flags: arch_flags=[flag for flag in flags if flag.startswith('-gencode=')]
-        if not arch_flags: raise RuntimeError('Missing compile architecture')
-        run([flags[0],'-c',*flags[1:],cu,'-o',str(newobj)])
+    _,flags=recipe(dep/stem/(cu+'.o.d'))
+    arch_flags=[flag for flag in flags if flag.startswith('-gencode=')]
+    if not arch_flags:raise RuntimeError('Missing compile architecture')
+    run([flags[0],'-c',*flags[1:],cu,'-o',str(newobj)])
     inputs,flags=recipe(dep/stem/(dlink+'.d'))
-    for name in inputs: manifest['inputs'][name]=sha(core/name)
-    for oldobj,newobj in zip(oldobjs,newobjs):
-        inputs=[str(newobj) if name==oldobj else name for name in inputs]
+    for name in inputs:manifest['inputs'][name]=sha(core/name)
+    inputs=[str(newobj) if name==oldobj else name for name in inputs]
     run([flags[0],*inputs,*flags[1:],*arch_flags,'-o',str(newlink)])
     archive=libdir/'libinfiniop-nvidia.a'
     shutil.copy2(core/'build/linux/x86_64/release/libinfiniop-nvidia.a',archive)
-    run(['/usr/bin/ar','r',str(archive),*(str(x) for x in newobjs),str(newlink)])
+    run(['/usr/bin/ar','r',str(archive),str(newobj),str(newlink)])
     inputs,flags=recipe(dep/'infiniop/linux/x86_64/release/libinfiniop.so.d')
     for name in inputs:manifest['inputs'][name]=sha(core/name)
     objects=[name for name in inputs if name.endswith('.o')]

@@ -1,0 +1,1111 @@
+{
+  "phase": "0.2A",
+  "generated_from": "local files only",
+  "historical_originals_present": [
+    "phase02_runs/baseline_split4_100_20260905T1400",
+    "phase02_runs/fixed_split4_100_20260905T1420",
+    "phase02_runs/gqa_fixed_20260905T1440",
+    "phase02_runs/provider_fixed_20260905T1450",
+    "phase02_runs/memcheck_20260905T1500",
+    "phase02_runs/racecheck_20260905T1510",
+    "phase02_runs/synccheck_20260905T1520"
+  ],
+  "entries": [
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_split4_100_20260905T1630/InfiniCore.patch",
+      "category": "source_snapshot",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_split4_100_20260905T1630/InfiniLM.patch",
+      "category": "source_snapshot",
+      "sha256": "3b9389b828468d8467ed284cc47204919ad0275e922d2b492a0d4519818b7751",
+      "bytes": 11647,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_split4_100_20260905T1630/dispatch.log",
+      "category": "run_result",
+      "sha256": "69ea0d80ee12216b6c5fc604a14aaeb2afd51e544cedbfa575c28bbcf99cc4db",
+      "bytes": 200,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_split4_100_20260905T1630/manifest.json",
+      "category": "run_result",
+      "sha256": "4a13b7f60e5e3c7e5570a0e91dc3440041ad49a4f4d90910302e262f4fbaecd4",
+      "bytes": 10902,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_split4_100_20260905T1630/results.json",
+      "category": "run_result",
+      "sha256": "08ea93af78a1a77309988bd6b85cc3c79af501b46da79187a0f3dc63bb3d7b1f",
+      "bytes": 402406,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_split4_100_20260905T1630/scripts/build_gqa_isolated.py",
+      "category": "other",
+      "sha256": "32bb7796781fde3fe6f8e9819edf206f931d8ea946a37864e0986ef52376da65",
+      "bytes": 3869,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_split4_100_20260905T1630/scripts/build_phase02_isolated.py",
+      "category": "other",
+      "sha256": "9c2e078b483eca42234c7fb1d9b2f66f65bf938ee01be4ba835f46e04dcb4813",
+      "bytes": 4461,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_split4_100_20260905T1630/scripts/correctness_support.py",
+      "category": "other",
+      "sha256": "ec872d14d767866586f6dae895aa0e5c4c4ca9d1db3ce7cba29ebda216d05d6a",
+      "bytes": 8941,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_split4_100_20260905T1630/scripts/environment_audit.py",
+      "category": "other",
+      "sha256": "f145c9445d4fd3bf5f542bf27b823586376f92d1612009a2d7d226a1ddd7af42",
+      "bytes": 1414,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_split4_100_20260905T1630/scripts/gqa_regression.py",
+      "category": "other",
+      "sha256": "f485cc668169604ffac4f0f62141b0eecacfa652f45006583b127fd272d8f941",
+      "bytes": 5693,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_split4_100_20260905T1630/scripts/native_baseline.py",
+      "category": "other",
+      "sha256": "d45c37309213172379974515b39b8a287c675e43d87454e3dd68cde9ee2a7f01",
+      "bytes": 13054,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_split4_100_20260905T1630/scripts/provider_replay.py",
+      "category": "other",
+      "sha256": "0b0ae4e25c31c489f794caa4cc664d18d291eb32b97fa2125fe8706232f0f3dd",
+      "bytes": 8703,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_split4_100_20260905T1630/scripts/split_control_probe.py",
+      "category": "other",
+      "sha256": "af13fb766814cff96c890d1a4153746da20fbf4a4031df01a9bab3a086af2d6b",
+      "bytes": 2914,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_split4_100_20260905T1630/scripts/summarize.py",
+      "category": "other",
+      "sha256": "20122446aead8b0d726236fddaf7a4e52c5c469266af0d0ec1d6dacd0d756da1",
+      "bytes": 5568,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_split4_100_20260905T1630/scripts/test_summarize.py",
+      "category": "other",
+      "sha256": "47a9212ca1634aa8a5aa436bcd5a6cea2ceb6560b289e989d3dcd5be6a7dc305",
+      "bytes": 3810,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_split4_100_20260905T1630/scripts/upstream_regression.py",
+      "category": "other",
+      "sha256": "fcfe8bc668219dab278176e099163c64681d46f279075ee31a9d177afa79f46b",
+      "bytes": 1035,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_summary/latency_summary.csv",
+      "category": "derived_summary",
+      "sha256": "74c3f7e0919a76b1910f2bf4d45375931ee503cf13e28070cc86313253aaea6a",
+      "bytes": 62,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_summary/summary.json",
+      "category": "derived_summary",
+      "sha256": "3dc605d7f32f5789fccfd3a372bec0209aa644719d6bf0415b4bdd89eca2f8a2",
+      "bytes": 1040,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/A_c033_summary/verdicts.json",
+      "category": "derived_summary",
+      "sha256": "252aae932d0a3615568c786c4323201cf73c881dbaf3ad9be43a3e82a4fc5b00",
+      "bytes": 30992,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640/InfiniCore.patch",
+      "category": "source_snapshot",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640/InfiniLM.patch",
+      "category": "source_snapshot",
+      "sha256": "3b9389b828468d8467ed284cc47204919ad0275e922d2b492a0d4519818b7751",
+      "bytes": 11647,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640/dispatch.log",
+      "category": "run_result",
+      "sha256": "69ea0d80ee12216b6c5fc604a14aaeb2afd51e544cedbfa575c28bbcf99cc4db",
+      "bytes": 200,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640/manifest.json",
+      "category": "run_result",
+      "sha256": "5da940fbfc1eda5a598e362d18631c9949accb0bf1646161484c2f8bbe2097d9",
+      "bytes": 10982,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640/results.json",
+      "category": "run_result",
+      "sha256": "2dd2cb9951d7987bbf4107ddfc1b33ae92ef5727301dddf78641a69560ee974c",
+      "bytes": 219092,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640/scripts/build_gqa_isolated.py",
+      "category": "other",
+      "sha256": "32bb7796781fde3fe6f8e9819edf206f931d8ea946a37864e0986ef52376da65",
+      "bytes": 3869,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640/scripts/build_phase02_isolated.py",
+      "category": "other",
+      "sha256": "9c2e078b483eca42234c7fb1d9b2f66f65bf938ee01be4ba835f46e04dcb4813",
+      "bytes": 4461,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640/scripts/correctness_support.py",
+      "category": "other",
+      "sha256": "ec872d14d767866586f6dae895aa0e5c4c4ca9d1db3ce7cba29ebda216d05d6a",
+      "bytes": 8941,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640/scripts/environment_audit.py",
+      "category": "other",
+      "sha256": "f145c9445d4fd3bf5f542bf27b823586376f92d1612009a2d7d226a1ddd7af42",
+      "bytes": 1414,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640/scripts/gqa_regression.py",
+      "category": "other",
+      "sha256": "f485cc668169604ffac4f0f62141b0eecacfa652f45006583b127fd272d8f941",
+      "bytes": 5693,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640/scripts/native_baseline.py",
+      "category": "other",
+      "sha256": "d45c37309213172379974515b39b8a287c675e43d87454e3dd68cde9ee2a7f01",
+      "bytes": 13054,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640/scripts/provider_replay.py",
+      "category": "other",
+      "sha256": "0b0ae4e25c31c489f794caa4cc664d18d291eb32b97fa2125fe8706232f0f3dd",
+      "bytes": 8703,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640/scripts/split_control_probe.py",
+      "category": "other",
+      "sha256": "af13fb766814cff96c890d1a4153746da20fbf4a4031df01a9bab3a086af2d6b",
+      "bytes": 2914,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640/scripts/summarize.py",
+      "category": "other",
+      "sha256": "20122446aead8b0d726236fddaf7a4e52c5c469266af0d0ec1d6dacd0d756da1",
+      "bytes": 5568,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640/scripts/test_summarize.py",
+      "category": "other",
+      "sha256": "47a9212ca1634aa8a5aa436bcd5a6cea2ceb6560b289e989d3dcd5be6a7dc305",
+      "bytes": 3810,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640/scripts/upstream_regression.py",
+      "category": "other",
+      "sha256": "fcfe8bc668219dab278176e099163c64681d46f279075ee31a9d177afa79f46b",
+      "bytes": 1035,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_summary/latency_summary.csv",
+      "category": "derived_summary",
+      "sha256": "74c3f7e0919a76b1910f2bf4d45375931ee503cf13e28070cc86313253aaea6a",
+      "bytes": 62,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_summary/summary.json",
+      "category": "derived_summary",
+      "sha256": "dae264b3ab0c9946b8d2b15a1b2cb291a5c475bdd7ebc8734dc16bce44f928be",
+      "bytes": 872,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/B_bd17_summary/verdicts.json",
+      "category": "derived_summary",
+      "sha256": "5d72be13e5b19895d34eaca75440016f4971be12178b3f99cebd9a2b9b6ffc86",
+      "bytes": 30992,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/baseline_split4_100_20260905T1400/InfiniCore.patch",
+      "category": "source_snapshot",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/baseline_split4_100_20260905T1400/InfiniLM.patch",
+      "category": "source_snapshot",
+      "sha256": "9430c0156d07642ae34373f23d762891f915407d979bee9066376eddd3b0940e",
+      "bytes": 1289,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/baseline_split4_100_20260905T1400/dispatch.log",
+      "category": "run_result",
+      "sha256": "69ea0d80ee12216b6c5fc604a14aaeb2afd51e544cedbfa575c28bbcf99cc4db",
+      "bytes": 200,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/baseline_split4_100_20260905T1400/manifest.json",
+      "category": "run_result",
+      "sha256": "8ec84099ebd8f6ea3277cb42ece165a51c79ced00e89927715f4848876857f4f",
+      "bytes": 8736,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/baseline_split4_100_20260905T1400/results.json",
+      "category": "run_result",
+      "sha256": "fa3dba071a54d085ce5f25da1f01cea9382851b02720bd73124863ec75f71241",
+      "bytes": 184137,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/baseline_split4_100_20260905T1400/scripts/build_gqa_isolated.py",
+      "category": "other",
+      "sha256": "32bb7796781fde3fe6f8e9819edf206f931d8ea946a37864e0986ef52376da65",
+      "bytes": 3869,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/baseline_split4_100_20260905T1400/scripts/correctness_support.py",
+      "category": "other",
+      "sha256": "ec872d14d767866586f6dae895aa0e5c4c4ca9d1db3ce7cba29ebda216d05d6a",
+      "bytes": 8941,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/baseline_split4_100_20260905T1400/scripts/environment_audit.py",
+      "category": "other",
+      "sha256": "f145c9445d4fd3bf5f542bf27b823586376f92d1612009a2d7d226a1ddd7af42",
+      "bytes": 1414,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/baseline_split4_100_20260905T1400/scripts/gqa_regression.py",
+      "category": "other",
+      "sha256": "f485cc668169604ffac4f0f62141b0eecacfa652f45006583b127fd272d8f941",
+      "bytes": 5693,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/baseline_split4_100_20260905T1400/scripts/native_baseline.py",
+      "category": "other",
+      "sha256": "d45c37309213172379974515b39b8a287c675e43d87454e3dd68cde9ee2a7f01",
+      "bytes": 13054,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/baseline_split4_100_20260905T1400/scripts/provider_replay.py",
+      "category": "other",
+      "sha256": "0b0ae4e25c31c489f794caa4cc664d18d291eb32b97fa2125fe8706232f0f3dd",
+      "bytes": 8703,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/baseline_split4_100_20260905T1400/scripts/split_control_probe.py",
+      "category": "other",
+      "sha256": "dc7592a6bb30e6d65e948bd3a335c6b0dae6b2fdecda5832ff1db7dfeeeb0cd5",
+      "bytes": 1707,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/baseline_split4_100_20260905T1400/scripts/summarize.py",
+      "category": "other",
+      "sha256": "f30cb6ccaf8465bee8108269acae8a0c68dd4c394690fdffddb5d2777b28cfa1",
+      "bytes": 3693,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/baseline_split4_100_20260905T1400/scripts/test_summarize.py",
+      "category": "other",
+      "sha256": "11dfcdfee3fa8415d05cfad06fccce24845e4a084ccce2d27da1efce4e545a05",
+      "bytes": 2263,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/baseline_split4_100_20260905T1400/scripts/upstream_regression.py",
+      "category": "other",
+      "sha256": "fcfe8bc668219dab278176e099163c64681d46f279075ee31a9d177afa79f46b",
+      "bytes": 1035,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/baseline_split4_100_20260905T1400_summary_0p2a/latency_summary.csv",
+      "category": "derived_summary",
+      "sha256": "74c3f7e0919a76b1910f2bf4d45375931ee503cf13e28070cc86313253aaea6a",
+      "bytes": 62,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/baseline_split4_100_20260905T1400_summary_0p2a/summary.json",
+      "category": "derived_summary",
+      "sha256": "13e870f541a481431ee03d47414fc40bf6053b6f5da5cf9dc2c5e8ed9e17df61",
+      "bytes": 1046,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/baseline_split4_100_20260905T1400_summary_0p2a/verdicts.json",
+      "category": "derived_summary",
+      "sha256": "1039b149619c943daa0026dc33700b81f4d28a57d1aab5e7a6b8b769b41511fc",
+      "bytes": 30992,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/build_A_c033_20260905T1600/InfiniCore.patch",
+      "category": "build_provenance",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/build_A_c033_20260905T1600/build.json",
+      "category": "build_provenance",
+      "sha256": "9cb24bb36b9e0535c8d4992e7d93e078451ccd31823042be91414434f207469e",
+      "bytes": 112548,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/build_A_c033_20260905T1600/build.log",
+      "category": "build_provenance",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/build_sm89_20260905T1410/InfiniCore.patch",
+      "category": "build_provenance",
+      "sha256": "f2d5e23fb26d7849b9084d0f911f1ad561a6bc520327bdad816c126b44e373cc",
+      "bytes": 2193,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/build_sm89_20260905T1410/build.json",
+      "category": "build_provenance",
+      "sha256": "c12b586577c09ec87f60ec4bed53dc8772811c465febd4bc5d87f291ef5eda33",
+      "bytes": 112615,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/build_sm89_20260905T1410/build.log",
+      "category": "build_provenance",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420/InfiniCore.patch",
+      "category": "source_snapshot",
+      "sha256": "f2d5e23fb26d7849b9084d0f911f1ad561a6bc520327bdad816c126b44e373cc",
+      "bytes": 2193,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420/InfiniLM.patch",
+      "category": "source_snapshot",
+      "sha256": "9430c0156d07642ae34373f23d762891f915407d979bee9066376eddd3b0940e",
+      "bytes": 1289,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420/dispatch.log",
+      "category": "run_result",
+      "sha256": "69ea0d80ee12216b6c5fc604a14aaeb2afd51e544cedbfa575c28bbcf99cc4db",
+      "bytes": 200,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420/manifest.json",
+      "category": "run_result",
+      "sha256": "f0a216152f7b92ffa00af846088612f09b9115a3257a654c52a18369acb0c1eb",
+      "bytes": 9019,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420/results.json",
+      "category": "run_result",
+      "sha256": "f0e2e5d7c5d0d4ecbacf8cfd866d35856a58b6b05c788605e88c31b031e90d4c",
+      "bytes": 183892,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420/scripts/build_gqa_isolated.py",
+      "category": "other",
+      "sha256": "32bb7796781fde3fe6f8e9819edf206f931d8ea946a37864e0986ef52376da65",
+      "bytes": 3869,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420/scripts/build_phase02_isolated.py",
+      "category": "other",
+      "sha256": "9c2e078b483eca42234c7fb1d9b2f66f65bf938ee01be4ba835f46e04dcb4813",
+      "bytes": 4461,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420/scripts/correctness_support.py",
+      "category": "other",
+      "sha256": "ec872d14d767866586f6dae895aa0e5c4c4ca9d1db3ce7cba29ebda216d05d6a",
+      "bytes": 8941,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420/scripts/environment_audit.py",
+      "category": "other",
+      "sha256": "f145c9445d4fd3bf5f542bf27b823586376f92d1612009a2d7d226a1ddd7af42",
+      "bytes": 1414,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420/scripts/gqa_regression.py",
+      "category": "other",
+      "sha256": "f485cc668169604ffac4f0f62141b0eecacfa652f45006583b127fd272d8f941",
+      "bytes": 5693,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420/scripts/native_baseline.py",
+      "category": "other",
+      "sha256": "d45c37309213172379974515b39b8a287c675e43d87454e3dd68cde9ee2a7f01",
+      "bytes": 13054,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420/scripts/provider_replay.py",
+      "category": "other",
+      "sha256": "0b0ae4e25c31c489f794caa4cc664d18d291eb32b97fa2125fe8706232f0f3dd",
+      "bytes": 8703,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420/scripts/split_control_probe.py",
+      "category": "other",
+      "sha256": "dc7592a6bb30e6d65e948bd3a335c6b0dae6b2fdecda5832ff1db7dfeeeb0cd5",
+      "bytes": 1707,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420/scripts/summarize.py",
+      "category": "other",
+      "sha256": "f30cb6ccaf8465bee8108269acae8a0c68dd4c394690fdffddb5d2777b28cfa1",
+      "bytes": 3693,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420/scripts/test_summarize.py",
+      "category": "other",
+      "sha256": "11dfcdfee3fa8415d05cfad06fccce24845e4a084ccce2d27da1efce4e545a05",
+      "bytes": 2263,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420/scripts/upstream_regression.py",
+      "category": "other",
+      "sha256": "fcfe8bc668219dab278176e099163c64681d46f279075ee31a9d177afa79f46b",
+      "bytes": 1035,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420_summary_0p2a/latency_summary.csv",
+      "category": "derived_summary",
+      "sha256": "74c3f7e0919a76b1910f2bf4d45375931ee503cf13e28070cc86313253aaea6a",
+      "bytes": 62,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420_summary_0p2a/summary.json",
+      "category": "derived_summary",
+      "sha256": "84229548027c11e1a26c269ed7a6802755e8547af1ffc580cdbd67d3e799adac",
+      "bytes": 869,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_100_20260905T1420_summary_0p2a/verdicts.json",
+      "category": "derived_summary",
+      "sha256": "5d72be13e5b19895d34eaca75440016f4971be12178b3f99cebd9a2b9b6ffc86",
+      "bytes": 30992,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_second_50_20260905T1430/InfiniCore.patch",
+      "category": "source_snapshot",
+      "sha256": "f2d5e23fb26d7849b9084d0f911f1ad561a6bc520327bdad816c126b44e373cc",
+      "bytes": 2193,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_second_50_20260905T1430/InfiniLM.patch",
+      "category": "source_snapshot",
+      "sha256": "c37728c6da91d539c7813ff5f668dd082ef08548bb90f4a8c1bd451e962cd6c7",
+      "bytes": 1775,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_second_50_20260905T1430/dispatch.log",
+      "category": "run_result",
+      "sha256": "69ea0d80ee12216b6c5fc604a14aaeb2afd51e544cedbfa575c28bbcf99cc4db",
+      "bytes": 200,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_second_50_20260905T1430/manifest.json",
+      "category": "run_result",
+      "sha256": "8291d163ad57d7ad4d536d3b98e4cc28fef40835acfa299e85bad42d14b684e7",
+      "bytes": 9146,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_second_50_20260905T1430/results.json",
+      "category": "run_result",
+      "sha256": "e06ab54eac3372d35473870aaff78559645321d632f8b31a812f410b6af8665d",
+      "bytes": 92242,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_second_50_20260905T1430/scripts/build_gqa_isolated.py",
+      "category": "other",
+      "sha256": "32bb7796781fde3fe6f8e9819edf206f931d8ea946a37864e0986ef52376da65",
+      "bytes": 3869,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_second_50_20260905T1430/scripts/build_phase02_isolated.py",
+      "category": "other",
+      "sha256": "9c2e078b483eca42234c7fb1d9b2f66f65bf938ee01be4ba835f46e04dcb4813",
+      "bytes": 4461,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_second_50_20260905T1430/scripts/correctness_support.py",
+      "category": "other",
+      "sha256": "ec872d14d767866586f6dae895aa0e5c4c4ca9d1db3ce7cba29ebda216d05d6a",
+      "bytes": 8941,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_second_50_20260905T1430/scripts/environment_audit.py",
+      "category": "other",
+      "sha256": "f145c9445d4fd3bf5f542bf27b823586376f92d1612009a2d7d226a1ddd7af42",
+      "bytes": 1414,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_second_50_20260905T1430/scripts/gqa_regression.py",
+      "category": "other",
+      "sha256": "f485cc668169604ffac4f0f62141b0eecacfa652f45006583b127fd272d8f941",
+      "bytes": 5693,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_second_50_20260905T1430/scripts/native_baseline.py",
+      "category": "other",
+      "sha256": "d45c37309213172379974515b39b8a287c675e43d87454e3dd68cde9ee2a7f01",
+      "bytes": 13054,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_second_50_20260905T1430/scripts/provider_replay.py",
+      "category": "other",
+      "sha256": "0b0ae4e25c31c489f794caa4cc664d18d291eb32b97fa2125fe8706232f0f3dd",
+      "bytes": 8703,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_second_50_20260905T1430/scripts/split_control_probe.py",
+      "category": "other",
+      "sha256": "7b44011346060e0a9e0270523dc75029238cc66cdf40c2fc8eb0ccdd4ec65556",
+      "bytes": 1898,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_second_50_20260905T1430/scripts/summarize.py",
+      "category": "other",
+      "sha256": "f30cb6ccaf8465bee8108269acae8a0c68dd4c394690fdffddb5d2777b28cfa1",
+      "bytes": 3693,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_second_50_20260905T1430/scripts/test_summarize.py",
+      "category": "other",
+      "sha256": "11dfcdfee3fa8415d05cfad06fccce24845e4a084ccce2d27da1efce4e545a05",
+      "bytes": 2263,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/fixed_split4_second_50_20260905T1430/scripts/upstream_regression.py",
+      "category": "other",
+      "sha256": "fcfe8bc668219dab278176e099163c64681d46f279075ee31a9d177afa79f46b",
+      "bytes": 1035,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440/InfiniCore.patch",
+      "category": "source_snapshot",
+      "sha256": "f2d5e23fb26d7849b9084d0f911f1ad561a6bc520327bdad816c126b44e373cc",
+      "bytes": 2193,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440/InfiniLM.patch",
+      "category": "source_snapshot",
+      "sha256": "c37728c6da91d539c7813ff5f668dd082ef08548bb90f4a8c1bd451e962cd6c7",
+      "bytes": 1775,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440/dispatch.log",
+      "category": "run_result",
+      "sha256": "e76ef0137aaa6758f223dcbcfc0af65da584c7953cb23adc55e016a6d2dde4ad",
+      "bytes": 13143,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440/manifest.json",
+      "category": "run_result",
+      "sha256": "ecfc8d03118fe583ea1ecfdf47ca9cbeaf09c2dfce74e33c027e781cf7d8837a",
+      "bytes": 8847,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440/results.json",
+      "category": "run_result",
+      "sha256": "6e0f934ef9a14e35470bd985ee37609dcbee0a7ae26267749c72e96d5d312409",
+      "bytes": 704190,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440/scripts/build_gqa_isolated.py",
+      "category": "other",
+      "sha256": "32bb7796781fde3fe6f8e9819edf206f931d8ea946a37864e0986ef52376da65",
+      "bytes": 3869,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440/scripts/build_phase02_isolated.py",
+      "category": "other",
+      "sha256": "9c2e078b483eca42234c7fb1d9b2f66f65bf938ee01be4ba835f46e04dcb4813",
+      "bytes": 4461,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440/scripts/correctness_support.py",
+      "category": "other",
+      "sha256": "ec872d14d767866586f6dae895aa0e5c4c4ca9d1db3ce7cba29ebda216d05d6a",
+      "bytes": 8941,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440/scripts/environment_audit.py",
+      "category": "other",
+      "sha256": "f145c9445d4fd3bf5f542bf27b823586376f92d1612009a2d7d226a1ddd7af42",
+      "bytes": 1414,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440/scripts/gqa_regression.py",
+      "category": "other",
+      "sha256": "f485cc668169604ffac4f0f62141b0eecacfa652f45006583b127fd272d8f941",
+      "bytes": 5693,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440/scripts/native_baseline.py",
+      "category": "other",
+      "sha256": "d45c37309213172379974515b39b8a287c675e43d87454e3dd68cde9ee2a7f01",
+      "bytes": 13054,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440/scripts/provider_replay.py",
+      "category": "other",
+      "sha256": "0b0ae4e25c31c489f794caa4cc664d18d291eb32b97fa2125fe8706232f0f3dd",
+      "bytes": 8703,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440/scripts/split_control_probe.py",
+      "category": "other",
+      "sha256": "7b44011346060e0a9e0270523dc75029238cc66cdf40c2fc8eb0ccdd4ec65556",
+      "bytes": 1898,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440/scripts/summarize.py",
+      "category": "other",
+      "sha256": "f30cb6ccaf8465bee8108269acae8a0c68dd4c394690fdffddb5d2777b28cfa1",
+      "bytes": 3693,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440/scripts/test_summarize.py",
+      "category": "other",
+      "sha256": "11dfcdfee3fa8415d05cfad06fccce24845e4a084ccce2d27da1efce4e545a05",
+      "bytes": 2263,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440/scripts/upstream_regression.py",
+      "category": "other",
+      "sha256": "fcfe8bc668219dab278176e099163c64681d46f279075ee31a9d177afa79f46b",
+      "bytes": 1035,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440_summary_0p2a/latency_summary.csv",
+      "category": "derived_summary",
+      "sha256": "74c3f7e0919a76b1910f2bf4d45375931ee503cf13e28070cc86313253aaea6a",
+      "bytes": 62,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440_summary_0p2a/summary.json",
+      "category": "derived_summary",
+      "sha256": "d25a75eb4cc11bde8a70dd2982ff2cf9c4b90f1be58386651678453e579d9585",
+      "bytes": 4122,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440_summary_0p2a/verdicts.json",
+      "category": "derived_summary",
+      "sha256": "c0fcad91f9e6b380675db9fd453e2db1d604d2161a643ff894884c1e271d0829",
+      "bytes": 68202,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/memcheck_20260905T1500/InfiniLM.patch",
+      "category": "source_snapshot",
+      "sha256": "c37728c6da91d539c7813ff5f668dd082ef08548bb90f4a8c1bd451e962cd6c7",
+      "bytes": 1775,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/post_fix_0p2a_summary/latency_summary.csv",
+      "category": "derived_summary",
+      "sha256": "74c3f7e0919a76b1910f2bf4d45375931ee503cf13e28070cc86313253aaea6a",
+      "bytes": 62,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/post_fix_0p2a_summary/summary.json",
+      "category": "derived_summary",
+      "sha256": "18839bfac14ca3b4a6bcf0e22767f6692e57eff86f4455d00259c3b201239bee",
+      "bytes": 5187,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/post_fix_0p2a_summary/verdicts.json",
+      "category": "derived_summary",
+      "sha256": "b498146f4bc1aae4c27a3e210ab398784211069a708638b41ada4b85d00d6474",
+      "bytes": 68199,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450/InfiniCore.patch",
+      "category": "source_snapshot",
+      "sha256": "f2d5e23fb26d7849b9084d0f911f1ad561a6bc520327bdad816c126b44e373cc",
+      "bytes": 2193,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450/InfiniLM.patch",
+      "category": "source_snapshot",
+      "sha256": "c37728c6da91d539c7813ff5f668dd082ef08548bb90f4a8c1bd451e962cd6c7",
+      "bytes": 1775,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450/dispatch.log",
+      "category": "run_result",
+      "sha256": "cef4d44ff88c0209f6a777fb433b01d797d9ca158e778856793c0653ed8a36e3",
+      "bytes": 453,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450/manifest.json",
+      "category": "run_result",
+      "sha256": "fc31c458167e89df3d38cd644f7f1e1d12cdb1a1bf725b6189e363429305cffe",
+      "bytes": 9436,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450/results.json",
+      "category": "run_result",
+      "sha256": "5bd4808a9654d54a4ed3b5ad6a34bb7cdd975480f66c1b582feefd0fa8f9df42",
+      "bytes": 32370,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450/scripts/build_gqa_isolated.py",
+      "category": "other",
+      "sha256": "32bb7796781fde3fe6f8e9819edf206f931d8ea946a37864e0986ef52376da65",
+      "bytes": 3869,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450/scripts/build_phase02_isolated.py",
+      "category": "other",
+      "sha256": "9c2e078b483eca42234c7fb1d9b2f66f65bf938ee01be4ba835f46e04dcb4813",
+      "bytes": 4461,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450/scripts/correctness_support.py",
+      "category": "other",
+      "sha256": "ec872d14d767866586f6dae895aa0e5c4c4ca9d1db3ce7cba29ebda216d05d6a",
+      "bytes": 8941,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450/scripts/environment_audit.py",
+      "category": "other",
+      "sha256": "f145c9445d4fd3bf5f542bf27b823586376f92d1612009a2d7d226a1ddd7af42",
+      "bytes": 1414,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450/scripts/gqa_regression.py",
+      "category": "other",
+      "sha256": "f485cc668169604ffac4f0f62141b0eecacfa652f45006583b127fd272d8f941",
+      "bytes": 5693,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450/scripts/native_baseline.py",
+      "category": "other",
+      "sha256": "d45c37309213172379974515b39b8a287c675e43d87454e3dd68cde9ee2a7f01",
+      "bytes": 13054,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450/scripts/provider_replay.py",
+      "category": "other",
+      "sha256": "0b0ae4e25c31c489f794caa4cc664d18d291eb32b97fa2125fe8706232f0f3dd",
+      "bytes": 8703,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450/scripts/split_control_probe.py",
+      "category": "other",
+      "sha256": "7b44011346060e0a9e0270523dc75029238cc66cdf40c2fc8eb0ccdd4ec65556",
+      "bytes": 1898,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450/scripts/summarize.py",
+      "category": "other",
+      "sha256": "f30cb6ccaf8465bee8108269acae8a0c68dd4c394690fdffddb5d2777b28cfa1",
+      "bytes": 3693,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450/scripts/test_summarize.py",
+      "category": "other",
+      "sha256": "11dfcdfee3fa8415d05cfad06fccce24845e4a084ccce2d27da1efce4e545a05",
+      "bytes": 2263,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450/scripts/upstream_regression.py",
+      "category": "other",
+      "sha256": "fcfe8bc668219dab278176e099163c64681d46f279075ee31a9d177afa79f46b",
+      "bytes": 1035,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450_summary_0p2a/latency_summary.csv",
+      "category": "derived_summary",
+      "sha256": "74c3f7e0919a76b1910f2bf4d45375931ee503cf13e28070cc86313253aaea6a",
+      "bytes": 62,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450_summary_0p2a/summary.json",
+      "category": "derived_summary",
+      "sha256": "68b8fd205cffb82da04209f2e1cf593c40060e219cdff361ffbbda0957a5e3dd",
+      "bytes": 2085,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450_summary_0p2a/verdicts.json",
+      "category": "derived_summary",
+      "sha256": "1c3572e492ba9c7b6fb3b162669b255900915b9df33a4595690d345c638ed0c4",
+      "bytes": 5030,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/racecheck_20260905T1510/InfiniLM.patch",
+      "category": "source_snapshot",
+      "sha256": "75fbcb93a5913978c426bad1d5a5fcc69c2f8f463ef098e4a724ac63d68abb6d",
+      "bytes": 3926,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/synccheck_20260905T1520/InfiniCore.patch",
+      "category": "source_snapshot",
+      "sha256": "f2d5e23fb26d7849b9084d0f911f1ad561a6bc520327bdad816c126b44e373cc",
+      "bytes": 2193,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/synccheck_20260905T1520/InfiniLM.patch",
+      "category": "source_snapshot",
+      "sha256": "75fbcb93a5913978c426bad1d5a5fcc69c2f8f463ef098e4a724ac63d68abb6d",
+      "bytes": 3926,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/synccheck_20260905T1520/dispatch.log",
+      "category": "run_result",
+      "sha256": "cef4d44ff88c0209f6a777fb433b01d797d9ca158e778856793c0653ed8a36e3",
+      "bytes": 453,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/synccheck_20260905T1520/manifest.json",
+      "category": "run_result",
+      "sha256": "736225bf6ee547e2007061ff5c9fa033410603f25ba3c89f7517acf28a808d96",
+      "bytes": 9505,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/synccheck_20260905T1520/results.json",
+      "category": "run_result",
+      "sha256": "81cb19dff396a2cb5acb77ed18fb4bef2fc7055a2caecc3316490e7e88388382",
+      "bytes": 32290,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/synccheck_20260905T1520/scripts/build_gqa_isolated.py",
+      "category": "other",
+      "sha256": "32bb7796781fde3fe6f8e9819edf206f931d8ea946a37864e0986ef52376da65",
+      "bytes": 3869,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/synccheck_20260905T1520/scripts/build_phase02_isolated.py",
+      "category": "other",
+      "sha256": "9c2e078b483eca42234c7fb1d9b2f66f65bf938ee01be4ba835f46e04dcb4813",
+      "bytes": 4461,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/synccheck_20260905T1520/scripts/correctness_support.py",
+      "category": "other",
+      "sha256": "ec872d14d767866586f6dae895aa0e5c4c4ca9d1db3ce7cba29ebda216d05d6a",
+      "bytes": 8941,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/synccheck_20260905T1520/scripts/environment_audit.py",
+      "category": "other",
+      "sha256": "f145c9445d4fd3bf5f542bf27b823586376f92d1612009a2d7d226a1ddd7af42",
+      "bytes": 1414,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/synccheck_20260905T1520/scripts/gqa_regression.py",
+      "category": "other",
+      "sha256": "f485cc668169604ffac4f0f62141b0eecacfa652f45006583b127fd272d8f941",
+      "bytes": 5693,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/synccheck_20260905T1520/scripts/native_baseline.py",
+      "category": "other",
+      "sha256": "d45c37309213172379974515b39b8a287c675e43d87454e3dd68cde9ee2a7f01",
+      "bytes": 13054,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/synccheck_20260905T1520/scripts/provider_replay.py",
+      "category": "other",
+      "sha256": "0b0ae4e25c31c489f794caa4cc664d18d291eb32b97fa2125fe8706232f0f3dd",
+      "bytes": 8703,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/synccheck_20260905T1520/scripts/split_control_probe.py",
+      "category": "other",
+      "sha256": "7b44011346060e0a9e0270523dc75029238cc66cdf40c2fc8eb0ccdd4ec65556",
+      "bytes": 1898,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/synccheck_20260905T1520/scripts/summarize.py",
+      "category": "other",
+      "sha256": "f30cb6ccaf8465bee8108269acae8a0c68dd4c394690fdffddb5d2777b28cfa1",
+      "bytes": 3693,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/synccheck_20260905T1520/scripts/test_summarize.py",
+      "category": "other",
+      "sha256": "c0052238550f30c54f5353373c40f6eee6d1cb0560235df3b7a4866d63ccc278",
+      "bytes": 3810,
+      "git_ignored": false
+    },
+    {
+      "path": "test/bench/phase0/phase02_runs/synccheck_20260905T1520/scripts/upstream_regression.py",
+      "category": "other",
+      "sha256": "fcfe8bc668219dab278176e099163c64681d46f279075ee31a9d177afa79f46b",
+      "bytes": 1035,
+      "git_ignored": false
+    }
+  ],
+  "missing_or_limited": [
+    "memcheck/racecheck tool output ended after COMPUTE-SANITIZER header due process SIGSEGV; shell logs /tmp/phase02-memcheck.log and /tmp/phase02-race.log retained outside archive",
+    "large traces/shared libraries/models excluded"
+  ]
+}

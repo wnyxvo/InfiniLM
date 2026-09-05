@@ -11,11 +11,11 @@
 
 GQA fused kernel 中，线程 0（每个 CTA 的 owner）更新了所有分组的私有 `m[g]/l[g]`，但原代码让 `tid < NGROUPS` 的多个线程直接读取各自未更新的 `l[g]` 来发布 normalization。修复将 `inv_l_shared[g]` 的发布统一放到 owner（`tid == 0`）并在原有 `__syncwarp/__syncthreads` 后使用，保持 epsilon、精度、dispatch、CTA 映射、tile、cache layout、API 和 split count 不变。
 
-修复库通过隔离 sm_89 构建生成于 `/tmp/phase01-fixed-sm89/lib/libinfiniop.so`，SHA256 `004e96510800cdebdd489f1eed641a45f26593a5084befc3af6b17afbe98ed2f`；旧 `/root/.infini/lib/libinfiniop.so` 未覆盖。复现实验环境使用：
+修复库通过隔离 sm_89 构建生成于 `/data/InfiniTensor/phase01-fixed-sm89/lib/libinfiniop.so`，SHA256 `004e96510800cdebdd489f1eed641a45f26593a5084befc3af6b17afbe98ed2f`；旧 `/root/.infini/lib/libinfiniop.so` 未覆盖。复现实验环境使用：
 
 ```text
-INFINI_ROOT=/tmp/phase01-fixed-sm89
-LD_LIBRARY_PATH=/tmp/phase01-fixed-sm89/lib:/root/.infini/lib:/usr/local/cuda/lib64
+INFINI_ROOT=/data/InfiniTensor/phase01-fixed-sm89
+LD_LIBRARY_PATH=/data/InfiniTensor/phase01-fixed-sm89/lib:/root/.infini/lib:/usr/local/cuda/lib64
 ```
 
 ## 可靠性与独立性
@@ -57,3 +57,8 @@ Phase 0.1 的修复和独立验证可以作为后续工作的 correctness prereq
 ## Phase 0.2 归因勘误
 
 Phase 0.1 的唯一综合失败被重新核对为对照 kernel（Split4）失败，目标 GQA attention 与 eager 输出均 PASS。Phase 0.2 固定输入 100 次旧库 69/100、加入消费者完成同步后的全实例化修复库 100/100，见 `phase02_runs/`。
+
+
+## 持久化产物说明
+
+云 GPU 的 `/tmp` 为临时目录。本次隔离库已复制到 `/data/InfiniTensor/phase01-fixed-sm89`、`/data/InfiniTensor/phase02-A-sm89` 和 `/data/InfiniTensor/phase02-fixed-sm89`；历史 manifest 保留原始 `/tmp` 运行路径和 hash，重启后应使用这些持久路径。

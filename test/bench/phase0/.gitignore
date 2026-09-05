@@ -30,3 +30,15 @@ __pycache__/
 !phase01_runs/*/build.log
 !phase01_runs/*/sanitizer.log
 !phase01_runs/*/graph_evidence.json
+!phase02_runs/*/manifest.json
+!phase02_runs/*/results.json
+!phase02_runs/*/dispatch.log
+!phase02_runs/*/exception.log
+!phase02_runs/*/execution.log
+!phase02_runs/*/summary.json
+!phase02_runs/*/verdicts.json
+!phase02_runs/*/build.json
+!phase02_runs/*/build.log
+!phase02_runs/*/archive_inventory.json
+!phase02_runs/*/tool.log
+!phase02_runs/archive_0p2a/archive_inventory.json

@@ -19,7 +19,7 @@ Provider 统计应分开：Phase 0.1 native 为 30 eager + 30 Graph 正向，20 
 输入为 FP16、B=16、Hq=32、Hkv=8、D=128、page size=256，固定 seed、q/K/V、页表、lengths=`[1,7,8,9,255,256,257,2049] * 2`，每次调用前输出填充 NaN，记录 actual dispatch、输入/reference 结构和运行库 hash。
 
 - 旧库 `/root/.infini/lib/libinfiniop.so`：100 次中 69 PASS、31 FAIL；失败为 `splitkv_cta`，非有限值为 0，但少数 head 的误差约 0.02。
-- 修复库 `/tmp/phase02-fixed-sm89/lib/libinfiniop.so`：同一输入 100/100 PASS。
+- 修复库 `/data/InfiniTensor/phase02-fixed-sm89/lib/libinfiniop.so`：同一输入 100/100 PASS。
 - 第二组 lengths=`[23,24,25,511,512,513,1023,1024] * 2`，独立进程 50/50 PASS。
 
 结果、manifest、dispatch 和脚本快照在 `test/bench/phase0/phase02_runs/`。复现命令见 [`phase0_2_commands.md`](phase0_2_commands.md)。
@@ -57,3 +57,8 @@ Append reference 在调用前从原 cache 克隆，按 slot/page table 更新 ex
 
 - InfiniCore：`fix(paged-attention): synchronize consumers before cp.async stage reuse`
 - InfiniLM：`test(phase0): correct split-kv attribution and add phase02 repro`
+
+
+## 持久化产物说明
+
+云 GPU 的 `/tmp` 为临时目录。本次隔离库已复制到 `/data/InfiniTensor/phase01-fixed-sm89`、`/data/InfiniTensor/phase02-A-sm89` 和 `/data/InfiniTensor/phase02-fixed-sm89`；历史 manifest 保留原始 `/tmp` 运行路径和 hash，重启后应使用这些持久路径。

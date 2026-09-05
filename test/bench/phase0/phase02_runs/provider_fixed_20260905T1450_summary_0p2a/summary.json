@@ -1,0 +1,78 @@
+{
+  "status": "COMPLETE",
+  "run_dir": "/data/InfiniTensor/InfiniLM/test/bench/phase0/phase02_runs/provider_fixed_20260905T1450",
+  "input_sha256": {
+    "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450/results.json": "5bd4808a9654d54a4ed3b5ad6a34bb7cdd975480f66c1b582feefd0fa8f9df42",
+    "test/bench/phase0/phase02_runs/provider_fixed_20260905T1450/manifest.json": "fc31c458167e89df3d38cd644f7f1e1d12cdb1a1bf725b6189e363429305cffe"
+  },
+  "correctness_counts": [
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 1
+    }
+  ],
+  "excluded_latency_rows": {},
+  "inconsistency_count": 0,
+  "inconsistencies": [],
+  "timing_warning": "Only independently validated overall PASS rows are eligible. No speedups or cross-case ranking inferred."
+}

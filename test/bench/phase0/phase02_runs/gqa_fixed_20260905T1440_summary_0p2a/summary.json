@@ -1,0 +1,174 @@
+{
+  "status": "COMPLETE",
+  "run_dir": "/data/InfiniTensor/InfiniLM/test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440",
+  "input_sha256": {
+    "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440/results.json": "6e0f934ef9a14e35470bd985ee37609dcbee0a7ae26267749c72e96d5d312409",
+    "test/bench/phase0/phase02_runs/gqa_fixed_20260905T1440/manifest.json": "ecfc8d03118fe583ea1ecfdf47ca9cbeaf09c2dfce74e33c027e781cf7d8837a"
+  },
+  "correctness_counts": [
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 11
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 33
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "auto",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 4
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "auto",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 12
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 4
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 12
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "cta",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 4
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "cta",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 12
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "split2",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 4
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "split2",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 12
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 11
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 33
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "auto",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 4
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "auto",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 12
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 4
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "default",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 12
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "cta",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 4
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "cta",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 12
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "split2",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 4
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "split2",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 12
+    }
+  ],
+  "excluded_latency_rows": {},
+  "inconsistency_count": 0,
+  "inconsistencies": [],
+  "timing_warning": "Only independently validated overall PASS rows are eligible. No speedups or cross-case ranking inferred."
+}

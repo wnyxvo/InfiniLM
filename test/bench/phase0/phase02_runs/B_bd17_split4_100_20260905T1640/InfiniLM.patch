@@ -1,0 +1,185 @@
+diff --git a/test/bench/phase0/.gitignore b/test/bench/phase0/.gitignore
+index de08816..37f6fc5 100644
+--- a/test/bench/phase0/.gitignore
++++ b/test/bench/phase0/.gitignore
+@@ -30,3 +30,14 @@ __pycache__/
+ !phase01_runs/*/build.log
+ !phase01_runs/*/sanitizer.log
+ !phase01_runs/*/graph_evidence.json
++!phase02_runs/*/manifest.json
++!phase02_runs/*/results.json
++!phase02_runs/*/dispatch.log
++!phase02_runs/*/exception.log
++!phase02_runs/*/execution.log
++!phase02_runs/*/summary.json
++!phase02_runs/*/verdicts.json
++!phase02_runs/*/build.json
++!phase02_runs/*/build.log
++!phase02_runs/*/archive_inventory.json
++!phase02_runs/*/tool.log
+diff --git a/test/bench/phase0/split_control_probe.py b/test/bench/phase0/split_control_probe.py
+index 427aa7c..16f236e 100644
+--- a/test/bench/phase0/split_control_probe.py
++++ b/test/bench/phase0/split_control_probe.py
+@@ -1,6 +1,7 @@
+ """Bounded repeatability probe for the Split4 cross-check anomaly; no timing."""
+ import argparse
+ import sys
++import hashlib
+ import torch
+ from correctness_support import Run, Native, SEED, PAGE, configure, reference, check_output, trace_call
+ 
+@@ -18,13 +19,26 @@ def main():
+         out=torch.empty_like(q);native=Native()
+         call=native.operation('PagedAttention',[out,q,k,v,table,lens])
+         ref=reference(q,k,v,table,lengths)
++        def thash(x):
++            return hashlib.sha256(x.detach().contiguous().cpu().numpy().tobytes()).hexdigest()
++        input_hash=hashlib.sha256(''.join(thash(x) for x in (q,k,v,table,lens)).encode()).hexdigest()
++        reference_hash=thash(ref)
+         config,dispatch,trace=trace_call(call,a.variant)
+         (run.path/'dispatch.log').write_text(trace)
+         for repeat in range(a.repeats):
+             out.fill_(float('nan'));call();torch.cuda.synchronize()
+             result=check_output(out,ref)
++            diff=(out.float()-ref.float()).abs()
++            threshold=0.001+0.01*ref.float().abs()
++            bad=torch.nonzero(diff > threshold, as_tuple=False)
++            coords=[]
++            for coord in bad[:32].tolist():
++                b,h,d=coord; coords.append({'batch':b,'head':h,'dim':d,'actual':float(out[b,h,d]),'expected':float(ref[b,h,d]),'abs_error':float(diff[b,h,d]),'threshold':float(threshold[b,h,d])})
+             run.add(dtype=str(q.dtype),variant=a.variant,mode='eager',repeat=repeat,
+                     actual_dispatch=dispatch,requested_config=config,
++                    input_hash=input_hash,reference_hash=reference_hash,output_hash=thash(out),
++                    failed_coords=coords,inputs_unchanged=(input_hash==hashlib.sha256(''.join(thash(x) for x in (q,k,v,table,lens)).encode()).hexdigest()),
++                    reference_unchanged=(reference_hash==thash(ref)),
+                     result=result['attention_correctness'],**result)
+         native.close();return run.finish()
+     except Exception as error:
+diff --git a/test/bench/phase0/summarize.py b/test/bench/phase0/summarize.py
+index 0a7a79a..8c725ae 100644
+--- a/test/bench/phase0/summarize.py
++++ b/test/bench/phase0/summarize.py
+@@ -9,6 +9,35 @@ import re
+ import statistics
+ 
+ 
++def derive(row):
++    """Return explicit target/control/cache/overall fields without mutating raw data."""
++    mode=row.get('mode', row.get('actual_execution_mode', 'UNKNOWN'))
++    negative=bool(row.get('negative_control'))
++    target=row.get('target_correctness')
++    if target is None:
++        target=row.get('graph_correctness') if mode in ('torch_cuda_graph','infinicore_graph','graph') else row.get('attention_correctness')
++    if target is None: target=row.get('correctness')
++    control=row.get('control_correctness', row.get('crosscheck_split4'))
++    cache=row.get('cache_correctness')
++    detected=str(row.get('negative_control_detected', row.get('detected', ''))).lower() == 'true'
++    recorded=row.get('result', row.get('overall_result', row.get('correctness', 'UNVERIFIED')))
++    if mode == 'graph_batch' and row.get('graph_correctness') != 'PASS':
++        overall='UNVERIFIED_LEGACY_GRAPH'
++    elif negative:
++        overall='PASS' if detected else ('FAIL' if detected is False else 'INCOMPLETE')
++    else:
++        checks=[target, cache, control]
++        if any(v in ('FAIL','ERROR') for v in checks): overall='FAIL'
++        elif any(v in ('NOT_RUN','UNVERIFIED','INCOMPLETE',None) for v in checks if v is not None or target is None):
++            overall='INCOMPLETE'
++        else: overall='PASS'
++    inconsistent=(recorded not in ('',None) and recorded != overall)
++    return {'test_kind':'negative_control' if negative else 'positive', 'target_correctness':target or 'NOT_RUN',
++            'control_correctness':control or 'NOT_RUN', 'cache_correctness':cache or 'NOT_RUN',
++            'overall_result':overall, 'negative_control_detected':detected if negative else None,
++            'recorded_result':recorded, 'inconsistent':inconsistent, 'mode':mode}
++
++
+ def main():
+     p=argparse.ArgumentParser()
+     p.add_argument('--run-dir',type=Path,required=True)
+@@ -18,46 +47,43 @@ def main():
+     a=p.parse_args()
+     source=a.raw or a.run_dir/'results.json'
+     required=[source,a.run_dir/'manifest.json']
+-    if a.dispatch_log:required.append(a.dispatch_log)
++    if a.dispatch_log: required.append(a.dispatch_log)
+     missing=[str(path) for path in required if not path.is_file()]
+-    if missing:p.error('INCOMPLETE: missing inputs: '+', '.join(missing))
+-    if a.output.exists():p.error('Refusing to overwrite output: '+str(a.output))
++    if missing: p.error('INCOMPLETE: missing inputs: '+', '.join(missing))
++    if a.output.exists(): p.error('Refusing to overwrite output: '+str(a.output))
+     hashes={str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in required}
+     data=json.loads(source.read_text()) if source.suffix=='.json' else list(csv.DictReader(source.open()))
+     a.output.mkdir(parents=True)
+-    counts=collections.Counter();latencies=collections.defaultdict(list);excluded=collections.Counter()
+-    for row in data:
+-        mode=row.get('mode',row.get('actual_execution_mode','UNKNOWN'))
+-        result=row.get('result',row.get('correctness','UNVERIFIED'))
+-        if mode=='graph_batch' and row.get('graph_correctness')!='PASS':
+-            result='UNVERIFIED_LEGACY_GRAPH'
+-        key=('negative_control' if row.get('negative_control') else 'positive',row.get('dtype','UNKNOWN'),row.get('variant',row.get('requested_variant','UNKNOWN')),mode,result)
++    counts=collections.Counter(); latencies=collections.defaultdict(list); excluded=collections.Counter(); inconsistencies=[]
++    for idx,row in enumerate(data):
++        d=derive(row)
++        variant=row.get('variant',row.get('requested_variant','UNKNOWN')); dtype=row.get('dtype','UNKNOWN')
++        key=(d['test_kind'],dtype,variant,d['mode'],d['overall_result'])
+         counts[key]+=1
++        if d['inconsistent']:
++            inconsistencies.append({'index':idx,'recorded_result':d['recorded_result'],**{k:d[k] for k in ('target_correctness','control_correctness','cache_correctness','overall_result','mode')}})
+         if row.get('latency_us'):
+-            if result=='PASS' or result=='PASS_bitwise_all_cache':latencies[key[:-1]].append(float(row['latency_us']))
+-            else:excluded[result]+=1
++            if d['overall_result'] in ('PASS','PASS_bitwise_all_cache'): latencies[key[:-1]].append(float(row['latency_us']))
++            else: excluded[d['overall_result']]+=1
+     summary={'status':'COMPLETE','run_dir':str(a.run_dir.resolve()),'input_sha256':hashes,
+              'correctness_counts':[dict(zip(['test_kind','dtype','variant','mode','result'],key),count=count) for key,count in counts.items()],
+-             'excluded_latency_rows':dict(excluded),
+-             'timing_warning':'Only matching independently validated execution modes are eligible. No speedups or cross-case ranking inferred.'}
++             'excluded_latency_rows':dict(excluded), 'inconsistency_count':len(inconsistencies), 'inconsistencies':inconsistencies,
++             'timing_warning':'Only independently validated overall PASS rows are eligible. No speedups or cross-case ranking inferred.'}
+     (a.output/'summary.json').write_text(json.dumps(summary,indent=2))
++    (a.output/'verdicts.json').write_text(json.dumps([{'index':i,**derive(r)} for i,r in enumerate(data)],indent=2))
+     with (a.output/'latency_summary.csv').open('w') as f:
+-        w=csv.writer(f);w.writerow(['test_kind','dtype','variant','mode','median_us','min_us','max_us','samples'])
+-        # Legacy mixed-shape CSV is deliberately not pooled into latency stats.
++        w=csv.writer(f); w.writerow(['test_kind','dtype','variant','mode','median_us','min_us','max_us','samples'])
+         if len({row.get('case') for row in data})<=1:
+-            for key,values in latencies.items():w.writerow([*key,statistics.median(values),min(values),max(values),len(values)])
++            for key,values in latencies.items(): w.writerow([*key,statistics.median(values),min(values),max(values),len(values)])
+     if a.dispatch_log:
+-        observed=[];context='UNKNOWN'
++        observed=[]; context='UNKNOWN'
+         for line in a.dispatch_log.read_text().splitlines():
+-            if line.startswith('TRACE '):context=line
+-            if 'dispatch: path=' in line:
+-                observed.append({'context':context,'dispatch':dict(re.findall(r'(\w+)=([^ ]+)',line.split('dispatch: ')[1]))})
+-        (a.output/'observed_dispatch.csv').write_text('context,dispatch\n')
++            if line.startswith('TRACE '): context=line
++            if 'dispatch: path=' in line: observed.append({'context':context,'dispatch':dict(re.findall(r'(\w+)=([^ ]+)',line.split('dispatch: ')[1]))})
+         with (a.output/'observed_dispatch.csv').open('w') as f:
+-            w=csv.writer(f);w.writerow(['context','dispatch'])
+-            w.writerows((r['context'],json.dumps(r['dispatch'])) for r in observed)
++            w=csv.writer(f);w.writerow(['context','dispatch']);w.writerows((r['context'],json.dumps(r['dispatch'])) for r in observed)
+     assert all(hashlib.sha256(Path(path).read_bytes()).hexdigest()==sha for path,sha in hashes.items())
+-    print('Read-only summary complete:',a.output)
++    print('Read-only summary complete:',a.output,'inconsistencies=',len(inconsistencies))
+ 
+ 
+ if __name__=='__main__':main()
+diff --git a/test/bench/phase0/test_summarize.py b/test/bench/phase0/test_summarize.py
+index 24bcfe8..09adbac 100644
+--- a/test/bench/phase0/test_summarize.py
++++ b/test/bench/phase0/test_summarize.py
+@@ -32,10 +32,10 @@ class SummaryTest(unittest.TestCase):
+                 '--run-dir',str(root),'--output',str(root/'summary')],check=True,capture_output=True)
+             summary=json.loads((root/'summary/summary.json').read_text())
+             counts={(r['test_kind'],r['dtype'],r['variant'],r['mode'],r['result']):r['count'] for r in summary['correctness_counts']}
+-            self.assertEqual(counts[('positive','fp16','gqa','eager','PASS')],1)
+-            self.assertEqual(counts[('positive','fp16','gqa','eager','FAIL')],1)
++            self.assertNotIn(('positive','fp16','gqa','eager','PASS'),counts)
++            self.assertEqual(counts[('positive','fp16','gqa','eager','FAIL')],2)
+             self.assertEqual(counts[('negative_control','fp16','gqa','eager','PASS')],1)
+-            self.assertEqual(counts[('positive','bf16','gqa','graph','NOT_RUN')],1)
++            self.assertEqual(counts[('positive','bf16','gqa','graph','INCOMPLETE')],1)
+ 
+     def test_raw_immutable_and_graph_pass_not_inferred(self):
+         with tempfile.TemporaryDirectory() as tmp:

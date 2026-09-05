@@ -1,0 +1,151 @@
+{
+  "run_id": "synccheck_20260905T1520",
+  "command": [
+    "/data/InfiniTensor/.venv-infini/bin/python",
+    "test/bench/phase0/provider_replay.py",
+    "--variant",
+    "gqa",
+    "--output",
+    "test/bench/phase0/phase02_runs/synccheck_20260905T1520"
+  ],
+  "seed": 20260905,
+  "python": "3.12.3 (main, Nov  6 2024, 18:32:19) [GCC 13.2.0]",
+  "torch": "2.9.1+cu128",
+  "torch_path": "/data/InfiniTensor/.venv-infini/lib/python3.12/site-packages/torch/__init__.py",
+  "cuda": "12.8",
+  "repos": {
+    "InfiniLM": {
+      "path": "/data/InfiniTensor/InfiniLM",
+      "sha": {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0,
+        "stdout": "210a20876615ddad287be01e757f36815e842be1\n",
+        "stderr": ""
+      },
+      "dirty": {
+        "command": [
+          "git",
+          "status",
+          "--short"
+        ],
+        "exit_code": 0,
+        "stdout": " M test/bench/phase0/split_control_probe.py\n M test/bench/phase0/test_summarize.py\n?? test/bench/phase0/build_phase02_isolated.py\n?? test/bench/phase0/phase02_runs/\n",
+        "stderr": ""
+      },
+      "branch": {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "exit_code": 0,
+        "stdout": "feat\n",
+        "stderr": ""
+      },
+      "submodules": {
+        "command": [
+          "git",
+          "submodule",
+          "status"
+        ],
+        "exit_code": 0,
+        "stdout": " 5ed07097faa6c50199c4a3b66e5ed37d4fbfccc2 third_party/json (v3.11.2-374-g5ed07097f)\n 88a0e07ad5bb3e2651cd5613530b3f06a15fc400 third_party/spdlog (v1.2.1-2532-g88a0e07a)\n",
+        "stderr": ""
+      }
+    },
+    "InfiniCore": {
+      "path": "/data/InfiniTensor/InfiniCore",
+      "sha": {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0,
+        "stdout": "c033221b6e319d5de1a1a8560ff2040588f3a9dd\n",
+        "stderr": ""
+      },
+      "dirty": {
+        "command": [
+          "git",
+          "status",
+          "--short"
+        ],
+        "exit_code": 0,
+        "stdout": " M src/infiniop/ops/paged_attention/cuda/kernel_v2.cuh\n",
+        "stderr": ""
+      },
+      "branch": {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "exit_code": 0,
+        "stdout": "feat\n",
+        "stderr": ""
+      },
+      "submodules": {
+        "command": [
+          "git",
+          "submodule",
+          "status"
+        ],
+        "exit_code": 0,
+        "stdout": " c21a5b465dbdd94bdc246e32cf9c985f2ca01c9e submodules/InfiniCCL (v0.1.0-2-gc21a5b4)\n 47c1c4969c4312b4f15fc73928c72e4c262f79ce submodules/InfiniOps (remotes/origin/codex/build-plugin-contract-199-g47c1c49)\n b14539d0bdc3c4b79384d3c8805cbe915e40ad91 submodules/InfiniRT (b14539d)\n 087c84df83d254b5fb295a7a408f1a1d554085cf third_party/cutlass (v4.4.0-16-g087c84df)\n 10846960ca0793b993446f6dbaf696479c127a9d third_party/flash-attention (fa4-v4.0.0.beta4-45-g1084696)\n-99bbf1feb925ccfcbd0f01d7786543e8ce6f268b third_party/mate\n f1d748e5e3edfa4b1778edea003bac94781bc7b7 third_party/spdlog (v1.2.1-2526-gf1d748e5)\n",
+        "stderr": ""
+      }
+    }
+  },
+  "scripts": {
+    "split_control_probe.py": "7b44011346060e0a9e0270523dc75029238cc66cdf40c2fc8eb0ccdd4ec65556",
+    "environment_audit.py": "f145c9445d4fd3bf5f542bf27b823586376f92d1612009a2d7d226a1ddd7af42",
+    "summarize.py": "f30cb6ccaf8465bee8108269acae8a0c68dd4c394690fdffddb5d2777b28cfa1",
+    "upstream_regression.py": "fcfe8bc668219dab278176e099163c64681d46f279075ee31a9d177afa79f46b",
+    "gqa_regression.py": "f485cc668169604ffac4f0f62141b0eecacfa652f45006583b127fd272d8f941",
+    "test_summarize.py": "c0052238550f30c54f5353373c40f6eee6d1cb0560235df3b7a4866d63ccc278",
+    "build_gqa_isolated.py": "32bb7796781fde3fe6f8e9819edf206f931d8ea946a37864e0986ef52376da65",
+    "native_baseline.py": "d45c37309213172379974515b39b8a287c675e43d87454e3dd68cde9ee2a7f01",
+    "correctness_support.py": "ec872d14d767866586f6dae895aa0e5c4c4ca9d1db3ce7cba29ebda216d05d6a",
+    "provider_replay.py": "0b0ae4e25c31c489f794caa4cc664d18d291eb32b97fa2125fe8706232f0f3dd",
+    "build_phase02_isolated.py": "9c2e078b483eca42234c7fb1d9b2f66f65bf938ee01be4ba835f46e04dcb4813"
+  },
+  "exit_code": 0,
+  "initial_environment": {
+    "INFINI_ROOT": "/tmp/phase02-fixed-sm89",
+    "LD_LIBRARY_PATH": "/usr/local/cuda-12.8/compute-sanitizer:/tmp/phase02-fixed-sm89/lib:/root/.infini/lib:/usr/local/cuda/lib64",
+    "INFINICORE_GRAPH_DEBUG": "1"
+  },
+  "build_config": "{\n    __toolchains_linux_x86_64 = {\n        \"envs\",\n        \"gcc\",\n        \"yasm\",\n        \"nasm\",\n        \"fasm\",\n        \"cuda\",\n        \"go\",\n        \"rust\",\n        \"swift\",\n        \"gfortran\",\n        \"fpc\"\n    },\n    __toolchains_linux_x86_64_host = {\n        \"envs\",\n        \"gcc\",\n        \"yasm\",\n        \"nasm\",\n        \"fasm\",\n        \"cuda\",\n        \"go\",\n        \"rust\",\n        \"swift\",\n        \"gfortran\",\n        \"fpc\"\n    },\n    [\"ali-ppu\"] = false,\n    arch = \"x86_64\",\n    [\"ascend-npu\"] = false,\n    aten = true,\n    [\"bang-mlu-arch\"] = \"mtp_592\",\n    builddir = \"build\",\n    [\"cambricon-mlu\"] = false,\n    ccache = true,\n    ccl = true,\n    clean = true,\n    cpu = true,\n    cuda = \"/usr/local/cuda\",\n    cuda_arch = \"sm_89\",\n    cuda_sdkver = \"12.8\",\n    cudnn = true,\n    editable = false,\n    [\"flash-attn\"] = \"/data/InfiniTensor/InfiniCore/third_party/flash-attention\",\n    graph = true,\n    host = \"linux\",\n    [\"hygon-arch\"] = false,\n    [\"hygon-dcu\"] = false,\n    [\"iluvatar-arch\"] = \"ivcore20\",\n    [\"iluvatar-gpu\"] = false,\n    infiniops = false,\n    [\"infiniops-root\"] = \"submodules/InfiniOps\",\n    [\"infinirt-root\"] = \"\",\n    kind = \"static\",\n    [\"kunlun-xpu\"] = false,\n    [\"metax-gpu\"] = false,\n    mode = \"release\",\n    [\"moore-gpu\"] = false,\n    [\"moore-gpu-arch\"] = \"mp_31\",\n    [\"mutual-awareness\"] = false,\n    ndk_stdcxx = true,\n    ninetoothed = false,\n    [\"nv-gpu\"] = true,\n    omp = true,\n    plat = \"linux\",\n    [\"qy-gpu\"] = false,\n    [\"use-mc\"] = false,\n    [\"use-vendor-ops\"] = false\n}",
+  "device": "_CudaDeviceProperties(name='NVIDIA GeForce RTX 4090', major=8, minor=9, total_memory=24330MB, multi_processor_count=128, uuid=bc61c62f-2e69-f382-e981-b932b23df2aa, pci_bus_id=55, pci_device_id=0, pci_domain_id=0, L2_cache_size=72MB)",
+  "nvidia_smi": {
+    "command": [
+      "nvidia-smi"
+    ],
+    "exit_code": 0,
+    "stdout": "Sat Sep  5 13:43:58 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |\n|-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA GeForce RTX 4090        Off |   00000000:37:00.0 Off |                  Off |\n| 31%   29C    P2             53W /  450W |     472MiB /  24564MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n                                                                                         \n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n+-----------------------------------------------------------------------------------------+\n",
+    "stderr": ""
+  },
+  "nvcc": {
+    "command": [
+      "nvcc",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Jan_15_19:20:09_PST_2025\nCuda compilation tools, release 12.8, V12.8.61\nBuild cuda_12.8.r12.8/compiler.35404655_0\n",
+    "stderr": ""
+  },
+  "loaded_libraries": {
+    "/data/InfiniTensor/InfiniCore/python/infinicore/lib/_infinicore.cpython-312-x86_64-linux-gnu.so": "ff1147c19f36e0195cb0aca01c211d1ad88dbd85f4e4bdb0af408aaa9b34b41a",
+    "/root/.infini/lib/libflash-attn-nvidia.so": "2d9990b4d9628e2a5a31652f0aaafff0029b8c3b8ae26f5239297e0b3df26bf0",
+    "/root/.infini/lib/libinfiniccl.so": "4f72e80dcafbe4168544e8b544c1cd945bdb63d60488365230cb2c2a3a4e22c4",
+    "/root/.infini/lib/libinfinicore_cpp_api.so": "838b84715177ee05c0b2c13059640be95f955c1870795c47888e1e16b5871ce7",
+    "/root/.infini/lib/libinfinirt.so": "0b6f729cdc75c23d626e68028c81b8bc5a39394339b2216bfe2689f5b4286503",
+    "/tmp/phase02-fixed-sm89/lib/libinfiniop.so": "c4295408576a183747f8f1060a195143726866a0399ecef1e5e82e97ee71a4a6"
+  },
+  "result": "PASS"
+}

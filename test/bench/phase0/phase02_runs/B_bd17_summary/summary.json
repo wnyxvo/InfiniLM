@@ -1,0 +1,22 @@
+{
+  "status": "COMPLETE",
+  "run_dir": "/data/InfiniTensor/InfiniLM/test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640",
+  "input_sha256": {
+    "test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640/results.json": "2dd2cb9951d7987bbf4107ddfc1b33ae92ef5727301dddf78641a69560ee974c",
+    "test/bench/phase0/phase02_runs/B_bd17_split4_100_20260905T1640/manifest.json": "5da940fbfc1eda5a598e362d18631c9949accb0bf1646161484c2f8bbe2097d9"
+  },
+  "correctness_counts": [
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 100
+    }
+  ],
+  "excluded_latency_rows": {},
+  "inconsistency_count": 0,
+  "inconsistencies": [],
+  "timing_warning": "Only independently validated overall PASS rows are eligible. No speedups or cross-case ranking inferred."
+}
