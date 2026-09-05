@@ -1,0 +1,68 @@
+Generating SQLite file /tmp/phase0-provider-flash.sqlite from /tmp/phase0-provider-flash.nsys-rep
+Processing [/tmp/phase0-provider-flash.sqlite] with [/usr/local/cuda-12.8/NsightSystems-cli-2024.6.2/target-linux-x64/reports/cuda_gpu_kern_sum.py]... 
+Time (%),Total Time (ns),Instances,Avg (ns),Med (ns),Min (ns),Max (ns),StdDev (ns),Name
+15.3,67168,32,2099.0,2112.0,1888,2400,169.3,"void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase &)::[lambda() (instance 3)]::operator ()() const::[lambda() (instance 7)]::operator ()() const::[lambda(float) (instance 1)], std::array<char *, (unsigned long)2>, (int)4, TrivialOffsetCalculator<(int)1, unsigned int>, TrivialOffsetCalculator<(int)1, unsigned int>, at::native::memory::LoadWithCast<(int)1>, at::native::memory::StoreWithCast<(int)1>>(int, T1, T2, T4, T5, T6, T7)"
+13.2,58242,16,3640.1,3616.5,3584,3840,56.6,"void at::native::elementwise_kernel<(int)128, (int)2, void at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase &)::[lambda() (instance 3)]::operator ()() const::[lambda() (instance 7)]::operator ()() const::[lambda(float) (instance 1)]>(at::TensorIteratorBase &, const T1 &)::[lambda(int) (instance 1)]>(int, T3)"
+9.1,40001,6,6666.8,6496.5,6464,7040,277.1,"void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<(int)128, (int)64, (int)128, (int)4, (bool)0, (bool)0, cutlass::bfloat16_t, Flash_kernel_traits<(int)128, (int)64, (int)128, (int)4, cutlass::bfloat16_t>>, (bool)0, (bool)0, (bool)0, (bool)0, (bool)1, (bool)0, (bool)1, (bool)0>(flash::Flash_fwd_params)"
+6.0,26561,11,2414.6,1440.0,1408,6752,2114.8,"void at::native::<unnamed>::distribution_elementwise_grid_stride_kernel<float, (int)4, void at::native::templates::cuda::normal_and_transform<c10::BFloat16, float, at::CUDAGeneratorImpl *, void at::native::templates::cuda::normal_kernel<at::CUDAGeneratorImpl *>(const at::TensorBase &, double, double, T1)::[lambda() (instance 1)]::operator ()() const::[lambda() (instance 4)]::operator ()() const::[lambda(float) (instance 1)]>(at::TensorIteratorBase &, T3, T4)::[lambda(curandStatePhilox4_32_10 *) (instance 2)], void at::native::<unnamed>::distribution_nullary_kernel<c10::BFloat16, float, float4, at::CUDAGeneratorImpl *, void at::native::templates::cuda::normal_and_transform<c10::BFloat16, float, at::CUDAGeneratorImpl *, void at::native::templates::cuda::normal_kernel<at::CUDAGeneratorImpl *>(const at::TensorBase &, double, double, T1)::[lambda() (instance 1)]::operator ()() const::[lambda() (instance 4)]::operator ()() const::[lambda(float) (instance 1)]>(at::TensorIteratorBase &, T3, T4)::[lambda(curandStatePhilox4_32_10 *) (instance 2)], void at::native::templates::cuda::normal_kernel<at::CUDAGeneratorImpl *>(const at::TensorBase &, double, double, T1)::[lambda() (instance 1)]::operator ()() const::[lambda() (instance 4)]::operator ()() const::[lambda(float) (instance 1)]>(at::TensorIteratorBase &, T4, const T5 &, T6)::[lambda(int, float) (instance 1)]>(long, at::PhiloxCudaState, T3, T4)"
+5.6,24800,8,3100.0,3104.0,2784,3488,196.8,"std::enable_if<!T7, void>::type internal::gemvx::kernel<int, int, float, float, float, float, (bool)0, (bool)1, (bool)0, (bool)0, (int)6, (bool)0, cublasGemvParamsEx<int, cublasGemvTensorStridedBatched<const float>, cublasGemvTensorStridedBatched<const float>, cublasGemvTensorStridedBatched<float>, float>>(T13)"
+5.0,21984,8,2748.0,2752.0,2688,2784,39.9,"void gemv2T_kernel_val<int, int, float, float, float, float, (int)128, (int)16, (int)2, (int)2, (bool)0, (bool)0, cublasGemvParamsEx<int, cublasGemvTensorStridedBatched<const float>, cublasGemvTensorStridedBatched<const float>, cublasGemvTensorStridedBatched<float>, float>>(T13, T6, T6)"
+4.6,20320,6,3386.7,3376.0,3360,3456,37.4,"void flash::flash_fwd_splitkv_combine_kernel<Flash_fwd_kernel_traits<(int)128, (int)64, (int)128, (int)4, (bool)0, (bool)0, cutlass::bfloat16_t, Flash_kernel_traits<(int)128, (int)64, (int)128, (int)4, cutlass::bfloat16_t>>, (int)4, (int)3, (bool)1>(flash::Flash_fwd_params)"
+4.3,18944,12,1578.7,1568.0,1568,1600,15.8,"void at::native::vectorized_gather_kernel<(int)16, long>(char *, char *, T2 *, int, long, long, long, long, bool)"
+3.9,16992,16,1062.0,1056.0,1024,1088,17.4,"void at::native::vectorized_elementwise_kernel<(int)4, at::native::AbsFunctor<float>, std::array<char *, (unsigned long)2>>(int, T2, T3)"
+2.9,12834,12,1069.5,1056.0,1056,1184,37.3,"void at::native::vectorized_elementwise_kernel<(int)4, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float>>, std::array<char *, (unsigned long)2>>(int, T2, T3)"
+2.9,12832,4,3208.0,3312.0,2784,3424,290.2,"void at::native::index_elementwise_kernel<(int)128, (int)4, void at::native::gpu_index_kernel<void at::native::index_kernel_impl<at::native::OpaqueType<(int)2>>(at::TensorIteratorBase &, c10::ArrayRef<long>, c10::ArrayRef<long>)::[lambda(char *, const char *, long) (instance 1)]>(at::TensorIteratorBase &, c10::ArrayRef<long>, c10::ArrayRef<long>, const T1 &, bool)::[lambda(int) (instance 1)]>(long, T3)"
+2.6,11520,2,5760.0,5760.0,5632,5888,181.0,"void at::native::elementwise_kernel<(int)128, (int)4, void at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase &)::[lambda() (instance 3)]::operator ()() const::[lambda() (instance 12)]::operator ()() const::[lambda(c10::BFloat16) (instance 1)]>(at::TensorIteratorBase &, const T1 &)::[lambda(int) (instance 1)]>(int, T3)"
+2.5,10912,4,2728.0,2784.0,2560,2784,112.0,"void at::native::reduce_kernel<(int)512, (int)1, at::native::ReduceOp<float, at::native::func_wrapper_t<float, at::native::MaxNanFunctor<float>>, unsigned int, float, (int)4, (int)4>>(T3)"
+2.5,10848,4,2712.0,2752.0,2560,2784,102.4,"void at::native::reduce_kernel<(int)512, (int)1, at::native::ReduceOp<bool, at::native::func_wrapper_t<bool, at::native::and_kernel_cuda(at::TensorIterator &)::[lambda() (instance 1)]::operator ()() const::[lambda() (instance 12)]::operator ()() const::[lambda(bool, bool) (instance 1)]>, unsigned int, bool, (int)4, (int)4>>(T3)"
+2.4,10784,6,1797.3,1808.0,1760,1824,31.5,"void <unnamed>::softmax_warp_forward<float, float, float, (int)9, (bool)0, (bool)0>(T2 *, const T1 *, int, int, int, const bool *, int, bool)"
+2.4,10432,8,1304.0,1312.0,1216,1472,83.4,"void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase &)::[lambda() (instance 3)]::operator ()() const::[lambda() (instance 4)]::operator ()() const::[lambda(long) (instance 1)], std::array<char *, (unsigned long)2>, (int)4, TrivialOffsetCalculator<(int)1, unsigned int>, TrivialOffsetCalculator<(int)1, unsigned int>, at::native::memory::LoadWithCast<(int)1>, at::native::memory::StoreWithCast<(int)1>>(int, T1, T2, T4, T5, T6, T7)"
+2.3,10304,6,1717.3,1632.0,1600,2048,171.3,"void pagedCaching<__nv_bfloat16, (int)1024>(T1 *, T1 *, const T1 *, const T1 *, const long *, unsigned long, unsigned long, unsigned long, long, long, long, long, long, long, long, long, long, long)"
+2.1,9056,8,1132.0,1120.0,1120,1152,16.6,"void at::native::vectorized_elementwise_kernel<(int)4, at::native::CUDAFunctor_add<float>, std::array<char *, (unsigned long)3>>(int, T2, T3)"
+2.0,8928,8,1116.0,1104.0,1056,1184,43.4,"void at::native::vectorized_elementwise_kernel<(int)4, at::native::BinaryFunctor<float, float, bool, at::native::<unnamed>::CompareEqFunctor<float>>, std::array<char *, (unsigned long)3>>(int, T2, T3)"
+1.4,6368,4,1592.0,1568.0,1536,1696,71.0,"void at::native::<unnamed>::CatArrayBatchedCopy_alignedK_contig<at::native::<unnamed>::OpaqueType<(unsigned int)4>, unsigned int, (int)2, (int)128, (int)1, (int)16>(T1 *, at::native::<unnamed>::CatArrInputTensorMetadata<T1, T2, T4, T5>, at::native::<unnamed>::TensorSizeStride<T2, (unsigned int)4>, int, T2)"
+1.0,4608,4,1152.0,1152.0,1152,1152,0.0,"void at::native::vectorized_elementwise_kernel<(int)4, at::native::<unnamed>::CompareFunctor<float>, std::array<char *, (unsigned long)3>>(int, T2, T3)"
+1.0,4352,4,1088.0,1088.0,1088,1088,0.0,"void at::native::vectorized_elementwise_kernel<(int)4, at::native::AUnaryFunctor<float, float, bool, at::native::<unnamed>::CompareEqFunctor<float>>, std::array<char *, (unsigned long)2>>(int, T2, T3)"
+1.0,4320,4,1080.0,1088.0,1056,1088,16.0,"void at::native::vectorized_elementwise_kernel<(int)4, at::native::CUDAFunctorOnSelf_add<float>, std::array<char *, (unsigned long)2>>(int, T2, T3)"
+1.0,4256,4,1064.0,1056.0,1056,1088,16.0,"void at::native::vectorized_elementwise_kernel<(int)4, at::native::BinaryFunctor<bool, bool, bool, at::native::BitwiseOrFunctor<bool>>, std::array<char *, (unsigned long)3>>(int, T2, T3)"
+1.0,4256,4,1064.0,1056.0,1056,1088,16.0,"void at::native::vectorized_elementwise_kernel<(int)4, at::native::BinaryFunctor<bool, bool, bool, at::native::binary_internal::MulFunctor<bool>>, std::array<char *, (unsigned long)3>>(int, T2, T3)"
+1.0,4192,4,1048.0,1056.0,1024,1056,16.0,"void at::native::vectorized_elementwise_kernel<(int)4, at::native::BinaryFunctor<bool, bool, bool, at::native::BitwiseAndFunctor<bool>>, std::array<char *, (unsigned long)3>>(int, T2, T3)"
+0.8,3360,2,1680.0,1680.0,1664,1696,22.6,"void <unnamed>::softmax_warp_forward<float, float, float, (int)8, (bool)0, (bool)0>(T2 *, const T1 *, int, int, int, const bool *, int, bool)"
+0.3,1184,1,1184.0,1184.0,1184,1184,0.0,"void at::native::roll_cuda_kernel<int>(const T1 *, T1 *, long, long, long, long, long, long)"
+
+Processing [/tmp/phase0-provider-flash.sqlite] with [/usr/local/cuda-12.8/NsightSystems-cli-2024.6.2/target-linux-x64/reports/cuda_api_sum.py]... 
+Time (%),Total Time (ns),Num Calls,Avg (ns),Med (ns),Min (ns),Max (ns),StdDev (ns),Name
+99.6,5783669484,211,27410755.8,4944.0,846,5657399751,389438250.2,cudaLaunchKernel
+0.3,15207757,4,3801939.3,4643695.5,884856,5035510,1957712.7,cuLibraryLoadData
+0.0,2722620,3,907540.0,15083.0,2612,2704925,1556593.6,cudaFree
+0.0,1056835,11,96075.9,81873.0,2871,313914,96143.0,cudaMalloc
+0.0,938273,3,312757.7,18663.0,15078,904532,512494.7,cudaHostAlloc
+0.0,559371,3,186457.0,183895.0,165125,210351,22721.6,cudaGetDeviceProperties_v2_v12000
+0.0,338472,41,8255.4,6215.0,1633,43698,6622.2,cudaMemcpyAsync
+0.0,210963,1257,167.8,135.0,65,5583,181.3,cuGetProcAddress_v2
+0.0,182502,16,11406.4,1771.5,1335,133350,32800.6,cudaStreamCreateWithFlags
+0.0,141143,32,4410.7,4245.0,1212,11603,2381.2,cudaStreamSynchronize
+0.0,81266,1,81266.0,81266.0,81266,81266,0.0,cudaGraphInstantiate_v12000
+0.0,50934,3,16978.0,13527.0,11888,25519,7442.0,cudaGraphLaunch_v10000
+0.0,50097,1,50097.0,50097.0,50097,50097,0.0,cudaStreamBeginCapture_v10000
+0.0,46272,1,46272.0,46272.0,46272,46272,0.0,cudaStreamCreate
+0.0,46132,8,5766.5,3586.5,1542,20946,6490.6,cudaDeviceSynchronize
+0.0,43665,1,43665.0,43665.0,43665,43665,0.0,cudaGraphExecDestroy_v10000
+0.0,30176,30,1005.9,425.0,302,6481,1390.9,cudaStreamIsCapturing_v10000
+0.0,24752,1,24752.0,24752.0,24752,24752,0.0,cudaMemsetAsync
+0.0,23627,37,638.6,291.0,275,2690,682.3,cudaEventCreateWithFlags
+0.0,20586,4,5146.5,5964.0,566,8092,3584.8,cuLibraryGetKernel
+0.0,18346,1,18346.0,18346.0,18346,18346,0.0,cudaStreamDestroy
+0.0,5923,5,1184.6,1269.0,597,1587,382.6,cuInit
+0.0,4269,1,4269.0,4269.0,4269,4269,0.0,cudaGraphDestroy_v10000
+0.0,1853,1,1853.0,1853.0,1853,1853,0.0,cudaStreamEndCapture_v10000
+0.0,1239,4,309.8,111.0,102,915,403.5,cuModuleGetLoadingMode
+0.0,1168,2,584.0,584.0,368,800,305.5,cudaGetDriverEntryPoint_v11030
+
+Processing [/tmp/phase0-provider-flash.sqlite] with [/usr/local/cuda-12.8/NsightSystems-cli-2024.6.2/target-linux-x64/reports/cuda_gpu_mem_time_sum.py]... 
+Time (%),Total Time (ns),Count,Avg (ns),Med (ns),Min (ns),Max (ns),StdDev (ns),Operation
+53.4,20032,18,1112.9,1056.0,1024,1344,103.9,[CUDA memcpy Device-to-Host]
+34.2,12832,13,987.1,992.0,960,1024,22.0,[CUDA memcpy Device-to-Device]
+8.6,3232,9,359.1,352.0,352,384,14.1,[CUDA memcpy Host-to-Device]
+3.8,1408,1,1408.0,1408.0,1408,1408,0.0,[CUDA memset]
+

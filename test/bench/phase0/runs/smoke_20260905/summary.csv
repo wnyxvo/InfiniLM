@@ -1,0 +1,3 @@
+run_id,op,case,dtype,variant,mode,median_us,min_us,max_us,stdev_us,samples
+smoke_20260905,attention,b1l256,torch.bfloat16,default,eager,14.909440279006958,14.663679599761963,15.769599676132202,0.4573285741994458,7
+smoke_20260905,attention,b1l256,torch.bfloat16,default,graph_batch,8.73471975326538,8.724480271339417,9.758719801902771,0.3853996052812623,7

@@ -1,0 +1,25 @@
+==PROF== Connected to process 64263 (/usr/bin/python3.12)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=2 pbs=256 max_blocks=4 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+[2026-09-05 07:42:22.476] [info] [:] segmented graph: operators=2, segments=1, host_segments=0
+{
+  "requested_provider": "native",
+  "requested_graph_mode": "InfiniCore Graph",
+  "correctness": "PASS",
+  "replay_steps": 3,
+  "max_abs_errors": [
+    0.0009472370147705078,
+    0.0009571611881256104,
+    0.0009565055370330811,
+    0.0009744167327880859
+  ],
+  "actual_execution_mode": "see Graph debug and Nsight evidence",
+  "loaded_libraries": [
+    "/root/.infini/lib/libflash-attn-nvidia.so",
+    "/root/.infini/lib/libinfiniccl.so",
+    "/root/.infini/lib/libinfinicore_cpp_api.so",
+    "/root/.infini/lib/libinfiniop.so",
+    "/root/.infini/lib/libinfinirt.so"
+  ]
+}
+==PROF== Disconnected from process 64263

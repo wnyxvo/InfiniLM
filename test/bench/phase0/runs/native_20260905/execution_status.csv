@@ -1,0 +1,8 @@
+run_id,requested_provider,requested_graph_mode,actual_provider,actual_graph_mode,status,reason
+native_20260905,native,eager,NOT_REACHED,NOT_REACHED,BLOCKED,"E2E B={1,16} L={256,2048} out=32: missing transformers and LM extension; pybind11 dependency unavailable"
+native_20260905,native,device_graph,NOT_REACHED,NOT_REACHED,BLOCKED,"E2E B={1,16} L={256,2048} out=32: missing transformers and LM extension; pybind11 dependency unavailable"
+native_20260905,flash-attn,eager,NOT_REACHED,NOT_REACHED,BLOCKED,"E2E B={1,16} L={256,2048} out=32: missing transformers and LM extension; pybind11 dependency unavailable"
+native_20260905,flash-attn,device_graph,NOT_REACHED,NOT_REACHED,BLOCKED,"E2E B={1,16} L={256,2048} out=32: missing transformers and LM extension; pybind11 dependency unavailable"
+native_20260905,InfiniOps ON,eager/graph,NOT_RUN,NOT_RUN,NOT_RUN,Current build infiniops=false; no provider rebuild authorized within local incremental scope
+native_20260905,native E2E B32 L8192,eager/graph,NOT_RUN,NOT_RUN,resource_excluded,KV alone 36 GiB > 24 GiB GPU
+native_20260905,Ncu counters,N/A,N/A,N/A,BLOCKED,ERR_NVGPUCTRPERM
