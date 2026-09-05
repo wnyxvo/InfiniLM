@@ -1,0 +1,14 @@
+========= COMPUTE-SANITIZER
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+[2026-09-05 12:31:38.053] [info] [:] segmented graph: operators=2, segments=1, host_segments=0
+torch.float16 gqa eager positive recorded
+torch.float16 gqa infinicore_graph positive recorded
+torch.float16 gqa eager skip_append recorded
+torch.float16 gqa infinicore_graph corrupt_written recorded
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+[2026-09-05 12:31:41.179] [info] [:] segmented graph: operators=2, segments=1, host_segments=0
+torch.bfloat16 gqa eager positive recorded
+torch.bfloat16 gqa infinicore_graph positive recorded
+torch.bfloat16 gqa eager skip_append recorded
+torch.bfloat16 gqa infinicore_graph corrupt_written recorded
+========= RACECHECK SUMMARY: 0 hazards displayed (0 errors, 0 warnings)

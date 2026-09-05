@@ -1,0 +1,180 @@
+{
+  "status": "COMPLETE",
+  "run_dir": "/data/InfiniTensor/InfiniLM/test/bench/phase0/phase01_runs/post_fix_20260905T1237",
+  "input_sha256": {
+    "test/bench/phase0/phase01_runs/post_fix_20260905T1237/results.json": "ed8637e7042c691c8e1d2cd6bb26f67a3a85b10cc2cd410b0158e18146c61ca5",
+    "test/bench/phase0/phase01_runs/post_fix_20260905T1237/manifest.json": "aefc09ce7c2a79631f69a448edab5b8a617feac2bb8172ce02c713f111125287"
+  },
+  "correctness_counts": [
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 11
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 33
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "auto",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "auto",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 12
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 4
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 12
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "cta",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 4
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "cta",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 12
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "split2",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 4
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "split2",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 12
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "auto",
+      "mode": "eager",
+      "result": "FAIL",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 11
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 33
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "auto",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 4
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "auto",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 12
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 4
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "default",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 12
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "cta",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 4
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "cta",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 12
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "split2",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 4
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "split2",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 12
+    }
+  ],
+  "excluded_latency_rows": {},
+  "timing_warning": "Only matching independently validated execution modes are eligible. No speedups or cross-case ranking inferred."
+}

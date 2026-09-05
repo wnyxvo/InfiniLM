@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/data/InfiniTensor/InfiniLM/examples/bench.py", line 7, in <module>
+    import infinicore
+  File "/data/InfiniTensor/InfiniCore/python/infinicore/__init__.py", line 8, in <module>
+    import infinicore.context as context
+  File "/data/InfiniTensor/InfiniCore/python/infinicore/context.py", line 1, in <module>
+    import infinicore.device
+  File "/data/InfiniTensor/InfiniCore/python/infinicore/device.py", line 1, in <module>
+    from infinicore.lib import _infinicore
+ImportError: libtorch.so: cannot open shared object file: No such file or directory

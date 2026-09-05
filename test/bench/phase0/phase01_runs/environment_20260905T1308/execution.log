@@ -1,0 +1,139 @@
+usage: bench.py [-h] --model MODEL [--draft-model DRAFT_MODEL]
+                [--num-draft-tokens NUM_DRAFT_TOKENS] [--device DEVICE]
+                [--tp TP] [--pp PP] [--node-rank NODE_RANK]
+                [--master-addr MASTER_ADDR] [--master-port MASTER_PORT]
+                [--dp DP] [--ep EP] [--moe-ep-backend MOE_EP_BACKEND]
+                [--use-legacy-moe] [--attn {default,paged-attn,flash-attn}]
+                [--enable-graph] [--pre-transpose] [--use-mla]
+                [--enable-paged-attn] [--disable-prefix-caching]
+                [--num-blocks NUM_BLOCKS] [--block-size BLOCK_SIZE]
+                [--max-cache-len MAX_CACHE_LEN] [--kv-cache-dtype {int8}]
+                [--skip-load] [--weight-load {async,sync}]
+                [--batch-size BATCH_SIZE] [--max-batch-size MAX_BATCH_SIZE]
+                [--input-len INPUT_LEN] [--output-len OUTPUT_LEN]
+                [--max-new-tokens MAX_NEW_TOKENS] [--prompt PROMPT]
+                [--top-k TOP_K] [--top-p TOP_P] [--temperature TEMPERATURE]
+                [--warmup] [--verbose]
+                [--log-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
+                [--bench {ceval,mmlu}]
+                [--backend {python,cpp,infinilm,torch,transformers,vllm}]
+                [--subject SUBJECT] [--split {test,val,all}]
+                [--num-samples NUM_SAMPLES] [--output-csv OUTPUT_CSV]
+                [--cache-dir CACHE_DIR] [--awq] [--gptq]
+                [--dtype {float32,float16,bfloat16}] [--host HOST]
+                [--port PORT] [--endpoint ENDPOINT] [--ignore-eos]
+                [--image IMAGE] [--image-max-pixels IMAGE_MAX_PIXELS]
+                [--image-min-pixels IMAGE_MIN_PIXELS] [--video VIDEO]
+                [--video-num-frames VIDEO_NUM_FRAMES]
+                [--video-max-pixels VIDEO_MAX_PIXELS]
+                [--video-min-pixels VIDEO_MIN_PIXELS] [--skip-output]
+                [--kv-transfer-config KV_TRANSFER_CONFIG]
+
+InfiniLM Unified Config
+
+options:
+  -h, --help            show this help message and exit
+  --model MODEL
+  --draft-model DRAFT_MODEL
+                        optional Eagle/MTP draft model directory
+  --num-draft-tokens NUM_DRAFT_TOKENS
+                        number of Eagle draft tokens to verify per target step
+  --device DEVICE       device platform: auto, cpu, nvidia, qy, metax, moore,
+                        iluvatar, ali, cambricon, ascend, kunlun, hygon, or
+                        backend name (cuda/mlu/musa/npu)
+  --tp TP, --tensor-parallel-size TP
+  --pp PP, --pipeline-parallel-size PP
+  --node-rank NODE_RANK, --pp-stage NODE_RANK, --pipeline-parallel-stage NODE_RANK
+  --master-addr MASTER_ADDR
+  --master-port MASTER_PORT
+  --dp DP, --data-parallel-size DP
+  --ep EP, --expert-parallel-size EP
+  --moe-ep-backend MOE_EP_BACKEND
+                        MoE expert-parallel backend: disabled keeps all
+                        experts on each rank; local_allreduce uses the tensor-
+                        parallel group as EP for TP=EP;
+                        allgather_reducescatter is reserved for true DP/EP
+                        routing; auto selects disabled for EP=1,
+                        local_allreduce for DP=1 and EP>1, and
+                        allgather_reducescatter for DP>1.
+  --use-legacy-moe      use the legacy Qwen3 MoE MLP instead of the EP MoE
+                        backend
+  --attn {default,paged-attn,flash-attn}
+  --enable-graph
+  --pre-transpose       enable weight pre-transposition optimization (Ascend)
+  --use-mla             use DeepSeek V2 MLA attention when supported
+  --enable-paged-attn   use paged cache
+  --disable-prefix-caching
+                        disable KV prefix cache reuse
+  --num-blocks NUM_BLOCKS
+                        number of KV cache blocks
+  --block-size BLOCK_SIZE
+                        size of each KV cache block
+  --max-cache-len MAX_CACHE_LEN
+                        maximum cache length
+  --kv-cache-dtype {int8}
+                        KV cache data type
+  --skip-load           skip loading model weights
+  --weight-load {async,sync}
+                        weight loading mode across tensor-parallel workers
+  --batch-size BATCH_SIZE
+  --max-batch-size MAX_BATCH_SIZE
+                        maximum batch size for server
+  --input-len INPUT_LEN
+                        input sequence length
+  --output-len OUTPUT_LEN
+                        output sequence length
+  --max-new-tokens MAX_NEW_TOKENS
+                        maximum number of new tokens to generate
+  --prompt PROMPT       default prompt text
+  --top-k TOP_K
+  --top-p TOP_P
+  --temperature TEMPERATURE
+  --warmup
+  --verbose
+  --log-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
+                        logging level
+  --bench {ceval,mmlu}  benchmark to evaluate
+  --backend {python,cpp,infinilm,torch,transformers,vllm}
+                        backend type (cpp/infinilm, transformers/torch, or
+                        vllm)
+  --subject SUBJECT     subject(s) to evaluate, comma-separated or 'all'
+  --split {test,val,all}
+                        dataset split to use
+  --num-samples NUM_SAMPLES
+                        number of samples to evaluate per subject
+  --output-csv OUTPUT_CSV
+                        path to output CSV file for results
+  --cache-dir CACHE_DIR
+                        directory for dataset cache
+  --awq                 use AWQ quantization
+  --gptq                use GPTQ quantization
+  --dtype {float32,float16,bfloat16}
+                        data type for model
+  --host HOST           server host
+  --port PORT           server port
+  --endpoint ENDPOINT   API endpoint
+  --ignore-eos          Ignore EOS token and continue generation
+  --image IMAGE         image path for multimodal models
+  --image-max-pixels IMAGE_MAX_PIXELS
+                        maximum image pixels for VideoNSA/Qwen-VL
+                        preprocessing
+  --image-min-pixels IMAGE_MIN_PIXELS
+                        minimum image pixels for VideoNSA/Qwen-VL
+                        preprocessing
+  --video VIDEO         video path for multimodal models
+  --video-num-frames VIDEO_NUM_FRAMES
+                        number of frames for VideoNSA/Qwen-VL preprocessing
+  --video-max-pixels VIDEO_MAX_PIXELS
+                        maximum video frame pixels for VideoNSA/Qwen-VL
+                        preprocessing
+  --video-min-pixels VIDEO_MIN_PIXELS
+                        minimum video frame pixels for VideoNSA/Qwen-VL
+                        preprocessing
+  --skip-output         skip printing sample prompt/output
+  --kv-transfer-config KV_TRANSFER_CONFIG
+                        JSON object for KVTransferConfig. Allowed keys only:
+                        kv_connector, engine_id, kv_role,
+                        kv_connector_extra_config (omit any for defaults).
+                        Example: '{"kv_connector":"MooncakeConnector","kv_role
+                        ":"kv_consumer"}'

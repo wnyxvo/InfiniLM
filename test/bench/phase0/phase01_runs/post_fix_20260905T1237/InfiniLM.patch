@@ -1,0 +1,452 @@
+diff --git a/test/bench/phase0/.gitignore b/test/bench/phase0/.gitignore
+index 3d2d45c..de08816 100644
+--- a/test/bench/phase0/.gitignore
++++ b/test/bench/phase0/.gitignore
+@@ -3,3 +3,30 @@ __pycache__/
+ *.ncu-rep
+ *.sqlite
+ *.qdstrm
++
++# Small provenance artifacts only; large traces remain excluded.
++!runs/*/manifest.json
++!runs/*/audit_manifest.json
++!runs/*/provider_native.json
++!runs/*/provider_flash.json
++!runs/*/graph_evidence.json
++!runs/*/dispatch.log
++!runs/*/provider_*.log
++!runs/*/upstream_*.log
++!runs/*/sanitizer.log
++!runs/*/e2e_*.log
++!runs/*/results.json
++!runs/*/exception.log
++!runs/*/execution.log
++!runs/*/summary.json
++!phase01_runs/*/manifest.json
++!phase01_runs/*/results.json
++!phase01_runs/*/dispatch.log
++!phase01_runs/*/exception.log
++!phase01_runs/*/execution.log
++!phase01_runs/*/summary.json
++!phase01_runs/*/archive_inventory.json
++!phase01_runs/*/build.json
++!phase01_runs/*/build.log
++!phase01_runs/*/sanitizer.log
++!phase01_runs/*/graph_evidence.json
+diff --git a/test/bench/phase0/native_baseline.py b/test/bench/phase0/native_baseline.py
+index 2a51fde..b795322 100644
+--- a/test/bench/phase0/native_baseline.py
++++ b/test/bench/phase0/native_baseline.py
+@@ -24,7 +24,7 @@ P.add_argument('--caching-only', action='store_true')
+ P.add_argument('--aligned', action='store_true')
+ P.add_argument('--variant', choices=['default','auto','warp','cta','gqa','split2','split8'])
+ args = P.parse_args()
+-args.output.mkdir(parents=True, exist_ok=True)
++args.output.mkdir(parents=True, exist_ok=False)
+ sys.path.insert(0, str(args.core / 'test/infiniop'))
+ import torch
+ from libinfiniop import LIBINFINIOP as lib, check_error, infiniopTensorDescriptor_t, infiniopOperatorDescriptor_t, infiniopHandle_t
+@@ -91,10 +91,12 @@ def reference(q,k,v,bt,lengths):
+         outs.append(torch.einsum('hl,lhd->hd',scores.softmax(-1),vv))
+     return torch.stack(outs)
+ 
+-fields=['run_id','op','case','B','lengths','capacity_pages','dtype','requested_variant','requested_env','actual_provider','actual_kernel','requested_graph_mode','actual_execution_mode','correctness','max_abs_error','workspace_bytes','shapes','strides','sample','repeats','latency_us']
++failures = 0
++fields=['eager_correctness','graph_correctness','run_id','op','case','B','lengths','capacity_pages','dtype','requested_variant','requested_env','actual_provider','actual_kernel','requested_graph_mode','actual_execution_mode','correctness','max_abs_error','workspace_bytes','shapes','strides','sample','repeats','latency_us']
+ f=(args.output/'raw.csv').open('w'); writer=csv.DictWriter(f,fieldnames=fields);writer.writeheader()
+ 
+-def measure(call,row):
++def measure(call,row,verify,reset):
++    global failures
+     for _ in range(10): call()
+     torch.cuda.synchronize()
+     for mode in ['eager','graph_batch']:
+@@ -106,6 +108,18 @@ def measure(call,row):
+         else:
+             def run():
+                 for _ in range(100):call()
++        reset()
++        run()
++        torch.cuda.synchronize()
++        passed = bool(verify())
++        row = dict(row, correctness='PASS' if passed else 'FAIL',
++                   eager_correctness=('PASS' if passed else 'FAIL') if mode=='eager' else 'NOT_RUN',
++                   graph_correctness=('PASS' if passed else 'FAIL') if mode=='graph_batch' else 'NOT_RUN')
++        if not passed:
++            failures += 1
++            writer.writerow(dict(row,requested_graph_mode=mode,actual_execution_mode=mode))
++            f.flush()
++            continue
+         samples=[]
+         for i in range(7):
+             start,end=torch.cuda.Event(enable_timing=True),torch.cuda.Event(enable_timing=True)
+@@ -142,11 +156,14 @@ for case,lengths,capacity in cases:
+         passed=torch.allclose(out.float(),ref,atol=.001 if args.fp16 else .005,rtol=.01 if args.fp16 else .05)
+         row=dict(rowbase('attention',case,tensors),B=B,lengths=json.dumps(lengths),capacity_pages=capacity,requested_variant=variant,requested_env=json.dumps(config),correctness='PASS' if passed else 'FAIL',max_abs_error=error,workspace_bytes=n)
+         if not passed:
++            failures += 1
++            row['eager_correctness']='FAIL'
++            row['graph_correctness']='NOT_RUN'
+             row['actual_execution_mode']='eager_correctness_only'
+             writer.writerow(row);f.flush()
+             print('FAIL',case,variant,'per_head_max',(out.float()-ref).abs().amax(dim=(0,2)).tolist(),flush=True)
+             continue
+-        measure(call,row)
++        measure(call,row,lambda: torch.allclose(out.float(),ref,atol=.001 if args.fp16 else .005,rtol=.01 if args.fp16 else .05),lambda: out.fill_(float("nan")))
+     # Same captured graph, in-place metadata updates and multiple replay checks.
+     for knob in knobs:os.environ.pop('INFINIOP_FLASH_'+knob,None)
+     graph=torch.cuda.CUDAGraph()
+@@ -174,6 +191,7 @@ for dtype in [torch.bfloat16,torch.float16,torch.float32]:
+                 k=k.contiguous();v=v.contiguous();kc=kc.contiguous();vc=vc.contiguous()
+             slots=torch.arange(B,device='cuda',dtype=torch.int64)+255
+             if B>1:slots[-1]=-1
++            before_k=kc.clone();before_v=vc.clone()
+             expected_k=kc.clone();expected_v=vc.clone()
+             for i,s in enumerate(slots.tolist()):
+                 if s>=0:expected_k[s//256,:,s%256,:]=k[i];expected_v[s//256,:,s%256,:dv]=v[i]
+@@ -181,5 +199,10 @@ for dtype in [torch.bfloat16,torch.float16,torch.float32]:
+             call,close,n,ws=operation('PagedCaching',tensors);call();torch.cuda.synchronize()
+             assert torch.equal(kc,expected_k) and torch.equal(vc,expected_v)
+             row=dict(rowbase('caching',f't{B}dv{dv}_aligned{args.aligned}',tensors),B=B,requested_variant='default',requested_env='{}',correctness='PASS_bitwise_all_cache',workspace_bytes=n)
+-            measure(call,row);close()
++            measure(call,row,lambda: torch.equal(kc,expected_k) and torch.equal(vc,expected_v),lambda: (kc.copy_(before_k),vc.copy_(before_v)));close()
+ f.close();check_error(lib.infiniopDestroyHandle(handle))
++
++manifest['exit_code']=int(failures>0)
++manifest['result']='FAIL' if failures else 'PASS'
++(args.output/'manifest.json').write_text(json.dumps(manifest,indent=2))
++sys.exit(int(failures>0))
+diff --git a/test/bench/phase0/provider_replay.py b/test/bench/phase0/provider_replay.py
+index 5ee7f90..b224b5b 100644
+--- a/test/bench/phase0/provider_replay.py
++++ b/test/bench/phase0/provider_replay.py
+@@ -1,77 +1,148 @@
+-"""C++ native/FlashAttention provider and actual InfiniCore Graph smoke test.
++"""Independent append verification for eager and InfiniCore device Graph.
+ 
+-Run under nsys for capture/kernel evidence. No latency claims from this script.
++Expected caches are cloned BEFORE execution; attention never reads the actual
++post-call cache as its reference. Negative controls are test-only injections.
+ """
+ import argparse
+-import json
+-import os
+-from pathlib import Path
++import sys
++
+ import torch
++from correctness_support import (Run, SEED, PAGE, configure, trace_call,
++                                 reference, check_output, append_expected)
+ import infinicore as ic
+ from infinicore.ops.paged_attention import paged_attention
+ from infinicore.ops.paged_caching import paged_caching
+ from infinicore.ops.mha_kvcache import mha_kvcache
+ 
+-p=argparse.ArgumentParser()
+-p.add_argument('--output',type=Path,required=True)
+-p.add_argument('--flash',action='store_true')
+-a=p.parse_args()
+-torch.manual_seed(20260905)
+-ic.set_device(ic.device('cuda',0))
+-os.environ['INFINICORE_GRAPH_DEBUG']='1'
+-os.environ['INFINIOP_FLASH_DEBUG_DISPATCH']='1'
+-for key in ['DECODE_SPLITKV','NUM_SPLITS','GQA_FUSED','DECODE_KERNEL']:
+-    os.environ.pop('INFINIOP_FLASH_'+key,None)
+-q=torch.randn(2,32,128,device='cuda',dtype=torch.bfloat16)
+-k=torch.randn(8,8,256,128,device='cuda',dtype=q.dtype)
+-v=torch.randn_like(k)
+-newk=torch.randn(2,8,128,device='cuda',dtype=q.dtype)
+-newv=torch.randn_like(newk)
+-bt=torch.tensor([[3,0,2,1],[7,4,6,5]],device='cuda',dtype=torch.int32)
+-lens=torch.tensor([255,257],device='cuda',dtype=torch.int32)
+-slots=torch.tensor([3*256+254,4*256],device='cuda',dtype=torch.int64)
+-out=torch.empty_like(q)
+-if a.flash:
+-    k=k.permute(0,2,1,3).contiguous();v=v.permute(0,2,1,3).contiguous()
+ 
+ def wrap(t):
+-    # from_torch currently assumes contiguous; use explicit strides for views.
+-    return ic.strided_from_blob(t.data_ptr(),list(t.shape),list(t.stride()),dtype={torch.bfloat16:ic.bfloat16,torch.int32:ic.int32,torch.int64:ic.int64}[t.dtype],device=ic.device('cuda',0))
++    types = {torch.float16:ic.float16,torch.bfloat16:ic.bfloat16,
++             torch.int32:ic.int32,torch.int64:ic.int64}
++    return ic.strided_from_blob(t.data_ptr(),list(t.shape),list(t.stride()),
++                               dtype=types[t.dtype],device=ic.device('cuda',0))
++
++
++def check_caches(k,v,ek,ev):
++    # All finite initialized elements: bitwise equality of whole cache also
++    # proves that unwritten positions, including old relocated pages, persist.
++    return torch.equal(k.view(torch.int16),ek.contiguous().view(torch.int16)) and torch.equal(v.view(torch.int16),ev.contiguous().view(torch.int16))
+ 
+-kc=k.permute(0,2,1,3) if a.flash else k
+-vc=v.permute(0,2,1,3) if a.flash else v
+-tensors=[wrap(t) for t in [q,kc,vc,newk,newv,bt,lens,slots,out]]
+-iq,ik,iv,ink,inv,ibt,ilens,islots,io=tensors
+-fq,fk,fv,fo=[wrap(t) for t in [q.unsqueeze(1),k,v,out.unsqueeze(1)]]
+ 
+-def ops():
+-    paged_caching(ik,iv,ink,inv,islots)
+-    if a.flash:mha_kvcache(fq,fk,fv,ilens,ibt,scale=128**-.5,out=fo)
+-    else:paged_attention(iq,ik,iv,ibt,ilens,scale=128**-.5,out=io)
++def main():
++    p=argparse.ArgumentParser()
++    p.add_argument('--output',required=True,help='New run directory (must not exist)')
++    p.add_argument('--flash',action='store_true')
++    p.add_argument('--variant',choices=['gqa','auto','default','cta','split2'])
++    args=p.parse_args()
++    torch.cuda.set_device(0)
++    ic.set_device(ic.device('cuda',0))
++    import os
++    if 'INFINICORE_DISABLE_DEVICE_GRAPH_SEGMENTS' in os.environ:
++        raise RuntimeError('Device graph disabled: cannot verify requested mode')
++    os.environ['INFINICORE_GRAPH_DEBUG']='1'
++    run=Run(args.output)
++    try:
++        variants=[args.variant] if args.variant else (['default'] if args.flash else ['gqa','auto','default','cta','split2'])
++        for dtype in [torch.float16,torch.bfloat16]:
++            for variant in variants:
++                configure(variant)
++                torch.manual_seed(SEED)
++                batch=4; pages_per_seq=2
++                # Extra spare page per sequence allows a semantic relocation:
++                # copy historical page contents, then change only its mapping.
++                shape=(batch*pages_per_seq+batch,8,PAGE,128)
++                initial_k=torch.randn(shape,device='cuda',dtype=dtype)
++                initial_v=torch.randn_like(initial_k)
++                initial_table=torch.randperm(batch*pages_per_seq).reshape(batch,pages_per_seq)
++                q=torch.randn(batch,32,128,device='cuda',dtype=dtype)
++                out=torch.empty_like(q)
++                newk=torch.randn(batch,8,128,device='cuda',dtype=dtype)
++                newv=torch.randn_like(newk)
++                if args.flash:
++                    kstore=initial_k.permute(0,2,1,3).contiguous()
++                    vstore=initial_v.permute(0,2,1,3).contiguous()
++                    k=kstore.permute(0,2,1,3);v=vstore.permute(0,2,1,3)
++                else:
++                    k=initial_k.clone();v=initial_v.clone();kstore=k;vstore=v
++                table=initial_table.to(device='cuda',dtype=torch.int32)
++                lens=torch.tensor([255,256,257,8],device='cuda',dtype=torch.int32)
++                slots=torch.tensor([int(initial_table[b,(n-1)//PAGE])*PAGE+(n-1)%PAGE for b,n in enumerate([255,256,257,8])],device='cuda',dtype=torch.int64)
++                iq,ik,iv,ink,inv,ibt,ilens,islots,io=[wrap(t) for t in [q,k,v,newk,newv,table,lens,slots,out]]
++                fq,fk,fv,fo=[wrap(t) for t in [q.unsqueeze(1),kstore,vstore,out.unsqueeze(1)]]
++                def attention():
++                    if args.flash:
++                        mha_kvcache(fq,fk,fv,ilens,ibt,scale=128**-.5,out=fo)
++                    else:
++                        paged_attention(iq,ik,iv,ibt,ilens,scale=128**-.5,out=io)
++                def ops():
++                    paged_caching(ik,iv,ink,inv,islots)
++                    attention()
++                torch.cuda.synchronize()
++                if not args.flash:
++                    config,dispatch,trace=trace_call(attention,variant)
++                    with (run.path/'dispatch.log').open('a') as f:
++                        f.write(f'TRACE {dtype} {variant}\n{trace}\n')
++                    want={'gqa':'cta_gqa_fused','auto':'cta_gqa_fused','cta':'cta_nosplit','default':'splitkv_cta','split2':'splitkv_cta'}[variant]
++                    if dispatch.get('path')!=want:raise AssertionError(dispatch)
++                else:
++                    config=configure(variant);dispatch={'path':'builtin_FlashAttention; confirm with Nsight'}
++                # Capture may run ops during warmup. Reset ACTUAL and expected
++                # from the original pre-call snapshot after capture below.
++                ic.start_graph_recording();ops();graph=ic.stop_graph_recording()
++                for mode,injection in [('eager',None),('infinicore_graph',None),
++                                       ('eager','skip_append'),('infinicore_graph','corrupt_written')]:
++                    k.copy_(initial_k);v.copy_(initial_v)
++                    ek=initial_k.clone();ev=initial_v.clone()
++                    host_table=initial_table.clone()
++                    detected=False
++                    for step in range(3):
++                        lengths=[255+step,256+step,257+step,8+step]
++                        if step==1:
++                            # Move each sequence's logical first page into an
++                            # unused physical page, preserving history exactly.
++                            for b in range(batch):
++                                old=int(host_table[b,0]);new=batch*pages_per_seq+b
++                                k[new].copy_(k[old]);v[new].copy_(v[old])
++                                ek[new].copy_(ek[old]);ev[new].copy_(ev[old])
++                                host_table[b,0]=new
++                        host_slots=[int(host_table[b,(n-1)//PAGE])*PAGE+(n-1)%PAGE for b,n in enumerate(lengths)]
++                        table.copy_(host_table.to(device='cuda',dtype=torch.int32))
++                        lens.copy_(torch.tensor(lengths,device='cuda',dtype=torch.int32))
++                        slots.copy_(torch.tensor(host_slots,device='cuda',dtype=torch.int64))
++                        q.normal_();newk.normal_();newv.normal_()
++                        append_expected(ek,ev,newk,newv,host_slots)
++                        expected=reference(q,ek,ev,table,lengths)
++                        out.fill_(float('nan'));torch.cuda.synchronize()
++                        if injection=='skip_append' and step==0:attention()
++                        elif mode=='eager':ops()
++                        else:graph.run()
++                        ic.sync_stream();torch.cuda.synchronize()
++                        if injection=='corrupt_written' and step==0:
++                            s=host_slots[0];k[s//PAGE,0,s%PAGE,0]+=1
++                        cache_pass=check_caches(k,v,ek,ev)
++                        result=check_output(out,expected)
++                        passed=cache_pass and result['attention_correctness']=='PASS'
++                        if injection:
++                            detected=not cache_pass
++                            run.add(dtype=str(dtype),variant=variant,mode=mode,step=step,
++                                    negative_control=injection,detected=detected,
++                                    cache_correctness='PASS' if cache_pass else 'FAIL',
++                                    result='PASS' if detected else 'FAIL',**result)
++                            break
++                        run.add(dtype=str(dtype),variant=variant,mode=mode,step=step,
++                                requested_config=config,actual_dispatch=dispatch,
++                                provider='native_caching+builtin_flash' if args.flash else 'native_C++',
++                                lengths=lengths,block_table=host_table.tolist(),slots=host_slots,
++                                cache_correctness='PASS' if cache_pass else 'FAIL',
++                                eager_correctness=('PASS' if passed else 'FAIL') if mode=='eager' else 'NOT_RUN',
++                                graph_correctness=('PASS' if passed else 'FAIL') if mode=='infinicore_graph' else 'NOT_RUN',
++                                result='PASS' if passed else 'FAIL',**result)
++                    print(dtype,variant,mode,injection or 'positive','recorded',flush=True)
++                del graph
++        return run.finish()
++    except Exception as error:
++        run.finish(error)
++        raise
+ 
+-def verify():
+-    torch.cuda.synchronize()
+-    expected=[]
+-    for b,L in enumerate(lens.tolist()):
+-        ids=bt[b,:((L+255)//256)].long()
+-        kk=kc[ids].permute(0,2,1,3).reshape(-1,8,128)[:L].float().repeat_interleave(4,1)
+-        vv=vc[ids].permute(0,2,1,3).reshape(-1,8,128)[:L].float().repeat_interleave(4,1)
+-        score=torch.einsum('hd,lhd->hl',q[b].float(),kk)*128**-.5
+-        expected.append(torch.einsum('hl,lhd->hd',score.softmax(-1),vv))
+-    ref=torch.stack(expected)
+-    assert torch.allclose(out.float(),ref,atol=.005,rtol=.05)
+-    return (out.float()-ref).abs().max().item()
+ 
+-torch.cuda.synchronize();ops();ic.sync_stream();errors=[verify()]
+-ic.start_graph_recording();ops();graph=ic.stop_graph_recording()
+-for step in range(3):
+-    lengths=[256+step,258+step]
+-    lens.copy_(torch.tensor(lengths,device='cuda',dtype=torch.int32))
+-    if step==1:bt.copy_(bt.roll(1,1))
+-    s=[int(bt[b,(L-1)//256])*256+(L-1)%256 for b,L in enumerate(lengths)]
+-    slots.copy_(torch.tensor(s,device='cuda',dtype=torch.int64))
+-    newk.normal_();newv.normal_();torch.cuda.synchronize()
+-    graph.run();ic.sync_stream();errors.append(verify())
+-a.output.parent.mkdir(parents=True,exist_ok=True)
+-a.output.write_text(json.dumps({'requested_provider':'flash' if a.flash else 'native','requested_graph_mode':'InfiniCore Graph','correctness':'PASS','replay_steps':3,'max_abs_errors':errors,'actual_execution_mode':'see Graph debug and Nsight evidence','loaded_libraries':sorted({l.split()[-1] for l in Path('/proc/self/maps').read_text().splitlines() if '/libinfini' in l or '/libflash-attn' in l})},indent=2))
+-print(a.output.read_text())
++if __name__=='__main__':sys.exit(main())
+diff --git a/test/bench/phase0/summarize.py b/test/bench/phase0/summarize.py
+index 2b56664..838be0e 100644
+--- a/test/bench/phase0/summarize.py
++++ b/test/bench/phase0/summarize.py
+@@ -1,59 +1,63 @@
+-"""Attach observed dispatch paths to raw rows and preserve evidence summaries."""
+-from pathlib import Path
++"""Read-only summarization with explicit inputs; never rewrite raw/manifest."""
++import argparse
+ import collections
+ import csv
+ import hashlib
+ import json
++from pathlib import Path
+ import re
+-import shutil
+-import sqlite3
+ import statistics
+ 
+-root=Path(__file__).resolve().parent
+-logs={'native_20260905':'/tmp/phase0-native.log','gqa_repro_20260905':'/tmp/phase0-gqa.log','gqa_fp16_20260905':'/tmp/phase0-gqa-fp16.log','caching_aligned_20260905':'/tmp/phase0-caching-aligned.log','smoke_20260905':'/tmp/phase0-smoke.log'}
+-for run,log in logs.items():
+-    dest=root/'runs'/run
+-    shutil.copyfile(log,dest/'dispatch.log')
+-    paths={};case=None
+-    for line in Path(log).read_text().splitlines():
+-        if line.startswith('TRACE '):case=tuple(line.split()[1:3])
+-        if 'dispatch: path=' in line and case:
+-            paths[case]=dict(re.findall(r'(\w+)=([^ ]+)',line.split('dispatch: ')[1]))
+-    raw=dest/'raw.csv'
+-    with raw.open() as f:
+-        reader=csv.DictReader(f);fields=reader.fieldnames;rows=list(reader)
+-    for r in rows:
+-        if r['op']=='attention':
+-            observed=paths.get((r['case'],r['requested_variant']))
+-            r['actual_kernel']=json.dumps(observed) if observed else 'UNKNOWN; dispatch signature suppressed; see log'
+-        else:r['actual_kernel']='pagedCaching<Tdata,1024>; BF16 confirmed by Nsight; F16/F32 SOURCE_CONFIRMED'
+-    with raw.open('w') as f:
+-        w=csv.DictWriter(f,fields);w.writeheader();w.writerows(rows)
+-    groups=collections.defaultdict(list)
+-    for r in rows:
+-        if r['latency_us']:groups[(r['op'],r['case'],r['dtype'],r['requested_variant'],r['actual_execution_mode'])].append(float(r['latency_us']))
+-    with (dest/'summary.csv').open('w') as f:
+-        w=csv.writer(f);w.writerow(['run_id','op','case','dtype','variant','mode','median_us','min_us','max_us','stdev_us','samples'])
+-        for key,v in groups.items():w.writerow([run,*key,statistics.median(v),min(v),max(v),statistics.stdev(v),len(v)])
+-    m=json.loads((dest/'manifest.json').read_text())
+-    m['artifact_script_sha256_at_finalization']={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in root.glob('*.py')}
+-    m['provenance_limit']='Installed libinfiniop hash equals local build artifact; no embedded source SHA/build attestation. Initial repositories clean, later dirty paths are these Phase0 artifacts.'
+-    (dest/'manifest.json').write_text(json.dumps(m,indent=2))
+ 
+-dest=root/'runs/native_20260905'
+-for name,src in {'upstream_caching.log':'/tmp/phase0-upstream-caching.log','upstream_attention.log':'/tmp/phase0-upstream-attention.log','provider_native.log':'/tmp/phase0-provider-native-v2.log','provider_flash.log':'/tmp/phase0-provider-flash.log','provider_nodes.log':'/tmp/phase0-provider-nodes.log'}.items():
+-    shutil.copyfile(src,dest/name)
+-db=Path('/tmp/phase0-provider-nodes.sqlite')
+-if db.exists():
+-    c=sqlite3.connect(db)
+-    query='''select s.value,k.graphNodeId,k.gridX,k.gridY,k.gridZ,k.blockX,k.registersPerThread,k.staticSharedMemory,k.dynamicSharedMemory,k.end-k.start as duration_ns from CUPTI_ACTIVITY_KIND_KERNEL k join StringIds s on s.id=k.demangledName where s.value like '%pagedCaching%' or s.value like '%flashAttentionDecodeHd128%' '''
+-    cur=c.execute(query)
+-    with (dest/'graph_nodes.csv').open('w') as f:
+-        w=csv.writer(f);w.writerow([x[0] for x in cur.description]);w.writerows(cur.fetchall())
+-    evidence={}
+-    for table in ['CUPTI_ACTIVITY_KIND_KERNEL','CUPTI_ACTIVITY_KIND_MEMCPY','CUPTI_ACTIVITY_KIND_MEMSET']:
+-        cols=[r[1] for r in c.execute('pragma table_info('+table+')')]
+-        evidence[table]={'columns':cols}
+-        if 'graphNodeId' in cols:evidence[table]['graph_node_count']=c.execute('select count(*) from '+table+' where graphNodeId is not null and graphNodeId != 0').fetchone()[0]
+-    (dest/'graph_evidence.json').write_text(json.dumps(evidence,indent=2))
+-print('summaries and observed dispatch paths saved')
++def main():
++    p=argparse.ArgumentParser()
++    p.add_argument('--run-dir',type=Path,required=True)
++    p.add_argument('--raw',type=Path,help='CSV path, or results.json; default run-dir/results.json')
++    p.add_argument('--dispatch-log',type=Path)
++    p.add_argument('--output',type=Path,required=True,help='NEW summary directory')
++    a=p.parse_args()
++    source=a.raw or a.run_dir/'results.json'
++    required=[source,a.run_dir/'manifest.json']
++    if a.dispatch_log:required.append(a.dispatch_log)
++    missing=[str(path) for path in required if not path.is_file()]
++    if missing:p.error('INCOMPLETE: missing inputs: '+', '.join(missing))
++    if a.output.exists():p.error('Refusing to overwrite output: '+str(a.output))
++    hashes={str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in required}
++    data=json.loads(source.read_text()) if source.suffix=='.json' else list(csv.DictReader(source.open()))
++    a.output.mkdir(parents=True)
++    counts=collections.Counter();latencies=collections.defaultdict(list);excluded=collections.Counter()
++    for row in data:
++        mode=row.get('mode',row.get('actual_execution_mode','UNKNOWN'))
++        result=row.get('result',row.get('correctness','UNVERIFIED'))
++        if mode=='graph_batch' and row.get('graph_correctness')!='PASS':
++            result='UNVERIFIED_LEGACY_GRAPH'
++        key=(row.get('dtype','UNKNOWN'),row.get('variant',row.get('requested_variant','UNKNOWN')),mode,result)
++        counts[key]+=1
++        if row.get('latency_us'):
++            if result=='PASS' or result=='PASS_bitwise_all_cache':latencies[key[:-1]].append(float(row['latency_us']))
++            else:excluded[result]+=1
++    summary={'status':'COMPLETE','run_dir':str(a.run_dir.resolve()),'input_sha256':hashes,
++             'correctness_counts':[dict(zip(['dtype','variant','mode','result'],key),count=count) for key,count in counts.items()],
++             'excluded_latency_rows':dict(excluded),
++             'timing_warning':'Only matching independently validated execution modes are eligible. No speedups or cross-case ranking inferred.'}
++    (a.output/'summary.json').write_text(json.dumps(summary,indent=2))
++    with (a.output/'latency_summary.csv').open('w') as f:
++        w=csv.writer(f);w.writerow(['dtype','variant','mode','median_us','min_us','max_us','samples'])
++        # Legacy mixed-shape CSV is deliberately not pooled into latency stats.
++        if len({row.get('case') for row in data})<=1:
++            for key,values in latencies.items():w.writerow([*key,statistics.median(values),min(values),max(values),len(values)])
++    if a.dispatch_log:
++        observed=[];context='UNKNOWN'
++        for line in a.dispatch_log.read_text().splitlines():
++            if line.startswith('TRACE '):context=line
++            if 'dispatch: path=' in line:
++                observed.append({'context':context,'dispatch':dict(re.findall(r'(\w+)=([^ ]+)',line.split('dispatch: ')[1]))})
++        (a.output/'observed_dispatch.csv').write_text('context,dispatch\n')
++        with (a.output/'observed_dispatch.csv').open('w') as f:
++            w=csv.writer(f);w.writerow(['context','dispatch'])
++            w.writerows((r['context'],json.dumps(r['dispatch'])) for r in observed)
++    assert all(hashlib.sha256(Path(path).read_bytes()).hexdigest()==sha for path,sha in hashes.items())
++    print('Read-only summary complete:',a.output)
++
++
++if __name__=='__main__':main()

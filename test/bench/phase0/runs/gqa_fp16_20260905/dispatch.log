@@ -1,0 +1,10 @@
+TRACE b1l256 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+FAIL b1l256 gqa per_head_max [0.00010415911674499512, inf, inf, inf, 5.805492401123047e-05, inf, inf, inf, 0.0001208186149597168, inf, inf, inf, 5.6549906730651855e-05, inf, inf, inf, 5.8457255363464355e-05, inf, inf, inf, 9.101629257202148e-05, inf, inf, inf, 0.00010573863983154297, inf, inf, inf, 9.146332740783691e-05, inf, inf, inf]
+metadata replay PASS b1l256
+t1dv128_alignedFalse default eager 12.245759963989258
+t1dv128_alignedFalse default graph_batch 1.515520066022873
+t1dv128_alignedFalse default eager 11.970560550689697
+t1dv128_alignedFalse default graph_batch 1.5052799880504608
+t1dv128_alignedFalse default eager 11.889280080795288
+t1dv128_alignedFalse default graph_batch 1.5052799880504608

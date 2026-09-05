@@ -1,0 +1,20 @@
+{
+  "status": "COMPLETE",
+  "run_dir": "/data/InfiniTensor/InfiniLM/test/bench/phase0/phase01_runs/gqa_stability_20260905T1305",
+  "input_sha256": {
+    "test/bench/phase0/phase01_runs/gqa_stability_20260905T1305/results.json": "8701ec37b31008a26d2221fa1309166517d4258776f33617498d1af5b6bc2c22",
+    "test/bench/phase0/phase01_runs/gqa_stability_20260905T1305/manifest.json": "2fa373a74b50e83bd3161de46b1715ae81a1065d2794869e88d71ebcfcd194fb"
+  },
+  "correctness_counts": [
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 30
+    }
+  ],
+  "excluded_latency_rows": {},
+  "timing_warning": "Only matching independently validated execution modes are eligible. No speedups or cross-case ranking inferred."
+}

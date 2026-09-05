@@ -1,0 +1,172 @@
+{
+  "status": "COMPLETE",
+  "run_dir": "/data/InfiniTensor/InfiniLM/test/bench/phase0/phase01_runs/pre_fix_20260905T1218",
+  "input_sha256": {
+    "test/bench/phase0/phase01_runs/pre_fix_20260905T1218/results.json": "7ce74b5341ada437b89b77f1898baafef4bb58dcdf725e5c520fa312edd75765",
+    "test/bench/phase0/phase01_runs/pre_fix_20260905T1218/manifest.json": "ab435f84949e668b186133d3a1891a34162908b95a2b9b35055a3bee94c1f9b6"
+  },
+  "correctness_counts": [
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "FAIL",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "torch_cuda_graph",
+      "result": "FAIL",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "auto",
+      "mode": "eager",
+      "result": "FAIL",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "auto",
+      "mode": "torch_cuda_graph",
+      "result": "FAIL",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "cta",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "cta",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "split2",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "split2",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "FAIL",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "torch_cuda_graph",
+      "result": "FAIL",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "auto",
+      "mode": "eager",
+      "result": "FAIL",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "auto",
+      "mode": "torch_cuda_graph",
+      "result": "FAIL",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "default",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "cta",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "cta",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "split2",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "split2",
+      "mode": "torch_cuda_graph",
+      "result": "PASS",
+      "count": 3
+    }
+  ],
+  "excluded_latency_rows": {},
+  "timing_warning": "Only matching independently validated execution modes are eligible. No speedups or cross-case ranking inferred."
+}

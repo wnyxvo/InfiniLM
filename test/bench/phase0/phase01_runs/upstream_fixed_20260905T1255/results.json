@@ -1,0 +1,25 @@
+[
+  {
+    "run_id": "upstream_fixed_20260905T1255",
+    "case": "paged_attention",
+    "mode": "eager",
+    "result": "PASS",
+    "case_count": 9,
+    "dtypes": [
+      19,
+      12
+    ]
+  },
+  {
+    "run_id": "upstream_fixed_20260905T1255",
+    "case": "paged_caching",
+    "mode": "eager",
+    "result": "PASS",
+    "case_count": 5,
+    "dtypes": [
+      19,
+      12,
+      13
+    ]
+  }
+]

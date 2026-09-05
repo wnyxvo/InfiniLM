@@ -1,0 +1,77 @@
+{
+  "CUPTI_ACTIVITY_KIND_KERNEL": {
+    "columns": [
+      "start",
+      "end",
+      "deviceId",
+      "contextId",
+      "greenContextId",
+      "streamId",
+      "correlationId",
+      "globalPid",
+      "demangledName",
+      "shortName",
+      "mangledName",
+      "launchType",
+      "cacheConfig",
+      "registersPerThread",
+      "gridX",
+      "gridY",
+      "gridZ",
+      "blockX",
+      "blockY",
+      "blockZ",
+      "staticSharedMemory",
+      "dynamicSharedMemory",
+      "localMemoryPerThread",
+      "localMemoryTotal",
+      "gridId",
+      "sharedMemoryExecuted",
+      "graphNodeId",
+      "sharedMemoryLimitConfig"
+    ],
+    "graph_node_count": 9
+  },
+  "CUPTI_ACTIVITY_KIND_MEMCPY": {
+    "columns": [
+      "start",
+      "end",
+      "deviceId",
+      "contextId",
+      "greenContextId",
+      "streamId",
+      "correlationId",
+      "globalPid",
+      "bytes",
+      "copyKind",
+      "deprecatedSrcId",
+      "srcKind",
+      "dstKind",
+      "srcDeviceId",
+      "srcContextId",
+      "dstDeviceId",
+      "dstContextId",
+      "migrationCause",
+      "graphNodeId",
+      "virtualAddress"
+    ],
+    "graph_node_count": 0
+  },
+  "CUPTI_ACTIVITY_KIND_MEMSET": {
+    "columns": [
+      "start",
+      "end",
+      "deviceId",
+      "contextId",
+      "greenContextId",
+      "streamId",
+      "correlationId",
+      "globalPid",
+      "value",
+      "bytes",
+      "graphNodeId",
+      "memKind"
+    ],
+    "graph_node_count": 0
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "source_trace": "/tmp/phase01-gqa-nodes.nsys-rep",
+  "trace_sha256": "acbd09fe33b1368224eb6523c581938094cff555a7155a03afaf8cad0b748054",
+  "tool": "Nsight Systems CUDA graph-node trace",
+  "graph_kernels": [
+    [
+      "void op::paged_attention::nvidia::flashAttentionDecodeHd128CtaGqa4<int, __half>(T2 *, const T2 *, const T2 *, const T2 *, const T1 *, const T1 *, const float *, unsigned long, float, unsigned long, unsigned long, long, long, long, long, long, long, long, long)",
+      4
+    ],
+    [
+      "void op::paged_attention::nvidia::flashAttentionDecodeHd128CtaGqa4<int, __nv_bfloat16>(T2 *, const T2 *, const T2 *, const T2 *, const T1 *, const T1 *, const float *, unsigned long, float, unsigned long, unsigned long, long, long, long, long, long, long, long, long)",
+      4
+    ],
+    [
+      "void pagedCaching<__half, (int)1024>(T1 *, T1 *, const T1 *, const T1 *, const long *, unsigned long, unsigned long, unsigned long, long, long, long, long, long, long, long, long, long, long)",
+      4
+    ],
+    [
+      "void pagedCaching<__nv_bfloat16, (int)1024>(T1 *, T1 *, const T1 *, const T1 *, const long *, unsigned long, unsigned long, unsigned long, long, long, long, long, long, long, long, long, long, long)",
+      4
+    ]
+  ],
+  "cuda_graph_launches": 8
+}

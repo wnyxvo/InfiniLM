@@ -1,0 +1,12 @@
+[
+  {
+    "run_id": "environment_final_20260905T1312",
+    "case": "bench_help",
+    "mode": "startup_only",
+    "result": "PASS",
+    "transformers": "5.16.1",
+    "infinilm_path": "/data/InfiniTensor/InfiniLM/python/infinilm/__init__.py",
+    "pybind11": "None",
+    "e2e": "NOT_RUN: correctness gate unresolved; historical missing-dependency blocker no longer applies"
+  }
+]

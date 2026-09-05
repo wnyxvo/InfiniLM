@@ -1,0 +1,22 @@
+{
+  "requested_provider": "flash",
+  "requested_graph_mode": "InfiniCore Graph",
+  "correctness": "PASS",
+  "replay_steps": 3,
+  "max_abs_errors": [
+    0.0011239051818847656,
+    0.0012349486351013184,
+    0.0013118088245391846,
+    0.0013061165809631348
+  ],
+  "actual_execution_mode": "device_graph_one_segment_zero_host_segments",
+  "loaded_libraries": [
+    "/root/.infini/lib/libflash-attn-nvidia.so",
+    "/root/.infini/lib/libinfiniccl.so",
+    "/root/.infini/lib/libinfinicore_cpp_api.so",
+    "/root/.infini/lib/libinfiniop.so",
+    "/root/.infini/lib/libinfinirt.so"
+  ],
+  "run_id": "native_20260905",
+  "actual_provider": "native caching + builtin FlashAttention"
+}

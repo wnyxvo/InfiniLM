@@ -1,0 +1,46 @@
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=1 kv_heads=1 seqs=1 pbs=16 max_blocks=64 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=1 kv_heads=1 seqs=1 pbs=16 max_blocks=64 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=40 kv_heads=40 seqs=4 pbs=16 max_blocks=64 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=40 kv_heads=40 seqs=4 pbs=16 max_blocks=64 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=40 kv_heads=40 seqs=6 pbs=16 max_blocks=64 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=40 kv_heads=40 seqs=6 pbs=16 max_blocks=64 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=8 kv_heads=8 seqs=3 pbs=16 max_blocks=64 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=8 kv_heads=8 seqs=3 pbs=16 max_blocks=64 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+[INFINIOP][paged_attention] split-kv is enabled; ignoring INFINIOP_FLASH_DECODE_KERNEL=cta (CTA split-kv not implemented yet)
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=64 kv_heads=8 seqs=8 pbs=16 max_blocks=128 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=64 kv_heads=8 seqs=8 pbs=16 max_blocks=128 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+Testing PagedAttention on NVIDIA with num_seqs=1, num_heads=1, head_size=128, value_size=128, block_size=16, dtype=BF16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=1, num_heads=1, head_size=128, value_size=128, block_size=16, dtype=F16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=4, num_heads=40, head_size=128, value_size=128, block_size=16, dtype=BF16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=4, num_heads=40, head_size=128, value_size=128, block_size=16, dtype=F16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=6, num_heads=40, head_size=128, value_size=128, block_size=16, dtype=BF16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=6, num_heads=40, head_size=128, value_size=128, block_size=16, dtype=F16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=3, num_heads=8, head_size=128, value_size=128, block_size=16, dtype=BF16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=3, num_heads=8, head_size=128, value_size=128, block_size=16, dtype=F16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=3, num_heads=8, head_size=64, value_size=64, block_size=16, dtype=BF16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=3, num_heads=8, head_size=64, value_size=64, block_size=16, dtype=F16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=8, num_heads=64, head_size=128, value_size=128, block_size=16, dtype=BF16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=8, num_heads=64, head_size=128, value_size=128, block_size=16, dtype=F16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=1, num_heads=16, head_size=192, value_size=192, block_size=16, dtype=BF16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=1, num_heads=16, head_size=192, value_size=192, block_size=16, dtype=F16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=1, num_heads=16, head_size=576, value_size=576, block_size=16, dtype=BF16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=1, num_heads=16, head_size=576, value_size=576, block_size=16, dtype=F16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=1, num_heads=16, head_size=576, value_size=512, block_size=16, dtype=BF16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=1, num_heads=16, head_size=576, value_size=512, block_size=16, dtype=F16, use_alibi=False
+[92mTest passed![0m
+Testing PagedCaching on NVIDIA with num_seqs=1, max_seq_len=128, num_kv_heads=8, head_size=128, value_size=128, block_size=16, dtype=BF16
+Testing PagedCaching on NVIDIA with num_seqs=1, max_seq_len=128, num_kv_heads=8, head_size=128, value_size=128, block_size=16, dtype=F16
+Testing PagedCaching on NVIDIA with num_seqs=1, max_seq_len=128, num_kv_heads=8, head_size=128, value_size=128, block_size=16, dtype=F32
+Testing PagedCaching on NVIDIA with num_seqs=5, max_seq_len=512, num_kv_heads=40, head_size=128, value_size=128, block_size=16, dtype=BF16
+Testing PagedCaching on NVIDIA with num_seqs=5, max_seq_len=512, num_kv_heads=40, head_size=128, value_size=128, block_size=16, dtype=F16
+Testing PagedCaching on NVIDIA with num_seqs=5, max_seq_len=512, num_kv_heads=40, head_size=128, value_size=128, block_size=16, dtype=F32
+Testing PagedCaching on NVIDIA with num_seqs=16, max_seq_len=1024, num_kv_heads=8, head_size=64, value_size=64, block_size=32, dtype=BF16
+Testing PagedCaching on NVIDIA with num_seqs=16, max_seq_len=1024, num_kv_heads=8, head_size=64, value_size=64, block_size=32, dtype=F16
+Testing PagedCaching on NVIDIA with num_seqs=16, max_seq_len=1024, num_kv_heads=8, head_size=64, value_size=64, block_size=32, dtype=F32
+Testing PagedCaching on NVIDIA with num_seqs=10, max_seq_len=1024, num_kv_heads=40, head_size=64, value_size=64, block_size=32, dtype=BF16
+Testing PagedCaching on NVIDIA with num_seqs=10, max_seq_len=1024, num_kv_heads=40, head_size=64, value_size=64, block_size=32, dtype=F16
+Testing PagedCaching on NVIDIA with num_seqs=10, max_seq_len=1024, num_kv_heads=40, head_size=64, value_size=64, block_size=32, dtype=F32
+Testing PagedCaching on NVIDIA with num_seqs=2, max_seq_len=128, num_kv_heads=1, head_size=576, value_size=512, block_size=16, dtype=BF16
+Testing PagedCaching on NVIDIA with num_seqs=2, max_seq_len=128, num_kv_heads=1, head_size=576, value_size=512, block_size=16, dtype=F16
+Testing PagedCaching on NVIDIA with num_seqs=2, max_seq_len=128, num_kv_heads=1, head_size=576, value_size=512, block_size=16, dtype=F32
+[92mTest passed![0m

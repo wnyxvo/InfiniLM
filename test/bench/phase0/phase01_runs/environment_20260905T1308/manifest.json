@@ -1,0 +1,19 @@
+{
+  "run_id": "environment_20260905T1308",
+  "scope": "current package and bench --help startup audit; no model inference",
+  "command": "PYTHONPATH=python /data/InfiniTensor/.venv-infini/bin/python -c 'import torch,runpy; runpy.run_path(\"examples/bench.py\",run_name=\"__main__\")' --help",
+  "result": "HELP_PASS",
+  "exit_code": 0,
+  "torch": "2.9.1+cu128",
+  "transformers": "5.16.1",
+  "infinilm_path": "/data/InfiniTensor/InfiniLM/python/infinilm/__init__.py",
+  "pybind11_spec": "None",
+  "libraries": {
+    "/data/InfiniTensor/InfiniLM/python/infinilm/lib/_infinilm.cpython-312-x86_64-linux-gnu.so": "b272132e1f1fb059471ab6019ded51eb02c2bec1b7aa1ad35d62f68d2fdfa077",
+    "/root/.infini/lib/libinfiniop.so": "c659030a2ea2b51c8486ae18635ffe8d8273b79d12c81c76b7b0bc577c35a58e",
+    "/root/.infini/lib/libinfinicore_cpp_api.so": "838b84715177ee05c0b2c13059640be95f955c1870795c47888e1e16b5871ce7",
+    "/root/.infini/lib/libinfinirt.so": "0b6f729cdc75c23d626e68028c81b8bc5a39394339b2216bfe2689f5b4286503",
+    "/root/.infini/lib/libinfiniccl.so": "4f72e80dcafbe4168544e8b544c1cd945bdb63d60488365230cb2c2a3a4e22c4"
+  },
+  "e2e": "NOT_RUN: this audit did not instantiate a model; historical missing-dependency blocker no longer applies"
+}

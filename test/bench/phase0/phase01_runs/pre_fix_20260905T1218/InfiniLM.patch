@@ -1,0 +1,35 @@
+diff --git a/test/bench/phase0/.gitignore b/test/bench/phase0/.gitignore
+index 3d2d45c..de08816 100644
+--- a/test/bench/phase0/.gitignore
++++ b/test/bench/phase0/.gitignore
+@@ -3,3 +3,30 @@ __pycache__/
+ *.ncu-rep
+ *.sqlite
+ *.qdstrm
++
++# Small provenance artifacts only; large traces remain excluded.
++!runs/*/manifest.json
++!runs/*/audit_manifest.json
++!runs/*/provider_native.json
++!runs/*/provider_flash.json
++!runs/*/graph_evidence.json
++!runs/*/dispatch.log
++!runs/*/provider_*.log
++!runs/*/upstream_*.log
++!runs/*/sanitizer.log
++!runs/*/e2e_*.log
++!runs/*/results.json
++!runs/*/exception.log
++!runs/*/execution.log
++!runs/*/summary.json
++!phase01_runs/*/manifest.json
++!phase01_runs/*/results.json
++!phase01_runs/*/dispatch.log
++!phase01_runs/*/exception.log
++!phase01_runs/*/execution.log
++!phase01_runs/*/summary.json
++!phase01_runs/*/archive_inventory.json
++!phase01_runs/*/build.json
++!phase01_runs/*/build.log
++!phase01_runs/*/sanitizer.log
++!phase01_runs/*/graph_evidence.json

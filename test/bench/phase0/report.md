@@ -200,3 +200,13 @@ Profiler含reference、初始化、元数据更新；整体kernel百分比不是
 4. 目前只有源码审计、缺陷复现、native基线与provider/Graph验证，**还不足以支撑独立CUDA优化简历项目**。需要本人实质CUDA修改、映射/访存解释、完整正确性与负结果、稳定绝对收益、profiler证据、未调参shape验证及InfiniLM E2E归因。上游能力、dispatch调参、框架接入、benchmark必须分开写。
 
 本轮未增加生产trace，复用既有debug。全部GO仅为后续建议；到此停止。
+
+
+## 2026-09-05 Phase 0.1 勘误（保留上述历史记录）
+
+- Phase 0 的 JSON/log 有22个原件存在但未被Git跟踪，原因是根目录 `*.json`/`*.log`。Phase 0.1通过局部精确放行补档，原始内容及CSV未改写；清单见 `phase01_runs/archive_20260905T1238/archive_inventory.json`。
+- 历史 `artifact_script_sha256_at_finalization` 只是归档时脚本hash，不能当作运行时hash；旧运行时脚本hash为 UNKNOWN。没有用当前环境补造旧manifest。
+- 旧 `provider_replay.py` 从actual cache算attention reference，不能独立证明append正确；旧页表roll也不代表保留历史语义的迁移。旧PASS只保留当时实际检查范围，不升级为独立append通过。
+- 旧 graph_batch 行复用了eager正确性，不能证明每个variant的Graph输出。历史CSV中的PASS不改写；新只读汇总把这类Graph行标为UNVERIFIED_LEGACY_GRAPH并排除排名。旧默认路径单独metadata检查也不能代表其他variant。
+- 新Phase 0.1在独立run中使用调用前expected cache、负对照、每variant哨兵和Graph输出校验，并分别记录eager_correctness与graph_correctness。
+- 本轮GPU UUID/PCI位置与Phase0不同，禁止跨轮性能加速比。详见Phase 0.1报告。

@@ -1,0 +1,244 @@
+TRACE b1l256 default
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+b1l256 default eager 15.882240533828735
+b1l256 default graph_batch 8.724480271339417
+TRACE b1l256 auto
+[INFINIOP][paged_attention] splitkv auto(mode): sm=128 heads=32 seqs=1 seqlen_k~256 -> num_splits=1
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=1 num_splits=1 fixed=1 gqa_fused=1
+FAIL b1l256 auto per_head_max [0.0007232427597045898, 6717440.0, 7110656.0, 6356991.5, 0.000874638557434082, 10420224.0, 7831552.0, 5242880.0, 0.0005579888820648193, 4751359.5, 4145151.75, 9699328.0, 0.00048179924488067627, 5603328.0, 8093695.5, 5767167.5, 0.00046159327030181885, 5013504.0, 5210111.5, 7340031.5, 0.0008620023727416992, 6881279.5, 5439487.5, 11141120.0, 0.0009666085243225098, 8847360.0, 4063231.75, 5636096.0, 0.0009761452674865723, 10223616.0, 7733247.5, 8257535.5]
+TRACE b1l256 warp
+[INFINIOP][paged_attention][hd128] dispatch: path=warp_nosplit dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+b1l256 warp eager 81.78688049316406
+b1l256 warp graph_batch 81.0086441040039
+TRACE b1l256 cta
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_nosplit dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+b1l256 cta eager 23.797760009765625
+b1l256 cta graph_batch 23.060479164123535
+TRACE b1l256 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+FAIL b1l256 gqa per_head_max [0.0007232427597045898, 6717440.0, 7110656.0, 6356991.5, 0.000874638557434082, 10420224.0, 7831552.0, 5242880.0, 0.0005579888820648193, 4751359.5, 4145151.75, 9699328.0, 0.00048179924488067627, 5603328.0, 8093695.5, 5767167.5, 0.00046159327030181885, 5013504.0, 5210111.5, 7340031.5, 0.0008620023727416992, 6881279.5, 5439487.5, 11141120.0, 0.0009666085243225098, 8847360.0, 4063231.75, 5636096.0, 0.0009761452674865723, 10223616.0, 7733247.5, 8257535.5]
+TRACE b1l256 split2
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=2 fixed=1 gqa_fused=1
+b1l256 split2 eager 15.431679487228394
+b1l256 split2 graph_batch 13.998080492019653
+TRACE b1l256 split8
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=8 fixed=1 gqa_fused=1
+b1l256 split8 eager 15.022079944610596
+b1l256 split8 graph_batch 6.512640118598938
+metadata replay PASS b1l256
+TRACE b1l8192 default
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+b1l8192 default eager 159.9180793762207
+b1l8192 default graph_batch 158.7609577178955
+TRACE b1l8192 auto
+[INFINIOP][paged_attention] splitkv auto(mode): sm=128 heads=32 seqs=1 seqlen_k~8192 -> num_splits=4
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=1 num_splits=4 fixed=1 gqa_fused=1
+b1l8192 auto eager 159.9385643005371
+b1l8192 auto graph_batch 158.74048233032227
+TRACE b1l8192 warp
+[INFINIOP][paged_attention][hd128] dispatch: path=warp_nosplit dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+b1l8192 warp eager 2349.7010803222656
+b1l8192 warp graph_batch 2348.800048828125
+TRACE b1l8192 cta
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_nosplit dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+b1l8192 cta eager 645.2742767333984
+b1l8192 cta graph_batch 644.5568084716797
+TRACE b1l8192 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+FAIL b1l8192 gqa per_head_max [9.024515748023987e-05, 12124160.0, 15335424.0, 9043968.0, 0.00011013075709342957, 29753344.0, 18087936.0, 9043968.0, 0.00011815130710601807, 18219008.0, 15466496.0, 26476544.0, 0.00011787563562393188, 16777216.0, 28704768.0, 24117248.0, 0.00010424107313156128, 9764864.0, 11337728.0, 12517376.0, 0.00011574849486351013, 24117248.0, 19136512.0, 18350080.0, 0.00011946633458137512, 17694720.0, 17956864.0, 12320768.0, 0.0001090019941329956, 16252928.0, 25034752.0, 21626880.0]
+TRACE b1l8192 split2
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=2 fixed=1 gqa_fused=1
+b1l8192 split2 eager 315.22815704345703
+b1l8192 split2 graph_batch 313.8764762878418
+TRACE b1l8192 split8
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=8 fixed=1 gqa_fused=1
+b1l8192 split8 eager 87.24479675292969
+b1l8192 split8 graph_batch 85.96480369567871
+metadata replay PASS b1l8192
+TRACE b16l2048 default
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=16 pbs=256 max_blocks=8 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+b16l2048 default eager 196.89472198486328
+b16l2048 default graph_batch 196.4031982421875
+TRACE b16l2048 auto
+[INFINIOP][paged_attention] splitkv auto(mode): sm=128 heads=32 seqs=16 seqlen_k~2048 -> num_splits=1
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=16 pbs=256 max_blocks=8 cta_tile=8 cta_threads=64 split=0 split_auto=1 num_splits=1 fixed=1 gqa_fused=1
+FAIL b16l2048 auto per_head_max [0.0004188120365142822, 16449536.0, 16908288.0, 18350080.0, 0.0004446059465408325, 17170432.0, 13565952.0, 18481152.0, 0.00024256110191345215, 18612224.0, 16908288.0, 17432576.0, 0.0002432018518447876, 23724032.0, 18612224.0, 17039360.0, 0.0003543943166732788, 18612224.0, 17825792.0, 17301504.0, 0.0002412647008895874, 19267584.0, 14680064.0, 17563648.0, 0.0004043877124786377, 19922944.0, 18087936.0, 14614528.0, 0.00024305284023284912, 16384000.0, 14811136.0, 16318464.0]
+TRACE b16l2048 warp
+[INFINIOP][paged_attention][hd128] dispatch: path=warp_nosplit dtype=19 heads=32 kv_heads=8 seqs=16 pbs=256 max_blocks=8 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+b16l2048 warp eager 1005.506591796875
+b16l2048 warp graph_batch 1004.3186950683594
+TRACE b16l2048 cta
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_nosplit dtype=19 heads=32 kv_heads=8 seqs=16 pbs=256 max_blocks=8 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+b16l2048 cta eager 218.15296173095703
+b16l2048 cta graph_batch 217.78432846069336
+TRACE b16l2048 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=16 pbs=256 max_blocks=8 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+FAIL b16l2048 gqa per_head_max [0.0004188120365142822, 16449536.0, 16908288.0, 18350080.0, 0.0004446059465408325, 17170432.0, 13565952.0, 18481152.0, 0.00024256110191345215, 18612224.0, 16908288.0, 17432576.0, 0.0002432018518447876, 23724032.0, 18612224.0, 17039360.0, 0.0003543943166732788, 18612224.0, 17825792.0, 17301504.0, 0.0002412647008895874, 19267584.0, 14680064.0, 17563648.0, 0.0004043877124786377, 19922944.0, 18087936.0, 14614528.0, 0.00024305284023284912, 16384000.0, 14811136.0, 16318464.0]
+TRACE b16l2048 split2
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=16 pbs=256 max_blocks=8 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=2 fixed=1 gqa_fused=1
+b16l2048 split2 eager 219.3497657775879
+b16l2048 split2 graph_batch 218.17344665527344
+TRACE b16l2048 split8
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=16 pbs=256 max_blocks=8 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=8 fixed=1 gqa_fused=1
+b16l2048 split8 eager 187.08480834960938
+b16l2048 split8 graph_batch 184.5030403137207
+metadata replay PASS b16l2048
+TRACE b32l8192 default
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=32 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+b32l8192 default eager 1468.3750915527344
+b32l8192 default graph_batch 1468.5081481933594
+TRACE b32l8192 auto
+[INFINIOP][paged_attention] splitkv auto(mode): sm=128 heads=32 seqs=32 seqlen_k~8192 -> num_splits=1
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=32 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=1 num_splits=1 fixed=1 gqa_fused=1
+FAIL b32l8192 auto per_head_max [0.00020153075456619263, 25034752.0, 30539776.0, 31064064.0, 0.00015620887279510498, 30408704.0, 28180480.0, 25427968.0, 0.0001214742660522461, 24379392.0, 37224448.0, 30277632.0, 0.00012662261724472046, 32374784.0, 35651584.0, 24117248.0, 0.00022183358669281006, 27787264.0, 27918336.0, 25690112.0, 0.00023724138736724854, 32374784.0, 28835840.0, 28573696.0, 0.00012884289026260376, 27918336.0, 31457280.0, 29491200.0, 0.00021375715732574463, 28442624.0, 29753344.0, 32243712.0]
+TRACE b32l8192 warp
+[INFINIOP][paged_attention][hd128] dispatch: path=warp_nosplit dtype=19 heads=32 kv_heads=8 seqs=32 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+b32l8192 warp eager 4091.7092895507812
+b32l8192 warp graph_batch 4090.3781127929688
+TRACE b32l8192 cta
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_nosplit dtype=19 heads=32 kv_heads=8 seqs=32 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+b32l8192 cta eager 2494.9862670898438
+b32l8192 cta graph_batch 2493.3477783203125
+TRACE b32l8192 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=32 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+FAIL b32l8192 gqa per_head_max [0.00020153075456619263, 25034752.0, 30539776.0, 31064064.0, 0.00015620887279510498, 30408704.0, 28180480.0, 25427968.0, 0.0001214742660522461, 24379392.0, 37224448.0, 30277632.0, 0.00012662261724472046, 32374784.0, 35651584.0, 24117248.0, 0.00022183358669281006, 27787264.0, 27918336.0, 25690112.0, 0.00023724138736724854, 32374784.0, 28835840.0, 28573696.0, 0.00012884289026260376, 27918336.0, 31457280.0, 29491200.0, 0.00021375715732574463, 28442624.0, 29753344.0, 32243712.0]
+TRACE b32l8192 split2
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=32 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=2 fixed=1 gqa_fused=1
+b32l8192 split2 eager 1645.823974609375
+b32l8192 split2 graph_batch 1662.607421875
+TRACE b32l8192 split8
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=32 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=8 fixed=1 gqa_fused=1
+b32l8192 split8 eager 1457.2647094726562
+b32l8192 split8 graph_batch 1459.9885559082031
+metadata replay PASS b32l8192
+TRACE capacity_wide default
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+capacity_wide default eager 14.725120067596436
+capacity_wide default graph_batch 8.130559921264648
+TRACE capacity_wide auto
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=1 num_splits=4 fixed=1 gqa_fused=1
+capacity_wide auto eager 15.032320022583008
+capacity_wide auto graph_batch 8.130559921264648
+TRACE capacity_wide warp
+[INFINIOP][paged_attention][hd128] dispatch: path=warp_nosplit dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+capacity_wide warp eager 76.08320236206055
+capacity_wide warp graph_batch 75.23327827453613
+TRACE capacity_wide cta
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_nosplit dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+capacity_wide cta eager 22.056961059570312
+capacity_wide cta graph_batch 21.36064052581787
+TRACE capacity_wide gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+FAIL capacity_wide gqa per_head_max [0.00047738850116729736, 5734399.5, 4456447.5, 12255232.0, 0.000719606876373291, 8224767.5, 8978432.0, 5439487.5, 0.0006826519966125488, 5865471.5, 5373951.5, 12255232.0, 0.000485837459564209, 6684672.0, 10485760.0, 12648448.0, 0.0004835277795791626, 5341183.5, 9895936.0, 5472255.5, 0.0007997751235961914, 5308415.5, 7110656.0, 6422527.5, 0.0007388591766357422, 5603328.0, 6586367.5, 9240576.0, 0.0004730820655822754, 4521984.0, 10354688.0, 5308416.0]
+TRACE capacity_wide split2
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=2 fixed=1 gqa_fused=1
+capacity_wide split2 eager 14.981119632720947
+capacity_wide split2 graph_batch 12.974079847335815
+TRACE capacity_wide split8
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=8 fixed=1 gqa_fused=1
+capacity_wide split8 eager 14.940160512924194
+capacity_wide split8 graph_batch 6.594560146331787
+metadata replay PASS capacity_wide
+TRACE length_short default
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+length_short default eager 14.827519655227661
+length_short default graph_batch 3.850240111351013
+TRACE length_short auto
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=1 num_splits=4 fixed=1 gqa_fused=1
+length_short auto eager 15.011839866638184
+length_short auto graph_batch 3.850240111351013
+TRACE length_short warp
+[INFINIOP][paged_attention][hd128] dispatch: path=warp_nosplit dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+length_short warp eager 12.524160146713257
+length_short warp graph_batch 6.266880035400391
+TRACE length_short cta
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_nosplit dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+length_short cta eager 12.503039836883545
+length_short cta graph_batch 3.1641599535942078
+TRACE length_short gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+FAIL length_short gqa per_head_max [0.0028563737869262695, 3637245.75, 3063807.0, 3522559.0, 0.0016173124313354492, 2654207.0, 4751359.0, 2883582.75, 0.0017609596252441406, 3325951.0, 4489215.0, 5832703.0, 0.0019050836563110352, 3981311.0, 4587519.0, 4423679.0, 0.0019037723541259766, 3276799.0, 3457023.0, 3719167.0, 0.0019248723983764648, 3751935.0, 3653631.0, 2506750.75, 0.0018690228462219238, 3293183.25, 7176190.5, 3751935.0, 0.002248406410217285, 2473983.0, 3588094.75, 4112383.0]
+TRACE length_short split2
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=2 fixed=1 gqa_fused=1
+length_short split2 eager 14.84671950340271
+length_short split2 graph_batch 4.454399943351746
+TRACE length_short split8
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=8 fixed=1 gqa_fused=1
+length_short split8 eager 14.807039499282837
+length_short split8 graph_batch 4.546560049057007
+metadata replay PASS length_short
+TRACE mixed default
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+mixed default eager 56.451520919799805
+mixed default graph_batch 55.24479866027832
+TRACE mixed auto
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=1 num_splits=1 fixed=1 gqa_fused=1
+FAIL mixed auto per_head_max [0.0018825531005859375, 16384000.0, 11403264.0, 11534336.0, 0.0019249916076660156, 12320768.0, 8519680.0, 12386304.0, 0.0026025772094726562, 9502720.0, 20054016.0, 12910592.0, 0.0016786456108093262, 10551296.0, 14090240.0, 14024704.0, 0.0036454200744628906, 8650752.0, 7143424.0, 11599872.0, 0.0018976926803588867, 10485760.0, 11927552.0, 15663104.0, 0.0019493699073791504, 10813440.0, 13762560.0, 13238272.0, 0.0037277936935424805, 14417920.0, 8257535.5, 7536640.0]
+TRACE mixed warp
+[INFINIOP][paged_attention][hd128] dispatch: path=warp_nosplit dtype=19 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+mixed warp eager 583.6691284179688
+mixed warp graph_batch 583.0348968505859
+TRACE mixed cta
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_nosplit dtype=19 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+mixed cta eager 164.3008041381836
+mixed cta graph_batch 163.73760223388672
+TRACE mixed gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+FAIL mixed gqa per_head_max [0.0018825531005859375, 16384000.0, 11403264.0, 11534336.0, 0.0019249916076660156, 12320768.0, 8519680.0, 12386304.0, 0.0026025772094726562, 9502720.0, 20054016.0, 12910592.0, 0.0016786456108093262, 10551296.0, 14090240.0, 14024704.0, 0.0036454200744628906, 8650752.0, 7143424.0, 11599872.0, 0.0018976926803588867, 10485760.0, 11927552.0, 15663104.0, 0.0019493699073791504, 10813440.0, 13762560.0, 13238272.0, 0.0037277936935424805, 14417920.0, 8257535.5, 7536640.0]
+TRACE mixed split2
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=2 fixed=1 gqa_fused=1
+mixed split2 eager 87.68511772155762
+mixed split2 graph_batch 86.57919883728027
+TRACE mixed split8
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=8 fixed=1 gqa_fused=1
+mixed split8 eager 47.18592166900635
+mixed split8 graph_batch 46.07999801635742
+metadata replay PASS mixed
+t1dv128 default eager 11.786559820175171
+t1dv128 default graph_batch 1.4131200313568115
+t1dv96 default eager 11.704319715499878
+t1dv96 default graph_batch 1.3923199474811554
+t4dv128 default eager 11.743680238723755
+t4dv128 default graph_batch 1.3910399377346039
+t4dv96 default eager 11.704319715499878
+t4dv96 default graph_batch 1.3926400244235992
+t16dv128 default eager 11.775679588317871
+t16dv128 default graph_batch 1.525759994983673
+t16dv96 default eager 11.816960573196411
+t16dv96 default graph_batch 1.5360000729560852
+t32dv128 default eager 11.786240339279175
+t32dv128 default graph_batch 2.282239943742752
+t32dv96 default eager 11.76576018333435
+t32dv96 default graph_batch 2.2835199534893036
+t1dv128 default eager 11.76576018333435
+t1dv128 default graph_batch 1.4115199446678162
+t1dv96 default eager 11.776000261306763
+t1dv96 default graph_batch 1.4028799533843994
+t4dv128 default eager 11.622400283813477
+t4dv128 default graph_batch 1.3926400244235992
+t4dv96 default eager 11.786559820175171
+t4dv96 default graph_batch 1.3926400244235992
+t16dv128 default eager 11.724799871444702
+t16dv128 default graph_batch 1.525759994983673
+t16dv96 default eager 11.786240339279175
+t16dv96 default graph_batch 1.525759994983673
+t32dv128 default eager 11.70464038848877
+t32dv128 default graph_batch 2.2835199534893036
+t32dv96 default eager 11.76576018333435
+t32dv96 default graph_batch 2.2732800245285034
+t1dv128 default eager 11.724799871444702
+t1dv128 default graph_batch 1.4028799533843994
+t1dv96 default eager 11.755520105361938
+t1dv96 default graph_batch 1.3910399377346039
+t4dv128 default eager 11.673599481582642
+t4dv128 default graph_batch 1.3926400244235992
+t4dv96 default eager 11.83743953704834
+t4dv96 default graph_batch 1.3926400244235992
+t16dv128 default eager 11.70591950416565
+t16dv128 default graph_batch 1.5462400019168854
+t16dv96 default eager 11.764479875564575
+t16dv96 default graph_batch 1.5360000729560852
+t32dv128 default eager 11.745280027389526
+t32dv128 default graph_batch 2.29312002658844
+t32dv96 default eager 11.787199974060059
+t32dv96 default graph_batch 2.303999960422516

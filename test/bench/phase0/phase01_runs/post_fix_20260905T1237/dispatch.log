@@ -1,0 +1,168 @@
+TRACE torch.float16 l1 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.float16 l1 auto
+[INFINIOP][paged_attention] splitkv auto(mode): sm=128 heads=32 seqs=1 seqlen_k~256 -> num_splits=1
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=1 num_splits=1 fixed=1 gqa_fused=1
+
+TRACE torch.float16 l1 default
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.float16 l1 cta
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_nosplit dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+
+TRACE torch.float16 l1 split2
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=2 fixed=1 gqa_fused=1
+
+TRACE torch.float16 l7 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.float16 l8 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.float16 l9 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.float16 l255 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.float16 l256 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.float16 l256 auto
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=1 num_splits=1 fixed=1 gqa_fused=1
+
+TRACE torch.float16 l256 default
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.float16 l256 cta
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_nosplit dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+
+TRACE torch.float16 l256 split2
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=2 fixed=1 gqa_fused=1
+
+TRACE torch.float16 l257 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.float16 l2049 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=9 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.float16 l8192 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.float16 l8192 default
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.float16 l8192 cta
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_nosplit dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+
+TRACE torch.float16 l8192 split2
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=2 fixed=1 gqa_fused=1
+
+TRACE torch.float16 mixed4 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=12 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.float16 mixed4 auto
+[INFINIOP][paged_attention] splitkv auto(mode): sm=128 heads=32 seqs=4 seqlen_k~512 -> num_splits=1
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=12 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=0 split_auto=1 num_splits=1 fixed=1 gqa_fused=1
+
+TRACE torch.float16 mixed4 default
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.float16 mixed4 cta
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_nosplit dtype=12 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+
+TRACE torch.float16 mixed4 split2
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=2 fixed=1 gqa_fused=1
+
+TRACE torch.float16 mixed16 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=12 heads=32 kv_heads=8 seqs=16 pbs=256 max_blocks=9 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.float16 mixed16 auto
+[INFINIOP][paged_attention] splitkv auto(mode): sm=128 heads=32 seqs=16 seqlen_k~2304 -> num_splits=1
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=12 heads=32 kv_heads=8 seqs=16 pbs=256 max_blocks=9 cta_tile=8 cta_threads=64 split=0 split_auto=1 num_splits=1 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 l1 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 l1 auto
+[INFINIOP][paged_attention] splitkv auto(mode): sm=128 heads=32 seqs=1 seqlen_k~256 -> num_splits=1
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=1 num_splits=1 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 l1 default
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 l1 cta
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_nosplit dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+
+TRACE torch.bfloat16 l1 split2
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=2 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 l7 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 l8 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 l9 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 l255 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 l256 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 l256 auto
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=1 num_splits=1 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 l256 default
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 l256 cta
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_nosplit dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+
+TRACE torch.bfloat16 l256 split2
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=2 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 l257 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 l2049 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=9 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 l8192 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 l8192 default
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 l8192 cta
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_nosplit dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+
+TRACE torch.bfloat16 l8192 split2
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=32 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=2 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 mixed4 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 mixed4 auto
+[INFINIOP][paged_attention] splitkv auto(mode): sm=128 heads=32 seqs=4 seqlen_k~512 -> num_splits=1
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=0 split_auto=1 num_splits=1 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 mixed4 default
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 mixed4 cta
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_nosplit dtype=19 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+
+TRACE torch.bfloat16 mixed4 split2
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=2 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 mixed16 gqa
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=16 pbs=256 max_blocks=9 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+
+TRACE torch.bfloat16 mixed16 auto
+[INFINIOP][paged_attention] splitkv auto(mode): sm=128 heads=32 seqs=16 seqlen_k~2304 -> num_splits=1
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=16 pbs=256 max_blocks=9 cta_tile=8 cta_threads=64 split=0 split_auto=1 num_splits=1 fixed=1 gqa_fused=1
+

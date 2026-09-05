@@ -1,0 +1,92 @@
+{
+  "status": "COMPLETE",
+  "run_dir": "/data/InfiniTensor/InfiniLM/test/bench/phase0/phase01_runs/synccheck_20260905T1246",
+  "input_sha256": {
+    "test/bench/phase0/phase01_runs/synccheck_20260905T1246/results.json": "f378c70f6ef4d5b6b366e28c567e1d87b9af20f52b9185a76a8fceefd07a8360",
+    "test/bench/phase0/phase01_runs/synccheck_20260905T1246/manifest.json": "fa11eedfe27fc664539fbadb5103287b04d0258d941a4ebcac6b65b78f4b6b68"
+  },
+  "correctness_counts": [
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "FAIL",
+      "count": 2
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "infinicore_graph",
+      "result": "FAIL",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 2
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "FAIL",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "infinicore_graph",
+      "result": "FAIL",
+      "count": 3
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 1
+    }
+  ],
+  "excluded_latency_rows": {},
+  "timing_warning": "Only matching independently validated execution modes are eligible. No speedups or cross-case ranking inferred."
+}

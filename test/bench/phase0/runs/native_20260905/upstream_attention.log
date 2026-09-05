@@ -1,0 +1,19 @@
+Testing PagedAttention on NVIDIA with num_seqs=1, num_heads=1, head_size=128, value_size=128, block_size=16, dtype=BF16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=1, num_heads=1, head_size=128, value_size=128, block_size=16, dtype=F16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=4, num_heads=40, head_size=128, value_size=128, block_size=16, dtype=BF16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=4, num_heads=40, head_size=128, value_size=128, block_size=16, dtype=F16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=6, num_heads=40, head_size=128, value_size=128, block_size=16, dtype=BF16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=6, num_heads=40, head_size=128, value_size=128, block_size=16, dtype=F16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=3, num_heads=8, head_size=128, value_size=128, block_size=16, dtype=BF16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=3, num_heads=8, head_size=128, value_size=128, block_size=16, dtype=F16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=3, num_heads=8, head_size=64, value_size=64, block_size=16, dtype=BF16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=3, num_heads=8, head_size=64, value_size=64, block_size=16, dtype=F16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=8, num_heads=64, head_size=128, value_size=128, block_size=16, dtype=BF16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=8, num_heads=64, head_size=128, value_size=128, block_size=16, dtype=F16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=1, num_heads=16, head_size=192, value_size=192, block_size=16, dtype=BF16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=1, num_heads=16, head_size=192, value_size=192, block_size=16, dtype=F16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=1, num_heads=16, head_size=576, value_size=576, block_size=16, dtype=BF16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=1, num_heads=16, head_size=576, value_size=576, block_size=16, dtype=F16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=1, num_heads=16, head_size=576, value_size=512, block_size=16, dtype=BF16, use_alibi=False
+Testing PagedAttention on NVIDIA with num_seqs=1, num_heads=16, head_size=576, value_size=512, block_size=16, dtype=F16, use_alibi=False
+[92mTest passed![0m

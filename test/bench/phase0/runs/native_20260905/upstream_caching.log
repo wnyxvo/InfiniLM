@@ -1,0 +1,16 @@
+Testing PagedCaching on NVIDIA with num_seqs=1, max_seq_len=128, num_kv_heads=8, head_size=128, value_size=128, block_size=16, dtype=BF16
+Testing PagedCaching on NVIDIA with num_seqs=1, max_seq_len=128, num_kv_heads=8, head_size=128, value_size=128, block_size=16, dtype=F16
+Testing PagedCaching on NVIDIA with num_seqs=1, max_seq_len=128, num_kv_heads=8, head_size=128, value_size=128, block_size=16, dtype=F32
+Testing PagedCaching on NVIDIA with num_seqs=5, max_seq_len=512, num_kv_heads=40, head_size=128, value_size=128, block_size=16, dtype=BF16
+Testing PagedCaching on NVIDIA with num_seqs=5, max_seq_len=512, num_kv_heads=40, head_size=128, value_size=128, block_size=16, dtype=F16
+Testing PagedCaching on NVIDIA with num_seqs=5, max_seq_len=512, num_kv_heads=40, head_size=128, value_size=128, block_size=16, dtype=F32
+Testing PagedCaching on NVIDIA with num_seqs=16, max_seq_len=1024, num_kv_heads=8, head_size=64, value_size=64, block_size=32, dtype=BF16
+Testing PagedCaching on NVIDIA with num_seqs=16, max_seq_len=1024, num_kv_heads=8, head_size=64, value_size=64, block_size=32, dtype=F16
+Testing PagedCaching on NVIDIA with num_seqs=16, max_seq_len=1024, num_kv_heads=8, head_size=64, value_size=64, block_size=32, dtype=F32
+Testing PagedCaching on NVIDIA with num_seqs=10, max_seq_len=1024, num_kv_heads=40, head_size=64, value_size=64, block_size=32, dtype=BF16
+Testing PagedCaching on NVIDIA with num_seqs=10, max_seq_len=1024, num_kv_heads=40, head_size=64, value_size=64, block_size=32, dtype=F16
+Testing PagedCaching on NVIDIA with num_seqs=10, max_seq_len=1024, num_kv_heads=40, head_size=64, value_size=64, block_size=32, dtype=F32
+Testing PagedCaching on NVIDIA with num_seqs=2, max_seq_len=128, num_kv_heads=1, head_size=576, value_size=512, block_size=16, dtype=BF16
+Testing PagedCaching on NVIDIA with num_seqs=2, max_seq_len=128, num_kv_heads=1, head_size=576, value_size=512, block_size=16, dtype=F16
+Testing PagedCaching on NVIDIA with num_seqs=2, max_seq_len=128, num_kv_heads=1, head_size=576, value_size=512, block_size=16, dtype=F32
+[92mTest passed![0m

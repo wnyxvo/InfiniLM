@@ -1,0 +1,76 @@
+{
+  "status": "COMPLETE",
+  "run_dir": "/data/InfiniTensor/InfiniLM/test/bench/phase0/phase01_runs/provider_flash_20260905T1255",
+  "input_sha256": {
+    "test/bench/phase0/phase01_runs/provider_flash_20260905T1255/results.json": "bd57b45c5a8f6d8239b8c84e906ef4382f248230b30cfb8b78417a7647208cd6",
+    "test/bench/phase0/phase01_runs/provider_flash_20260905T1255/manifest.json": "e13f5429fec81d613f3fe139deebde6c3f810959b6ad6c1c5485df356a88e7d8"
+  },
+  "correctness_counts": [
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "default",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.bfloat16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.bfloat16",
+      "variant": "default",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 1
+    }
+  ],
+  "excluded_latency_rows": {},
+  "timing_warning": "Only matching independently validated execution modes are eligible. No speedups or cross-case ranking inferred."
+}

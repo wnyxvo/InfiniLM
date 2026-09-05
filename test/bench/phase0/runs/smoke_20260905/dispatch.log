@@ -1,0 +1,12 @@
+TRACE b1l256 default
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+b1l256 default eager 14.909440279006958
+b1l256 default graph_batch 8.73471975326538
+TRACE b1l256 auto
+[INFINIOP][paged_attention] splitkv auto(mode): sm=128 heads=32 seqs=1 seqlen_k~256 -> num_splits=1
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=19 heads=32 kv_heads=8 seqs=1 pbs=256 max_blocks=1 cta_tile=8 cta_threads=64 split=0 split_auto=1 num_splits=1 fixed=1 gqa_fused=1
+Traceback (most recent call last):
+  File "/data/InfiniTensor/InfiniLM/test/bench/phase0/native_baseline.py", line 137, in <module>
+    if not passed:writer.writerow(row);f.flush();raise AssertionError(row)
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'run_id': 'smoke_20260905', 'op': 'attention', 'case': 'b1l256', 'dtype': 'torch.bfloat16', 'actual_provider': 'native_C_API', 'actual_kernel': 'see dispatch.log; caching symbol confirmed separately', 'shapes': '[[1, 32, 128], [1, 32, 128], [1, 8, 256, 128], [1, 8, 256, 128], [1, 1], [1]]', 'strides': '[[4096, 128, 1], [4096, 128, 1], [262144, 32768, 128, 1], [262144, 32768, 128, 1], [1, 1], [1]]', 'B': 1, 'lengths': '[256]', 'capacity_pages': 1, 'requested_variant': 'auto', 'requested_env': '{"DECODE_SPLITKV": "auto"}', 'correctness': 'FAIL', 'max_abs_error': 11141120.0, 'workspace_bytes': 133120}

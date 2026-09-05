@@ -1,0 +1,148 @@
+{
+  "run_id": "nsys_gqa_20260905T1300",
+  "command": [
+    "/data/InfiniTensor/.venv-infini/bin/python",
+    "test/bench/phase0/provider_replay.py",
+    "--variant",
+    "gqa",
+    "--output",
+    "test/bench/phase0/phase01_runs/nsys_gqa_20260905T1300"
+  ],
+  "seed": 20260905,
+  "python": "3.12.3 (main, Nov  6 2024, 18:32:19) [GCC 13.2.0]",
+  "torch": "2.9.1+cu128",
+  "torch_path": "/data/InfiniTensor/.venv-infini/lib/python3.12/site-packages/torch/__init__.py",
+  "cuda": "12.8",
+  "repos": {
+    "InfiniLM": {
+      "path": "/data/InfiniTensor/InfiniLM",
+      "sha": {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0,
+        "stdout": "f1498ccd13d42f20c4ab5fe9e97e5bf70761fcdc\n",
+        "stderr": ""
+      },
+      "dirty": {
+        "command": [
+          "git",
+          "status",
+          "--short"
+        ],
+        "exit_code": 0,
+        "stdout": " M test/bench/phase0/.gitignore\n M test/bench/phase0/native_baseline.py\n M test/bench/phase0/provider_replay.py\n M test/bench/phase0/report.md\n M test/bench/phase0/summarize.py\n?? test/bench/phase0/build_gqa_isolated.py\n?? test/bench/phase0/correctness_support.py\n?? test/bench/phase0/gqa_regression.py\n?? test/bench/phase0/phase01_runs/\n?? test/bench/phase0/runs/caching_aligned_20260905/dispatch.log\n?? test/bench/phase0/runs/caching_aligned_20260905/manifest.json\n?? test/bench/phase0/runs/gqa_fp16_20260905/dispatch.log\n?? test/bench/phase0/runs/gqa_fp16_20260905/manifest.json\n?? test/bench/phase0/runs/gqa_repro_20260905/dispatch.log\n?? test/bench/phase0/runs/gqa_repro_20260905/manifest.json\n?? test/bench/phase0/runs/native_20260905/audit_manifest.json\n?? test/bench/phase0/runs/native_20260905/dispatch.log\n?? test/bench/phase0/runs/native_20260905/e2e_attempt.log\n?? test/bench/phase0/runs/native_20260905/e2e_preload_attempt.log\n?? test/bench/phase0/runs/native_20260905/graph_evidence.json\n?? test/bench/phase0/runs/native_20260905/manifest.json\n?? test/bench/phase0/runs/native_20260905/provider_flash.json\n?? test/bench/phase0/runs/native_20260905/provider_flash.log\n?? test/bench/phase0/runs/native_20260905/provider_native.json\n?? test/bench/phase0/runs/native_20260905/provider_native.log\n?? test/bench/phase0/runs/native_20260905/provider_nodes.log\n?? test/bench/phase0/runs/native_20260905/sanitizer.log\n?? test/bench/phase0/runs/native_20260905/upstream_attention.log\n?? test/bench/phase0/runs/native_20260905/upstream_caching.log\n?? test/bench/phase0/runs/smoke_20260905/dispatch.log\n?? test/bench/phase0/runs/smoke_20260905/manifest.json\n?? test/bench/phase0/split_control_probe.py\n?? test/bench/phase0/test_summarize.py\n?? test/bench/phase0/upstream_regression.py\n",
+        "stderr": ""
+      },
+      "branch": {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "exit_code": 0,
+        "stdout": "feat\n",
+        "stderr": ""
+      },
+      "submodules": {
+        "command": [
+          "git",
+          "submodule",
+          "status"
+        ],
+        "exit_code": 0,
+        "stdout": " 5ed07097faa6c50199c4a3b66e5ed37d4fbfccc2 third_party/json (v3.11.2-374-g5ed07097f)\n 88a0e07ad5bb3e2651cd5613530b3f06a15fc400 third_party/spdlog (v1.2.1-2532-g88a0e07a)\n",
+        "stderr": ""
+      }
+    },
+    "InfiniCore": {
+      "path": "/data/InfiniTensor/InfiniCore",
+      "sha": {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0,
+        "stdout": "46ca684929aaa2ce69fb1b288787e8a859e26c93\n",
+        "stderr": ""
+      },
+      "dirty": {
+        "command": [
+          "git",
+          "status",
+          "--short"
+        ],
+        "exit_code": 0,
+        "stdout": " M src/infiniop/ops/paged_attention/cuda/kernel_v2.cuh\n",
+        "stderr": ""
+      },
+      "branch": {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "exit_code": 0,
+        "stdout": "feat\n",
+        "stderr": ""
+      },
+      "submodules": {
+        "command": [
+          "git",
+          "submodule",
+          "status"
+        ],
+        "exit_code": 0,
+        "stdout": " c21a5b465dbdd94bdc246e32cf9c985f2ca01c9e submodules/InfiniCCL (v0.1.0-2-gc21a5b4)\n 47c1c4969c4312b4f15fc73928c72e4c262f79ce submodules/InfiniOps (remotes/origin/codex/build-plugin-contract-199-g47c1c49)\n b14539d0bdc3c4b79384d3c8805cbe915e40ad91 submodules/InfiniRT (b14539d)\n 087c84df83d254b5fb295a7a408f1a1d554085cf third_party/cutlass (v4.4.0-16-g087c84df)\n 10846960ca0793b993446f6dbaf696479c127a9d third_party/flash-attention (fa4-v4.0.0.beta4-45-g1084696)\n-99bbf1feb925ccfcbd0f01d7786543e8ce6f268b third_party/mate\n f1d748e5e3edfa4b1778edea003bac94781bc7b7 third_party/spdlog (v1.2.1-2526-gf1d748e5)\n",
+        "stderr": ""
+      }
+    }
+  },
+  "scripts": {
+    "split_control_probe.py": "a51987fe34a38068e8f6efc5a03329d9c34381841327280ecacac01bb99b3c71",
+    "summarize.py": "ea0bde75b4cd229bc51e45a08974afde2528c872f443f6d25c2d158324f31204",
+    "upstream_regression.py": "fcfe8bc668219dab278176e099163c64681d46f279075ee31a9d177afa79f46b",
+    "gqa_regression.py": "f485cc668169604ffac4f0f62141b0eecacfa652f45006583b127fd272d8f941",
+    "test_summarize.py": "4032c395358db2f934bc72192a538c8e890a679b7bed64c7de63ccbe018fdd0d",
+    "build_gqa_isolated.py": "32bb7796781fde3fe6f8e9819edf206f931d8ea946a37864e0986ef52376da65",
+    "native_baseline.py": "6bb8cd18154316ae50a93e4afe124545b2c402eaac1891a5d0a85f888619debb",
+    "correctness_support.py": "c71ee358319a2b67a5f5e20899cab5283843d4b08c22c897f7ff5a3d6b37f1d5",
+    "provider_replay.py": "0b0ae4e25c31c489f794caa4cc664d18d291eb32b97fa2125fe8706232f0f3dd"
+  },
+  "exit_code": 0,
+  "initial_environment": {
+    "INFINI_ROOT": "/tmp/phase01-fixed-sm89",
+    "LD_LIBRARY_PATH": "/tmp/phase01-fixed-sm89/lib:/root/.infini/lib:/usr/local/cuda/lib64",
+    "INFINICORE_GRAPH_DEBUG": "1"
+  },
+  "build_config": "{\n    __toolchains_linux_x86_64 = {\n        \"envs\",\n        \"gcc\",\n        \"yasm\",\n        \"nasm\",\n        \"fasm\",\n        \"cuda\",\n        \"go\",\n        \"rust\",\n        \"swift\",\n        \"gfortran\",\n        \"fpc\"\n    },\n    __toolchains_linux_x86_64_host = {\n        \"envs\",\n        \"gcc\",\n        \"yasm\",\n        \"nasm\",\n        \"fasm\",\n        \"cuda\",\n        \"go\",\n        \"rust\",\n        \"swift\",\n        \"gfortran\",\n        \"fpc\"\n    },\n    [\"ali-ppu\"] = false,\n    arch = \"x86_64\",\n    [\"ascend-npu\"] = false,\n    aten = true,\n    [\"bang-mlu-arch\"] = \"mtp_592\",\n    builddir = \"build\",\n    [\"cambricon-mlu\"] = false,\n    ccache = true,\n    ccl = true,\n    clean = true,\n    cpu = true,\n    cuda = \"/usr/local/cuda\",\n    cuda_arch = \"sm_89\",\n    cuda_sdkver = \"12.8\",\n    cudnn = true,\n    editable = false,\n    [\"flash-attn\"] = \"/data/InfiniTensor/InfiniCore/third_party/flash-attention\",\n    graph = true,\n    host = \"linux\",\n    [\"hygon-arch\"] = false,\n    [\"hygon-dcu\"] = false,\n    [\"iluvatar-arch\"] = \"ivcore20\",\n    [\"iluvatar-gpu\"] = false,\n    infiniops = false,\n    [\"infiniops-root\"] = \"submodules/InfiniOps\",\n    [\"infinirt-root\"] = \"\",\n    kind = \"static\",\n    [\"kunlun-xpu\"] = false,\n    [\"metax-gpu\"] = false,\n    mode = \"release\",\n    [\"moore-gpu\"] = false,\n    [\"moore-gpu-arch\"] = \"mp_31\",\n    [\"mutual-awareness\"] = false,\n    ndk_stdcxx = true,\n    ninetoothed = false,\n    [\"nv-gpu\"] = true,\n    omp = true,\n    plat = \"linux\",\n    [\"qy-gpu\"] = false,\n    [\"use-mc\"] = false,\n    [\"use-vendor-ops\"] = false\n}",
+  "device": "_CudaDeviceProperties(name='NVIDIA GeForce RTX 4090', major=8, minor=9, total_memory=24330MB, multi_processor_count=128, uuid=bc61c62f-2e69-f382-e981-b932b23df2aa, pci_bus_id=55, pci_device_id=0, pci_domain_id=0, L2_cache_size=72MB)",
+  "nvidia_smi": {
+    "command": [
+      "nvidia-smi"
+    ],
+    "exit_code": 0,
+    "stdout": "Sat Sep  5 12:47:42 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |\n|-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA GeForce RTX 4090        Off |   00000000:37:00.0 Off |                  Off |\n| 30%   29C    P2             28W /  450W |     418MiB /  24564MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n                                                                                         \n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n+-----------------------------------------------------------------------------------------+\n",
+    "stderr": ""
+  },
+  "nvcc": {
+    "command": [
+      "nvcc",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Jan_15_19:20:09_PST_2025\nCuda compilation tools, release 12.8, V12.8.61\nBuild cuda_12.8.r12.8/compiler.35404655_0\n",
+    "stderr": ""
+  },
+  "loaded_libraries": {
+    "/root/.infini/lib/libflash-attn-nvidia.so": "2d9990b4d9628e2a5a31652f0aaafff0029b8c3b8ae26f5239297e0b3df26bf0",
+    "/root/.infini/lib/libinfiniccl.so": "4f72e80dcafbe4168544e8b544c1cd945bdb63d60488365230cb2c2a3a4e22c4",
+    "/root/.infini/lib/libinfinicore_cpp_api.so": "838b84715177ee05c0b2c13059640be95f955c1870795c47888e1e16b5871ce7",
+    "/root/.infini/lib/libinfinirt.so": "0b6f729cdc75c23d626e68028c81b8bc5a39394339b2216bfe2689f5b4286503",
+    "/tmp/phase01-fixed-sm89/lib/libinfiniop.so": "004e96510800cdebdd489f1eed641a45f26593a5084befc3af6b17afbe98ed2f"
+  },
+  "result": "PASS"
+}

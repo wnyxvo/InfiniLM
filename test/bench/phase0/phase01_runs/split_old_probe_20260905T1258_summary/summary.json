@@ -1,0 +1,28 @@
+{
+  "status": "COMPLETE",
+  "run_dir": "/data/InfiniTensor/InfiniLM/test/bench/phase0/phase01_runs/split_old_probe_20260905T1258",
+  "input_sha256": {
+    "test/bench/phase0/phase01_runs/split_old_probe_20260905T1258/results.json": "c06b4a4ab2b683e6ed20b5d1216052758a48a75f3d395a8e571524b63c89f061",
+    "test/bench/phase0/phase01_runs/split_old_probe_20260905T1258/manifest.json": "57a812d4ae2873a0ee8ae099ad7741cdfe92496659e859db9546cc1d4b095b50"
+  },
+  "correctness_counts": [
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 20
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "FAIL",
+      "count": 10
+    }
+  ],
+  "excluded_latency_rows": {},
+  "timing_warning": "Only matching independently validated execution modes are eligible. No speedups or cross-case ranking inferred."
+}

@@ -1,0 +1,269 @@
+{
+  "audit_date": "2026-09-05",
+  "source_commit": "f1498ccd13d42f20c4ab5fe9e97e5bf70761fcdc",
+  "items": [
+    {
+      "path": "test/bench/phase0/runs/caching_aligned_20260905/dispatch.log",
+      "tracked_at_phase0_commit": false,
+      "bytes": 2675,
+      "sha256": "9f32a796e22fde6b58644cbce07eced0b54dccf561d86663ee626305440141f2",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/caching_aligned_20260905/manifest.json",
+      "tracked_at_phase0_commit": false,
+      "bytes": 11500,
+      "sha256": "0de5b2515e416877123f1973d79dc3ab43367f498e198f5380a6f833cdded044",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/caching_aligned_20260905/raw.csv",
+      "tracked_at_phase0_commit": true,
+      "bytes": 136169,
+      "sha256": "c7f8e0c31e0da0edd4682652cf04bcb9e0639c39b4eed5240daa6bd5898cab0c",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/caching_aligned_20260905/summary.csv",
+      "tracked_at_phase0_commit": true,
+      "bytes": 7913,
+      "sha256": "a3115055851f8fd6a6d811b79d574a4063264fe8d49676bc455852e74c28febf",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/gqa_fp16_20260905/dispatch.log",
+      "tracked_at_phase0_commit": false,
+      "bytes": 925,
+      "sha256": "153d3708612b845c6c4fbcb34c5ac233cf4cd18dc812ffe22fee7f1f5faf3dbb",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/gqa_fp16_20260905/manifest.json",
+      "tracked_at_phase0_commit": false,
+      "bytes": 11504,
+      "sha256": "8bf96234dd1ed5510bfc65922cc020a831314484dec29a2fae4de6d84316ddc5",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/gqa_fp16_20260905/raw.csv",
+      "tracked_at_phase0_commit": true,
+      "bytes": 17584,
+      "sha256": "47914891c63911b4e7faf078dd887b15975cda49d5f02f8bf13fcd1f4a4ebcc1",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/gqa_fp16_20260905/summary.csv",
+      "tracked_at_phase0_commit": true,
+      "bytes": 1024,
+      "sha256": "dc83570d3e08e7b109a5f03ef5de28d35331633123897393ec99e3fb4a50f46e",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/gqa_repro_20260905/dispatch.log",
+      "tracked_at_phase0_commit": false,
+      "bytes": 992,
+      "sha256": "13fe2dea2158ba1097d0fab53c1f76bd55a8855754d6e124a22776b144dd1ff7",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/gqa_repro_20260905/manifest.json",
+      "tracked_at_phase0_commit": false,
+      "bytes": 11492,
+      "sha256": "0b5f414fbcdc8354cdae0578ae19172171b65fd5ac8275e7a8751cdd1930e906",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/gqa_repro_20260905/raw.csv",
+      "tracked_at_phase0_commit": true,
+      "bytes": 17082,
+      "sha256": "ea514feb522954b2a8ad52171908270c107ecb74b070bfb51122372ace6594db",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/gqa_repro_20260905/summary.csv",
+      "tracked_at_phase0_commit": true,
+      "bytes": 941,
+      "sha256": "d393123530477d7609b1e5b7096649764694060e5638de1650a376141984abe4",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/audit_manifest.json",
+      "tracked_at_phase0_commit": false,
+      "bytes": 6914,
+      "sha256": "9739854ab48a2db0022b138b6a52f9d870a057a062673a0567896705217b7260",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/dispatch.log",
+      "tracked_at_phase0_commit": false,
+      "bytes": 22340,
+      "sha256": "802645d6fbbc8e3f5dd972678d6d4815f7402b5a07b15acc24ca06f95702f9a4",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/e2e_attempt.log",
+      "tracked_at_phase0_commit": false,
+      "bytes": 597,
+      "sha256": "e2a2e216f8adf61a6a168da5babb3173274d243ce4ac721df89a073cf5a5d095",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/e2e_preload_attempt.log",
+      "tracked_at_phase0_commit": false,
+      "bytes": 1054,
+      "sha256": "734bdb2567054e992fa4dc6acd451adae503724abec2a8fe427650d4f27f6c28",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/execution_status.csv",
+      "tracked_at_phase0_commit": true,
+      "bytes": 1133,
+      "sha256": "c89520f510aadb2560d96aece398af2da88341e8670bad433314004579eb5251",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/graph_evidence.json",
+      "tracked_at_phase0_commit": false,
+      "bytes": 1466,
+      "sha256": "311aa34766d189f74453493abc31e8671737bbe7288a2e0994d071b82d31c5e8",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/graph_nodes.csv",
+      "tracked_at_phase0_commit": true,
+      "bytes": 6720,
+      "sha256": "7e5b06c58c2c7020acee5f1b640edfc7bd43d372365cc1c08b3c82522bf12c52",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/manifest.json",
+      "tracked_at_phase0_commit": false,
+      "bytes": 11443,
+      "sha256": "0474099b4162648f4fc4724df6e06ef989cd892fbe5a9a1d0604cc808ed84b9d",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/ncu_caching.csv",
+      "tracked_at_phase0_commit": true,
+      "bytes": 1218,
+      "sha256": "b69522983231617f34ff0e7065abe834a92ecd31604b8f90d3916901cb2797c6",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/nsys_flash.csv",
+      "tracked_at_phase0_commit": true,
+      "bytes": 12000,
+      "sha256": "558592e9472f25f417bcbf5014b131b42476e5bfd3d86d8e8cbfc1961bb67238",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/nsys_native.csv",
+      "tracked_at_phase0_commit": true,
+      "bytes": 12262,
+      "sha256": "4761d6986fd8e636165f39f4ea210a5574ed71f66eaeefd17d0efe137ed7ac03",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/provider_flash.json",
+      "tracked_at_phase0_commit": false,
+      "bytes": 678,
+      "sha256": "9df5e0e0bc34d6d233cea6893ee2e4497fe4f7782ba0f044b9b05b76c14f2cf2",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/provider_flash.log",
+      "tracked_at_phase0_commit": false,
+      "bytes": 1532,
+      "sha256": "afa021ec7f472a8c9653a88944d528f208bc5f0c7a07bb9f414e5dafeb3c6654",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/provider_native.json",
+      "tracked_at_phase0_commit": false,
+      "bytes": 655,
+      "sha256": "be959eda8e98eaacc3222e81de6381abe272f17fc87683d5e3a5f5f71e28540d",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/provider_native.log",
+      "tracked_at_phase0_commit": false,
+      "bytes": 1780,
+      "sha256": "9a1f648bf9a2d751ff84f096910fc5ae8c9e99a27b3304eeae3a56cac3b4459b",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/provider_nodes.log",
+      "tracked_at_phase0_commit": false,
+      "bytes": 1732,
+      "sha256": "905c527d229660ac08ed7b76e1c6a7aac56e9d88aee124b66c42ec480b8db77e",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/raw.csv",
+      "tracked_at_phase0_commit": true,
+      "bytes": 518141,
+      "sha256": "d24bd3ad02a6587cd022a4359a9acdbd1eae6afc9b48a2233714af63155121c6",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/sanitizer.log",
+      "tracked_at_phase0_commit": false,
+      "bytes": 933,
+      "sha256": "9c32ee4b571e3adf98f09a064182702f74b35398d1bafb6a1221e98efa1f62e7",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/summary.csv",
+      "tracked_at_phase0_commit": true,
+      "bytes": 17830,
+      "sha256": "d4e45a104cf78c1b0babe8917a502bef2c365731db8000396a9e7289c269d20a",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/upstream_attention.log",
+      "tracked_at_phase0_commit": false,
+      "bytes": 2487,
+      "sha256": "50162473388bf30f2cfff9e6e4148e4cb54ed60559d48ba0ba4f5f809ad55aae",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/native_20260905/upstream_caching.log",
+      "tracked_at_phase0_commit": false,
+      "bytes": 2088,
+      "sha256": "4a5659ac3678203daa6d0a1dce55633234e598cc2adb9aabade12de8dda315e0",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/smoke_20260905/dispatch.log",
+      "tracked_at_phase0_commit": false,
+      "bytes": 1528,
+      "sha256": "c1f4271a95e58f662ca7facef40c44bcc663a49c9f3bba0556c952f76b897c58",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/smoke_20260905/manifest.json",
+      "tracked_at_phase0_commit": false,
+      "bytes": 11456,
+      "sha256": "6f824e23e746e001b5833ddf40de19b21acf21882e3d149a90a484acd8e7af9b",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/smoke_20260905/raw.csv",
+      "tracked_at_phase0_commit": true,
+      "bytes": 9715,
+      "sha256": "b079a524883c5dfe3b49b68cc4d46b1a1200e86ad050854b714ab212c1b905f3",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    },
+    {
+      "path": "test/bench/phase0/runs/smoke_20260905/summary.csv",
+      "tracked_at_phase0_commit": true,
+      "bytes": 358,
+      "sha256": "b74ad13a8a967f668e5cf503a304dff53a8d223484d8f299335f738c7c9a7665",
+      "status": "ORIGINAL_PRESENT_NO_REWRITE"
+    }
+  ],
+  "missing_report_artifacts": [],
+  "historical_run_time_script_hash": "UNKNOWN; finalization hashes are not run-time hashes",
+  "historical_gpu": "Read only from existing manifests; current device is different",
+  "status": "PASS_ORIGINAL_FILES_RECOVERABLE"
+}

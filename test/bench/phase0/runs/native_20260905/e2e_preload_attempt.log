@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "<frozen runpy>", line 286, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "examples/bench.py", line 9, in <module>
+    from infinilm.base_config import BaseConfig
+  File "/data/InfiniTensor/InfiniLM/python/infinilm/__init__.py", line 1, in <module>
+    from .models import AutoLlamaModel
+  File "/data/InfiniTensor/InfiniLM/python/infinilm/models/__init__.py", line 1, in <module>
+    from .llama import AutoLlamaModel
+  File "/data/InfiniTensor/InfiniLM/python/infinilm/models/llama/__init__.py", line 5, in <module>
+    from . import modeling_llama
+  File "/data/InfiniTensor/InfiniLM/python/infinilm/models/llama/modeling_llama.py", line 23, in <module>
+    from ...cache_utils import Cache, DynamicCache
+  File "/data/InfiniTensor/InfiniLM/python/infinilm/cache_utils.py", line 19, in <module>
+    import transformers.utils.logging as logging
+ModuleNotFoundError: No module named 'transformers'

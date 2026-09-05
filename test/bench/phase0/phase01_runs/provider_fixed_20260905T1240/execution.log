@@ -1,0 +1,56 @@
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+[2026-09-05 12:25:59.730] [info] [:] segmented graph: operators=2, segments=1, host_segments=0
+torch.float16 gqa eager positive recorded
+torch.float16 gqa infinicore_graph positive recorded
+torch.float16 gqa eager skip_append recorded
+torch.float16 gqa infinicore_graph corrupt_written recorded
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+[2026-09-05 12:26:02.248] [info] [:] segmented graph: operators=2, segments=1, host_segments=0
+torch.float16 auto eager positive recorded
+torch.float16 auto infinicore_graph positive recorded
+torch.float16 auto eager skip_append recorded
+torch.float16 auto infinicore_graph corrupt_written recorded
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_nosplit dtype=12 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+[2026-09-05 12:26:04.613] [info] [:] segmented graph: operators=2, segments=1, host_segments=0
+torch.float16 default eager positive recorded
+torch.float16 default infinicore_graph positive recorded
+torch.float16 default eager skip_append recorded
+torch.float16 default infinicore_graph corrupt_written recorded
+[2026-09-05 12:26:06.971] [info] [:] segmented graph: operators=2, segments=1, host_segments=0
+torch.float16 cta eager positive recorded
+torch.float16 cta infinicore_graph positive recorded
+torch.float16 cta eager skip_append recorded
+torch.float16 cta infinicore_graph corrupt_written recorded
+[2026-09-05 12:26:09.331] [info] [:] segmented graph: operators=2, segments=1, host_segments=0
+torch.float16 split2 eager positive recorded
+torch.float16 split2 infinicore_graph positive recorded
+torch.float16 split2 eager skip_append recorded
+torch.float16 split2 infinicore_graph corrupt_written recorded
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+[2026-09-05 12:26:11.698] [info] [:] segmented graph: operators=2, segments=1, host_segments=0
+torch.bfloat16 gqa eager positive recorded
+torch.bfloat16 gqa infinicore_graph positive recorded
+torch.bfloat16 gqa eager skip_append recorded
+torch.bfloat16 gqa infinicore_graph corrupt_written recorded
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=1 split_auto=0 num_splits=4 fixed=1 gqa_fused=1
+[2026-09-05 12:26:14.087] [info] [:] segmented graph: operators=2, segments=1, host_segments=0
+torch.bfloat16 auto eager positive recorded
+torch.bfloat16 auto infinicore_graph positive recorded
+torch.bfloat16 auto eager skip_append recorded
+torch.bfloat16 auto infinicore_graph corrupt_written recorded
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_nosplit dtype=19 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=2 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
+[2026-09-05 12:26:16.467] [info] [:] segmented graph: operators=2, segments=1, host_segments=0
+torch.bfloat16 default eager positive recorded
+torch.bfloat16 default infinicore_graph positive recorded
+torch.bfloat16 default eager skip_append recorded
+torch.bfloat16 default infinicore_graph corrupt_written recorded
+[2026-09-05 12:26:18.838] [info] [:] segmented graph: operators=2, segments=1, host_segments=0
+torch.bfloat16 cta eager positive recorded
+torch.bfloat16 cta infinicore_graph positive recorded
+torch.bfloat16 cta eager skip_append recorded
+torch.bfloat16 cta infinicore_graph corrupt_written recorded
+[2026-09-05 12:26:21.211] [info] [:] segmented graph: operators=2, segments=1, host_segments=0
+torch.bfloat16 split2 eager positive recorded
+torch.bfloat16 split2 infinicore_graph positive recorded
+torch.bfloat16 split2 eager skip_append recorded
+torch.bfloat16 split2 infinicore_graph corrupt_written recorded

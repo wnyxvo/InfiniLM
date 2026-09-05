@@ -1,0 +1,10 @@
+[2026-09-05 12:33:34.480] [info] [:] segmented graph: operators=2, segments=1, host_segments=0
+torch.float16 default eager positive recorded
+torch.float16 default infinicore_graph positive recorded
+torch.float16 default eager skip_append recorded
+torch.float16 default infinicore_graph corrupt_written recorded
+[2026-09-05 12:33:37.011] [info] [:] segmented graph: operators=2, segments=1, host_segments=0
+torch.bfloat16 default eager positive recorded
+torch.bfloat16 default infinicore_graph positive recorded
+torch.bfloat16 default eager skip_append recorded
+torch.bfloat16 default infinicore_graph corrupt_written recorded

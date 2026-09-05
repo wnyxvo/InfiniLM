@@ -1,0 +1,148 @@
+{
+  "status": "COMPLETE",
+  "run_dir": "/data/InfiniTensor/InfiniLM/test/bench/phase0/runs/native_20260905",
+  "input_sha256": {
+    "test/bench/phase0/runs/native_20260905/raw.csv": "d24bd3ad02a6587cd022a4359a9acdbd1eae6afc9b48a2233714af63155121c6",
+    "test/bench/phase0/runs/native_20260905/manifest.json": "0474099b4162648f4fc4724df6e06ef989cd892fbe5a9a1d0604cc808ed84b9d",
+    "test/bench/phase0/runs/native_20260905/dispatch.log": "802645d6fbbc8e3f5dd972678d6d4815f7402b5a07b15acc24ca06f95702f9a4"
+  },
+  "correctness_counts": [
+    {
+      "dtype": "torch.bfloat16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 49
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "variant": "default",
+      "mode": "graph_batch",
+      "result": "UNVERIFIED_LEGACY_GRAPH",
+      "count": 105
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "variant": "auto",
+      "mode": "eager_correctness_only",
+      "result": "FAIL",
+      "count": 4
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "variant": "warp",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 49
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "variant": "warp",
+      "mode": "graph_batch",
+      "result": "UNVERIFIED_LEGACY_GRAPH",
+      "count": 49
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "variant": "cta",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 49
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "variant": "cta",
+      "mode": "graph_batch",
+      "result": "UNVERIFIED_LEGACY_GRAPH",
+      "count": 49
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "eager_correctness_only",
+      "result": "FAIL",
+      "count": 7
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "variant": "split2",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 49
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "variant": "split2",
+      "mode": "graph_batch",
+      "result": "UNVERIFIED_LEGACY_GRAPH",
+      "count": 49
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "variant": "split8",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 49
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "variant": "split8",
+      "mode": "graph_batch",
+      "result": "UNVERIFIED_LEGACY_GRAPH",
+      "count": 49
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "variant": "auto",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 21
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "variant": "auto",
+      "mode": "graph_batch",
+      "result": "UNVERIFIED_LEGACY_GRAPH",
+      "count": 21
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS_bitwise_all_cache",
+      "count": 56
+    },
+    {
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS_bitwise_all_cache",
+      "count": 56
+    },
+    {
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "graph_batch",
+      "result": "UNVERIFIED_LEGACY_GRAPH",
+      "count": 56
+    },
+    {
+      "dtype": "torch.float32",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS_bitwise_all_cache",
+      "count": 56
+    },
+    {
+      "dtype": "torch.float32",
+      "variant": "default",
+      "mode": "graph_batch",
+      "result": "UNVERIFIED_LEGACY_GRAPH",
+      "count": 56
+    }
+  ],
+  "excluded_latency_rows": {
+    "UNVERIFIED_LEGACY_GRAPH": 434
+  },
+  "timing_warning": "Only matching independently validated execution modes are eligible. No speedups or cross-case ranking inferred."
+}

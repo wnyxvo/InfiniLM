@@ -1,0 +1,332 @@
+{
+  "status": "COMPLETE",
+  "run_dir": "/data/InfiniTensor/InfiniLM/test/bench/phase0/phase01_runs/provider_fixed_20260905T1240",
+  "input_sha256": {
+    "test/bench/phase0/phase01_runs/provider_fixed_20260905T1240/results.json": "cc5db4bba8a7453fa4f2db4cf1a633d88bd678f1a7f1f9feb35d289a237af9e1",
+    "test/bench/phase0/phase01_runs/provider_fixed_20260905T1240/manifest.json": "ad64f6c14611cb6726740bff7a619929cd522d637f6d2702bfdef66f09cd58ef"
+  },
+  "correctness_counts": [
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.float16",
+      "variant": "gqa",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "auto",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "auto",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.float16",
+      "variant": "auto",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.float16",
+      "variant": "auto",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.float16",
+      "variant": "default",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "cta",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "cta",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.float16",
+      "variant": "cta",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.float16",
+      "variant": "cta",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "split2",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.float16",
+      "variant": "split2",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.float16",
+      "variant": "split2",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.float16",
+      "variant": "split2",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.bfloat16",
+      "variant": "gqa",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "auto",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "auto",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.bfloat16",
+      "variant": "auto",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.bfloat16",
+      "variant": "auto",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "default",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.bfloat16",
+      "variant": "default",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.bfloat16",
+      "variant": "default",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "cta",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "cta",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.bfloat16",
+      "variant": "cta",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.bfloat16",
+      "variant": "cta",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "split2",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "positive",
+      "dtype": "torch.bfloat16",
+      "variant": "split2",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.bfloat16",
+      "variant": "split2",
+      "mode": "eager",
+      "result": "PASS",
+      "count": 1
+    },
+    {
+      "test_kind": "negative_control",
+      "dtype": "torch.bfloat16",
+      "variant": "split2",
+      "mode": "infinicore_graph",
+      "result": "PASS",
+      "count": 1
+    }
+  ],
+  "excluded_latency_rows": {},
+  "timing_warning": "Only matching independently validated execution modes are eligible. No speedups or cross-case ranking inferred."
+}

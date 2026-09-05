@@ -1,0 +1,20 @@
+diff --git a/src/infiniop/ops/paged_attention/cuda/kernel_v2.cuh b/src/infiniop/ops/paged_attention/cuda/kernel_v2.cuh
+index 489c117b..6ed767ad 100644
+--- a/src/infiniop/ops/paged_attention/cuda/kernel_v2.cuh
++++ b/src/infiniop/ops/paged_attention/cuda/kernel_v2.cuh
+@@ -2102,8 +2102,13 @@ __device__ void flashAttentionDecodeCtaGqaKernel(
+ 
+     // Write outputs for each group.
+     __shared__ float inv_l_shared[NGROUPS];
+-    if (tid < NGROUPS) {
+-        inv_l_shared[tid] = 1.0f / (l[tid] + 1e-6f);
++    // Only thread 0 updates the thread-private m[g]/l[g] above.
++    // Publish every group's normalization from that owner before the CTA sync.
++    if (tid == 0) {
++#pragma unroll
++        for (int g = 0; g < NGROUPS; ++g) {
++            inv_l_shared[g] = 1.0f / (l[g] + 1e-6f);
++        }
+     }
+     if constexpr (NUM_WARPS == 1) {
+         __syncwarp();

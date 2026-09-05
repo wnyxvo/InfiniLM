@@ -1,0 +1,1 @@
+[INFINIOP][paged_attention][hd128] dispatch: path=cta_nosplit dtype=12 heads=32 kv_heads=8 seqs=16 pbs=256 max_blocks=9 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=0
