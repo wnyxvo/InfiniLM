@@ -1,0 +1,158 @@
+[
+  {
+    "run_id": "m4_strategy_override_20260906",
+    "rows": [
+      {
+        "case": "numeric2",
+        "heads": 32,
+        "requested_num_splits": "2",
+        "dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "1",
+          "num_splits": "2",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0",
+          "strategy_reason": "numeric_override"
+        },
+        "trace": "[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=9 cta_tile=8 cta_threads=64 split=1 split_auto=1 num_splits=2 fixed=1 gqa_fused=1 capacity_strategy=0 strategy_reason=numeric_override\n",
+        "result": "PASS"
+      },
+      {
+        "case": "auto",
+        "heads": 32,
+        "requested_num_splits": "auto",
+        "dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "1",
+          "num_splits": "4",
+          "fixed": "0",
+          "gqa_fused": "1",
+          "capacity_strategy": "1",
+          "strategy_reason": "capacity_v1"
+        },
+        "trace": "[INFINIOP][paged_attention] splitkv auto(mode): strategy=capacity_v1 sm=128 heads=32 seqs=4 seqlen_k~2304 -> num_splits=4\n[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=9 cta_tile=8 cta_threads=64 split=1 split_auto=1 num_splits=4 fixed=0 gqa_fused=1 capacity_strategy=1 strategy_reason=capacity_v1\n[INFINIOP][paged_attention] splitkv auto: sm=128 heads=32 seqs=4 seqlen_k~2304 -> num_splits=4\n",
+        "result": "PASS"
+      },
+      {
+        "case": "unset",
+        "heads": 32,
+        "requested_num_splits": null,
+        "dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "1",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "1",
+          "strategy_reason": "capacity_v1"
+        },
+        "trace": "[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=9 cta_tile=8 cta_threads=64 split=1 split_auto=1 num_splits=4 fixed=1 gqa_fused=1 capacity_strategy=1 strategy_reason=capacity_v1\n",
+        "result": "PASS"
+      },
+      {
+        "case": "closed",
+        "heads": 32,
+        "requested_num_splits": null,
+        "dispatch": {
+          "path": "cta_gqa_fused",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "0",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0",
+          "strategy_reason": "split_disabled"
+        },
+        "trace": "[INFINIOP][paged_attention][hd128] dispatch: path=cta_gqa_fused dtype=12 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=9 cta_tile=8 cta_threads=64 split=0 split_auto=0 num_splits=4 fixed=1 gqa_fused=1 capacity_strategy=0 strategy_reason=split_disabled\n",
+        "result": "PASS"
+      },
+      {
+        "case": "invalid",
+        "heads": 32,
+        "requested_num_splits": "bogus",
+        "dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "1",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0",
+          "strategy_reason": "invalid_num_splits_default"
+        },
+        "trace": "[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=9 cta_tile=8 cta_threads=64 split=1 split_auto=1 num_splits=4 fixed=1 gqa_fused=1 capacity_strategy=0 strategy_reason=invalid_num_splits_default\n",
+        "result": "PASS"
+      },
+      {
+        "case": "out_of_scope",
+        "heads": 16,
+        "requested_num_splits": null,
+        "dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "16",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "1",
+          "num_splits": "2",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0",
+          "strategy_reason": "out_of_scope_fallback"
+        },
+        "trace": "[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=16 kv_heads=8 seqs=4 pbs=256 max_blocks=9 cta_tile=8 cta_threads=64 split=1 split_auto=1 num_splits=2 fixed=1 gqa_fused=1 capacity_strategy=0 strategy_reason=out_of_scope_fallback\n",
+        "result": "PASS"
+      }
+    ],
+    "result": "PASS"
+  }
+]

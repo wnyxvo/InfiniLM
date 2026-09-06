@@ -1,0 +1,66 @@
+diff --git a/src/infiniop/ops/paged_attention/nvidia/paged_attention_hd128.cu b/src/infiniop/ops/paged_attention/nvidia/paged_attention_hd128.cu
+index a3faf600..ad75bec4 100644
+--- a/src/infiniop/ops/paged_attention/nvidia/paged_attention_hd128.cu
++++ b/src/infiniop/ops/paged_attention/nvidia/paged_attention_hd128.cu
+@@ -545,14 +545,27 @@ infiniStatus_t launch_decode_hd128_impl(
+     }
+     int num_splits = 4;
+     bool fixed_num_splits = true;
++    bool num_splits_explicit = false;
++    bool num_splits_auto = false;
++    bool num_splits_invalid = false;
+     const char *strategy_env = std::getenv("INFINIOP_FLASH_SPLITKV_STRATEGY");
+     const bool requested_capacity_strategy = strategy_env && std::strcmp(strategy_env, "capacity_v1") == 0;
+     if (const char *env = std::getenv("INFINIOP_FLASH_NUM_SPLITS")) {
++        num_splits_explicit = true;
+         if (std::strcmp(env, "auto") == 0) {
+             fixed_num_splits = false;
++            num_splits_auto = true;
+         } else {
+-            num_splits = std::atoi(env);
+-            fixed_num_splits = (num_splits > 0);
++            char *end = nullptr;
++            const long parsed = std::strtol(env, &end, 10);
++            if (end != env && *end == '\0' && parsed > 0) {
++                num_splits = static_cast<int>(parsed);
++                fixed_num_splits = true;
++            } else {
++                // Invalid values retain the production default and never let
++                // an experimental strategy silently replace the user input.
++                num_splits_invalid = true;
++            }
+         }
+     }
+     if (num_splits < 1) {
+@@ -564,11 +577,21 @@ infiniStatus_t launch_decode_hd128_impl(
+     // capacity_v1 is scoped to the validated GQA decode shape. Numeric split
+     // overrides always win; outside this scope auto uses the original heuristic.
+     const bool capacity_strategy_in_scope = requested_capacity_strategy && use_split_auto &&
++        (!num_splits_explicit || num_splits_auto) && !num_splits_invalid &&
+         use_cta && alibi_slopes == nullptr && num_heads == 32 && num_kv_heads == 8 &&
+         (dtype == INFINI_DTYPE_F16 || dtype == INFINI_DTYPE_BF16);
++    // A positive/invalid numeric value is an explicit request: keep split
++    // enabled and never replace it with an auto decision. Invalid values use
++    // the production default (four splits) as a safe fallback.
++    if (use_split_auto && num_splits_explicit && !num_splits_auto) {
++        use_split = true;
++    }
+     const bool use_capacity_strategy = capacity_strategy_in_scope;
+     const char *capacity_strategy_reason = !requested_capacity_strategy ? "not_requested" :
+-        (use_capacity_strategy ? "capacity_v1" : (use_split_auto ? "out_of_scope_fallback" : "numeric_override"));
++        (num_splits_invalid ? "invalid_num_splits_default" :
++         (use_capacity_strategy ? "capacity_v1" :
++          (num_splits_explicit && !num_splits_auto ? "numeric_override" :
++           (use_split_auto ? "out_of_scope_fallback" : "split_disabled"))));
+     const bool use_gqa_split = envBool("INFINIOP_FLASH_GQA_SPLITKV") &&
+         use_split && use_cta && alibi_slopes == nullptr &&
+         num_kv_heads > 0 && num_heads == num_kv_heads * 4;
+@@ -636,7 +659,7 @@ infiniStatus_t launch_decode_hd128_impl(
+     };
+ 
+     // Split-kv auto mode: decide whether to split based on a heuristic.
+-    if (use_split_auto) {
++    if (use_split_auto && (!num_splits_explicit || num_splits_auto) && !num_splits_invalid) {
+         // Approximate seqlen_k by the per-seq KV capacity (paged KV upper bound).
+         const size_t seqlen_k = max_num_blocks_per_seq * page_block_size;
+         const int sm_count = getSmCount();

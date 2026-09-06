@@ -51,3 +51,5 @@ Milestone 2C tile-level online softmax 优化见 `reports/milestone2C_report.md`
 Milestone 3A CTA Split-KV 容量策略与 Provider 集成见 `reports/milestone3A_report.md`；shared-KV 分支已关闭。
 
 Milestone 3B 见 `reports/milestone3B_report.md`；候选库为 `/data/InfiniTensor/phase3b-strategy`。`capacity_v1` 仅在显式 auto、目标 GQA/CTA/FP16-BF16 范围内启用，`num_splits=1` 明确走普通 `cta_nosplit`；provider 长序列、三轮 FP16/BF16 基准及 strategy memcheck 证据位于 `runs/m3b_*_20260906/`。生产默认环境变量为空时保持原 dispatch。
+
+Milestone 4 最终收束见 `reports/FINAL_REPORT.md`；最终统一候选库为 `/data/InfiniTensor/phase4-final`。本轮修复 NUM_SPLITS 覆盖和 provider history+4 页容量，并完成 A/B/D KV Update 三轮验收及代表性 InfiniCore 集成；整模型 E2E 保持 NOT_RUN。

@@ -41,7 +41,7 @@ def main():
     p.add_argument('--output',required=True,help='New run directory (must not exist)')
     p.add_argument('--flash',action='store_true')
     p.add_argument('--variant',choices=['gqa','auto','default','cta','split2','strategy'])
-    p.add_argument('--history',type=int,default=255,help='initial history length; 2049 exercises the long split path')
+    p.add_argument('--history',type=int,default=255,help='pre-append historical token count; append slots/lens advance from this value')
     p.add_argument('--pages-per-seq',type=int,default=2)
     args=p.parse_args()
     torch.cuda.set_device(0)
@@ -58,7 +58,8 @@ def main():
                 configure(variant)
                 if variant == 'strategy': os.environ['INFINIOP_FLASH_SPLITKV_STRATEGY'] = 'capacity_v1'
                 torch.manual_seed(SEED)
-                batch=4; pages_per_seq=max(args.pages_per_seq, (args.history + 2 + PAGE - 1)//PAGE)
+                batch=4; max_legal_length=args.history + 4
+                pages_per_seq=max(args.pages_per_seq, (max_legal_length + PAGE - 1)//PAGE)
                 if args.history < 1: raise ValueError('--history must be positive')
                 base_lengths=[args.history+i for i in range(batch-1)] + [max(8, min(args.history, PAGE//32))]
                 # Extra spare page per sequence allows a semantic relocation:

@@ -17,3 +17,5 @@
 - [Milestone 3A](milestone3A_report.md)：CTA Split-KV 容量策略与真实 InfiniCore Provider 集成。
 
 - [Milestone 3B](milestone3B_report.md)：Split 策略与 kernel family 解耦、capacity holdout、长序列 provider、Graph/正确性与 sanitizer。
+
+- [FINAL_REPORT](FINAL_REPORT.md)：Milestone 4 最终验收、成果分级与项目收束。

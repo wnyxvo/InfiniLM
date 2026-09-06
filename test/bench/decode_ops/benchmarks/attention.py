@@ -23,6 +23,7 @@ def set_mode(mode):
         return
     if mode in ("auto", "capacity_strategy"):
         configure("default")
+        os.environ.pop("INFINIOP_FLASH_NUM_SPLITS", None)
         os.environ["INFINIOP_FLASH_DECODE_SPLITKV"] = "auto"
         if mode == "capacity_strategy": os.environ["INFINIOP_FLASH_SPLITKV_STRATEGY"] = "capacity_v1"
         return
