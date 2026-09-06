@@ -43,3 +43,5 @@ LD_LIBRARY_PATH=/data/InfiniTensor/phase1b-cache-vector3/lib:/root/.infini/lib:/
 Milestone 1C E/F 显式候选：`--threads 64 --grouped-heads 2 --vector`（E），`--threads 128 --grouped-heads 4 --vector`（F）。不设置这些环境开关时生产默认路径保持不变。
 
 Milestone 2A attention 原型与复现命令见 `reports/milestone2A_report.md`；GQA-aware 路径通过 `INFINIOP_FLASH_GQA_SPLITKV=1` 显式启用，默认 dispatch 不变。
+
+Milestone 2B shared-KV GQA Split-KV kernel、正确性矩阵和完整 attention 消融见 `reports/milestone2B_report.md`。实现通过 `INFINIOP_FLASH_GQA_SHARED_SPLITKV=1` 显式启用；复现脚本为 `correctness/gqa_shared.py` 与 `benchmarks/attention.py`，证据位于 `runs/m2b_*_20260906/`。当前 kernel correctness PASS、性能结论 NO_GAIN；shared-path memcheck/racecheck/synccheck PASS，两算子组合库集成已修复并 PASS（此前错误源于 host link 缺少当前 cache object），整模型 E2E 为 NOT_RUN。

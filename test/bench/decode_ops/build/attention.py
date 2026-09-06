@@ -27,5 +27,12 @@ def main():
   return str(base/'objects'/Path(x).name) if any(x.endswith('/'+n) for n in attention_names) else x
  inputs=[str(newobj) if x==oldobj else remap(x) for x in inputs]; run([lf[0],*inputs,*lf[1:],*arch,'-o',str(newlink)])
  archive=libdir/'libinfiniop-nvidia.a'; shutil.copy2(base/'lib/libinfiniop-nvidia.a',archive); run(['/usr/bin/ar','r',str(archive),str(newobj),str(newlink)])
- inputs,lf=recipe(dep/'infiniop/linux/x86_64/release/libinfiniop.so.d'); objs=[str(newobj) if x==oldobj else remap(x) for x in inputs if x.endswith('.o')]; run([lf[0],*objs,'-L'+str(libdir),*lf[1:],'-o',str(libdir/'libinfiniop.so')]); m['new_library_hash']=sha(libdir/'libinfiniop.so'); m['exit_code']=0; (a.evidence/'build.json').write_text(json.dumps(m,indent=2)); print(m['new_library_hash'])
+ inputs,lf=recipe(dep/'infiniop/linux/x86_64/release/libinfiniop.so.d'); objs=[str(newobj) if x==oldobj else remap(x) for x in inputs if x.endswith('.o')];
+ # The archive copied from the base prefix contains legacy paged-caching
+ # templates. Add the cache object explicitly so current template symbols
+ # (e.g. pagedCaching<half,256,false,1>) resolve in the host shared library.
+ if cache:
+  cache_obj = str(cache/'objects'/'paged_caching_nvidia.cu.o')
+  if cache_obj not in objs: objs.append(cache_obj)
+ run([lf[0],*objs,'-L'+str(libdir),*lf[1:],'-o',str(libdir/'libinfiniop.so')]); m['new_library_hash']=sha(libdir/'libinfiniop.so'); m['exit_code']=0; (a.evidence/'build.json').write_text(json.dumps(m,indent=2)); print(m['new_library_hash'])
 if __name__=='__main__': main()

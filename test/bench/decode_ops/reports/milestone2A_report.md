@@ -55,3 +55,7 @@ INFINI_ROOT=/data/InfiniTensor/phase2a-gqa-split LD_LIBRARY_PATH=/data/InfiniTen
 ```
 
 建议提交信息：`feat(infiniop): prototype gqa-aware split-kv decode`；`bench(decode_ops): add milestone 2A attention evidence`。
+
+## 后续校正（Milestone 2B 前置审计）
+
+此前表格中的 `default/auto baseline` 实际来自旧脚本把 `INFINIOP_FLASH_DECODE_SPLITKV=0` 固定为 CTA non-split；它不是源码环境下的 production default。后续脚本已拆分为 `production_default` 与 `non_split_cta`，因此旧表不能用于宣称 production default 性能。此前 sanitizer 的 SIGSEGV 只证明该 compute-sanitizer 运行在当前机器上退出 139；没有足够证据把原因归因于环境，故应表述为 `BLOCKED / cause unresolved`。两算子集成的 PASS 仅覆盖实际运行过的 KV Update + attention workload，provider 与整模型 E2E 仍未验证。

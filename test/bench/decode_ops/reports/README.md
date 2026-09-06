@@ -9,3 +9,5 @@
 - [Milestone 1C](milestone1C_report.md)：grouped CTA E/F、计时协议修正、正确性与消融。
 
 - [Milestone 2A](milestone2A_report.md)：GQA-aware Split-KV 原型、完整 attention 消融与集成验证。
+
+- [Milestone 2B](milestone2B_report.md)：shared-KV GQA Split-KV kernel、Graph 正确性与完整 attention 消融。
