@@ -1,0 +1,7 @@
+TRACE torch.float16 strategy
+[INFINIOP][paged_attention] splitkv auto(mode): strategy=capacity_v1 sm=128 heads=32 seqs=4 seqlen_k~2304 -> num_splits=4
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=12 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=9 cta_tile=8 cta_threads=64 split=1 split_auto=1 num_splits=4 fixed=1 gqa_fused=1 capacity_strategy=1 strategy_reason=capacity_v1
+
+TRACE torch.bfloat16 strategy
+[INFINIOP][paged_attention][hd128] dispatch: path=splitkv_cta dtype=19 heads=32 kv_heads=8 seqs=4 pbs=256 max_blocks=9 cta_tile=8 cta_threads=64 split=1 split_auto=1 num_splits=4 fixed=1 gqa_fused=1 capacity_strategy=1 strategy_reason=capacity_v1
+

@@ -50,3 +50,7 @@ INFINI_ROOT=/data/InfiniTensor/phase3a-strategy LD_LIBRARY_PATH=/data/InfiniTens
 ```
 
 建议提交信息：`feat(infiniop): add capacity-aware split-kv dispatch strategy`；`bench(decode_ops): add milestone 3A provider evidence`。
+
+### 3B errata
+
+3A 的 `capacity_v1` 在选择 `num_splits=1` 时实际会落入 GQA fused；3B 已将该选择改为显式 `cta_nosplit`。3A 基准的 auto/capacity kernel 计数曾按模式固定，3B 改为读取实际 dispatch；`gqa_splitkv_shared` 与 `gqa_splitkv_tile` 也不再作为两条独立收益路径。3A provider 只覆盖 history≤257，不能证明长序列收益；3B 新增 B4、L=2049 的 eager/Graph provider 验证。长序列 capacity 相对 auto 的收益来自路径选择，不能解读为超过生产默认。

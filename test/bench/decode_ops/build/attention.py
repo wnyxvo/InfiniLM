@@ -24,7 +24,7 @@ def main():
  attention_names=('paged_attention_hd64.cu.o','paged_attention_hd128.cu.o','paged_attention_hd192.cu.o','paged_attention_hd256.cu.o','paged_attention_hd576.cu.o','paged_attention_mla_hd576_v512.cu.o')
  def remap(x):
   if cache and x.endswith('/paged_caching_nvidia.cu.o'): return str(cache/'objects'/'paged_caching_nvidia.cu.o')
-  return str(base/'objects'/Path(x).name) if any(x.endswith('/'+n) for n in attention_names) else x
+  return str(base/'objects'/Path(x).name) if ('paged_attention_hd' in x or 'paged_attention_mla' in x) else x
  inputs=[str(newobj) if x==oldobj else remap(x) for x in inputs]; run([lf[0],*inputs,*lf[1:],*arch,'-o',str(newlink)])
  archive=libdir/'libinfiniop-nvidia.a'; shutil.copy2(base/'lib/libinfiniop-nvidia.a',archive)
  # Replace the archive's legacy cache member with the current-Core object.
@@ -35,5 +35,6 @@ def main():
  # The archive copied from the base prefix contains legacy paged-caching
  # templates; also link the current object explicitly for symbol resolution.
  if cache_obj and cache_obj not in objs: objs.append(cache_obj)
+ if str(newlink) not in objs: objs.append(str(newlink))
  run([lf[0],*objs,'-L'+str(libdir),*lf[1:],'-o',str(libdir/'libinfiniop.so')]); m['new_library_hash']=sha(libdir/'libinfiniop.so'); m['exit_code']=0; (a.evidence/'build.json').write_text(json.dumps(m,indent=2)); print(m['new_library_hash'])
 if __name__=='__main__': main()

@@ -1,9 +1,9 @@
 """Bounded attention path ablation including eager/Graph workload accounting."""
-import argparse, hashlib, os, statistics, sys
+import argparse, ctypes as C, hashlib, os, re, statistics, sys
 from pathlib import Path
 import torch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from common.correctness_support import Run, Native, PAGE, reference, check_output, configure
+from common.correctness_support import Run, Native, PAGE, reference, check_output, configure, capture_stderr
 from common.timing import measure_cuda, cpu_count_test
 
 def h(*xs):
@@ -40,23 +40,42 @@ def set_mode(mode):
     elif mode in ("gqa_splitkv_shared", "gqa_splitkv_tile"):
         os.environ["INFINIOP_FLASH_GQA_SHARED_SPLITKV"] = "1"
 
+def observe_dispatch(call, mode):
+    # Diagnostics are captured before timing and a different path is primed so
+    # the native signature logger cannot hide the target configuration.
+    prime = 'gqa_fused' if mode == 'non_split_cta' else 'non_split_cta'
+    set_mode(prime); call(); torch.cuda.synchronize()
+    set_mode(mode)
+    os.environ['INFINIOP_FLASH_DEBUG_DISPATCH'] = '1'
+    with capture_stderr() as f:
+        call(); torch.cuda.synchronize(); C.CDLL(None).fflush(None)
+        f.seek(0); trace = f.read().decode()
+    lines = [x for x in trace.splitlines() if 'dispatch: path=' in x]
+    if not lines:
+        raise RuntimeError(f'no dispatch evidence for {mode}: {trace}')
+    return dict(re.findall(r'(\w+)=([^ ]+)', lines[-1].split('dispatch: ')[1]))
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument('--output', required=True); p.add_argument('--samples', type=int, default=5)
     p.add_argument('--graph-workloads', type=int, default=100); p.add_argument('--graph-replays', type=int, default=2); p.add_argument('--dtype', choices=('fp16','bf16'), default='fp16'); p.add_argument('--round', type=int, default=1)
     args = p.parse_args(); torch.cuda.set_device(0); run = Run(args.output); rows = []
-    modes = ('production_default','auto','capacity_strategy','non_split_cta','gqa_fused','warp_splitkv','cta_splitkv','gqa_splitkv_2a','gqa_splitkv_shared','gqa_splitkv_tile')
+    modes = ('production_default','auto','capacity_strategy','non_split_cta','gqa_fused','warp_splitkv','cta_splitkv','gqa_splitkv_2a','gqa_splitkv_shared')
     if args.round % 2 == 0: modes = tuple(reversed(modes))
     try:
         for mode in modes:
-            for batch, length in ((1,256),(1,2049),(4,2049),(16,2049)):
-                dtype = torch.float16 if args.dtype == 'fp16' else torch.bfloat16; cap = (length + PAGE - 1) // PAGE
+            for batch, length, capacity_blocks in ((1,256,1),(1,2049,9),(4,2049,9),(4,2049,16),(16,2049,9)):
+                dtype = torch.float16 if args.dtype == 'fp16' else torch.bfloat16; cap = max(capacity_blocks, (length + PAGE - 1) // PAGE)
                 torch.manual_seed(20260906 + batch + length)
                 q = torch.randn(batch,32,128,device='cuda',dtype=dtype)
                 k = torch.randn(batch*cap,8,PAGE,128,device='cuda',dtype=dtype); v = torch.randn_like(k)
                 table = torch.randperm(batch*cap,device='cuda',dtype=torch.int32).reshape(batch,cap)
                 lens = torch.full((batch,),length,device='cuda',dtype=torch.int32); out = torch.empty_like(q)
                 native = Native(); call = native.operation('PagedAttention',[out,q,k,v,table,lens]); set_mode(mode)
+                dispatch = observe_dispatch(call, mode)
+                # Remove diagnostics from all timed and graph work.
+                os.environ.pop('INFINIOP_FLASH_DEBUG_DISPATCH', None); os.environ.pop('INFINIOP_FLASH_DEBUG_SPLITS', None)
                 ref = reference(q,k,v,table,[length]*batch)
                 out.fill_(float('nan')); call(); torch.cuda.synchronize(); eager_corr = check_output(out,ref)
                 out.fill_(float('nan')); graph = torch.cuda.CUDAGraph()
@@ -69,13 +88,17 @@ def main():
                     sample['normalized_us'] = sample['elapsed_ms']*1000/(args.graph_workloads*args.graph_replays)
                     sample['formula'] = 'elapsed_ms/(workloads_per_graph*graph_replays)'
                 vals = [x['normalized_us'] for x in gm['samples']]
-                split = mode in ('production_default','warp_splitkv','cta_splitkv','gqa_splitkv_2a','gqa_splitkv_shared','gqa_splitkv_tile')
+                split = dispatch.get('split') == '1'
+                actual_splits = int(dispatch.get('num_splits', '1')) if split else 1
+                launches = 2 if split else 1
                 gm.update(median_us=statistics.median(vals), min_us=min(vals), max_us=max(vals),
                           workloads_per_graph=args.graph_workloads, graph_replays=args.graph_replays,
                           total_logical_workloads=args.graph_workloads*args.graph_replays,
-                          kernel_calls_per_workload=2 if split else 1)
-                rows.append({'mode':mode,'batch':batch,'length':length,'dtype':str(dtype),
-                    'num_splits':4 if split else 0,'workspace_bytes':'descriptor-managed',
+                          kernel_calls_per_workload=launches)
+                rows.append({'mode':mode,'batch':batch,'length':length,'capacity_blocks':cap,'dtype':str(dtype),
+                    'requested_mode':mode,'actual_dispatch':dispatch,'actual_path':dispatch.get('path'),
+                    'actual_split':split,'num_splits':actual_splits,'kernel_launches_per_workload':launches,
+                    'workspace_bytes':getattr(call,'workspace_size',None),
                     'eager_correctness':eager_corr['attention_correctness'],'graph_correctness':graph_corr['attention_correctness'],
                     'input_hash':h(q,k,v,table,lens),'eager':eager,'graph_batch':gm,
                     'result':'PASS' if eager_corr['attention_correctness']=='PASS' and graph_corr['attention_correctness']=='PASS' else 'FAIL'})

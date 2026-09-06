@@ -1,0 +1,3170 @@
+[
+  {
+    "run_id": "m3b_attention_fp16_r1_20260906",
+    "rows": [
+      {
+        "mode": "production_default",
+        "batch": 1,
+        "length": 256,
+        "capacity_blocks": 1,
+        "dtype": "torch.float16",
+        "requested_mode": "production_default",
+        "actual_dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "1",
+          "pbs": "256",
+          "max_blocks": "1",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_cta",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 133120,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "e3229ee870d75d7c523a6f1cec4a95b8fdc7bf06a7d214f2a1f30fa17156fecb",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.187391996383667,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 18.7391996383667
+            }
+          ],
+          "median_us": 18.7391996383667,
+          "min_us": 18.7391996383667,
+          "max_us": 18.7391996383667,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.3583360016345978,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 8.958400040864944
+            }
+          ],
+          "median_us": 8.958400040864944,
+          "min_us": 8.958400040864944,
+          "max_us": 8.958400040864944,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "production_default",
+        "batch": 1,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "production_default",
+        "actual_dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "1",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_cta",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 133120,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "133655801f7b8336ad8a786ce709343bc563ec6fc491d4ff6f6ad3f1026e7331",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.49561598896980286,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 49.561598896980286
+            }
+          ],
+          "median_us": 49.561598896980286,
+          "min_us": 49.561598896980286,
+          "max_us": 49.561598896980286,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.8688000440597534,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 46.720001101493835
+            }
+          ],
+          "median_us": 46.720001101493835,
+          "min_us": 46.720001101493835,
+          "max_us": 46.720001101493835,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "production_default",
+        "batch": 4,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "production_default",
+        "actual_dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_cta",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 532480,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "72d45f0e42b10e16c169f629711b7601254629cc847cf9fa6357a374172befb7",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.6420480012893677,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 64.20480012893677
+            }
+          ],
+          "median_us": 64.20480012893677,
+          "min_us": 64.20480012893677,
+          "max_us": 64.20480012893677,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.4586238861083984,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 61.46559715270996
+            }
+          ],
+          "median_us": 61.46559715270996,
+          "min_us": 61.46559715270996,
+          "max_us": 61.46559715270996,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "production_default",
+        "batch": 4,
+        "length": 2049,
+        "capacity_blocks": 16,
+        "dtype": "torch.float16",
+        "requested_mode": "production_default",
+        "actual_dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "16",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_cta",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 532480,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "bd4691365f1e4624b7691d7eec27e529290c07bc464e838eda35f9cfbc5740d8",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.6451200246810913,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 64.51200246810913
+            }
+          ],
+          "median_us": 64.51200246810913,
+          "min_us": 64.51200246810913,
+          "max_us": 64.51200246810913,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.4596478939056396,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 61.49119734764099
+            }
+          ],
+          "median_us": 61.49119734764099,
+          "min_us": 61.49119734764099,
+          "max_us": 61.49119734764099,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "production_default",
+        "batch": 16,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "production_default",
+        "actual_dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "16",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_cta",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 2129920,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "f211e1fc6cadcb1a70e9497e5beaa1bc5913028e35721424453d82af30628164",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.189311981201172,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 218.9311981201172
+            }
+          ],
+          "median_us": 218.9311981201172,
+          "min_us": 218.9311981201172,
+          "max_us": 218.9311981201172,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 8.614912033081055,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 215.37280082702637
+            }
+          ],
+          "median_us": 215.37280082702637,
+          "min_us": 215.37280082702637,
+          "max_us": 215.37280082702637,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "auto",
+        "batch": 1,
+        "length": 256,
+        "capacity_blocks": 1,
+        "dtype": "torch.float16",
+        "requested_mode": "auto",
+        "actual_dispatch": {
+          "path": "cta_gqa_fused",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "1",
+          "pbs": "256",
+          "max_blocks": "1",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "0",
+          "split_auto": "1",
+          "num_splits": "1",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "cta_gqa_fused",
+        "actual_split": false,
+        "num_splits": 1,
+        "kernel_launches_per_workload": 1,
+        "workspace_bytes": 133120,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "e3229ee870d75d7c523a6f1cec4a95b8fdc7bf06a7d214f2a1f30fa17156fecb",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.5623360276222229,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 56.23360276222229
+            }
+          ],
+          "median_us": 56.23360276222229,
+          "min_us": 56.23360276222229,
+          "max_us": 56.23360276222229,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.15449595451355,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 53.862398862838745
+            }
+          ],
+          "median_us": 53.862398862838745,
+          "min_us": 53.862398862838745,
+          "max_us": 53.862398862838745,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "auto",
+        "batch": 1,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "auto",
+        "actual_dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "1",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "1",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_cta",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 133120,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "133655801f7b8336ad8a786ce709343bc563ec6fc491d4ff6f6ad3f1026e7331",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.49663999676704407,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 49.66399967670441
+            }
+          ],
+          "median_us": 49.66399967670441,
+          "min_us": 49.66399967670441,
+          "max_us": 49.66399967670441,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.8706879615783691,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 46.76719903945923
+            }
+          ],
+          "median_us": 46.76719903945923,
+          "min_us": 46.76719903945923,
+          "max_us": 46.76719903945923,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "auto",
+        "batch": 4,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "auto",
+        "actual_dispatch": {
+          "path": "cta_gqa_fused",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "0",
+          "split_auto": "1",
+          "num_splits": "1",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "cta_gqa_fused",
+        "actual_split": false,
+        "num_splits": 1,
+        "kernel_launches_per_workload": 1,
+        "workspace_bytes": 532480,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "72d45f0e42b10e16c169f629711b7601254629cc847cf9fa6357a374172befb7",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 4.25164794921875,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 425.164794921875
+            }
+          ],
+          "median_us": 425.164794921875,
+          "min_us": 425.164794921875,
+          "max_us": 425.164794921875,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 16.913408279418945,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 422.83520698547363
+            }
+          ],
+          "median_us": 422.83520698547363,
+          "min_us": 422.83520698547363,
+          "max_us": 422.83520698547363,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "auto",
+        "batch": 4,
+        "length": 2049,
+        "capacity_blocks": 16,
+        "dtype": "torch.float16",
+        "requested_mode": "auto",
+        "actual_dispatch": {
+          "path": "cta_gqa_fused",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "16",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "0",
+          "split_auto": "1",
+          "num_splits": "1",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "cta_gqa_fused",
+        "actual_split": false,
+        "num_splits": 1,
+        "kernel_launches_per_workload": 1,
+        "workspace_bytes": 532480,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "bd4691365f1e4624b7691d7eec27e529290c07bc464e838eda35f9cfbc5740d8",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 4.254720211029053,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 425.4720211029053
+            }
+          ],
+          "median_us": 425.4720211029053,
+          "min_us": 425.4720211029053,
+          "max_us": 425.4720211029053,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 16.920576095581055,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 423.01440238952637
+            }
+          ],
+          "median_us": 423.01440238952637,
+          "min_us": 423.01440238952637,
+          "max_us": 423.01440238952637,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "auto",
+        "batch": 16,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "auto",
+        "actual_dispatch": {
+          "path": "cta_gqa_fused",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "16",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "0",
+          "split_auto": "1",
+          "num_splits": "1",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "cta_gqa_fused",
+        "actual_split": false,
+        "num_splits": 1,
+        "kernel_launches_per_workload": 1,
+        "workspace_bytes": 2129920,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "f211e1fc6cadcb1a70e9497e5beaa1bc5913028e35721424453d82af30628164",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 3.9547839164733887,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 395.47839164733887
+            }
+          ],
+          "median_us": 395.47839164733887,
+          "min_us": 395.47839164733887,
+          "max_us": 395.47839164733887,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 15.706111907958984,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 392.6527976989746
+            }
+          ],
+          "median_us": 392.6527976989746,
+          "min_us": 392.6527976989746,
+          "max_us": 392.6527976989746,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "capacity_strategy",
+        "batch": 1,
+        "length": 256,
+        "capacity_blocks": 1,
+        "dtype": "torch.float16",
+        "requested_mode": "capacity_strategy",
+        "actual_dispatch": {
+          "path": "cta_nosplit",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "1",
+          "pbs": "256",
+          "max_blocks": "1",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "0",
+          "split_auto": "1",
+          "num_splits": "1",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "1"
+        },
+        "actual_path": "cta_nosplit",
+        "actual_split": false,
+        "num_splits": 1,
+        "kernel_launches_per_workload": 1,
+        "workspace_bytes": 133120,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "e3229ee870d75d7c523a6f1cec4a95b8fdc7bf06a7d214f2a1f30fa17156fecb",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.23024000227451324,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 23.024000227451324
+            }
+          ],
+          "median_us": 23.024000227451324,
+          "min_us": 23.024000227451324,
+          "max_us": 23.024000227451324,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.822272002696991,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 20.556800067424774
+            }
+          ],
+          "median_us": 20.556800067424774,
+          "min_us": 20.556800067424774,
+          "max_us": 20.556800067424774,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "capacity_strategy",
+        "batch": 1,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "capacity_strategy",
+        "actual_dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "1",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "1",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "1"
+        },
+        "actual_path": "splitkv_cta",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 133120,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "133655801f7b8336ad8a786ce709343bc563ec6fc491d4ff6f6ad3f1026e7331",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.45875200629234314,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 45.875200629234314
+            }
+          ],
+          "median_us": 45.875200629234314,
+          "min_us": 45.875200629234314,
+          "max_us": 45.875200629234314,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.7182719707489014,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 42.956799268722534
+            }
+          ],
+          "median_us": 42.956799268722534,
+          "min_us": 42.956799268722534,
+          "max_us": 42.956799268722534,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "capacity_strategy",
+        "batch": 4,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "capacity_strategy",
+        "actual_dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "1",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "1"
+        },
+        "actual_path": "splitkv_cta",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 532480,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "72d45f0e42b10e16c169f629711b7601254629cc847cf9fa6357a374172befb7",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.5959680080413818,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 59.596800804138184
+            }
+          ],
+          "median_us": 59.596800804138184,
+          "min_us": 59.596800804138184,
+          "max_us": 59.596800804138184,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.2620160579681396,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 56.55040144920349
+            }
+          ],
+          "median_us": 56.55040144920349,
+          "min_us": 56.55040144920349,
+          "max_us": 56.55040144920349,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "capacity_strategy",
+        "batch": 4,
+        "length": 2049,
+        "capacity_blocks": 16,
+        "dtype": "torch.float16",
+        "requested_mode": "capacity_strategy",
+        "actual_dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "16",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "1",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "1"
+        },
+        "actual_path": "splitkv_cta",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 532480,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "bd4691365f1e4624b7691d7eec27e529290c07bc464e838eda35f9cfbc5740d8",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.5949440002441406,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 59.49440002441406
+            }
+          ],
+          "median_us": 59.49440002441406,
+          "min_us": 59.49440002441406,
+          "max_us": 59.49440002441406,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.26911997795105,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 56.727999448776245
+            }
+          ],
+          "median_us": 56.727999448776245,
+          "min_us": 56.727999448776245,
+          "max_us": 56.727999448776245,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "capacity_strategy",
+        "batch": 16,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "capacity_strategy",
+        "actual_dispatch": {
+          "path": "cta_nosplit",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "16",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "0",
+          "split_auto": "1",
+          "num_splits": "1",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "1"
+        },
+        "actual_path": "cta_nosplit",
+        "actual_split": false,
+        "num_splits": 1,
+        "kernel_launches_per_workload": 1,
+        "workspace_bytes": 2129920,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "f211e1fc6cadcb1a70e9497e5beaa1bc5913028e35721424453d82af30628164",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.1759679317474365,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 217.59679317474365
+            }
+          ],
+          "median_us": 217.59679317474365,
+          "min_us": 217.59679317474365,
+          "max_us": 217.59679317474365,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 8.586112022399902,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 214.65280055999756
+            }
+          ],
+          "median_us": 214.65280055999756,
+          "min_us": 214.65280055999756,
+          "max_us": 214.65280055999756,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "non_split_cta",
+        "batch": 1,
+        "length": 256,
+        "capacity_blocks": 1,
+        "dtype": "torch.float16",
+        "requested_mode": "non_split_cta",
+        "actual_dispatch": {
+          "path": "cta_nosplit",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "1",
+          "pbs": "256",
+          "max_blocks": "1",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "0",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "cta_nosplit",
+        "actual_split": false,
+        "num_splits": 1,
+        "kernel_launches_per_workload": 1,
+        "workspace_bytes": 133120,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "e3229ee870d75d7c523a6f1cec4a95b8fdc7bf06a7d214f2a1f30fa17156fecb",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.23024000227451324,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 23.024000227451324
+            }
+          ],
+          "median_us": 23.024000227451324,
+          "min_us": 23.024000227451324,
+          "max_us": 23.024000227451324,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.822272002696991,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 20.556800067424774
+            }
+          ],
+          "median_us": 20.556800067424774,
+          "min_us": 20.556800067424774,
+          "max_us": 20.556800067424774,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "non_split_cta",
+        "batch": 1,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "non_split_cta",
+        "actual_dispatch": {
+          "path": "cta_nosplit",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "1",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "0",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "cta_nosplit",
+        "actual_split": false,
+        "num_splits": 1,
+        "kernel_launches_per_workload": 1,
+        "workspace_bytes": 133120,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "133655801f7b8336ad8a786ce709343bc563ec6fc491d4ff6f6ad3f1026e7331",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.5872000455856323,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 158.72000455856323
+            }
+          ],
+          "median_us": 158.72000455856323,
+          "min_us": 158.72000455856323,
+          "max_us": 158.72000455856323,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 6.2566399574279785,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 156.41599893569946
+            }
+          ],
+          "median_us": 156.41599893569946,
+          "min_us": 156.41599893569946,
+          "max_us": 156.41599893569946,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "non_split_cta",
+        "batch": 4,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "non_split_cta",
+        "actual_dispatch": {
+          "path": "cta_nosplit",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "0",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "cta_nosplit",
+        "actual_split": false,
+        "num_splits": 1,
+        "kernel_launches_per_workload": 1,
+        "workspace_bytes": 532480,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "72d45f0e42b10e16c169f629711b7601254629cc847cf9fa6357a374172befb7",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.5994880199432373,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 159.94880199432373
+            }
+          ],
+          "median_us": 159.94880199432373,
+          "min_us": 159.94880199432373,
+          "max_us": 159.94880199432373,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 6.27507209777832,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 156.876802444458
+            }
+          ],
+          "median_us": 156.876802444458,
+          "min_us": 156.876802444458,
+          "max_us": 156.876802444458,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "non_split_cta",
+        "batch": 4,
+        "length": 2049,
+        "capacity_blocks": 16,
+        "dtype": "torch.float16",
+        "requested_mode": "non_split_cta",
+        "actual_dispatch": {
+          "path": "cta_nosplit",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "16",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "0",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "cta_nosplit",
+        "actual_split": false,
+        "num_splits": 1,
+        "kernel_launches_per_workload": 1,
+        "workspace_bytes": 532480,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "bd4691365f1e4624b7691d7eec27e529290c07bc464e838eda35f9cfbc5740d8",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.5912959575653076,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 159.12959575653076
+            }
+          ],
+          "median_us": 159.12959575653076,
+          "min_us": 159.12959575653076,
+          "max_us": 159.12959575653076,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 6.276095867156982,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 156.90239667892456
+            }
+          ],
+          "median_us": 156.90239667892456,
+          "min_us": 156.90239667892456,
+          "max_us": 156.90239667892456,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "non_split_cta",
+        "batch": 16,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "non_split_cta",
+        "actual_dispatch": {
+          "path": "cta_nosplit",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "16",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "0",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "cta_nosplit",
+        "actual_split": false,
+        "num_splits": 1,
+        "kernel_launches_per_workload": 1,
+        "workspace_bytes": 2129920,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "f211e1fc6cadcb1a70e9497e5beaa1bc5913028e35721424453d82af30628164",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.1719040870666504,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 217.19040870666504
+            }
+          ],
+          "median_us": 217.19040870666504,
+          "min_us": 217.19040870666504,
+          "max_us": 217.19040870666504,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 8.599552154541016,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 214.9888038635254
+            }
+          ],
+          "median_us": 214.9888038635254,
+          "min_us": 214.9888038635254,
+          "max_us": 214.9888038635254,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_fused",
+        "batch": 1,
+        "length": 256,
+        "capacity_blocks": 1,
+        "dtype": "torch.float16",
+        "requested_mode": "gqa_fused",
+        "actual_dispatch": {
+          "path": "cta_gqa_fused",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "1",
+          "pbs": "256",
+          "max_blocks": "1",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "0",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "cta_gqa_fused",
+        "actual_split": false,
+        "num_splits": 1,
+        "kernel_launches_per_workload": 1,
+        "workspace_bytes": 133120,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "e3229ee870d75d7c523a6f1cec4a95b8fdc7bf06a7d214f2a1f30fa17156fecb",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.5642240047454834,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 56.42240047454834
+            }
+          ],
+          "median_us": 56.42240047454834,
+          "min_us": 56.42240047454834,
+          "max_us": 56.42240047454834,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.1637120246887207,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 54.09280061721802
+            }
+          ],
+          "median_us": 54.09280061721802,
+          "min_us": 54.09280061721802,
+          "max_us": 54.09280061721802,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_fused",
+        "batch": 1,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "gqa_fused",
+        "actual_dispatch": {
+          "path": "cta_gqa_fused",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "1",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "0",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "cta_gqa_fused",
+        "actual_split": false,
+        "num_splits": 1,
+        "kernel_launches_per_workload": 1,
+        "workspace_bytes": 133120,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "133655801f7b8336ad8a786ce709343bc563ec6fc491d4ff6f6ad3f1026e7331",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 4.277247905731201,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 427.7247905731201
+            }
+          ],
+          "median_us": 427.7247905731201,
+          "min_us": 427.7247905731201,
+          "max_us": 427.7247905731201,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 16.915424346923828,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 422.8856086730957
+            }
+          ],
+          "median_us": 422.8856086730957,
+          "min_us": 422.8856086730957,
+          "max_us": 422.8856086730957,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_fused",
+        "batch": 4,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "gqa_fused",
+        "actual_dispatch": {
+          "path": "cta_gqa_fused",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "0",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "cta_gqa_fused",
+        "actual_split": false,
+        "num_splits": 1,
+        "kernel_launches_per_workload": 1,
+        "workspace_bytes": 532480,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "72d45f0e42b10e16c169f629711b7601254629cc847cf9fa6357a374172befb7",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 4.250624179840088,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 425.0624179840088
+            }
+          ],
+          "median_us": 425.0624179840088,
+          "min_us": 425.0624179840088,
+          "max_us": 425.0624179840088,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 16.903167724609375,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 422.5791931152344
+            }
+          ],
+          "median_us": 422.5791931152344,
+          "min_us": 422.5791931152344,
+          "max_us": 422.5791931152344,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_fused",
+        "batch": 4,
+        "length": 2049,
+        "capacity_blocks": 16,
+        "dtype": "torch.float16",
+        "requested_mode": "gqa_fused",
+        "actual_dispatch": {
+          "path": "cta_gqa_fused",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "16",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "0",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "cta_gqa_fused",
+        "actual_split": false,
+        "num_splits": 1,
+        "kernel_launches_per_workload": 1,
+        "workspace_bytes": 532480,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "bd4691365f1e4624b7691d7eec27e529290c07bc464e838eda35f9cfbc5740d8",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 3.92192006111145,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 392.192006111145
+            }
+          ],
+          "median_us": 392.192006111145,
+          "min_us": 392.192006111145,
+          "max_us": 392.192006111145,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 15.605759620666504,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 390.1439905166626
+            }
+          ],
+          "median_us": 390.1439905166626,
+          "min_us": 390.1439905166626,
+          "max_us": 390.1439905166626,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_fused",
+        "batch": 16,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "gqa_fused",
+        "actual_dispatch": {
+          "path": "cta_gqa_fused",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "16",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "0",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "1",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "cta_gqa_fused",
+        "actual_split": false,
+        "num_splits": 1,
+        "kernel_launches_per_workload": 1,
+        "workspace_bytes": 2129920,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "f211e1fc6cadcb1a70e9497e5beaa1bc5913028e35721424453d82af30628164",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 3.960832118988037,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 396.0832118988037
+            }
+          ],
+          "median_us": 396.0832118988037,
+          "min_us": 396.0832118988037,
+          "max_us": 396.0832118988037,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 15.725567817687988,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 393.1391954421997
+            }
+          ],
+          "median_us": 393.1391954421997,
+          "min_us": 393.1391954421997,
+          "max_us": 393.1391954421997,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "warp_splitkv",
+        "batch": 1,
+        "length": 256,
+        "capacity_blocks": 1,
+        "dtype": "torch.float16",
+        "requested_mode": "warp_splitkv",
+        "actual_dispatch": {
+          "path": "splitkv_warp",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "1",
+          "pbs": "256",
+          "max_blocks": "1",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_warp",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 133120,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "e3229ee870d75d7c523a6f1cec4a95b8fdc7bf06a7d214f2a1f30fa17156fecb",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.2826240062713623,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 28.26240062713623
+            }
+          ],
+          "median_us": 28.26240062713623,
+          "min_us": 28.26240062713623,
+          "max_us": 28.26240062713623,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.0117119550704956,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 25.29279887676239
+            }
+          ],
+          "median_us": 25.29279887676239,
+          "min_us": 25.29279887676239,
+          "max_us": 25.29279887676239,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "warp_splitkv",
+        "batch": 1,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "warp_splitkv",
+        "actual_dispatch": {
+          "path": "splitkv_warp",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "1",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_warp",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 133120,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "133655801f7b8336ad8a786ce709343bc563ec6fc491d4ff6f6ad3f1026e7331",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.8348480463027954,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 183.48480463027954
+            }
+          ],
+          "median_us": 183.48480463027954,
+          "min_us": 183.48480463027954,
+          "max_us": 183.48480463027954,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 7.217023849487305,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 180.42559623718262
+            }
+          ],
+          "median_us": 180.42559623718262,
+          "min_us": 180.42559623718262,
+          "max_us": 180.42559623718262,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "warp_splitkv",
+        "batch": 4,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "warp_splitkv",
+        "actual_dispatch": {
+          "path": "splitkv_warp",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_warp",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 532480,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "72d45f0e42b10e16c169f629711b7601254629cc847cf9fa6357a374172befb7",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.840127944946289,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 184.0127944946289
+            }
+          ],
+          "median_us": 184.0127944946289,
+          "min_us": 184.0127944946289,
+          "max_us": 184.0127944946289,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 7.2478718757629395,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 181.1967968940735
+            }
+          ],
+          "median_us": 181.1967968940735,
+          "min_us": 181.1967968940735,
+          "max_us": 181.1967968940735,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "warp_splitkv",
+        "batch": 4,
+        "length": 2049,
+        "capacity_blocks": 16,
+        "dtype": "torch.float16",
+        "requested_mode": "warp_splitkv",
+        "actual_dispatch": {
+          "path": "splitkv_warp",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "16",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_warp",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 532480,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "bd4691365f1e4624b7691d7eec27e529290c07bc464e838eda35f9cfbc5740d8",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.8390079736709595,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 183.90079736709595
+            }
+          ],
+          "median_us": 183.90079736709595,
+          "min_us": 183.90079736709595,
+          "max_us": 183.90079736709595,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 7.252992153167725,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 181.32480382919312
+            }
+          ],
+          "median_us": 181.32480382919312,
+          "min_us": 181.32480382919312,
+          "max_us": 181.32480382919312,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "warp_splitkv",
+        "batch": 16,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "warp_splitkv",
+        "actual_dispatch": {
+          "path": "splitkv_warp",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "16",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_warp",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 2129920,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "f211e1fc6cadcb1a70e9497e5beaa1bc5913028e35721424453d82af30628164",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 3.3822720050811768,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 338.2272005081177
+            }
+          ],
+          "median_us": 338.2272005081177,
+          "min_us": 338.2272005081177,
+          "max_us": 338.2272005081177,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 13.412351608276367,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 335.3087902069092
+            }
+          ],
+          "median_us": 335.3087902069092,
+          "min_us": 335.3087902069092,
+          "max_us": 335.3087902069092,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "cta_splitkv",
+        "batch": 1,
+        "length": 256,
+        "capacity_blocks": 1,
+        "dtype": "torch.float16",
+        "requested_mode": "cta_splitkv",
+        "actual_dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "1",
+          "pbs": "256",
+          "max_blocks": "1",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_cta",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 133120,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "e3229ee870d75d7c523a6f1cec4a95b8fdc7bf06a7d214f2a1f30fa17156fecb",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.18115200102329254,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 18.115200102329254
+            }
+          ],
+          "median_us": 18.115200102329254,
+          "min_us": 18.115200102329254,
+          "max_us": 18.115200102329254,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.32972800731658936,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 8.243200182914734
+            }
+          ],
+          "median_us": 8.243200182914734,
+          "min_us": 8.243200182914734,
+          "max_us": 8.243200182914734,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "cta_splitkv",
+        "batch": 1,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "cta_splitkv",
+        "actual_dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "1",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_cta",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 133120,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "133655801f7b8336ad8a786ce709343bc563ec6fc491d4ff6f6ad3f1026e7331",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.45875200629234314,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 45.875200629234314
+            }
+          ],
+          "median_us": 45.875200629234314,
+          "min_us": 45.875200629234314,
+          "max_us": 45.875200629234314,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.7172479629516602,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 42.931199073791504
+            }
+          ],
+          "median_us": 42.931199073791504,
+          "min_us": 42.931199073791504,
+          "max_us": 42.931199073791504,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "cta_splitkv",
+        "batch": 4,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "cta_splitkv",
+        "actual_dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_cta",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 532480,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "72d45f0e42b10e16c169f629711b7601254629cc847cf9fa6357a374172befb7",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.5939199924468994,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 59.39199924468994
+            }
+          ],
+          "median_us": 59.39199924468994,
+          "min_us": 59.39199924468994,
+          "max_us": 59.39199924468994,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.2661120891571045,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 56.65280222892761
+            }
+          ],
+          "median_us": 56.65280222892761,
+          "min_us": 56.65280222892761,
+          "max_us": 56.65280222892761,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "cta_splitkv",
+        "batch": 4,
+        "length": 2049,
+        "capacity_blocks": 16,
+        "dtype": "torch.float16",
+        "requested_mode": "cta_splitkv",
+        "actual_dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "16",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_cta",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 532480,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "bd4691365f1e4624b7691d7eec27e529290c07bc464e838eda35f9cfbc5740d8",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.5949440002441406,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 59.49440002441406
+            }
+          ],
+          "median_us": 59.49440002441406,
+          "min_us": 59.49440002441406,
+          "max_us": 59.49440002441406,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.268160104751587,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 56.70400261878967
+            }
+          ],
+          "median_us": 56.70400261878967,
+          "min_us": 56.70400261878967,
+          "max_us": 56.70400261878967,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "cta_splitkv",
+        "batch": 16,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "cta_splitkv",
+        "actual_dispatch": {
+          "path": "splitkv_cta",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "16",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_cta",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 2129920,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "f211e1fc6cadcb1a70e9497e5beaa1bc5913028e35721424453d82af30628164",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.032639980316162,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 203.2639980316162
+            }
+          ],
+          "median_us": 203.2639980316162,
+          "min_us": 203.2639980316162,
+          "max_us": 203.2639980316162,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 8.20019245147705,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 205.00481128692627
+            }
+          ],
+          "median_us": 205.00481128692627,
+          "min_us": 205.00481128692627,
+          "max_us": 205.00481128692627,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_2a",
+        "batch": 1,
+        "length": 256,
+        "capacity_blocks": 1,
+        "dtype": "torch.float16",
+        "requested_mode": "gqa_splitkv_2a",
+        "actual_dispatch": {
+          "path": "splitkv_gqa_4warp",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "1",
+          "pbs": "256",
+          "max_blocks": "1",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_gqa_4warp",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 133120,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "e3229ee870d75d7c523a6f1cec4a95b8fdc7bf06a7d214f2a1f30fa17156fecb",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.30617600679397583,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 30.617600679397583
+            }
+          ],
+          "median_us": 30.617600679397583,
+          "min_us": 30.617600679397583,
+          "max_us": 30.617600679397583,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.1008000373840332,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 27.52000093460083
+            }
+          ],
+          "median_us": 27.52000093460083,
+          "min_us": 27.52000093460083,
+          "max_us": 27.52000093460083,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_2a",
+        "batch": 1,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "gqa_splitkv_2a",
+        "actual_dispatch": {
+          "path": "splitkv_gqa_4warp",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "1",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_gqa_4warp",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 133120,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "133655801f7b8336ad8a786ce709343bc563ec6fc491d4ff6f6ad3f1026e7331",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.008064031600952,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 200.80640316009521
+            }
+          ],
+          "median_us": 200.80640316009521,
+          "min_us": 200.80640316009521,
+          "max_us": 200.80640316009521,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 7.911424160003662,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 197.78560400009155
+            }
+          ],
+          "median_us": 197.78560400009155,
+          "min_us": 197.78560400009155,
+          "max_us": 197.78560400009155,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_2a",
+        "batch": 4,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "gqa_splitkv_2a",
+        "actual_dispatch": {
+          "path": "splitkv_gqa_4warp",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_gqa_4warp",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 532480,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "72d45f0e42b10e16c169f629711b7601254629cc847cf9fa6357a374172befb7",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.010080099105835,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 201.0080099105835
+            }
+          ],
+          "median_us": 201.0080099105835,
+          "min_us": 201.0080099105835,
+          "max_us": 201.0080099105835,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 7.921631813049316,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 198.0407953262329
+            }
+          ],
+          "median_us": 198.0407953262329,
+          "min_us": 198.0407953262329,
+          "max_us": 198.0407953262329,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_2a",
+        "batch": 4,
+        "length": 2049,
+        "capacity_blocks": 16,
+        "dtype": "torch.float16",
+        "requested_mode": "gqa_splitkv_2a",
+        "actual_dispatch": {
+          "path": "splitkv_gqa_4warp",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "16",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_gqa_4warp",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 532480,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "bd4691365f1e4624b7691d7eec27e529290c07bc464e838eda35f9cfbc5740d8",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.008064031600952,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 200.80640316009521
+            }
+          ],
+          "median_us": 200.80640316009521,
+          "min_us": 200.80640316009521,
+          "max_us": 200.80640316009521,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 7.921664237976074,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 198.04160594940186
+            }
+          ],
+          "median_us": 198.04160594940186,
+          "min_us": 198.04160594940186,
+          "max_us": 198.04160594940186,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_2a",
+        "batch": 16,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "gqa_splitkv_2a",
+        "actual_dispatch": {
+          "path": "splitkv_gqa_4warp",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "16",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_gqa_4warp",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 2129920,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "f211e1fc6cadcb1a70e9497e5beaa1bc5913028e35721424453d82af30628164",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 3.5808000564575195,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 358.08000564575195
+            }
+          ],
+          "median_us": 358.08000564575195,
+          "min_us": 358.08000564575195,
+          "max_us": 358.08000564575195,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 14.18342399597168,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 354.585599899292
+            }
+          ],
+          "median_us": 354.585599899292,
+          "min_us": 354.585599899292,
+          "max_us": 354.585599899292,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_shared",
+        "batch": 1,
+        "length": 256,
+        "capacity_blocks": 1,
+        "dtype": "torch.float16",
+        "requested_mode": "gqa_splitkv_shared",
+        "actual_dispatch": {
+          "path": "splitkv_gqa_shared",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "1",
+          "pbs": "256",
+          "max_blocks": "1",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_gqa_shared",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 133120,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "e3229ee870d75d7c523a6f1cec4a95b8fdc7bf06a7d214f2a1f30fa17156fecb",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.32256001234054565,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 32.256001234054565
+            }
+          ],
+          "median_us": 32.256001234054565,
+          "min_us": 32.256001234054565,
+          "max_us": 32.256001234054565,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.1683839559555054,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 29.209598898887634
+            }
+          ],
+          "median_us": 29.209598898887634,
+          "min_us": 29.209598898887634,
+          "max_us": 29.209598898887634,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_shared",
+        "batch": 1,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "gqa_splitkv_shared",
+        "actual_dispatch": {
+          "path": "splitkv_gqa_shared",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "1",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_gqa_shared",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 133120,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "133655801f7b8336ad8a786ce709343bc563ec6fc491d4ff6f6ad3f1026e7331",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.1288959980010986,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 212.88959980010986
+            }
+          ],
+          "median_us": 212.88959980010986,
+          "min_us": 212.88959980010986,
+          "max_us": 212.88959980010986,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 8.39475154876709,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 209.86878871917725
+            }
+          ],
+          "median_us": 209.86878871917725,
+          "min_us": 209.86878871917725,
+          "max_us": 209.86878871917725,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_shared",
+        "batch": 4,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "gqa_splitkv_shared",
+        "actual_dispatch": {
+          "path": "splitkv_gqa_shared",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_gqa_shared",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 532480,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "72d45f0e42b10e16c169f629711b7601254629cc847cf9fa6357a374172befb7",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.1369919776916504,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 213.69919776916504
+            }
+          ],
+          "median_us": 213.69919776916504,
+          "min_us": 213.69919776916504,
+          "max_us": 213.69919776916504,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 8.428447723388672,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 210.7111930847168
+            }
+          ],
+          "median_us": 210.7111930847168,
+          "min_us": 210.7111930847168,
+          "max_us": 210.7111930847168,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_shared",
+        "batch": 4,
+        "length": 2049,
+        "capacity_blocks": 16,
+        "dtype": "torch.float16",
+        "requested_mode": "gqa_splitkv_shared",
+        "actual_dispatch": {
+          "path": "splitkv_gqa_shared",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "4",
+          "pbs": "256",
+          "max_blocks": "16",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_gqa_shared",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 532480,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "bd4691365f1e4624b7691d7eec27e529290c07bc464e838eda35f9cfbc5740d8",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.130944013595581,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 213.0944013595581
+            }
+          ],
+          "median_us": 213.0944013595581,
+          "min_us": 213.0944013595581,
+          "max_us": 213.0944013595581,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 8.40396785736084,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 210.099196434021
+            }
+          ],
+          "median_us": 210.099196434021,
+          "min_us": 210.099196434021,
+          "max_us": 210.099196434021,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_shared",
+        "batch": 16,
+        "length": 2049,
+        "capacity_blocks": 9,
+        "dtype": "torch.float16",
+        "requested_mode": "gqa_splitkv_shared",
+        "actual_dispatch": {
+          "path": "splitkv_gqa_shared",
+          "dtype": "12",
+          "heads": "32",
+          "kv_heads": "8",
+          "seqs": "16",
+          "pbs": "256",
+          "max_blocks": "9",
+          "cta_tile": "8",
+          "cta_threads": "64",
+          "split": "1",
+          "split_auto": "0",
+          "num_splits": "4",
+          "fixed": "1",
+          "gqa_fused": "0",
+          "capacity_strategy": "0"
+        },
+        "actual_path": "splitkv_gqa_shared",
+        "actual_split": true,
+        "num_splits": 4,
+        "kernel_launches_per_workload": 2,
+        "workspace_bytes": 2129920,
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "f211e1fc6cadcb1a70e9497e5beaa1bc5913028e35721424453d82af30628164",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 3.240959882736206,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 324.0959882736206
+            }
+          ],
+          "median_us": 324.0959882736206,
+          "min_us": 324.0959882736206,
+          "max_us": 324.0959882736206,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 12.813311576843262,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 320.33278942108154
+            }
+          ],
+          "median_us": 320.33278942108154,
+          "min_us": 320.33278942108154,
+          "max_us": 320.33278942108154,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 20,
+          "graph_replays": 2,
+          "total_logical_workloads": 40,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      }
+    ],
+    "cpu_count_test": {
+      "calls_1": 1,
+      "calls_100": 100,
+      "existing_batch_object": {
+        "batch_invocations": 1,
+        "logical_calls": 100
+      },
+      "status": "PASS"
+    },
+    "round": 1,
+    "result": "PASS",
+    "graph_workloads": 20,
+    "graph_replays": 2
+  }
+]

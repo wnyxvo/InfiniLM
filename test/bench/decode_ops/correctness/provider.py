@@ -8,7 +8,7 @@ import sys
 
 if '--help' in sys.argv:
     _p=argparse.ArgumentParser(description='Independent append and InfiniCore Graph verification')
-    _p.add_argument('--output');_p.add_argument('--flash',action='store_true');_p.add_argument('--variant',choices=['gqa','auto','default','cta','split2','strategy'])
+    _p.add_argument('--output');_p.add_argument('--flash',action='store_true');_p.add_argument('--variant',choices=['gqa','auto','default','cta','split2','strategy']);_p.add_argument('--history',type=int,default=255);_p.add_argument('--pages-per-seq',type=int,default=2)
     _p.parse_args();sys.exit(0)
 
 import torch
@@ -41,6 +41,8 @@ def main():
     p.add_argument('--output',required=True,help='New run directory (must not exist)')
     p.add_argument('--flash',action='store_true')
     p.add_argument('--variant',choices=['gqa','auto','default','cta','split2','strategy'])
+    p.add_argument('--history',type=int,default=255,help='initial history length; 2049 exercises the long split path')
+    p.add_argument('--pages-per-seq',type=int,default=2)
     args=p.parse_args()
     torch.cuda.set_device(0)
     ic.set_device(ic.device('cuda',0))
@@ -56,7 +58,9 @@ def main():
                 configure(variant)
                 if variant == 'strategy': os.environ['INFINIOP_FLASH_SPLITKV_STRATEGY'] = 'capacity_v1'
                 torch.manual_seed(SEED)
-                batch=4; pages_per_seq=2
+                batch=4; pages_per_seq=max(args.pages_per_seq, (args.history + 2 + PAGE - 1)//PAGE)
+                if args.history < 1: raise ValueError('--history must be positive')
+                base_lengths=[args.history+i for i in range(batch-1)] + [max(8, min(args.history, PAGE//32))]
                 # Extra spare page per sequence allows a semantic relocation:
                 # copy historical page contents, then change only its mapping.
                 shape=(batch*pages_per_seq+batch,8,PAGE,128)
@@ -74,8 +78,8 @@ def main():
                 else:
                     k=initial_k.clone();v=initial_v.clone();kstore=k;vstore=v
                 table=initial_table.to(device='cuda',dtype=torch.int32)
-                lens=torch.tensor([255,256,257,8],device='cuda',dtype=torch.int32)
-                slots=torch.tensor([int(initial_table[b,(n-1)//PAGE])*PAGE+(n-1)%PAGE for b,n in enumerate([255,256,257,8])],device='cuda',dtype=torch.int64)
+                lens=torch.tensor(base_lengths,device='cuda',dtype=torch.int32)
+                slots=torch.tensor([int(initial_table[b,(n-1)//PAGE])*PAGE+(n-1)%PAGE for b,n in enumerate(base_lengths)],device='cuda',dtype=torch.int64)
                 iq,ik,iv,ink,inv,ibt,ilens,islots,io=[wrap(t) for t in [q,k,v,newk,newv,table,lens,slots,out]]
                 fq,fk,fv,fo=[wrap(t) for t in [q.unsqueeze(1),kstore,vstore,out.unsqueeze(1)]]
                 def attention():
@@ -105,7 +109,7 @@ def main():
                     host_table=initial_table.clone()
                     detected=False
                     for step in range(3):
-                        lengths=[255+step,256+step,257+step,8+step]
+                        lengths=[n+step for n in base_lengths]
                         if step==1:
                             # Move each sequence's logical first page into an
                             # unused physical page, preserving history exactly.

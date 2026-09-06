@@ -1,0 +1,201 @@
+diff --git a/test/bench/decode_ops/README.md b/test/bench/decode_ops/README.md
+index 1bb1f6e..8819d5d 100644
+--- a/test/bench/decode_ops/README.md
++++ b/test/bench/decode_ops/README.md
+@@ -49,3 +49,5 @@ Milestone 2B shared-KV GQA Split-KV kernel、正确性矩阵和完整 attention
+ Milestone 2C tile-level online softmax 优化见 `reports/milestone2C_report.md`；结果为 correctness/Graph/sanitizer/两算子集成 PASS，性能相对 2B 与普通 CTA 均 NO_GAIN，按停止条件不再扩展候选。
+ 
+ Milestone 3A CTA Split-KV 容量策略与 Provider 集成见 `reports/milestone3A_report.md`；shared-KV 分支已关闭。
++
++Milestone 3B 见 `reports/milestone3B_report.md`；候选库为 `/data/InfiniTensor/phase3b-strategy`。`capacity_v1` 仅在显式 auto、目标 GQA/CTA/FP16-BF16 范围内启用，`num_splits=1` 明确走普通 `cta_nosplit`；provider 长序列、三轮 FP16/BF16 基准及 strategy memcheck 证据位于 `runs/m3b_*_20260906/`。生产默认环境变量为空时保持原 dispatch。
+diff --git a/test/bench/decode_ops/benchmarks/attention.py b/test/bench/decode_ops/benchmarks/attention.py
+index 5b99321..42b1bb9 100644
+--- a/test/bench/decode_ops/benchmarks/attention.py
++++ b/test/bench/decode_ops/benchmarks/attention.py
+@@ -1,9 +1,9 @@
+ """Bounded attention path ablation including eager/Graph workload accounting."""
+-import argparse, hashlib, os, statistics, sys
++import argparse, ctypes as C, hashlib, os, re, statistics, sys
+ from pathlib import Path
+ import torch
+ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+-from common.correctness_support import Run, Native, PAGE, reference, check_output, configure
++from common.correctness_support import Run, Native, PAGE, reference, check_output, configure, capture_stderr
+ from common.timing import measure_cuda, cpu_count_test
+ 
+ def h(*xs):
+@@ -40,23 +40,42 @@ def set_mode(mode):
+     elif mode in ("gqa_splitkv_shared", "gqa_splitkv_tile"):
+         os.environ["INFINIOP_FLASH_GQA_SHARED_SPLITKV"] = "1"
+ 
++def observe_dispatch(call, mode):
++    # Diagnostics are captured before timing and a different path is primed so
++    # the native signature logger cannot hide the target configuration.
++    prime = 'gqa_fused' if mode == 'non_split_cta' else 'non_split_cta'
++    set_mode(prime); call(); torch.cuda.synchronize()
++    set_mode(mode)
++    os.environ['INFINIOP_FLASH_DEBUG_DISPATCH'] = '1'
++    with capture_stderr() as f:
++        call(); torch.cuda.synchronize(); C.CDLL(None).fflush(None)
++        f.seek(0); trace = f.read().decode()
++    lines = [x for x in trace.splitlines() if 'dispatch: path=' in x]
++    if not lines:
++        raise RuntimeError(f'no dispatch evidence for {mode}: {trace}')
++    return dict(re.findall(r'(\w+)=([^ ]+)', lines[-1].split('dispatch: ')[1]))
++
++
+ def main():
+     p = argparse.ArgumentParser()
+     p.add_argument('--output', required=True); p.add_argument('--samples', type=int, default=5)
+     p.add_argument('--graph-workloads', type=int, default=100); p.add_argument('--graph-replays', type=int, default=2); p.add_argument('--dtype', choices=('fp16','bf16'), default='fp16'); p.add_argument('--round', type=int, default=1)
+     args = p.parse_args(); torch.cuda.set_device(0); run = Run(args.output); rows = []
+-    modes = ('production_default','auto','capacity_strategy','non_split_cta','gqa_fused','warp_splitkv','cta_splitkv','gqa_splitkv_2a','gqa_splitkv_shared','gqa_splitkv_tile')
++    modes = ('production_default','auto','capacity_strategy','non_split_cta','gqa_fused','warp_splitkv','cta_splitkv','gqa_splitkv_2a','gqa_splitkv_shared')
+     if args.round % 2 == 0: modes = tuple(reversed(modes))
+     try:
+         for mode in modes:
+-            for batch, length in ((1,256),(1,2049),(4,2049),(16,2049)):
+-                dtype = torch.float16 if args.dtype == 'fp16' else torch.bfloat16; cap = (length + PAGE - 1) // PAGE
++            for batch, length, capacity_blocks in ((1,256,1),(1,2049,9),(4,2049,9),(4,2049,16),(16,2049,9)):
++                dtype = torch.float16 if args.dtype == 'fp16' else torch.bfloat16; cap = max(capacity_blocks, (length + PAGE - 1) // PAGE)
+                 torch.manual_seed(20260906 + batch + length)
+                 q = torch.randn(batch,32,128,device='cuda',dtype=dtype)
+                 k = torch.randn(batch*cap,8,PAGE,128,device='cuda',dtype=dtype); v = torch.randn_like(k)
+                 table = torch.randperm(batch*cap,device='cuda',dtype=torch.int32).reshape(batch,cap)
+                 lens = torch.full((batch,),length,device='cuda',dtype=torch.int32); out = torch.empty_like(q)
+                 native = Native(); call = native.operation('PagedAttention',[out,q,k,v,table,lens]); set_mode(mode)
++                dispatch = observe_dispatch(call, mode)
++                # Remove diagnostics from all timed and graph work.
++                os.environ.pop('INFINIOP_FLASH_DEBUG_DISPATCH', None); os.environ.pop('INFINIOP_FLASH_DEBUG_SPLITS', None)
+                 ref = reference(q,k,v,table,[length]*batch)
+                 out.fill_(float('nan')); call(); torch.cuda.synchronize(); eager_corr = check_output(out,ref)
+                 out.fill_(float('nan')); graph = torch.cuda.CUDAGraph()
+@@ -69,13 +88,17 @@ def main():
+                     sample['normalized_us'] = sample['elapsed_ms']*1000/(args.graph_workloads*args.graph_replays)
+                     sample['formula'] = 'elapsed_ms/(workloads_per_graph*graph_replays)'
+                 vals = [x['normalized_us'] for x in gm['samples']]
+-                split = mode in ('production_default','warp_splitkv','cta_splitkv','gqa_splitkv_2a','gqa_splitkv_shared','gqa_splitkv_tile')
++                split = dispatch.get('split') == '1'
++                actual_splits = int(dispatch.get('num_splits', '1')) if split else 1
++                launches = 2 if split else 1
+                 gm.update(median_us=statistics.median(vals), min_us=min(vals), max_us=max(vals),
+                           workloads_per_graph=args.graph_workloads, graph_replays=args.graph_replays,
+                           total_logical_workloads=args.graph_workloads*args.graph_replays,
+-                          kernel_calls_per_workload=2 if split else 1)
+-                rows.append({'mode':mode,'batch':batch,'length':length,'dtype':str(dtype),
+-                    'num_splits':4 if split else 0,'workspace_bytes':'descriptor-managed',
++                          kernel_calls_per_workload=launches)
++                rows.append({'mode':mode,'batch':batch,'length':length,'capacity_blocks':cap,'dtype':str(dtype),
++                    'requested_mode':mode,'actual_dispatch':dispatch,'actual_path':dispatch.get('path'),
++                    'actual_split':split,'num_splits':actual_splits,'kernel_launches_per_workload':launches,
++                    'workspace_bytes':getattr(call,'workspace_size',None),
+                     'eager_correctness':eager_corr['attention_correctness'],'graph_correctness':graph_corr['attention_correctness'],
+                     'input_hash':h(q,k,v,table,lens),'eager':eager,'graph_batch':gm,
+                     'result':'PASS' if eager_corr['attention_correctness']=='PASS' and graph_corr['attention_correctness']=='PASS' else 'FAIL'})
+diff --git a/test/bench/decode_ops/build/attention.py b/test/bench/decode_ops/build/attention.py
+index f705a4d..9afbaf4 100644
+--- a/test/bench/decode_ops/build/attention.py
++++ b/test/bench/decode_ops/build/attention.py
+@@ -24,7 +24,7 @@ def main():
+  attention_names=('paged_attention_hd64.cu.o','paged_attention_hd128.cu.o','paged_attention_hd192.cu.o','paged_attention_hd256.cu.o','paged_attention_hd576.cu.o','paged_attention_mla_hd576_v512.cu.o')
+  def remap(x):
+   if cache and x.endswith('/paged_caching_nvidia.cu.o'): return str(cache/'objects'/'paged_caching_nvidia.cu.o')
+-  return str(base/'objects'/Path(x).name) if any(x.endswith('/'+n) for n in attention_names) else x
++  return str(base/'objects'/Path(x).name) if ('paged_attention_hd' in x or 'paged_attention_mla' in x) else x
+  inputs=[str(newobj) if x==oldobj else remap(x) for x in inputs]; run([lf[0],*inputs,*lf[1:],*arch,'-o',str(newlink)])
+  archive=libdir/'libinfiniop-nvidia.a'; shutil.copy2(base/'lib/libinfiniop-nvidia.a',archive)
+  # Replace the archive's legacy cache member with the current-Core object.
+@@ -35,5 +35,6 @@ def main():
+  # The archive copied from the base prefix contains legacy paged-caching
+  # templates; also link the current object explicitly for symbol resolution.
+  if cache_obj and cache_obj not in objs: objs.append(cache_obj)
++ if str(newlink) not in objs: objs.append(str(newlink))
+  run([lf[0],*objs,'-L'+str(libdir),*lf[1:],'-o',str(libdir/'libinfiniop.so')]); m['new_library_hash']=sha(libdir/'libinfiniop.so'); m['exit_code']=0; (a.evidence/'build.json').write_text(json.dumps(m,indent=2)); print(m['new_library_hash'])
+ if __name__=='__main__': main()
+diff --git a/test/bench/decode_ops/common/correctness_support.py b/test/bench/decode_ops/common/correctness_support.py
+index 42bb1be..a1b3842 100644
+--- a/test/bench/decode_ops/common/correctness_support.py
++++ b/test/bench/decode_ops/common/correctness_support.py
+@@ -198,6 +198,7 @@ class Native:
+         ws = torch.empty(max(1,size.value),device='cuda',dtype=torch.uint8)
+         def call():
+             check_error(getattr(lib,'infiniop'+name)(op,ws.data_ptr(),size.value,*[t.data_ptr() for t in tensors],*([None] if name=='PagedAttention' else []),torch.cuda.current_stream().cuda_stream))
++        call.workspace_size = int(size.value)
+         self.ops.append((name,op,descriptors,ws,tensors))
+         return call
+ 
+diff --git a/test/bench/decode_ops/correctness/provider.py b/test/bench/decode_ops/correctness/provider.py
+index 245e15f..9592458 100644
+--- a/test/bench/decode_ops/correctness/provider.py
++++ b/test/bench/decode_ops/correctness/provider.py
+@@ -8,7 +8,7 @@ import sys
+ 
+ if '--help' in sys.argv:
+     _p=argparse.ArgumentParser(description='Independent append and InfiniCore Graph verification')
+-    _p.add_argument('--output');_p.add_argument('--flash',action='store_true');_p.add_argument('--variant',choices=['gqa','auto','default','cta','split2','strategy'])
++    _p.add_argument('--output');_p.add_argument('--flash',action='store_true');_p.add_argument('--variant',choices=['gqa','auto','default','cta','split2','strategy']);_p.add_argument('--history',type=int,default=255);_p.add_argument('--pages-per-seq',type=int,default=2)
+     _p.parse_args();sys.exit(0)
+ 
+ import torch
+@@ -41,6 +41,8 @@ def main():
+     p.add_argument('--output',required=True,help='New run directory (must not exist)')
+     p.add_argument('--flash',action='store_true')
+     p.add_argument('--variant',choices=['gqa','auto','default','cta','split2','strategy'])
++    p.add_argument('--history',type=int,default=255,help='initial history length; 2049 exercises the long split path')
++    p.add_argument('--pages-per-seq',type=int,default=2)
+     args=p.parse_args()
+     torch.cuda.set_device(0)
+     ic.set_device(ic.device('cuda',0))
+@@ -56,7 +58,9 @@ def main():
+                 configure(variant)
+                 if variant == 'strategy': os.environ['INFINIOP_FLASH_SPLITKV_STRATEGY'] = 'capacity_v1'
+                 torch.manual_seed(SEED)
+-                batch=4; pages_per_seq=2
++                batch=4; pages_per_seq=max(args.pages_per_seq, (args.history + 2 + PAGE - 1)//PAGE)
++                if args.history < 1: raise ValueError('--history must be positive')
++                base_lengths=[args.history+i for i in range(batch-1)] + [max(8, min(args.history, PAGE//32))]
+                 # Extra spare page per sequence allows a semantic relocation:
+                 # copy historical page contents, then change only its mapping.
+                 shape=(batch*pages_per_seq+batch,8,PAGE,128)
+@@ -74,8 +78,8 @@ def main():
+                 else:
+                     k=initial_k.clone();v=initial_v.clone();kstore=k;vstore=v
+                 table=initial_table.to(device='cuda',dtype=torch.int32)
+-                lens=torch.tensor([255,256,257,8],device='cuda',dtype=torch.int32)
+-                slots=torch.tensor([int(initial_table[b,(n-1)//PAGE])*PAGE+(n-1)%PAGE for b,n in enumerate([255,256,257,8])],device='cuda',dtype=torch.int64)
++                lens=torch.tensor(base_lengths,device='cuda',dtype=torch.int32)
++                slots=torch.tensor([int(initial_table[b,(n-1)//PAGE])*PAGE+(n-1)%PAGE for b,n in enumerate(base_lengths)],device='cuda',dtype=torch.int64)
+                 iq,ik,iv,ink,inv,ibt,ilens,islots,io=[wrap(t) for t in [q,k,v,newk,newv,table,lens,slots,out]]
+                 fq,fk,fv,fo=[wrap(t) for t in [q.unsqueeze(1),kstore,vstore,out.unsqueeze(1)]]
+                 def attention():
+@@ -105,7 +109,7 @@ def main():
+                     host_table=initial_table.clone()
+                     detected=False
+                     for step in range(3):
+-                        lengths=[255+step,256+step,257+step,8+step]
++                        lengths=[n+step for n in base_lengths]
+                         if step==1:
+                             # Move each sequence's logical first page into an
+                             # unused physical page, preserving history exactly.
+diff --git a/test/bench/decode_ops/reports/README.md b/test/bench/decode_ops/reports/README.md
+index cdf3b3f..eccf3fc 100644
+--- a/test/bench/decode_ops/reports/README.md
++++ b/test/bench/decode_ops/reports/README.md
+@@ -15,3 +15,5 @@
+ - [Milestone 2C](milestone2C_report.md)：GQA shared-KV tile-level online softmax 优化与验证。
+ 
+ - [Milestone 3A](milestone3A_report.md)：CTA Split-KV 容量策略与真实 InfiniCore Provider 集成。
++
++- [Milestone 3B](milestone3B_report.md)：Split 策略与 kernel family 解耦、capacity holdout、长序列 provider、Graph/正确性与 sanitizer。
+diff --git a/test/bench/decode_ops/reports/milestone3A_report.md b/test/bench/decode_ops/reports/milestone3A_report.md
+index ae87546..206a10d 100644
+--- a/test/bench/decode_ops/reports/milestone3A_report.md
++++ b/test/bench/decode_ops/reports/milestone3A_report.md
+@@ -50,3 +50,7 @@ INFINI_ROOT=/data/InfiniTensor/phase3a-strategy LD_LIBRARY_PATH=/data/InfiniTens
+ ```
+ 
+ 建议提交信息：`feat(infiniop): add capacity-aware split-kv dispatch strategy`；`bench(decode_ops): add milestone 3A provider evidence`。
++
++### 3B errata
++
++3A 的 `capacity_v1` 在选择 `num_splits=1` 时实际会落入 GQA fused；3B 已将该选择改为显式 `cta_nosplit`。3A 基准的 auto/capacity kernel 计数曾按模式固定，3B 改为读取实际 dispatch；`gqa_splitkv_shared` 与 `gqa_splitkv_tile` 也不再作为两条独立收益路径。3A provider 只覆盖 history≤257，不能证明长序列收益；3B 新增 B4、L=2049 的 eager/Graph provider 验证。长序列 capacity 相对 auto 的收益来自路径选择，不能解读为超过生产默认。

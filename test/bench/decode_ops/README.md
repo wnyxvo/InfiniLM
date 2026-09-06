@@ -49,3 +49,5 @@ Milestone 2B shared-KV GQA Split-KV kernel、正确性矩阵和完整 attention 
 Milestone 2C tile-level online softmax 优化见 `reports/milestone2C_report.md`；结果为 correctness/Graph/sanitizer/两算子集成 PASS，性能相对 2B 与普通 CTA 均 NO_GAIN，按停止条件不再扩展候选。
 
 Milestone 3A CTA Split-KV 容量策略与 Provider 集成见 `reports/milestone3A_report.md`；shared-KV 分支已关闭。
+
+Milestone 3B 见 `reports/milestone3B_report.md`；候选库为 `/data/InfiniTensor/phase3b-strategy`。`capacity_v1` 仅在显式 auto、目标 GQA/CTA/FP16-BF16 范围内启用，`num_splits=1` 明确走普通 `cta_nosplit`；provider 长序列、三轮 FP16/BF16 基准及 strategy memcheck 证据位于 `runs/m3b_*_20260906/`。生产默认环境变量为空时保持原 dispatch。
