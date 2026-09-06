@@ -1,10 +1,10 @@
 # FINAL_REPORT — CUDA LLM Decode 算子优化收束
 
-日期：2026-09-06。基线为 InfiniLM `0bd5dbcc7fe39e57cf5671573a9729281d143be4`、InfiniCore `5e3d5b32209623d246cd2cbd01fbfc33d4b67b67`；两仓库均先核对为 clean。最终统一库 `/data/InfiniTensor/phase4-final/lib/libinfiniop.so`，SHA256 `fbabcb6dcc63245b1c14bc850a7f59e884b5024104d0cd56b3896cb6951813d5`，由当前 Core hd128 对象、已验证 attention 对象和 `phase1c-cache-grouped` caching 对象链接生成。
+日期：2026-09-06。基线为 InfiniLM `21e0197c2bc99f1dad9a2e95f4be7be420ada30a`、InfiniCore `02012f27a52b8131c3e7b19bd37277fe5cd55402`；两仓库均先核对为 clean。最终统一库 `/data/InfiniTensor/phase4-final/lib/libinfiniop.so`，SHA256 `fbabcb6dcc63245b1c14bc850a7f59e884b5024104d0cd56b3896cb6951813d5`，由当前 Core hd128 对象、已验证 attention 对象和 `phase1c-cache-grouped` caching 对象链接生成。
 
 ## 项目解决的问题与调用链
 
-项目围绕 paged KV decode，补齐了 CUDA paged-caching 写入、paged-attention GQA/Split-KV 路径、独立 FP32 reference、append→attention 验证和 Graph 计时。真实验证链为 `infinicore.ops.paged_caching → infinicore.ops.paged_attention`；InfiniLM Llama 当前仍在模型层使用 dense `grouped_query_attention`，没有 paged provider 接口，因此整模型 E2E 为 `NOT_RUN`。
+项目围绕 paged KV decode，补齐了 CUDA paged-caching 写入、paged-attention GQA/Split-KV 路径、独立 FP32 reference、append→attention 验证和 Graph 计时。真实验证链为 `infinicore.ops.paged_caching → infinicore.ops.paged_attention`。Llama 默认模型仍使用 dense `grouped_query_attention`；Qwen3 已有 `forward_paged_ → AttentionLayer → PagedAttentionImpl → paged_caching_ / paged_attention_` 调用链，本轮据此完成真实服务验证。
 
 上游原有实现提供基础 paged cache/attention 与默认 dispatch。本项目新增或修正了 8-byte FP16/BF16 vector copy、CTA right-sizing/grouped CTA、GQA Split-KV/shared-KV/tile-softmax 实验、capacity_v1 dispatch 以及本轮 NUM_SPLITS 优先级和页容量边界修复。shared-KV/tile-softmax 保留实现与负结果，已 CLOSED。
 
@@ -32,7 +32,7 @@
 | BF16 | 32 | 13.394 / 2.483 | 13.190 / 1.690 | 13.578 / 1.818 |
 | BF16 | 256 | 14.868 / 13.798 | 13.046 / 2.970 | 13.128 / 2.688 |
 
-B 相对 A 在本矩阵中具有稳定收益：Graph 绝对差（B−A）为 FP16 `-0.128/-0.819/-10.829`、BF16 `-0.077/-0.793/-10.828` µs（tokens=1/32/256）；D−B 分别为 FP16 `+0.013/+0.128/-0.282`、BF16 `+0.026/+0.128/-0.282` µs。三轮 Graph 中位数波动最大为 A 在 tokens=32 的 FP16 `2.483–2.534` µs，其他候选均在约 `0.03` µs 内。D 相对 A 仅在部分 token 范围改善，且相对强对照 B 没有稳定优势，因此最终建议保留 B/D 为显式候选，生产默认仍为 A。FP16 rotating-slot D（tokens=32）为 `13.394 / 1.818`，slots 与输入均在计时前准备；该结果只作合法布局对照，不等同 HBM 带宽测试。
+B 相对 A 在本矩阵中具有稳定收益：Graph 绝对差（B−A）为 FP16 `-0.128/-0.819/-10.829`、BF16 `-0.077/-0.793/-10.828` µs（tokens=1/32/256）；D−B 分别为 FP16 `+0.013/+0.128/-0.282`、BF16 `+0.026/+0.128/-0.282` µs。三轮 Graph 中位数波动最大为 A 在 tokens=32 的 FP16 `2.483–2.534` µs，其他候选均在约 `0.03` µs 内。D 相对 A 仅在部分 token 范围改善，且相对强对照 B 没有稳定优势，因此最终建议保留 B/D 为显式候选，生产默认仍为 A。FP16 fixed-offset D（tokens=32）为 `13.394 / 1.818`，slots 与输入均在计时前准备；该结果只作合法布局对照，不等同 HBM 带宽测试。
 
 KV Update 最终采用口径的 18 个 A/B/D runs 全部 PASS；B 代表点 memcheck 为 `ERROR SUMMARY: 0 errors`。append→attention 在 B4/B16、FP16/BF16 的 cache bitwise、attention 输出、eager 和 Graph 均 PASS。单算子延迟改善不外推为整个 decode 加速。
 
@@ -67,9 +67,28 @@ python test/bench/decode_ops/correctness/provider.py \
 
 构建证据在 `runs/build_phase4_final_20260906/`；KV Update 三轮证据为 `runs/m4_kv_{fp16,bf16}_{A,B,D}_r{1,2,3}_20260906/`；集成为 `runs/m4_integration_{fp16,bf16}_B{4,16}_20260906/`；sanitizer 为 `runs/m4_kv_B_memcheck_20260906/`。
 
-推荐保留生产默认行为；显式采用 B 需由上层 workload 配置 `INFINIOP_PAGED_CACHING_THREADS=128`，D 仅用于已验证对齐布局实验。不要把 provider 级集成称作 InfiniLM 整模型集成。
+推荐保留生产默认行为；显式采用 B 需由上层 workload 配置 `INFINIOP_PAGED_CACHING_THREADS=128`，D 仅用于已验证对齐布局实验。Qwen3 服务链已完成本轮整模型 paged E2E 验证；Llama dense 模型不在本轮范围内。
 
 建议提交信息：
 
 - InfiniCore：`fix(paged-attention): preserve explicit split overrides and safe fallbacks`
 - InfiniLM：`test(decode): finalize KV update and dispatch acceptance`
+
+## Milestone 5 — Qwen3-4B 服务 A/B
+
+模型为 `/root/huggingface/models/Qwen--Qwen3-4B/snapshots/master`，配置为 BF16、36 层、hidden=2560、Hq/Hkv=32/8、head_dim=128、vocab=151936。A/B 均使用 `--enable-paged-attn --attn=paged-attn --disable-prefix-caching`、`num-blocks=128`、`block-size=256`、`max-cache-len=2048`、`max-batch-size=16`、`max-new-tokens=8`，只改变 `INFINIOP_PAGED_CACHING_THREADS`（A 未设置，B=128）；加载库 SHA256 为 `fbabcb6dcc63245b1c14bc850a7f59e884b5024104d0cd56b3896cb6951813d5`。
+
+Qwen3 的实际服务调用链为 `forward_paged_ → AttentionLayer → PagedAttentionImpl → paged_caching_ → paged_attention_`。worker trace 记录 A=`selected_threads=1024`、B=`selected_threads=128`，两者均为 scalar (`vector_active=0`)；attention dispatch 为 `splitkv_cta`、GQA 32/8、`num_splits=4`。固定中文、英文和长中文请求，top-k=1，eager A/B 各 3 轮、并发 1/4/16 共 69 条，均 HTTP 200 且输出哈希 0 mismatch；Graph A/B 也各 3 轮、69 条，均 PASS 且 0 mismatch。
+
+| 模式 | 并发 | A 中位数 ms | B 中位数 ms | B−A |
+|---|---:|---:|---:|---:|
+| eager | 1 | 93.12 | 92.19 | −0.99% |
+| eager | 4 | 491.10 | 481.09 | −2.04% |
+| eager | 16 | 2023.18 | 1999.91 | −1.15% |
+| Graph | 1 | 90.23 | 91.07 | +0.93% |
+| Graph | 4 | 486.64 | 484.85 | −0.37% |
+| Graph | 16 | 2019.10 | 2000.55 | −0.92% |
+
+HTTP usage 已记录每个请求的 prompt/completion/total tokens；例如 A eager round1 的 smoke/English/long prompt 分别为 21/23/2351 prompt tokens，均生成 8 tokens。当前服务诊断未暴露逐步 prefill/decode token 计数，故不虚构该字段。结果标签：Paged model path **VERIFIED**；KV Update A/B **VERIFIED**；model output **PASS**；eager E2E **INCONCLUSIVE**（B 在各并发档约 1–2% 以内变化，未形成稳定模型级收益）；Graph E2E **INCONCLUSIVE**（同样为约 1% 以内波动）。本轮不把单算子收益外推为整模型加速。
+
+可复用服务启动脚本为 `milestone5/qwen3_service.sh`，请求脚本为 `milestone5/qwen3_ab.py`；证据位于 `runs/m5_qwen_{A,B}_{eager,graph_perf}_20260906/`，worker 路径诊断归档为各 eager run 的 `worker_debug.log`。

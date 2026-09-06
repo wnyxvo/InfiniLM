@@ -52,4 +52,8 @@ Milestone 3A CTA Split-KV 容量策略与 Provider 集成见 `reports/milestone3
 
 Milestone 3B 见 `reports/milestone3B_report.md`；候选库为 `/data/InfiniTensor/phase3b-strategy`。`capacity_v1` 仅在显式 auto、目标 GQA/CTA/FP16-BF16 范围内启用，`num_splits=1` 明确走普通 `cta_nosplit`；provider 长序列、三轮 FP16/BF16 基准及 strategy memcheck 证据位于 `runs/m3b_*_20260906/`。生产默认环境变量为空时保持原 dispatch。
 
-Milestone 4 最终收束见 `reports/FINAL_REPORT.md`；最终统一候选库为 `/data/InfiniTensor/phase4-final`。本轮修复 NUM_SPLITS 覆盖和 provider history+4 页容量，并完成 A/B/D KV Update 三轮验收及代表性 InfiniCore 集成；整模型 E2E 保持 NOT_RUN。
+Milestone 4 最终收束见 `reports/FINAL_REPORT.md`；最终统一候选库为 `/data/InfiniTensor/phase4-final`。本轮修复 NUM_SPLITS 覆盖和 provider history+4 页容量，并完成 A/B/D KV Update 三轮验收及代表性 InfiniCore 集成；Milestone 5 已完成 Qwen3-4B paged eager/Graph 服务 A/B；调用链、模型输出和 worker 线程证据均 PASS，模型级收益结论为 INCONCLUSIVE（详见 `reports/FINAL_REPORT.md`）。
+
+Milestone 5 Qwen3-4B A/B 请求脚本为 `milestone5/qwen3_ab.py`；固定 paged 服务参数和 3 轮并发 1/4/16 证据位于 `runs/m5_qwen_{A,B}_{eager,graph_perf}_20260906/`。
+
+复现服务：`env ... test/bench/decode_ops/milestone5/qwen3_service.sh A|B 18000 0 /tmp/qwen.log`（B 仅增加 `INFINIOP_PAGED_CACHING_THREADS=128`）；随后运行 `qwen3_ab.py --port 18000 --rounds 3 --max-tokens 8 --output <run-dir>`。Graph 将第三个参数改为 `1`。

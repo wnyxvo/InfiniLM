@@ -1,0 +1,2486 @@
+[
+  {
+    "round": 1,
+    "concurrency": 1,
+    "name": "smoke_zh",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-3980419025e345a685dfd49b42c99146",
+      "object": "chat.completion",
+      "created": 1788700790,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 91.25711023807526,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 1,
+    "name": "english",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-6fa6f69c01554c2f9fa19bc099b6e68e",
+      "object": "chat.completion",
+      "created": 1788700791,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 90.22997319698334,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 1,
+    "name": "long_zh",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-51c7060b860746bda00cfe1ad22ef5e1",
+      "object": "chat.completion",
+      "created": 1788700791,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 468.8241630792618,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 4,
+    "name": "smoke_zh_0",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-34e3461ac198474fb9cecc9d8ec55127",
+      "object": "chat.completion",
+      "created": 1788700791,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 492.3855662345886,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 4,
+    "name": "english_1",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-32b696191352491ba20dce8bd2e93906",
+      "object": "chat.completion",
+      "created": 1788700791,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 492.5511032342911,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 4,
+    "name": "long_zh_2",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-18a4a0d427a84747baa57a01d69e5038",
+      "object": "chat.completion",
+      "created": 1788700792,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 493.3045357465744,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 4,
+    "name": "smoke_zh_3",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-30593f66149b4c12b76fddcec5979035",
+      "object": "chat.completion",
+      "created": 1788700791,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 491.43365025520325,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 16,
+    "name": "smoke_zh_0",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-946e589c5bd14b3799e3e6a5ee6d95c4",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 2021.4727818965912,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 16,
+    "name": "english_1",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-1c9d75105fb64cfd907b412837810b33",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 2022.039920091629,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 16,
+    "name": "long_zh_2",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-57c3d18fd4ea41d3b0507b24aeb69b67",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 2021.750196814537,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 16,
+    "name": "smoke_zh_3",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-1e35114e1c7f4d26b815e11423e4e9ac",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 2020.7653492689133,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 16,
+    "name": "english_4",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-6ac23ebf51584580bea4cf835d71eaaa",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 2020.611822605133,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 16,
+    "name": "long_zh_5",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-5f74f12213e0464ea70beee03fe376de",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 2019.8082476854324,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 16,
+    "name": "smoke_zh_6",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-48b315d633ea436287b1e44f702de555",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 2019.1062986850739,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 16,
+    "name": "english_7",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-ac487463a8d54cf88e2723bb802789ec",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 2019.7853296995163,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 16,
+    "name": "long_zh_8",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-e674ecf277594866a937e99df17c4553",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 2018.1588679552078,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 16,
+    "name": "smoke_zh_9",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-1b5ffb5c320343299951fab556cc7502",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 2019.7769403457642,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 16,
+    "name": "english_10",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-9d524ad12d2248e3881cf76678a074fe",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 2016.4346992969513,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 16,
+    "name": "long_zh_11",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-505e8e2fffd34c38bfdad57d5e8e0556",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 2017.5894051790237,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 16,
+    "name": "smoke_zh_12",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-88e3790e582e4707a27f3759a0f78ec8",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 2017.025038599968,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 16,
+    "name": "english_13",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-59a4ad2c0d3e483a9cda566c19ff3ad2",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 2015.546828508377,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 16,
+    "name": "long_zh_14",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-6ddcb471d4c9498789249423bfb3faf4",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 2015.283852815628,
+    "error": null
+  },
+  {
+    "round": 1,
+    "concurrency": 16,
+    "name": "smoke_zh_15",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-41baa0acb165433f81a71ee77bda6132",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 2014.4138634204865,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 1,
+    "name": "smoke_zh",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-801953d9ce1b4e0e813810835a8d6d52",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 84.42343771457672,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 1,
+    "name": "english",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-295adaa08ea14740a84f086a550275e7",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 88.41089904308319,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 1,
+    "name": "long_zh",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-10261d6a524e4a4391cec6ba30860987",
+      "object": "chat.completion",
+      "created": 1788700794,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 468.1519865989685,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 4,
+    "name": "smoke_zh_0",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-eb75449652c24b11ae48abf96a327ce1",
+      "object": "chat.completion",
+      "created": 1788700795,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 486.60479485988617,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 4,
+    "name": "english_1",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-c8c1ca68831b43068b98f28bb2dcca52",
+      "object": "chat.completion",
+      "created": 1788700795,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 484.29660499095917,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 4,
+    "name": "long_zh_2",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-112feea52f6a42efb091a4f980c60499",
+      "object": "chat.completion",
+      "created": 1788700795,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 484.18958485126495,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 4,
+    "name": "smoke_zh_3",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-e7762229de174672ab08b2dcead80e7f",
+      "object": "chat.completion",
+      "created": 1788700795,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 484.4057410955429,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 16,
+    "name": "smoke_zh_0",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-965b51f7d6204e3b96c5ded3b18d6887",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 2021.3646739721298,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 16,
+    "name": "english_1",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-c2cae91c9b294c009d4dc9cdbebcbd95",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 2021.8950062990189,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 16,
+    "name": "long_zh_2",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-5987e2b1c9d54fbcb7438f043f9e728d",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 2020.1240479946136,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 16,
+    "name": "smoke_zh_3",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-38ecb11744914dcfae3d344e3b4f77d2",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 2017.6447182893753,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 16,
+    "name": "english_4",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-c6979f7856a9421881511c2669481b31",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 2019.5922404527664,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 16,
+    "name": "long_zh_5",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-dec3a9e477d94c8fac0cc637ca23887c",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 2018.877848982811,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 16,
+    "name": "smoke_zh_6",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-f035201457da4763b1552c399cfc715a",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 2017.892524600029,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 16,
+    "name": "english_7",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-418f56d41aa34374bceef0aea5dc89b9",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 2017.1486139297485,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 16,
+    "name": "long_zh_8",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-d3b1b738dbbb474489829c6a37045ac4",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 2016.8320834636688,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 16,
+    "name": "smoke_zh_9",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-6161e98f78e148be9fc80a3046c2176d",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 2015.496626496315,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 16,
+    "name": "english_10",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-ccf63c59508a44edbc9bd4798ea45142",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 2015.451803803444,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 16,
+    "name": "long_zh_11",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-2daed7e5f2c748089305c8cd3af24e01",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 2015.2612924575806,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 16,
+    "name": "smoke_zh_12",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-aaa498defc5d496f976d4e9eb03883b9",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 2014.1032934188843,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 16,
+    "name": "english_13",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-bf6e4738320e491ea383bdc88086f72d",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 2014.3682807683945,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 16,
+    "name": "long_zh_14",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-aab85382e5b74367bd47fe7a366a1866",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 2013.3500844240189,
+    "error": null
+  },
+  {
+    "round": 2,
+    "concurrency": 16,
+    "name": "smoke_zh_15",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-ac4a8b0ec68a489ab13ac80fa7261f52",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 2012.586459517479,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 1,
+    "name": "smoke_zh",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-7e9c02c553d64336a3837bbd426907c8",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 89.174285531044,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 1,
+    "name": "english",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-fd58684a8e5641d9a1b6abb7f6802e89",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 88.97550404071808,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 1,
+    "name": "long_zh",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-a5b3f23bc1a44144b83a0e722a4d741a",
+      "object": "chat.completion",
+      "created": 1788700797,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 457.8690826892853,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 4,
+    "name": "smoke_zh_0",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-e95b4a41b636496584fc0f521bbcb2ad",
+      "object": "chat.completion",
+      "created": 1788700798,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 486.16743087768555,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 4,
+    "name": "english_1",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-1f66a1b1f3d9443799eefae02c8dee7e",
+      "object": "chat.completion",
+      "created": 1788700798,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 486.56295239925385,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 4,
+    "name": "long_zh_2",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-a5195a279b9649ec92d2579c38255d3f",
+      "object": "chat.completion",
+      "created": 1788700798,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 486.68172955513,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 4,
+    "name": "smoke_zh_3",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-6911dc602d724baeb489558abcf32093",
+      "object": "chat.completion",
+      "created": 1788700798,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 486.8568480014801,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 16,
+    "name": "smoke_zh_0",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-d600b65efb5f488c99dc1442641a50f7",
+      "object": "chat.completion",
+      "created": 1788700800,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 2019.1032886505127,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 16,
+    "name": "english_1",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-be852b4d2f42491ab3a47f5c4201cef2",
+      "object": "chat.completion",
+      "created": 1788700800,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 2019.7222977876663,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 16,
+    "name": "long_zh_2",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-5678940bb9934f5d8b151259f9e3473d",
+      "object": "chat.completion",
+      "created": 1788700800,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 2019.8245644569397,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 16,
+    "name": "smoke_zh_3",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-b6c697c548cc4363938f49c3feab507f",
+      "object": "chat.completion",
+      "created": 1788700800,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 2021.0324227809906,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 16,
+    "name": "english_4",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-724343e1825d4adab5f8bfd004825782",
+      "object": "chat.completion",
+      "created": 1788700800,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 2019.5101648569107,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 16,
+    "name": "long_zh_5",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-54ff2cb4b08345a7b68d9f2bcdc6b14d",
+      "object": "chat.completion",
+      "created": 1788700800,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 2020.1837867498398,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 16,
+    "name": "smoke_zh_6",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-70f916d3857f41768582aead044ff261",
+      "object": "chat.completion",
+      "created": 1788700800,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 2020.1112031936646,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 16,
+    "name": "english_7",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-f28cfd75c9cc488a9a0f1d1b3de6d494",
+      "object": "chat.completion",
+      "created": 1788700800,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 2020.1625376939774,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 16,
+    "name": "long_zh_8",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-54bf951c776d4b29a0cb88b5b1325b9f",
+      "object": "chat.completion",
+      "created": 1788700800,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 2019.4875299930573,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 16,
+    "name": "smoke_zh_9",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-374522303e704646aa15a9d606a768c3",
+      "object": "chat.completion",
+      "created": 1788700800,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 2019.4049030542374,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 16,
+    "name": "english_10",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-511147ad23ed4606b3cfa270d66aeb6d",
+      "object": "chat.completion",
+      "created": 1788700800,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 2018.8964158296585,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 16,
+    "name": "long_zh_11",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-ad2bd192ed384a24a1a422714911ae9d",
+      "object": "chat.completion",
+      "created": 1788700800,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 2019.5737481117249,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 16,
+    "name": "smoke_zh_12",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-712752f3c7944e48b51f40727275eb86",
+      "object": "chat.completion",
+      "created": 1788700800,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 2019.3178951740265,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 16,
+    "name": "english_13",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-597667a5c8fb4db5a36ee2485f812fe6",
+      "object": "chat.completion",
+      "created": 1788700800,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nUse shared memory"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 8,
+        "total_tokens": 31
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 23,
+    "completion_tokens": 8,
+    "total_tokens": 31,
+    "content_sha256": "82b8bf813218fd4501bf8425c010a92b7a0bcf6d6030c360f801aa13d72c2654",
+    "latency_ms": 2016.7194604873657,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 16,
+    "name": "long_zh_14",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-8c3295df0a6243ecafe6ea31bf3460dd",
+      "object": "chat.completion",
+      "created": 1788700800,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\n在大模型"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 8,
+        "total_tokens": 2359
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 2351,
+    "completion_tokens": 8,
+    "total_tokens": 2359,
+    "content_sha256": "25b991265746fcdf57bae697235e93f966c4644920fa8a377f522cd342a98ac3",
+    "latency_ms": 2016.4577960968018,
+    "error": null
+  },
+  {
+    "round": 3,
+    "concurrency": 16,
+    "name": "smoke_zh_15",
+    "http_status": 200,
+    "response": {
+      "id": "cmpl-8677180b90df4e059f3f0b42f85e06fa",
+      "object": "chat.completion",
+      "created": 1788700800,
+      "model": "master",
+      "system_fingerprint": null,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "<think>\n\n</think>\n\nCUDA kernel"
+          },
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "finish_reason": "length",
+    "prompt_tokens": 21,
+    "completion_tokens": 8,
+    "total_tokens": 29,
+    "content_sha256": "75a0a453318b93d789d610ec782c398162da1b8e4865c4d65218aa81cf6f59a1",
+    "latency_ms": 2016.1984711885452,
+    "error": null
+  }
+]

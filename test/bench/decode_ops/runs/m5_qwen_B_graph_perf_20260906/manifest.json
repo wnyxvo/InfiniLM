@@ -1,0 +1,12 @@
+{
+  "port": 18000,
+  "rounds": 3,
+  "max_tokens": 8,
+  "prompt_names": [
+    "smoke_zh",
+    "english",
+    "long_zh"
+  ],
+  "result": "PASS",
+  "rows": 69
+}

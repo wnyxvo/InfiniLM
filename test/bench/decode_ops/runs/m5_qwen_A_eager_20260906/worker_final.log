@@ -1,0 +1,97 @@
+2026-09-06 13:16:16 - __main__ - INFO - MoE EP backend: disabled  TP=1  DP=1  EP=1
+2026-09-06 13:16:16 - __main__ - INFO - Starting API Server at 127.0.0.1:18000...
+INFO:     Started server process [480152]
+INFO:     Waiting for application startup.
+2026-09-06 13:16:16 - infinilm.llm.model_runner.model_runner - INFO - kv_transfer_config: None
+2026-09-06 13:16:16 - infinilm.llm.model_runner.model_runner - INFO - Using Paged KV Cache with num_blocks=128
+ load weights ......
+Found index file: /root/huggingface/models/Qwen--Qwen3-4B/snapshots/master/model.safetensors.index.json. Loading shards by index.
+Processing files:   0%|          | 0/3 [00:00<?, ?it/s]                                                       Processing files:   0%|          | 0/3 [00:00<?, ?it/s]Processing files:  33%|███▎      | 1/3 [00:00<00:01,  1.08it/s]                                                               Processing files:  33%|███▎      | 1/3 [00:00<00:01,  1.08it/s]Processing files:  67%|██████▋   | 2/3 [00:01<00:00,  2.22it/s]                                                               Processing files:  67%|██████▋   | 2/3 [00:01<00:00,  2.22it/s]Processing files: 100%|██████████| 3/3 [00:01<00:00,  1.62it/s]Processing files: 100%|██████████| 3/3 [00:01<00:00,  1.62it/s]
+Processing: model-00002-of-00003.safetensors
+Processing: model-00003-of-00003.safetensors
+Processing: model-00001-of-00003.safetensors
+ load weights over! 2201.5061378479004 ms 
+
+2026-09-06 13:16:19 - infinilm.llm.llm - INFO - Using Paged KV Cache with num_blocks=128
+2026-09-06 13:16:19 - infinilm.llm.llm - INFO - LLMEngine initialized with model at /root/huggingface/models/Qwen--Qwen3-4B/snapshots/master on device cuda, enable_graph=False
+2026-09-06 13:16:19 - infinilm.llm.llm - INFO - AsyncLLMEngine started
+2026-09-06 13:16:19 - __main__ - INFO - Engine initialized with model at /root/huggingface/models/Qwen--Qwen3-4B/snapshots/master
+2026-09-06 13:16:19 - __main__ - INFO -   enable_graph: False
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:18000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:38852 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38876 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38884 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38892 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38916 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38918 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38920 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38922 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38948 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38950 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38952 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38954 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38956 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38960 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38962 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38964 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38966 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38968 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38970 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38972 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38974 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38976 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38978 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38980 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39094 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39100 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39106 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39132 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39136 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39134 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39138 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39168 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39170 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39172 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39176 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39174 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39178 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39180 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39182 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39184 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39186 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39188 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39190 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39192 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39194 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39196 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39198 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39308 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39314 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39320 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39346 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39350 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39348 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39352 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39376 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39378 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39380 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39382 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39384 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39386 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39388 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39390 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39392 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39394 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39396 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39400 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39398 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39402 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39404 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39406 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+2026-09-06 13:16:41 - infinilm.llm.llm - INFO - AsyncLLMEngine stopped
+INFO:     Application shutdown complete.
+INFO:     Finished server process [480152]
+2026-09-06 13:16:41 - __main__ - INFO - Inference Server stopped

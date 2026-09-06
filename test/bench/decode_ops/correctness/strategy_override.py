@@ -21,6 +21,14 @@ def env_for(case):
 def main():
     p=argparse.ArgumentParser(); p.add_argument('--output',required=True); a=p.parse_args()
     torch.cuda.set_device(0); run=Run(a.output); native=Native(); rows=[]
+    expected={
+        'numeric2': {'path':'splitkv_cta','split':'1','num_splits':'2','strategy_reason':'numeric_override'},
+        'auto': {'path':'splitkv_cta','split':'1','num_splits':'4','strategy_reason':'capacity_v1'},
+        'unset': {'path':'splitkv_cta','split':'1','num_splits':'4','strategy_reason':'capacity_v1'},
+        'closed': {'path':'cta_gqa_fused','split':'0','strategy_reason':'split_disabled'},
+        'invalid': {'path':'splitkv_cta','split':'1','num_splits':'4','strategy_reason':'invalid_num_splits_default'},
+        'out_of_scope': {'path':'splitkv_cta','split':'1','num_splits':'2','strategy_reason':'out_of_scope_fallback'},
+    }
     try:
         for case in ('numeric2','auto','unset','closed','invalid','out_of_scope'):
             heads=16 if case=='out_of_scope' else 32; kv=8; batch=4; cap=9
@@ -35,7 +43,10 @@ def main():
             lines=[x for x in trace.splitlines() if 'dispatch: path=' in x]
             if not lines: raise RuntimeError(f'no dispatch evidence for {case}: {trace}')
             dispatch=dict(re.findall(r'(\w+)=([^ ]+)',lines[-1].split('dispatch: ')[1]))
-            rows.append({'case':case,'heads':heads,'requested_num_splits':os.environ.get('INFINIOP_FLASH_NUM_SPLITS'),'dispatch':dispatch,'trace':trace,'result':'PASS'})
+            exp=expected[case]
+            if any(dispatch.get(k) != v for k,v in exp.items()):
+                raise RuntimeError(f'{case} dispatch mismatch: expected {exp}, got {dispatch}')
+            rows.append({'case':case,'heads':heads,'requested_num_splits':os.environ.get('INFINIOP_FLASH_NUM_SPLITS'),'expected':exp,'dispatch':dispatch,'trace':trace,'result':'PASS'})
         run.add(rows=rows, result='PASS'); return run.finish()
     except Exception as e:
         run.finish(e); raise
