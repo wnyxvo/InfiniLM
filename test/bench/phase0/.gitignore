@@ -48,3 +48,11 @@ __pycache__/
 !phase1a_runs/*/summary.json
 !phase1a_runs/*/build.json
 !phase1a_runs/*/build.log
+!decode_ops/runs/*/manifest.json
+!decode_ops/runs/*/results.json
+!decode_ops/runs/*/summary.json
+!decode_ops/runs/*/verdicts.json
+!decode_ops/runs/*/dispatch.log
+!decode_ops/runs/*/build.json
+!decode_ops/runs/*/build.log
+!decode_ops/runs/*/execution.log

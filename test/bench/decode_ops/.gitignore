@@ -1,0 +1,21 @@
+__pycache__/
+*.nsys-rep
+*.ncu-rep
+*.sqlite
+*.qdstrm
+
+# Keep small provenance and result files; exclude large traces and binaries.
+!runs/*/manifest.json
+!runs/*/results.json
+!runs/*/summary.json
+!runs/*/verdicts.json
+!runs/*/dispatch.log
+!runs/*/build.json
+!runs/*/build.log
+!runs/*/execution.log
+!runs/*/exception.log
+!runs/*/sanitizer.log
+!runs/*/*.log
+*.so
+*.a
+*.o
