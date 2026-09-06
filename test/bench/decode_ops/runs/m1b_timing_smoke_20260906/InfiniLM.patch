@@ -1,0 +1,88 @@
+diff --git a/test/bench/decode_ops/benchmarks/caching.py b/test/bench/decode_ops/benchmarks/caching.py
+index 864aee8..ee588f3 100644
+--- a/test/bench/decode_ops/benchmarks/caching.py
++++ b/test/bench/decode_ops/benchmarks/caching.py
+@@ -13,11 +13,15 @@ def digest(t):
+  return hashlib.sha256(x.cpu().numpy().tobytes()).hexdigest()
+ def tensor_set_hash(ts): return hashlib.sha256(''.join(digest(x) for x in ts).encode()).hexdigest()
+ def parse():
+- p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--threads',choices=['default','128','256'],default='default');p.add_argument('--dtype',choices=['fp16','bf16'],default='fp16');p.add_argument('--samples',type=int,default=20);p.add_argument('--workload-calls',type=int,default=100);return p.parse_args()
++ p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--threads',choices=['default','32','128','256'],default='default');p.add_argument('--vector',action='store_true',help='request 32-thread 8-byte vector writes');p.add_argument('--dtype',choices=['fp16','bf16'],default='fp16');p.add_argument('--samples',type=int,default=20);p.add_argument('--workload-calls',type=int,default=100);return p.parse_args()
+ def main():
+  a=parse(); torch.cuda.set_device(0); run=Run(a.output); torch.manual_seed(20260905); dtype=torch.float16 if a.dtype=='fp16' else torch.bfloat16
+  if a.threads=='default': os.environ.pop('INFINIOP_PAGED_CACHING_THREADS',None)
+  else: os.environ['INFINIOP_PAGED_CACHING_THREADS']=a.threads
++ if a.vector:
++  if a.threads != '32': raise ValueError('--vector requires --threads 32')
++  os.environ['INFINIOP_PAGED_CACHING_VECTOR']='1'
++ else: os.environ.pop('INFINIOP_PAGED_CACHING_VECTOR',None)
+  native=Native(); rows=[]
+  for ntok in [1,4,16,32,255,256,257]:
+   pages=max(1,(ntok+255)//256); k=torch.randn(ntok,8,128,device='cuda',dtype=dtype);v=torch.randn_like(k); base=torch.randn(pages,8,256,128,device='cuda',dtype=dtype); kc=base.clone();vc=torch.randn_like(base); vc0=vc.clone(); slots=torch.arange(ntok,device='cuda',dtype=torch.int64); expected_k=base.clone();expected_v=vc0.clone()
+@@ -40,6 +44,6 @@ def main():
+  with torch.cuda.graph(graph): both()
+  torch.cuda.synchronize(); reset_decode(); graphm=measure_cuda(graph.replay,samples=a.samples,workload_calls=1,warmup=1); reset_decode(); graph.replay();torch.cuda.synchronize(); expected2=reference(q,ek,ev,table,[history+1]*B); graph_ok=check_output(out,expected2)['attention_correctness']=='PASS'; del graph
+  rows.append({'operation':'append_attention','dtype':str(dtype),'threads':a.threads,'batch':B,'history_tokens':history,'append_tokens':B,'target_correctness':integ['attention_correctness'],'cache_correctness':'PASS' if torch.equal(kc,ek) and torch.equal(vc,ev) else 'FAIL','graph_correctness':'PASS' if graph_ok else 'FAIL','input_hash':base_hash,'workload':'one append + one attention','workload_calls':1,'eager':eager,'graph':graphm})
+- run.add(rows=rows,cpu_count_test=cpu_count_test(),requested_threads=a.threads,actual_threads='template selected by INFINIOP_PAGED_CACHING_THREADS/default branch',dtype=str(dtype),script_hash=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),result='PASS' if all(r['target_correctness']=='PASS' and r['cache_correctness']=='PASS' and r['graph_correctness']=='PASS' for r in rows) else 'FAIL')
++ run.add(rows=rows,cpu_count_test=cpu_count_test(),requested_threads=a.threads,vector_requested=a.vector,actual_threads='32 vector/scalar or 128/256/default selected in NVIDIA calculate',dtype=str(dtype),script_hash=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),result='PASS' if all(r['target_correctness']=='PASS' and r['cache_correctness']=='PASS' and r['graph_correctness']=='PASS' for r in rows) else 'FAIL')
+  native.close();return run.finish()
+ if __name__=='__main__':sys.exit(main())
+diff --git a/test/bench/decode_ops/common/timing.py b/test/bench/decode_ops/common/timing.py
+index 0ee9550..2d52828 100644
+--- a/test/bench/decode_ops/common/timing.py
++++ b/test/bench/decode_ops/common/timing.py
+@@ -1,23 +1,39 @@
+ """Shared CUDA-event timing and workload-count helpers."""
+-import statistics, time
++import statistics
+ import torch
+ 
++
++def run_workload(workload, calls):
++    """Execute exactly ``calls`` logical workloads and return the count."""
++    for _ in range(calls):
++        workload()
++    return calls
++
++
+ def measure_cuda(workload, *, samples, workload_calls, warmup=0, formula='elapsed_ms/workload_calls'):
+-    for _ in range(warmup): workload()
++    run_workload(workload, warmup)
+     torch.cuda.synchronize()
+-    rows=[]
++    rows = []
+     for i in range(samples):
+-        start,end=torch.cuda.Event(enable_timing=True),torch.cuda.Event(enable_timing=True)
+-        start.record(); workload(); end.record(); end.synchronize()
+-        elapsed_ms=start.elapsed_time(end)
+-        rows.append({'sample':i,'elapsed_ms':elapsed_ms,'workload_calls':workload_calls,'formula':formula,'normalized_us':elapsed_ms*1000/workload_calls})
+-    vals=[r['normalized_us'] for r in rows]
+-    return {'samples':rows,'median_us':statistics.median(vals),'min_us':min(vals),'max_us':max(vals),'workload_calls':workload_calls,'formula':formula}
++        start, end = torch.cuda.Event(enable_timing=True), torch.cuda.Event(enable_timing=True)
++        start.record()
++        run_workload(workload, workload_calls)
++        end.record()
++        end.synchronize()
++        elapsed_ms = start.elapsed_time(end)
++        rows.append({'sample': i, 'elapsed_ms': elapsed_ms, 'workload_calls': workload_calls,
++                     'formula': formula, 'normalized_us': elapsed_ms * 1000 / workload_calls})
++    vals = [r['normalized_us'] for r in rows]
++    return {'samples': rows, 'median_us': statistics.median(vals), 'min_us': min(vals),
++            'max_us': max(vals), 'workload_calls': workload_calls, 'formula': formula}
++
+ 
+ def cpu_count_test():
+-    for n in (1,100):
+-        count={'value':0}
+-        def work(): count['value']+=1
+-        for _ in range(n): work()
+-        assert count['value']==n
+-    return {'calls_1':1,'calls_100':100,'status':'PASS'}
++    observed = {}
++    for n in (1, 100):
++        count = {'value': 0}
++        def work():
++            count['value'] += 1
++        observed[n] = run_workload(work, n)
++        assert count['value'] == n
++    return {'calls_1': observed[1], 'calls_100': observed[100], 'status': 'PASS'}

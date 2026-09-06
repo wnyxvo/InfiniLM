@@ -19,3 +19,7 @@ __pycache__/
 *.so
 *.a
 *.o
+
+# The build directory contains a source script; keep its Python entrypoint.
+!build/
+!build/*.py
