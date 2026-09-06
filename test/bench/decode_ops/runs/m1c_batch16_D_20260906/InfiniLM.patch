@@ -1,0 +1,186 @@
+diff --git a/test/bench/decode_ops/README.md b/test/bench/decode_ops/README.md
+index f4b4595..57684bd 100644
+--- a/test/bench/decode_ops/README.md
++++ b/test/bench/decode_ops/README.md
+@@ -21,10 +21,10 @@ cd /data/InfiniTensor/InfiniLM
+ INFINI_ROOT=/data/InfiniTensor/phase1b-cache-vector3 \
+ LD_LIBRARY_PATH=/data/InfiniTensor/phase1b-cache-vector3/lib:/root/.infini/lib:/usr/local/cuda/lib64 \
+ /data/InfiniTensor/.venv-infini/bin/python test/bench/decode_ops/benchmarks/caching.py \
+---threads 32 --vector --dtype fp16 --output test/bench/decode_ops/runs/m1b_vector_fp16_32
++--threads 32 --grouped-heads 1 --vector --dtype fp16 --output test/bench/decode_ops/runs/m1b_vector_fp16_32
+ ```
+ 
+-候选构建脚本在 `build/caching.py`，不把编译产物写入仓库。完整 A/B、Graph、sanitizer 命令见 `reports/phase0_2_commands.md`；Milestone 1A 结果见 `reports/milestone1A_report.md`；本轮补测与修复见 `reports/milestone1A_1_report.md`；Milestone 1B 见 `reports/milestone1B_report.md`。
++候选构建脚本在 `build/caching.py`，不把编译产物写入仓库。完整 A/B、Graph、sanitizer 命令见 `reports/phase0_2_commands.md`；Milestone 1A 结果见 `reports/milestone1A_report.md`；本轮补测与修复见 `reports/milestone1A_1_report.md`；Milestone 1B 见 `reports/milestone1B_report.md`；Milestone 1C grouped CTA 见 `reports/milestone1C_report.md`。
+ 
+ ## 迁移映射
+ 
+@@ -39,3 +39,5 @@ LD_LIBRARY_PATH=/data/InfiniTensor/phase1b-cache-vector3/lib:/root/.infini/lib:/
+ | `phase0/phase0_2A_report.md` | `decode_ops/reports/phase0_2A_report.md` |
+ 
+ 历史 `phase0/runs/` 与 `phase0/phase0*_runs/` 原位保留，新的 JSON/log 仅放在 `decode_ops/runs/` 并由局部忽略规则精确放行。
++
++Milestone 1C E/F 显式候选：`--threads 64 --grouped-heads 2 --vector`（E），`--threads 128 --grouped-heads 4 --vector`（F）。不设置这些环境开关时生产默认路径保持不变。
+diff --git a/test/bench/decode_ops/benchmarks/caching.py b/test/bench/decode_ops/benchmarks/caching.py
+index ee588f3..1d836ef 100644
+--- a/test/bench/decode_ops/benchmarks/caching.py
++++ b/test/bench/decode_ops/benchmarks/caching.py
+@@ -13,29 +13,34 @@ def digest(t):
+  return hashlib.sha256(x.cpu().numpy().tobytes()).hexdigest()
+ def tensor_set_hash(ts): return hashlib.sha256(''.join(digest(x) for x in ts).encode()).hexdigest()
+ def parse():
+- p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--threads',choices=['default','32','128','256'],default='default');p.add_argument('--vector',action='store_true',help='request 32-thread 8-byte vector writes');p.add_argument('--dtype',choices=['fp16','bf16'],default='fp16');p.add_argument('--samples',type=int,default=20);p.add_argument('--workload-calls',type=int,default=100);return p.parse_args()
++ p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--threads',choices=['default','32','64','128','256'],default='default');p.add_argument('--grouped-heads',choices=['1','2','4'],default='1');p.add_argument('--vector',action='store_true',help='request 8-byte vector writes');p.add_argument('--dtype',choices=['fp16','bf16'],default='fp16');p.add_argument('--samples',type=int,default=20);p.add_argument('--workload-calls',type=int,default=100);p.add_argument('--batch',type=int,default=4);return p.parse_args()
+ def main():
+  a=parse(); torch.cuda.set_device(0); run=Run(a.output); torch.manual_seed(20260905); dtype=torch.float16 if a.dtype=='fp16' else torch.bfloat16
+  if a.threads=='default': os.environ.pop('INFINIOP_PAGED_CACHING_THREADS',None)
+  else: os.environ['INFINIOP_PAGED_CACHING_THREADS']=a.threads
++ grouped=int(a.grouped_heads)
++ if grouped == 2 and a.threads != '64': raise ValueError('--grouped-heads 2 requires --threads 64')
++ if grouped == 4 and a.threads != '128': raise ValueError('--grouped-heads 4 requires --threads 128')
++ if grouped == 1 and a.threads == '64': raise ValueError('--threads 64 requires --grouped-heads 2')
+  if a.vector:
+-  if a.threads != '32': raise ValueError('--vector requires --threads 32')
+   os.environ['INFINIOP_PAGED_CACHING_VECTOR']='1'
+  else: os.environ.pop('INFINIOP_PAGED_CACHING_VECTOR',None)
++ if grouped > 1: os.environ['INFINIOP_PAGED_CACHING_HEADS_PER_CTA']=str(grouped)
++ else: os.environ.pop('INFINIOP_PAGED_CACHING_HEADS_PER_CTA',None)
+  native=Native(); rows=[]
+  for ntok in [1,4,16,32,255,256,257]:
+   pages=max(1,(ntok+255)//256); k=torch.randn(ntok,8,128,device='cuda',dtype=dtype);v=torch.randn_like(k); base=torch.randn(pages,8,256,128,device='cuda',dtype=dtype); kc=base.clone();vc=torch.randn_like(base); vc0=vc.clone(); slots=torch.arange(ntok,device='cuda',dtype=torch.int64); expected_k=base.clone();expected_v=vc0.clone()
+   for i,slot in enumerate(slots.tolist()): expected_k[slot//256,:,slot%256,:]=k[i];expected_v[slot//256,:,slot%256,:]=v[i]
+   call=native.operation('PagedCaching',[kc,vc,k,v,slots]); call();torch.cuda.synchronize(); ok=bool(torch.equal(kc,expected_k) and torch.equal(vc,expected_v)); in_hash=tensor_set_hash([k,v,slots,base,vc0]); ref_hash=tensor_set_hash([expected_k,expected_v]);
+   def reset(): kc.copy_(base);vc.copy_(vc0)
+-  reset(); eager=measure_cuda(lambda:[call() for _ in range(a.workload_calls)],samples=a.samples,workload_calls=a.workload_calls,warmup=2)
++  reset(); eager=measure_cuda(call,samples=a.samples,workload_calls=a.workload_calls,warmup=2)
+   reset(); graph=torch.cuda.CUDAGraph()
+   with torch.cuda.graph(graph):
+-   for _ in range(a.workload_calls): call()
+-  torch.cuda.synchronize(); reset(); graphm=measure_cuda(graph.replay,samples=a.samples,workload_calls=a.workload_calls,warmup=1); reset(); graph.replay();torch.cuda.synchronize(); graph_ok=bool(torch.equal(kc,expected_k) and torch.equal(vc,expected_v)); del graph
+-  rows.append({'operation':'paged_caching','dtype':str(dtype),'threads':a.threads,'tokens':ntok,'target_correctness':'PASS' if ok else 'FAIL','cache_correctness':'PASS' if ok else 'FAIL','input_hash':in_hash,'expected_cache_hash':ref_hash,'eager':eager,'graph':graphm,'graph_correctness':'PASS' if graph_ok else 'FAIL','workload':'one paged_caching','workload_calls':a.workload_calls})
++   call()
++  torch.cuda.synchronize(); reset(); graphm=measure_cuda(graph.replay,samples=a.samples,workload_calls=1,warmup=1); reset(); graph.replay();torch.cuda.synchronize(); graph_ok=bool(torch.equal(kc,expected_k) and torch.equal(vc,expected_v)); del graph
++  rows.append({'operation':'paged_caching','dtype':str(dtype),'threads':a.threads,'tokens':ntok,'target_correctness':'PASS' if ok else 'FAIL','cache_correctness':'PASS' if ok else 'FAIL','input_hash':in_hash,'expected_cache_hash':ref_hash,'eager':eager,'graph':graphm,'graph_correctness':'PASS' if graph_ok else 'FAIL','workload':'one paged_caching','workload_calls':a.workload_calls,'graph_workload_calls':1})
+  # realistic decode: history is pre-existing; each sequence appends one token once
+- B=4; history=256; lengths=[history]*B; q=torch.randn(B,32,128,device='cuda',dtype=dtype); new_k=torch.randn(B,8,128,device='cuda',dtype=dtype); new_v=torch.randn_like(new_k); pages=B*2; kc=torch.randn(pages,8,256,128,device='cuda',dtype=dtype);vc=torch.randn_like(kc); kc0=kc.clone();vc0=vc.clone(); slots=torch.tensor([b*512+history for b in range(B)],device='cuda',dtype=torch.int64); table=torch.tensor([[b*2,b*2+1] for b in range(B)],device='cuda',dtype=torch.int32); lens=torch.tensor([history+1]*B,device='cuda',dtype=torch.int32); out=torch.empty_like(q); ek=kc0.clone();ev=vc0.clone()
++ B=a.batch; history=256; lengths=[history]*B; q=torch.randn(B,32,128,device='cuda',dtype=dtype); new_k=torch.randn(B,8,128,device='cuda',dtype=dtype); new_v=torch.randn_like(new_k); pages=B*2; kc=torch.randn(pages,8,256,128,device='cuda',dtype=dtype);vc=torch.randn_like(kc); kc0=kc.clone();vc0=vc.clone(); slots=torch.tensor([b*512+history for b in range(B)],device='cuda',dtype=torch.int64); table=torch.tensor([[b*2,b*2+1] for b in range(B)],device='cuda',dtype=torch.int32); lens=torch.tensor([history+1]*B,device='cuda',dtype=torch.int32); out=torch.empty_like(q); ek=kc0.clone();ev=vc0.clone()
+  for b,slot in enumerate(slots.tolist()): ek[slot//256,:,slot%256,:]=new_k[b];ev[slot//256,:,slot%256,:]=new_v[b]
+  append=native.operation('PagedCaching',[kc,vc,new_k,new_v,slots]);attn=native.operation('PagedAttention',[out,q, kc,vc,table,lens]);append();attn();torch.cuda.synchronize(); expected=reference(q,ek,ev,table,[history+1]*B); integ=check_output(out,expected); base_hash=tensor_set_hash([q,new_k,new_v,kc0,vc0,table,lens]);
+  def both(): append();attn()
+@@ -44,6 +49,6 @@ def main():
+  with torch.cuda.graph(graph): both()
+  torch.cuda.synchronize(); reset_decode(); graphm=measure_cuda(graph.replay,samples=a.samples,workload_calls=1,warmup=1); reset_decode(); graph.replay();torch.cuda.synchronize(); expected2=reference(q,ek,ev,table,[history+1]*B); graph_ok=check_output(out,expected2)['attention_correctness']=='PASS'; del graph
+  rows.append({'operation':'append_attention','dtype':str(dtype),'threads':a.threads,'batch':B,'history_tokens':history,'append_tokens':B,'target_correctness':integ['attention_correctness'],'cache_correctness':'PASS' if torch.equal(kc,ek) and torch.equal(vc,ev) else 'FAIL','graph_correctness':'PASS' if graph_ok else 'FAIL','input_hash':base_hash,'workload':'one append + one attention','workload_calls':1,'eager':eager,'graph':graphm})
+- run.add(rows=rows,cpu_count_test=cpu_count_test(),requested_threads=a.threads,vector_requested=a.vector,actual_threads='32 vector/scalar or 128/256/default selected in NVIDIA calculate',dtype=str(dtype),script_hash=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),result='PASS' if all(r['target_correctness']=='PASS' and r['cache_correctness']=='PASS' and r['graph_correctness']=='PASS' for r in rows) else 'FAIL')
++ run.add(rows=rows,cpu_count_test=cpu_count_test(),requested_threads=a.threads,vector_requested=a.vector,heads_per_cta=grouped,actual_threads='32/64/128/256/default selected in NVIDIA calculate',graph_workload_calls=1,dtype=str(dtype),script_hash=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),result='PASS' if all(r['target_correctness']=='PASS' and r['cache_correctness']=='PASS' and r['graph_correctness']=='PASS' for r in rows) else 'FAIL')
+  native.close();return run.finish()
+ if __name__=='__main__':sys.exit(main())
+diff --git a/test/bench/decode_ops/common/timing.py b/test/bench/decode_ops/common/timing.py
+index 2d52828..7829d23 100644
+--- a/test/bench/decode_ops/common/timing.py
++++ b/test/bench/decode_ops/common/timing.py
+@@ -36,4 +36,13 @@ def cpu_count_test():
+             count['value'] += 1
+         observed[n] = run_workload(work, n)
+         assert count['value'] == n
+-    return {'calls_1': observed[1], 'calls_100': observed[100], 'status': 'PASS'}
++    # Exercise the same helper through an already-batched workload object:
++    # the outer timing protocol must count each logical operation exactly once.
++    batch_count = {'value': 0}
++    def single():
++        batch_count['value'] += 1
++    batch_calls = run_workload(lambda: run_workload(single, 100), 1)
++    assert batch_count['value'] == 100
++    return {'calls_1': observed[1], 'calls_100': observed[100],
++            'existing_batch_object': {'batch_invocations': batch_calls, 'logical_calls': batch_count['value']},
++            'status': 'PASS'}
+diff --git a/test/bench/decode_ops/correctness/vectorized.py b/test/bench/decode_ops/correctness/vectorized.py
+index f0aa38b..52d31f7 100644
+--- a/test/bench/decode_ops/correctness/vectorized.py
++++ b/test/bench/decode_ops/correctness/vectorized.py
+@@ -38,50 +38,59 @@ def main():
+     torch.manual_seed(20260906)
+     run = Run(args.output)
+     cases = [
+-        ("vector_fp16_aligned", torch.float16, 128, 128, 1, 0, True),
+-        ("vector_bf16_aligned", torch.bfloat16, 128, 128, 1, 0, True),
+-        ("fallback_storage_offset", torch.float16, 128, 128, 1, 1, True),
+-        ("fallback_innermost_stride", torch.float16, 128, 128, 2, 0, True),
+-        ("fallback_different_widths", torch.float16, 130, 96, 1, 0, True),
+-        ("fallback_fp32_negative_slot", torch.float32, 128, 128, 1, 0, True),
++        ("vector_fp16_aligned", torch.float16, 128, 128, 1, 0, True, 1),
++        ("vector_bf16_aligned", torch.bfloat16, 128, 128, 1, 0, True, 1),
++        ("fallback_storage_offset", torch.float16, 128, 128, 1, 1, True, 1),
++        ("fallback_innermost_stride", torch.float16, 128, 128, 2, 0, True, 1),
++        ("fallback_different_widths", torch.float16, 130, 96, 1, 0, True, 1),
++        ("fallback_fp32_negative_slot", torch.float32, 128, 128, 1, 0, True, 1),
++        ("grouped_E_hkv3", torch.float16, 128, 128, 1, 0, True, 2),
++        ("grouped_E_hkv5", torch.bfloat16, 128, 128, 1, 0, True, 2),
++        ("grouped_F_hkv1", torch.float16, 128, 128, 1, 0, True, 4),
++        ("grouped_F_hkv5", torch.bfloat16, 128, 128, 1, 0, True, 4),
+     ]
+     try:
+-        for name, dtype, dk, dv, last_stride, offset, request_vector in cases:
+-            os.environ["INFINIOP_PAGED_CACHING_THREADS"] = "32"
++        for name, dtype, dk, dv, last_stride, offset, request_vector, grouped in cases:
++            os.environ["INFINIOP_PAGED_CACHING_THREADS"] = "64" if grouped == 2 else ("128" if grouped == 4 else "32")
++            if grouped > 1: os.environ["INFINIOP_PAGED_CACHING_HEADS_PER_CTA"] = str(grouped)
++            else: os.environ.pop("INFINIOP_PAGED_CACHING_HEADS_PER_CTA", None)
+             if request_vector:
+                 os.environ["INFINIOP_PAGED_CACHING_VECTOR"] = "1"
+             else:
+                 os.environ.pop("INFINIOP_PAGED_CACHING_VECTOR", None)
+-            tokens, heads, blocks = 5, 8, 3
++            tokens, heads, blocks = 5, (3 if "hkv3" in name else (1 if "hkv1" in name else (5 if "hkv5" in name else 8))), 3
+             k = make_tensor((tokens, heads, dk), dtype, last_stride, offset)
+             v = make_tensor((tokens, heads, dv), dtype, last_stride, offset)
+             kc = make_tensor((blocks, heads, PAGE, dk), dtype, last_stride, offset)
+             vc = make_tensor((blocks, heads, PAGE, dv), dtype, last_stride, offset)
+             slots = torch.tensor([0, 255, 256, 511, -1], device="cuda", dtype=torch.int64)
+-            ek = expected_cache(kc, k, slots)
+-            ev = expected_cache(vc, v, slots)
++            # Save the original cache before any measured call; all expected
++            # states are derived from this immutable pre-call snapshot.
++            base_k, base_v = kc.clone(), vc.clone()
++            ek = expected_cache(base_k, k, slots)
++            ev = expected_cache(base_v, v, slots)
+             native = Native()
+             call = native.operation("PagedCaching", [kc, vc, k, v, slots])
+             call(); torch.cuda.synchronize()
+             eager_pass = bool(torch.equal(kc, ek) and torch.equal(vc, ev))
+-            # Capture from an independent pre-call snapshot, then restore it
+-            # before replay so the graph is checked against the same expected state.
+-            base_k, base_v = kc.clone(), vc.clone()
+-            ek = expected_cache(base_k, k, slots); ev = expected_cache(base_v, v, slots)
++            # Capture from the original state, then restore it before replay.
+             kc.copy_(base_k); vc.copy_(base_v)
+             graph = torch.cuda.CUDAGraph()
+             with torch.cuda.graph(graph):
+                 call()
+             torch.cuda.synchronize()
+             kc.copy_(base_k); vc.copy_(base_v)
++            skipped_replay_detected = bool(torch.equal(kc, base_k) and torch.equal(vc, base_v) and not torch.equal(kc, ek))
+             graph.replay(); torch.cuda.synchronize()
+             graph_pass = bool(torch.equal(kc, ek) and torch.equal(vc, ev))
+             run.add(case=name, dtype=str(dtype), head_size=dk, v_head_size=dv,
+                     innermost_stride=last_stride, storage_offset=offset,
+                     vector_requested=request_vector, eager_correctness="PASS" if eager_pass else "FAIL",
+                     graph_correctness="PASS" if graph_pass else "FAIL",
++                    skip_replay_negative_control="PASS" if skipped_replay_detected else "FAIL",
+                     negative_slot_preserved=bool(torch.equal(kc[-1], base_k[-1])),
+-                    result="PASS" if eager_pass and graph_pass else "FAIL")
++                    heads_per_cta=grouped,
++                    result="PASS" if eager_pass and graph_pass and skipped_replay_detected else "FAIL")
+             del graph
+             native.close()
+         return run.finish()
+diff --git a/test/bench/decode_ops/reports/README.md b/test/bench/decode_ops/reports/README.md
+index de70dbd..b447b1e 100644
+--- a/test/bench/decode_ops/reports/README.md
++++ b/test/bench/decode_ops/reports/README.md
+@@ -5,3 +5,5 @@
+ - `milestone1B_report.md`: 32-thread vectorized paged KV writes and ablation.
+ - `phase0_2A_report.md`: Phase 0.2A 同步修复验收。
+ - `phase0_2_commands.md`: Phase 0.2/0.2A 完整复现命令。
++
++- [Milestone 1C](milestone1C_report.md)：grouped CTA E/F、计时协议修正、正确性与消融。

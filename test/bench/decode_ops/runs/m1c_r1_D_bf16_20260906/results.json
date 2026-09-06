@@ -1,0 +1,840 @@
+[
+  {
+    "run_id": "m1c_r1_D_bf16_20260906",
+    "rows": [
+      {
+        "operation": "paged_caching",
+        "dtype": "torch.bfloat16",
+        "threads": "32",
+        "tokens": 1,
+        "target_correctness": "PASS",
+        "cache_correctness": "PASS",
+        "input_hash": "906a299858c63f5a4ee0bc4df8b1cb712fe72b17628e740be25382ef73da25c0",
+        "expected_cache_hash": "7bded9d5fe7dcad059cec829376dd9ae4c3e8a1b95bb2494e519a4236807d119",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.2969599962234497,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.847999811172485
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.27750399708747864,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.875199854373932
+            },
+            {
+              "sample": 2,
+              "elapsed_ms": 0.30003198981285095,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 15.001599490642548
+            },
+            {
+              "sample": 3,
+              "elapsed_ms": 0.27852800488471985,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.926400244235992
+            },
+            {
+              "sample": 4,
+              "elapsed_ms": 0.27136000990867615,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.568000495433807
+            }
+          ],
+          "median_us": 13.926400244235992,
+          "min_us": 13.568000495433807,
+          "max_us": 15.001599490642548,
+          "workload_calls": 20,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.017535999417304993,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 17.535999417304993
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.0144640002399683,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.4640002399683
+            },
+            {
+              "sample": 2,
+              "elapsed_ms": 0.014336000196635723,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.336000196635723
+            },
+            {
+              "sample": 3,
+              "elapsed_ms": 0.014336000196635723,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.336000196635723
+            },
+            {
+              "sample": 4,
+              "elapsed_ms": 0.014336000196635723,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.336000196635723
+            }
+          ],
+          "median_us": 14.336000196635723,
+          "min_us": 14.336000196635723,
+          "max_us": 17.535999417304993,
+          "workload_calls": 1,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_correctness": "PASS",
+        "workload": "one paged_caching",
+        "workload_calls": 20,
+        "graph_workload_calls": 1
+      },
+      {
+        "operation": "paged_caching",
+        "dtype": "torch.bfloat16",
+        "threads": "32",
+        "tokens": 4,
+        "target_correctness": "PASS",
+        "cache_correctness": "PASS",
+        "input_hash": "a68b1cb310f411adc942ef011147978a4b600564ff9a6abbf080294939c7e3a3",
+        "expected_cache_hash": "1f18148de58181caf1bc0d3c4bc5a9b353023840cad5543d9a103f1727e88fc1",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.2887040078639984,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.43520039319992
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.2836480140686035,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.182400703430176
+            },
+            {
+              "sample": 2,
+              "elapsed_ms": 0.27852800488471985,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.926400244235992
+            },
+            {
+              "sample": 3,
+              "elapsed_ms": 0.27852800488471985,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.926400244235992
+            },
+            {
+              "sample": 4,
+              "elapsed_ms": 0.2754560112953186,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.77280056476593
+            }
+          ],
+          "median_us": 13.926400244235992,
+          "min_us": 13.77280056476593,
+          "max_us": 14.43520039319992,
+          "workload_calls": 20,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.016224000602960587,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 16.224000602960587
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.014336000196635723,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.336000196635723
+            },
+            {
+              "sample": 2,
+              "elapsed_ms": 0.014240000396966934,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.240000396966934
+            },
+            {
+              "sample": 3,
+              "elapsed_ms": 0.014336000196635723,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.336000196635723
+            },
+            {
+              "sample": 4,
+              "elapsed_ms": 0.013311999849975109,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.311999849975109
+            }
+          ],
+          "median_us": 14.336000196635723,
+          "min_us": 13.311999849975109,
+          "max_us": 16.224000602960587,
+          "workload_calls": 1,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_correctness": "PASS",
+        "workload": "one paged_caching",
+        "workload_calls": 20,
+        "graph_workload_calls": 1
+      },
+      {
+        "operation": "paged_caching",
+        "dtype": "torch.bfloat16",
+        "threads": "32",
+        "tokens": 16,
+        "target_correctness": "PASS",
+        "cache_correctness": "PASS",
+        "input_hash": "ac11017f050038c5c10b021f6fc33fd27e4574a012f76a6de11e2daf0c68d891",
+        "expected_cache_hash": "886256d0f0e404a2bccdbdf678a8cdbd01663023a21cb701ee0f17f23f283159",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.2949120104312897,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.745600521564484
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.2744320034980774,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.72160017490387
+            },
+            {
+              "sample": 2,
+              "elapsed_ms": 0.2754560112953186,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.77280056476593
+            },
+            {
+              "sample": 3,
+              "elapsed_ms": 0.27136000990867615,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.568000495433807
+            },
+            {
+              "sample": 4,
+              "elapsed_ms": 0.27238398790359497,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.619199395179749
+            }
+          ],
+          "median_us": 13.72160017490387,
+          "min_us": 13.568000495433807,
+          "max_us": 14.745600521564484,
+          "workload_calls": 20,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.015359999611973763,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 15.359999611973763
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.014336000196635723,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.336000196635723
+            },
+            {
+              "sample": 2,
+              "elapsed_ms": 0.014336000196635723,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.336000196635723
+            },
+            {
+              "sample": 3,
+              "elapsed_ms": 0.013439999893307686,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.439999893307686
+            },
+            {
+              "sample": 4,
+              "elapsed_ms": 0.013311999849975109,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.311999849975109
+            }
+          ],
+          "median_us": 14.336000196635723,
+          "min_us": 13.311999849975109,
+          "max_us": 15.359999611973763,
+          "workload_calls": 1,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_correctness": "PASS",
+        "workload": "one paged_caching",
+        "workload_calls": 20,
+        "graph_workload_calls": 1
+      },
+      {
+        "operation": "paged_caching",
+        "dtype": "torch.bfloat16",
+        "threads": "32",
+        "tokens": 32,
+        "target_correctness": "PASS",
+        "cache_correctness": "PASS",
+        "input_hash": "61883517e557b600a62af97b580859871b4ac46b49ee4052ca98c0455a79071f",
+        "expected_cache_hash": "b8a7f6f1a9057b501528c15f2729c5d9c93b0f6680ae8949bee35068400ba364",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.40959998965263367,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 20.479999482631683
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.4761599898338318,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 23.80799949169159
+            },
+            {
+              "sample": 2,
+              "elapsed_ms": 0.4782080054283142,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 23.91040027141571
+            },
+            {
+              "sample": 3,
+              "elapsed_ms": 0.2766079902648926,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.830399513244629
+            },
+            {
+              "sample": 4,
+              "elapsed_ms": 0.2734079957008362,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.670399785041809
+            }
+          ],
+          "median_us": 20.479999482631683,
+          "min_us": 13.670399785041809,
+          "max_us": 23.91040027141571,
+          "workload_calls": 20,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.016383999958634377,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 16.383999958634377
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.014336000196635723,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.336000196635723
+            },
+            {
+              "sample": 2,
+              "elapsed_ms": 0.013311999849975109,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.311999849975109
+            },
+            {
+              "sample": 3,
+              "elapsed_ms": 0.013472000136971474,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.472000136971474
+            },
+            {
+              "sample": 4,
+              "elapsed_ms": 0.013311999849975109,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.311999849975109
+            }
+          ],
+          "median_us": 13.472000136971474,
+          "min_us": 13.311999849975109,
+          "max_us": 16.383999958634377,
+          "workload_calls": 1,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_correctness": "PASS",
+        "workload": "one paged_caching",
+        "workload_calls": 20,
+        "graph_workload_calls": 1
+      },
+      {
+        "operation": "paged_caching",
+        "dtype": "torch.bfloat16",
+        "threads": "32",
+        "tokens": 255,
+        "target_correctness": "PASS",
+        "cache_correctness": "PASS",
+        "input_hash": "09ca0c041235252761feadf86e3e781f14d4ce869690a817e6609fd0f70848a0",
+        "expected_cache_hash": "5c591e612098bdc828b9e4fd5472d557ecc9aebc0e715fda3a1df8b13d5ebe31",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.27955201268196106,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.977600634098053
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.27238398790359497,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.619199395179749
+            },
+            {
+              "sample": 2,
+              "elapsed_ms": 0.2826240062713623,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.131200313568115
+            },
+            {
+              "sample": 3,
+              "elapsed_ms": 0.2682879865169525,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.414399325847626
+            },
+            {
+              "sample": 4,
+              "elapsed_ms": 0.2691839933395386,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.459199666976929
+            }
+          ],
+          "median_us": 13.619199395179749,
+          "min_us": 13.414399325847626,
+          "max_us": 14.131200313568115,
+          "workload_calls": 20,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.015359999611973763,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 15.359999611973763
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.014336000196635723,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.336000196635723
+            },
+            {
+              "sample": 2,
+              "elapsed_ms": 0.013504000380635262,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.504000380635262
+            },
+            {
+              "sample": 3,
+              "elapsed_ms": 0.013311999849975109,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.311999849975109
+            },
+            {
+              "sample": 4,
+              "elapsed_ms": 0.013311999849975109,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.311999849975109
+            }
+          ],
+          "median_us": 13.504000380635262,
+          "min_us": 13.311999849975109,
+          "max_us": 15.359999611973763,
+          "workload_calls": 1,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_correctness": "PASS",
+        "workload": "one paged_caching",
+        "workload_calls": 20,
+        "graph_workload_calls": 1
+      },
+      {
+        "operation": "paged_caching",
+        "dtype": "torch.bfloat16",
+        "threads": "32",
+        "tokens": 256,
+        "target_correctness": "PASS",
+        "cache_correctness": "PASS",
+        "input_hash": "747e757e1685c5e6872363904946ae5936fc6ade6612cc039f5c1d2b50e92ad9",
+        "expected_cache_hash": "90d6b3b98b0571083536c7be6432cc49161e3140c6775d973e2297364f764e77",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.2969599962234497,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.847999811172485
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.2764799892902374,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.823999464511871
+            },
+            {
+              "sample": 2,
+              "elapsed_ms": 0.2693119943141937,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.465599715709686
+            },
+            {
+              "sample": 3,
+              "elapsed_ms": 0.26521599292755127,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.260799646377563
+            },
+            {
+              "sample": 4,
+              "elapsed_ms": 0.2672640085220337,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.363200426101685
+            }
+          ],
+          "median_us": 13.465599715709686,
+          "min_us": 13.260799646377563,
+          "max_us": 14.847999811172485,
+          "workload_calls": 20,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.01539199985563755,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 15.39199985563755
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.013344000093638897,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.344000093638897
+            },
+            {
+              "sample": 2,
+              "elapsed_ms": 0.014208000153303146,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.208000153303146
+            },
+            {
+              "sample": 3,
+              "elapsed_ms": 0.014303999952971935,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.303999952971935
+            },
+            {
+              "sample": 4,
+              "elapsed_ms": 0.013311999849975109,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.311999849975109
+            }
+          ],
+          "median_us": 14.208000153303146,
+          "min_us": 13.311999849975109,
+          "max_us": 15.39199985563755,
+          "workload_calls": 1,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_correctness": "PASS",
+        "workload": "one paged_caching",
+        "workload_calls": 20,
+        "graph_workload_calls": 1
+      },
+      {
+        "operation": "paged_caching",
+        "dtype": "torch.bfloat16",
+        "threads": "32",
+        "tokens": 257,
+        "target_correctness": "PASS",
+        "cache_correctness": "PASS",
+        "input_hash": "37166f9390183fc00fe111a3bd8fa49ae0492a69b87fe62b785e65618b6746f9",
+        "expected_cache_hash": "7ee969339142341baa964656dd674a816a904960e687e5fecf8ecbb5b44f81c7",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.2815999984741211,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.079999923706055
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.2949120104312897,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 14.745600521564484
+            },
+            {
+              "sample": 2,
+              "elapsed_ms": 0.2754560112953186,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.77280056476593
+            },
+            {
+              "sample": 3,
+              "elapsed_ms": 0.2764799892902374,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.823999464511871
+            },
+            {
+              "sample": 4,
+              "elapsed_ms": 0.2693119943141937,
+              "workload_calls": 20,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 13.465599715709686
+            }
+          ],
+          "median_us": 13.823999464511871,
+          "min_us": 13.465599715709686,
+          "max_us": 14.745600521564484,
+          "workload_calls": 20,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.021503999829292297,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 21.503999829292297
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.01945599913597107,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 19.45599913597107
+            },
+            {
+              "sample": 2,
+              "elapsed_ms": 0.018432000651955605,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 18.432000651955605
+            },
+            {
+              "sample": 3,
+              "elapsed_ms": 0.01945599913597107,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 19.45599913597107
+            },
+            {
+              "sample": 4,
+              "elapsed_ms": 0.019551999866962433,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 19.551999866962433
+            }
+          ],
+          "median_us": 19.45599913597107,
+          "min_us": 18.432000651955605,
+          "max_us": 21.503999829292297,
+          "workload_calls": 1,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_correctness": "PASS",
+        "workload": "one paged_caching",
+        "workload_calls": 20,
+        "graph_workload_calls": 1
+      },
+      {
+        "operation": "append_attention",
+        "dtype": "torch.bfloat16",
+        "threads": "32",
+        "batch": 4,
+        "history_tokens": 256,
+        "append_tokens": 4,
+        "target_correctness": "PASS",
+        "cache_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "5b45be110d8b47b27c2dcd7d3dc12aae48601320654b2a8e4bcfaa2cc45688fd",
+        "workload": "one append + one attention",
+        "workload_calls": 1,
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.048128001391887665,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 48.128001391887665
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.04396799951791763,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 43.96799951791763
+            },
+            {
+              "sample": 2,
+              "elapsed_ms": 0.043007999658584595,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 43.007999658584595
+            },
+            {
+              "sample": 3,
+              "elapsed_ms": 0.04403200000524521,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 44.03200000524521
+            },
+            {
+              "sample": 4,
+              "elapsed_ms": 0.04095999896526337,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 40.95999896526337
+            }
+          ],
+          "median_us": 43.96799951791763,
+          "min_us": 40.95999896526337,
+          "max_us": 48.128001391887665,
+          "workload_calls": 1,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.01945599913597107,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 19.45599913597107
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.018432000651955605,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 18.432000651955605
+            },
+            {
+              "sample": 2,
+              "elapsed_ms": 0.018432000651955605,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 18.432000651955605
+            },
+            {
+              "sample": 3,
+              "elapsed_ms": 0.018432000651955605,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 18.432000651955605
+            },
+            {
+              "sample": 4,
+              "elapsed_ms": 0.018432000651955605,
+              "workload_calls": 1,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 18.432000651955605
+            }
+          ],
+          "median_us": 18.432000651955605,
+          "min_us": 18.432000651955605,
+          "max_us": 19.45599913597107,
+          "workload_calls": 1,
+          "formula": "elapsed_ms/workload_calls"
+        }
+      }
+    ],
+    "cpu_count_test": {
+      "calls_1": 1,
+      "calls_100": 100,
+      "existing_batch_object": {
+        "batch_invocations": 1,
+        "logical_calls": 100
+      },
+      "status": "PASS"
+    },
+    "requested_threads": "32",
+    "vector_requested": true,
+    "heads_per_cta": 1,
+    "actual_threads": "32/64/128/256/default selected in NVIDIA calculate",
+    "graph_workload_calls": 1,
+    "dtype": "torch.bfloat16",
+    "script_hash": "c16f22e87e7ee0da8b0cd85375c509c868960e04a29285be1e1c90ee560b9594",
+    "result": "PASS"
+  }
+]

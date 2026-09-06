@@ -21,10 +21,10 @@ cd /data/InfiniTensor/InfiniLM
 INFINI_ROOT=/data/InfiniTensor/phase1b-cache-vector3 \
 LD_LIBRARY_PATH=/data/InfiniTensor/phase1b-cache-vector3/lib:/root/.infini/lib:/usr/local/cuda/lib64 \
 /data/InfiniTensor/.venv-infini/bin/python test/bench/decode_ops/benchmarks/caching.py \
---threads 32 --vector --dtype fp16 --output test/bench/decode_ops/runs/m1b_vector_fp16_32
+--threads 32 --grouped-heads 1 --vector --dtype fp16 --output test/bench/decode_ops/runs/m1b_vector_fp16_32
 ```
 
-候选构建脚本在 `build/caching.py`，不把编译产物写入仓库。完整 A/B、Graph、sanitizer 命令见 `reports/phase0_2_commands.md`；Milestone 1A 结果见 `reports/milestone1A_report.md`；本轮补测与修复见 `reports/milestone1A_1_report.md`；Milestone 1B 见 `reports/milestone1B_report.md`。
+候选构建脚本在 `build/caching.py`，不把编译产物写入仓库。完整 A/B、Graph、sanitizer 命令见 `reports/phase0_2_commands.md`；Milestone 1A 结果见 `reports/milestone1A_report.md`；本轮补测与修复见 `reports/milestone1A_1_report.md`；Milestone 1B 见 `reports/milestone1B_report.md`；Milestone 1C grouped CTA 见 `reports/milestone1C_report.md`。
 
 ## 迁移映射
 
@@ -39,3 +39,5 @@ LD_LIBRARY_PATH=/data/InfiniTensor/phase1b-cache-vector3/lib:/root/.infini/lib:/
 | `phase0/phase0_2A_report.md` | `decode_ops/reports/phase0_2A_report.md` |
 
 历史 `phase0/runs/` 与 `phase0/phase0*_runs/` 原位保留，新的 JSON/log 仅放在 `decode_ops/runs/` 并由局部忽略规则精确放行。
+
+Milestone 1C E/F 显式候选：`--threads 64 --grouped-heads 2 --vector`（E），`--threads 128 --grouped-heads 4 --vector`（F）。不设置这些环境开关时生产默认路径保持不变。
