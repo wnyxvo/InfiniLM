@@ -41,3 +41,5 @@ LD_LIBRARY_PATH=/data/InfiniTensor/phase1b-cache-vector3/lib:/root/.infini/lib:/
 历史 `phase0/runs/` 与 `phase0/phase0*_runs/` 原位保留，新的 JSON/log 仅放在 `decode_ops/runs/` 并由局部忽略规则精确放行。
 
 Milestone 1C E/F 显式候选：`--threads 64 --grouped-heads 2 --vector`（E），`--threads 128 --grouped-heads 4 --vector`（F）。不设置这些环境开关时生产默认路径保持不变。
+
+Milestone 2A attention 原型与复现命令见 `reports/milestone2A_report.md`；GQA-aware 路径通过 `INFINIOP_FLASH_GQA_SPLITKV=1` 显式启用，默认 dispatch 不变。
