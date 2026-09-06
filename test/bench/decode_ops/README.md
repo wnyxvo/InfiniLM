@@ -45,3 +45,5 @@ Milestone 1C E/F 显式候选：`--threads 64 --grouped-heads 2 --vector`（E）
 Milestone 2A attention 原型与复现命令见 `reports/milestone2A_report.md`；GQA-aware 路径通过 `INFINIOP_FLASH_GQA_SPLITKV=1` 显式启用，默认 dispatch 不变。
 
 Milestone 2B shared-KV GQA Split-KV kernel、正确性矩阵和完整 attention 消融见 `reports/milestone2B_report.md`。实现通过 `INFINIOP_FLASH_GQA_SHARED_SPLITKV=1` 显式启用；复现脚本为 `correctness/gqa_shared.py` 与 `benchmarks/attention.py`，证据位于 `runs/m2b_*_20260906/`。当前 kernel correctness PASS、性能结论 NO_GAIN；shared-path memcheck/racecheck/synccheck PASS，两算子组合库集成已修复并 PASS（此前错误源于 host link 缺少当前 cache object），整模型 E2E 为 NOT_RUN。
+
+Milestone 2C tile-level online softmax 优化见 `reports/milestone2C_report.md`；结果为 correctness/Graph/sanitizer/两算子集成 PASS，性能相对 2B 与普通 CTA 均 NO_GAIN，按停止条件不再扩展候选。

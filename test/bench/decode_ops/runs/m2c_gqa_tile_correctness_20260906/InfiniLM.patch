@@ -1,0 +1,60 @@
+diff --git a/test/bench/decode_ops/build/attention.py b/test/bench/decode_ops/build/attention.py
+index d0c996a..f705a4d 100644
+--- a/test/bench/decode_ops/build/attention.py
++++ b/test/bench/decode_ops/build/attention.py
+@@ -26,13 +26,14 @@ def main():
+   if cache and x.endswith('/paged_caching_nvidia.cu.o'): return str(cache/'objects'/'paged_caching_nvidia.cu.o')
+   return str(base/'objects'/Path(x).name) if any(x.endswith('/'+n) for n in attention_names) else x
+  inputs=[str(newobj) if x==oldobj else remap(x) for x in inputs]; run([lf[0],*inputs,*lf[1:],*arch,'-o',str(newlink)])
+- archive=libdir/'libinfiniop-nvidia.a'; shutil.copy2(base/'lib/libinfiniop-nvidia.a',archive); run(['/usr/bin/ar','r',str(archive),str(newobj),str(newlink)])
++ archive=libdir/'libinfiniop-nvidia.a'; shutil.copy2(base/'lib/libinfiniop-nvidia.a',archive)
++ # Replace the archive's legacy cache member with the current-Core object.
++ cache_obj = str(cache/'objects'/'paged_caching_nvidia.cu.o') if cache else None
++ archive_members=[str(newobj),str(newlink)] + ([cache_obj] if cache_obj else [])
++ run(['/usr/bin/ar','r',str(archive),*archive_members])
+  inputs,lf=recipe(dep/'infiniop/linux/x86_64/release/libinfiniop.so.d'); objs=[str(newobj) if x==oldobj else remap(x) for x in inputs if x.endswith('.o')];
+  # The archive copied from the base prefix contains legacy paged-caching
+- # templates. Add the cache object explicitly so current template symbols
+- # (e.g. pagedCaching<half,256,false,1>) resolve in the host shared library.
+- if cache:
+-  cache_obj = str(cache/'objects'/'paged_caching_nvidia.cu.o')
+-  if cache_obj not in objs: objs.append(cache_obj)
++ # templates; also link the current object explicitly for symbol resolution.
++ if cache_obj and cache_obj not in objs: objs.append(cache_obj)
+  run([lf[0],*objs,'-L'+str(libdir),*lf[1:],'-o',str(libdir/'libinfiniop.so')]); m['new_library_hash']=sha(libdir/'libinfiniop.so'); m['exit_code']=0; (a.evidence/'build.json').write_text(json.dumps(m,indent=2)); print(m['new_library_hash'])
+ if __name__=='__main__': main()
+diff --git a/test/bench/decode_ops/correctness/gqa_shared.py b/test/bench/decode_ops/correctness/gqa_shared.py
+index 511ae2d..88ff789 100644
+--- a/test/bench/decode_ops/correctness/gqa_shared.py
++++ b/test/bench/decode_ops/correctness/gqa_shared.py
+@@ -10,7 +10,7 @@ def main():
+     try:
+         for dtype in (torch.float16, torch.bfloat16):
+             for num_splits in (2, 4, 8):
+-                for lengths in ([1],[7],[255],[256],[257],[2049],[7,256,2049]):
++                for lengths in ([1],[7],[8],[9],[255],[256],[257],[2049],[8192],[7,256,2049]):
+                     batch = len(lengths); cap = (max(lengths)+PAGE-1)//PAGE
+                     torch.manual_seed(20260906 + batch + max(lengths))
+                     q = torch.randn(batch,32,128,device='cuda',dtype=dtype)
+diff --git a/test/bench/decode_ops/reports/milestone2B_report.md b/test/bench/decode_ops/reports/milestone2B_report.md
+index 39d4b37..8884576 100644
+--- a/test/bench/decode_ops/reports/milestone2B_report.md
++++ b/test/bench/decode_ops/reports/milestone2B_report.md
+@@ -2,7 +2,7 @@
+ 
+ 本里程碑在 InfiniCore `ee2ca9c383af0b203ffaa842c276288756f41e2d`、InfiniLM `1c35eb42d5bb01aa8e6a74b18ccf4d708e93e655` 上实现可切换的 HD128 GQA shared-KV Split-KV CUDA kernel，范围为 Hq=32、Hkv=8、ratio=4、FP16/BF16。每个 CTA 对应一个 KV head、sequence 和 shard；四个 warp 分别处理四个 Q head。每个 token tile（8×128）由 CTA 协作加载到 shared K/V，四个 warp 在同步区间内复用该 tile，并各自维护 FP32 `(m,l,acc)`；现有 FP32 workspace/combine 保持不变。空 shard 写入 `m=-inf,l=0,acc=0`，页表和跨页尾部按 token 映射，所有 shared-memory barrier 由完整 CTA 执行。
+ 
+-最终重建 prefix 为 `/data/InfiniTensor/phase2b-gqa-shared-fixed`，`lib/libinfiniop.so` SHA256 为 `7b7717ebaf96852a4edab49162535d968efab0710afd8fb1973ec2004904c303`。实现文件为 [kernel_v2.cuh](/data/InfiniTensor/InfiniCore/src/infiniop/ops/paged_attention/cuda/kernel_v2.cuh) 与 [paged_attention_hd128.cu](/data/InfiniTensor/InfiniCore/src/infiniop/ops/paged_attention/nvidia/paged_attention_hd128.cu)。开关为 `INFINIOP_FLASH_GQA_SHARED_SPLITKV=1`，同时需要 Split-KV、CTA、无 ALiBi 且 Hq=4×Hkv；dispatch 记录为 `splitkv_gqa_shared`。默认行为未改变。
++最终重建 prefix 为 `/data/InfiniTensor/phase2b-gqa-shared-archive`，`lib/libinfiniop.so` SHA256 为 `d06c9410c772a1ddd80e8f0932fe2bf31ef18b2578488ce28e8d067ea171cbd6`；archive 已重新生成并包含当前 cache object。实现文件为 [kernel_v2.cuh](/data/InfiniTensor/InfiniCore/src/infiniop/ops/paged_attention/cuda/kernel_v2.cuh) 与 [paged_attention_hd128.cu](/data/InfiniTensor/InfiniCore/src/infiniop/ops/paged_attention/nvidia/paged_attention_hd128.cu)。开关为 `INFINIOP_FLASH_GQA_SHARED_SPLITKV=1`，同时需要 Split-KV、CTA、无 ALiBi 且 Hq=4×Hkv；dispatch 记录为 `splitkv_gqa_shared`。默认行为未改变。
+ 
+ ## 正确性
+ 
+@@ -26,7 +26,7 @@ B=16,L=2049 的 2B shared-KV 为约 301.4 μs；该标量 shared-memory 原型
+ 
+ ## Sanitizer 与集成
+ 
+-compute-sanitizer memcheck、racecheck、synccheck 代表矩阵均 PASS（0 errors / 0 hazards，证据目录分别为 `runs/m2b_gqa_shared_memcheck_20260906`、`runs/m2b_gqa_shared_racecheck_20260906`、`runs/m2b_gqa_shared_synccheck_20260906`）。KV Update standalone 通过。初始组合构建曾因 host link 只取 base archive 中旧的 `pagedCaching<T,512/1024/4096>`，缺少当前源码需要的 `pagedCaching<T,256,false,1>`，触发 `CUDA error: named symbol not found`；已修正 `build/attention.py`，将当前 cache object 显式加入最终 `.so`。修复后 `runs/m2b_integration_fixed_b4_20260906` 的 8 个 paged-caching workload 与 append+attention 均 PASS（target/cache/Graph 均 PASS）。整模型 E2E 为 `NOT_RUN`。
++compute-sanitizer memcheck、racecheck、synccheck 代表矩阵均 PASS（0 errors / 0 hazards，证据目录分别为 `runs/m2b_gqa_shared_memcheck_20260906`、`runs/m2b_gqa_shared_racecheck_20260906`、`runs/m2b_gqa_shared_synccheck_20260906`）。KV Update standalone 通过。初始组合构建曾因 host link 只取 base archive 中旧的 `pagedCaching<T,512/1024/4096>`，缺少当前源码需要的 `pagedCaching<T,256,false,1>`，触发 `CUDA error: named symbol not found`；已修正 `build/attention.py`，将当前 cache object 显式加入最终 `.so`。修复后 `runs/m2b_integration_archive_b4_20260906` 的 8 个 paged-caching workload 与 append+attention 均 PASS（target/cache/Graph 均 PASS）。整模型 E2E 为 `NOT_RUN`。
+ 
+ ## 复现
+ 

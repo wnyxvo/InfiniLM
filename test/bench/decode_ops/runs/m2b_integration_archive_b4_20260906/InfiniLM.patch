@@ -1,0 +1,25 @@
+diff --git a/test/bench/decode_ops/build/attention.py b/test/bench/decode_ops/build/attention.py
+index d0c996a..f705a4d 100644
+--- a/test/bench/decode_ops/build/attention.py
++++ b/test/bench/decode_ops/build/attention.py
+@@ -26,13 +26,14 @@ def main():
+   if cache and x.endswith('/paged_caching_nvidia.cu.o'): return str(cache/'objects'/'paged_caching_nvidia.cu.o')
+   return str(base/'objects'/Path(x).name) if any(x.endswith('/'+n) for n in attention_names) else x
+  inputs=[str(newobj) if x==oldobj else remap(x) for x in inputs]; run([lf[0],*inputs,*lf[1:],*arch,'-o',str(newlink)])
+- archive=libdir/'libinfiniop-nvidia.a'; shutil.copy2(base/'lib/libinfiniop-nvidia.a',archive); run(['/usr/bin/ar','r',str(archive),str(newobj),str(newlink)])
++ archive=libdir/'libinfiniop-nvidia.a'; shutil.copy2(base/'lib/libinfiniop-nvidia.a',archive)
++ # Replace the archive's legacy cache member with the current-Core object.
++ cache_obj = str(cache/'objects'/'paged_caching_nvidia.cu.o') if cache else None
++ archive_members=[str(newobj),str(newlink)] + ([cache_obj] if cache_obj else [])
++ run(['/usr/bin/ar','r',str(archive),*archive_members])
+  inputs,lf=recipe(dep/'infiniop/linux/x86_64/release/libinfiniop.so.d'); objs=[str(newobj) if x==oldobj else remap(x) for x in inputs if x.endswith('.o')];
+  # The archive copied from the base prefix contains legacy paged-caching
+- # templates. Add the cache object explicitly so current template symbols
+- # (e.g. pagedCaching<half,256,false,1>) resolve in the host shared library.
+- if cache:
+-  cache_obj = str(cache/'objects'/'paged_caching_nvidia.cu.o')
+-  if cache_obj not in objs: objs.append(cache_obj)
++ # templates; also link the current object explicitly for symbol resolution.
++ if cache_obj and cache_obj not in objs: objs.append(cache_obj)
+  run([lf[0],*objs,'-L'+str(libdir),*lf[1:],'-o',str(libdir/'libinfiniop.so')]); m['new_library_hash']=sha(libdir/'libinfiniop.so'); m['exit_code']=0; (a.evidence/'build.json').write_text(json.dumps(m,indent=2)); print(m['new_library_hash'])
+ if __name__=='__main__': main()

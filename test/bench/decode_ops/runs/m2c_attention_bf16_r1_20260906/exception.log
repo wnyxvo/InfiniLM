@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/data/InfiniTensor/InfiniLM/test/bench/decode_ops/benchmarks/attention.py", line 70, in main
+    'input_hash':h(q,k,v,table,lens),'eager':eager,'graph_batch':gm,
+                 ^^^^^^^^^^^^^^^^^^^
+  File "/data/InfiniTensor/InfiniLM/test/bench/decode_ops/benchmarks/attention.py", line 10, in h
+    return hashlib.sha256(b"".join(str(x.detach().contiguous().cpu().numpy().tobytes()).encode() for x in xs)).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/InfiniTensor/InfiniLM/test/bench/decode_ops/benchmarks/attention.py", line 10, in <genexpr>
+    return hashlib.sha256(b"".join(str(x.detach().contiguous().cpu().numpy().tobytes()).encode() for x in xs)).hexdigest()
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Got unsupported ScalarType BFloat16

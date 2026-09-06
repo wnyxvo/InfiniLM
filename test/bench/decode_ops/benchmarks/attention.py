@@ -7,7 +7,12 @@ from common.correctness_support import Run, Native, PAGE, reference, check_outpu
 from common.timing import measure_cuda, cpu_count_test
 
 def h(*xs):
-    return hashlib.sha256(b"".join(str(x.detach().contiguous().cpu().numpy().tobytes()).encode() for x in xs)).hexdigest()
+    chunks = []
+    for x in xs:
+        y = x.detach().contiguous()
+        if y.dtype == torch.bfloat16: y = y.view(torch.uint16)
+        chunks.append(y.cpu().numpy().tobytes())
+    return hashlib.sha256(b"".join(chunks)).hexdigest()
 
 def set_mode(mode):
     # Clear all dispatch knobs so production_default observes source defaults.
@@ -27,19 +32,20 @@ def set_mode(mode):
         os.environ["INFINIOP_FLASH_DECODE_KERNEL"] = "warp"
     elif mode == "gqa_splitkv_2a":
         os.environ["INFINIOP_FLASH_GQA_SPLITKV"] = "1"
-    elif mode == "gqa_splitkv_shared":
+    elif mode in ("gqa_splitkv_shared", "gqa_splitkv_tile"):
         os.environ["INFINIOP_FLASH_GQA_SHARED_SPLITKV"] = "1"
 
 def main():
     p = argparse.ArgumentParser()
     p.add_argument('--output', required=True); p.add_argument('--samples', type=int, default=5)
-    p.add_argument('--graph-workloads', type=int, default=100); p.add_argument('--graph-replays', type=int, default=2)
+    p.add_argument('--graph-workloads', type=int, default=100); p.add_argument('--graph-replays', type=int, default=2); p.add_argument('--dtype', choices=('fp16','bf16'), default='fp16'); p.add_argument('--round', type=int, default=1)
     args = p.parse_args(); torch.cuda.set_device(0); run = Run(args.output); rows = []
-    modes = ('production_default','non_split_cta','gqa_fused','warp_splitkv','cta_splitkv','gqa_splitkv_2a','gqa_splitkv_shared')
+    modes = ('production_default','non_split_cta','gqa_fused','warp_splitkv','cta_splitkv','gqa_splitkv_2a','gqa_splitkv_shared','gqa_splitkv_tile')
+    if args.round % 2 == 0: modes = tuple(reversed(modes))
     try:
         for mode in modes:
             for batch, length in ((1,256),(1,2049),(4,2049),(16,2049)):
-                dtype = torch.float16; cap = (length + PAGE - 1) // PAGE
+                dtype = torch.float16 if args.dtype == 'fp16' else torch.bfloat16; cap = (length + PAGE - 1) // PAGE
                 torch.manual_seed(20260906 + batch + length)
                 q = torch.randn(batch,32,128,device='cuda',dtype=dtype)
                 k = torch.randn(batch*cap,8,PAGE,128,device='cuda',dtype=dtype); v = torch.randn_like(k)
@@ -58,18 +64,18 @@ def main():
                     sample['normalized_us'] = sample['elapsed_ms']*1000/(args.graph_workloads*args.graph_replays)
                     sample['formula'] = 'elapsed_ms/(workloads_per_graph*graph_replays)'
                 vals = [x['normalized_us'] for x in gm['samples']]
-                split = mode in ('production_default','warp_splitkv','cta_splitkv','gqa_splitkv_2a','gqa_splitkv_shared')
+                split = mode in ('production_default','warp_splitkv','cta_splitkv','gqa_splitkv_2a','gqa_splitkv_shared','gqa_splitkv_tile')
                 gm.update(median_us=statistics.median(vals), min_us=min(vals), max_us=max(vals),
                           workloads_per_graph=args.graph_workloads, graph_replays=args.graph_replays,
                           total_logical_workloads=args.graph_workloads*args.graph_replays,
                           kernel_calls_per_workload=2 if split else 1)
-                rows.append({'mode':mode,'batch':batch,'length':length,'dtype':'torch.float16',
+                rows.append({'mode':mode,'batch':batch,'length':length,'dtype':str(dtype),
                     'num_splits':4 if split else 0,'workspace_bytes':'descriptor-managed',
                     'eager_correctness':eager_corr['attention_correctness'],'graph_correctness':graph_corr['attention_correctness'],
                     'input_hash':h(q,k,v,table,lens),'eager':eager,'graph_batch':gm,
                     'result':'PASS' if eager_corr['attention_correctness']=='PASS' and graph_corr['attention_correctness']=='PASS' else 'FAIL'})
                 del graph; native.close()
-        run.add(rows=rows,cpu_count_test=cpu_count_test(),result='PASS' if all(r['result']=='PASS' for r in rows) else 'FAIL',
+        run.add(rows=rows,cpu_count_test=cpu_count_test(),round=args.round,result='PASS' if all(r['result']=='PASS' for r in rows) else 'FAIL',
                 graph_workloads=args.graph_workloads,graph_replays=args.graph_replays)
         return run.finish()
     except Exception as e:

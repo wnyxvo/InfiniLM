@@ -1,0 +1,2004 @@
+[
+  {
+    "run_id": "m2c_attention_fp16_r3_20260906",
+    "rows": [
+      {
+        "mode": "production_default",
+        "batch": 1,
+        "length": 256,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "60a9075b656d848b38984a08e137874b7929149df2cdbaffbe9156910dd9ec9a",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.22937600314617157,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 22.937600314617157
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.2017280012369156,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 20.17280012369156
+            }
+          ],
+          "median_us": 21.555200219154358,
+          "min_us": 20.17280012369156,
+          "max_us": 22.937600314617157,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.7592320442199707,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 8.796160221099854
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 1.7582080364227295,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 8.791040182113647
+            }
+          ],
+          "median_us": 8.79360020160675,
+          "min_us": 8.791040182113647,
+          "max_us": 8.796160221099854,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "production_default",
+        "batch": 1,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "71e1237826b4c59a4d9c81dc00e209c23b4cb90aac9c74d8996c38a0fa5e0ca7",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.5017600059509277,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 50.17600059509277
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.4935680031776428,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 49.35680031776428
+            }
+          ],
+          "median_us": 49.76640045642853,
+          "min_us": 49.35680031776428,
+          "max_us": 50.17600059509277,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 9.2957124710083,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 46.478562355041504
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 9.29587173461914,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 46.4793586730957
+            }
+          ],
+          "median_us": 46.4789605140686,
+          "min_us": 46.478562355041504,
+          "max_us": 46.4793586730957,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "production_default",
+        "batch": 4,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "731b75a9f302589bfc7555cc53f4c7b2356e1f32cdbdd91cd897c0d71bc268af",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.6451200246810913,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 64.51200246810913
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.6461120247840881,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 64.61120247840881
+            }
+          ],
+          "median_us": 64.56160247325897,
+          "min_us": 64.51200246810913,
+          "max_us": 64.61120247840881,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 12.218367576599121,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 61.091837882995605
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 12.210176467895508,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 61.05088233947754
+            }
+          ],
+          "median_us": 61.07136011123657,
+          "min_us": 61.05088233947754,
+          "max_us": 61.091837882995605,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "production_default",
+        "batch": 16,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "787fdc4a2d24d718e038b7841bf849dbae27dfd3944bddedf724a1df9d56c0b1",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.1831679344177246,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 218.31679344177246
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 2.181119918823242,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 218.11199188232422
+            }
+          ],
+          "median_us": 218.21439266204834,
+          "min_us": 218.11199188232422,
+          "max_us": 218.31679344177246,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 42.9219856262207,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 214.60992813110352
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 42.93008041381836,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 214.6504020690918
+            }
+          ],
+          "median_us": 214.63016510009766,
+          "min_us": 214.60992813110352,
+          "max_us": 214.6504020690918,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "non_split_cta",
+        "batch": 1,
+        "length": 256,
+        "dtype": "torch.float16",
+        "num_splits": 0,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "60a9075b656d848b38984a08e137874b7929149df2cdbaffbe9156910dd9ec9a",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.24764800071716309,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 24.76480007171631
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.24268800020217896,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 24.268800020217896
+            }
+          ],
+          "median_us": 24.516800045967102,
+          "min_us": 24.268800020217896,
+          "max_us": 24.76480007171631,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 4.425727844238281,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 22.128639221191406
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 4.424704074859619,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 22.123520374298096
+            }
+          ],
+          "median_us": 22.12607979774475,
+          "min_us": 22.123520374298096,
+          "max_us": 22.128639221191406,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "non_split_cta",
+        "batch": 1,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 0,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "71e1237826b4c59a4d9c81dc00e209c23b4cb90aac9c74d8996c38a0fa5e0ca7",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.7182719707489014,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 171.82719707489014
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 1.7182719707489014,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 171.82719707489014
+            }
+          ],
+          "median_us": 171.82719707489014,
+          "min_us": 171.82719707489014,
+          "max_us": 171.82719707489014,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 33.87184143066406,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 169.3592071533203
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 33.870849609375,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 169.354248046875
+            }
+          ],
+          "median_us": 169.35672760009766,
+          "min_us": 169.354248046875,
+          "max_us": 169.3592071533203,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "non_split_cta",
+        "batch": 4,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 0,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "731b75a9f302589bfc7555cc53f4c7b2356e1f32cdbdd91cd897c0d71bc268af",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.7254400253295898,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 172.54400253295898
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 1.7203199863433838,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 172.03199863433838
+            }
+          ],
+          "median_us": 172.28800058364868,
+          "min_us": 172.03199863433838,
+          "max_us": 172.54400253295898,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 33.96403121948242,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 169.8201560974121
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 33.9628791809082,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 169.81439590454102
+            }
+          ],
+          "median_us": 169.81727600097656,
+          "min_us": 169.81439590454102,
+          "max_us": 169.8201560974121,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "non_split_cta",
+        "batch": 16,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 0,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "787fdc4a2d24d718e038b7841bf849dbae27dfd3944bddedf724a1df9d56c0b1",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.1923840045928955,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 219.23840045928955
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 2.194432020187378,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 219.4432020187378
+            }
+          ],
+          "median_us": 219.34080123901367,
+          "min_us": 219.23840045928955,
+          "max_us": 219.4432020187378,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 42.93427276611328,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 214.6713638305664
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 43.0274543762207,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 215.13727188110352
+            }
+          ],
+          "median_us": 214.90431785583496,
+          "min_us": 214.6713638305664,
+          "max_us": 215.13727188110352,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_fused",
+        "batch": 1,
+        "length": 256,
+        "dtype": "torch.float16",
+        "num_splits": 0,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "60a9075b656d848b38984a08e137874b7929149df2cdbaffbe9156910dd9ec9a",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.562175989151001,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 56.2175989151001
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.5591040253639221,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 55.91040253639221
+            }
+          ],
+          "median_us": 56.064000725746155,
+          "min_us": 55.91040253639221,
+          "max_us": 56.2175989151001,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 10.742783546447754,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 53.71391773223877
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 10.74176025390625,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 53.70880126953125
+            }
+          ],
+          "median_us": 53.71135950088501,
+          "min_us": 53.70880126953125,
+          "max_us": 53.71391773223877,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_fused",
+        "batch": 1,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 0,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "71e1237826b4c59a4d9c81dc00e209c23b4cb90aac9c74d8996c38a0fa5e0ca7",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 4.247551918029785,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 424.7551918029785
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 4.206463813781738,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 420.6463813781738
+            }
+          ],
+          "median_us": 422.7007865905762,
+          "min_us": 420.6463813781738,
+          "max_us": 424.7551918029785,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 82.96131134033203,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 414.80655670166016
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 82.40425872802734,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 412.0212936401367
+            }
+          ],
+          "median_us": 413.41392517089844,
+          "min_us": 412.0212936401367,
+          "max_us": 414.80655670166016,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_fused",
+        "batch": 4,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 0,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "731b75a9f302589bfc7555cc53f4c7b2356e1f32cdbdd91cd897c0d71bc268af",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 3.929152011871338,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 392.9152011871338
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 3.926016092300415,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 392.6016092300415
+            }
+          ],
+          "median_us": 392.75840520858765,
+          "min_us": 392.6016092300415,
+          "max_us": 392.9152011871338,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 78.05951690673828,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 390.2975845336914
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 78.0738525390625,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 390.3692626953125
+            }
+          ],
+          "median_us": 390.33342361450195,
+          "min_us": 390.2975845336914,
+          "max_us": 390.3692626953125,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_fused",
+        "batch": 16,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 0,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "787fdc4a2d24d718e038b7841bf849dbae27dfd3944bddedf724a1df9d56c0b1",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 3.960767984390259,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 396.0767984390259
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 3.959808111190796,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 395.9808111190796
+            }
+          ],
+          "median_us": 396.02880477905273,
+          "min_us": 395.9808111190796,
+          "max_us": 396.0767984390259,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 78.64422607421875,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 393.22113037109375
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 78.64521789550781,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 393.22608947753906
+            }
+          ],
+          "median_us": 393.2236099243164,
+          "min_us": 393.22113037109375,
+          "max_us": 393.22608947753906,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 1
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "warp_splitkv",
+        "batch": 1,
+        "length": 256,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "60a9075b656d848b38984a08e137874b7929149df2cdbaffbe9156910dd9ec9a",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.3051519989967346,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 30.515199899673462
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.30105599761009216,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 30.105599761009216
+            }
+          ],
+          "median_us": 30.31039983034134,
+          "min_us": 30.105599761009216,
+          "max_us": 30.515199899673462,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 5.47430419921875,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 27.37152099609375
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 5.476352214813232,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 27.381761074066162
+            }
+          ],
+          "median_us": 27.376641035079956,
+          "min_us": 27.37152099609375,
+          "max_us": 27.381761074066162,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "warp_splitkv",
+        "batch": 1,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "71e1237826b4c59a4d9c81dc00e209c23b4cb90aac9c74d8996c38a0fa5e0ca7",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.9896320104599,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 198.96320104599
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 1.9916800260543823,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 199.16800260543823
+            }
+          ],
+          "median_us": 199.0656018257141,
+          "min_us": 198.96320104599,
+          "max_us": 199.16800260543823,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 39.15571212768555,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 195.77856063842773
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 36.98774337768555,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 184.93871688842773
+            }
+          ],
+          "median_us": 190.35863876342773,
+          "min_us": 184.93871688842773,
+          "max_us": 195.77856063842773,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "warp_splitkv",
+        "batch": 4,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "731b75a9f302589bfc7555cc53f4c7b2356e1f32cdbdd91cd897c0d71bc268af",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.8452479839324951,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 184.5247983932495
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 1.8423360586166382,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 184.23360586166382
+            }
+          ],
+          "median_us": 184.37920212745667,
+          "min_us": 184.23360586166382,
+          "max_us": 184.5247983932495,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 36.28953552246094,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 181.4476776123047
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 36.28851318359375,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 181.44256591796875
+            }
+          ],
+          "median_us": 181.44512176513672,
+          "min_us": 181.44256591796875,
+          "max_us": 181.4476776123047,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "warp_splitkv",
+        "batch": 16,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "787fdc4a2d24d718e038b7841bf849dbae27dfd3944bddedf724a1df9d56c0b1",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 3.384320020675659,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 338.4320020675659
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 3.393376111984253,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 339.3376111984253
+            }
+          ],
+          "median_us": 338.8848066329956,
+          "min_us": 338.4320020675659,
+          "max_us": 339.3376111984253,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 67.07917022705078,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 335.3958511352539
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 67.11296081542969,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 335.56480407714844
+            }
+          ],
+          "median_us": 335.4803276062012,
+          "min_us": 335.3958511352539,
+          "max_us": 335.56480407714844,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "cta_splitkv",
+        "batch": 1,
+        "length": 256,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "60a9075b656d848b38984a08e137874b7929149df2cdbaffbe9156910dd9ec9a",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.1812479943037033,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 18.12479943037033
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.1740799993276596,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 17.40799993276596
+            }
+          ],
+          "median_us": 17.766399681568146,
+          "min_us": 17.40799993276596,
+          "max_us": 18.12479943037033,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.7643519639968872,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 8.821759819984436
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 1.763327956199646,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 8.81663978099823
+            }
+          ],
+          "median_us": 8.819199800491333,
+          "min_us": 8.81663978099823,
+          "max_us": 8.821759819984436,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "cta_splitkv",
+        "batch": 1,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "71e1237826b4c59a4d9c81dc00e209c23b4cb90aac9c74d8996c38a0fa5e0ca7",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.49561598896980286,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 49.561598896980286
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.4925439953804016,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 49.25439953804016
+            }
+          ],
+          "median_us": 49.40799921751022,
+          "min_us": 49.25439953804016,
+          "max_us": 49.561598896980286,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 9.299967765808105,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 46.49983882904053
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 9.297920227050781,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 46.489601135253906
+            }
+          ],
+          "median_us": 46.49471998214722,
+          "min_us": 46.489601135253906,
+          "max_us": 46.49983882904053,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "cta_splitkv",
+        "batch": 4,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "731b75a9f302589bfc7555cc53f4c7b2356e1f32cdbdd91cd897c0d71bc268af",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.6440960168838501,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 64.40960168838501
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.6410239934921265,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 64.10239934921265
+            }
+          ],
+          "median_us": 64.25600051879883,
+          "min_us": 64.10239934921265,
+          "max_us": 64.40960168838501,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 12.221376419067383,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 61.106882095336914
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 12.219391822814941,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 61.09695911407471
+            }
+          ],
+          "median_us": 61.10192060470581,
+          "min_us": 61.09695911407471,
+          "max_us": 61.106882095336914,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "cta_splitkv",
+        "batch": 16,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "787fdc4a2d24d718e038b7841bf849dbae27dfd3944bddedf724a1df9d56c0b1",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.1821439266204834,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 218.21439266204834
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 2.185215950012207,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 218.5215950012207
+            }
+          ],
+          "median_us": 218.36799383163452,
+          "min_us": 218.21439266204834,
+          "max_us": 218.5215950012207,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 42.91891098022461,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 214.59455490112305
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 42.92399978637695,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 214.61999893188477
+            }
+          ],
+          "median_us": 214.6072769165039,
+          "min_us": 214.59455490112305,
+          "max_us": 214.61999893188477,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_2a",
+        "batch": 1,
+        "length": 256,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "60a9075b656d848b38984a08e137874b7929149df2cdbaffbe9156910dd9ec9a",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.30822399258613586,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 30.822399258613586
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.3041279911994934,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 30.41279911994934
+            }
+          ],
+          "median_us": 30.617599189281464,
+          "min_us": 30.41279911994934,
+          "max_us": 30.822399258613586,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 5.511168003082275,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 27.555840015411377
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 5.5121917724609375,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 27.560958862304688
+            }
+          ],
+          "median_us": 27.558399438858032,
+          "min_us": 27.555840015411377,
+          "max_us": 27.560958862304688,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_2a",
+        "batch": 1,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "71e1237826b4c59a4d9c81dc00e209c23b4cb90aac9c74d8996c38a0fa5e0ca7",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.0090880393981934,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 200.90880393981934
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 2.0049920082092285,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 200.49920082092285
+            }
+          ],
+          "median_us": 200.7040023803711,
+          "min_us": 200.49920082092285,
+          "max_us": 200.90880393981934,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 39.53353500366211,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 197.66767501831055
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 39.53561782836914,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 197.6780891418457
+            }
+          ],
+          "median_us": 197.67288208007812,
+          "min_us": 197.66767501831055,
+          "max_us": 197.6780891418457,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_2a",
+        "batch": 4,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "731b75a9f302589bfc7555cc53f4c7b2356e1f32cdbdd91cd897c0d71bc268af",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.007040023803711,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 200.7040023803711
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 2.0059518814086914,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 200.59518814086914
+            }
+          ],
+          "median_us": 200.64959526062012,
+          "min_us": 200.59518814086914,
+          "max_us": 200.7040023803711,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 39.570430755615234,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 197.85215377807617
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 39.570430755615234,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 197.85215377807617
+            }
+          ],
+          "median_us": 197.85215377807617,
+          "min_us": 197.85215377807617,
+          "max_us": 197.85215377807617,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_2a",
+        "batch": 16,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "787fdc4a2d24d718e038b7841bf849dbae27dfd3944bddedf724a1df9d56c0b1",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 3.403775930404663,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 340.3775930404663
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 3.4109439849853516,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 341.09439849853516
+            }
+          ],
+          "median_us": 340.73599576950073,
+          "min_us": 340.3775930404663,
+          "max_us": 341.09439849853516,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 67.43756866455078,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 337.1878433227539
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 67.44371032714844,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 337.2185516357422
+            }
+          ],
+          "median_us": 337.20319747924805,
+          "min_us": 337.1878433227539,
+          "max_us": 337.2185516357422,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_shared",
+        "batch": 1,
+        "length": 256,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "60a9075b656d848b38984a08e137874b7929149df2cdbaffbe9156910dd9ec9a",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.3235839903354645,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 32.35839903354645
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.319487988948822,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 31.948798894882202
+            }
+          ],
+          "median_us": 32.153598964214325,
+          "min_us": 31.948798894882202,
+          "max_us": 32.35839903354645,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 5.809152126312256,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 29.04576063156128
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 5.809152126312256,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 29.04576063156128
+            }
+          ],
+          "median_us": 29.04576063156128,
+          "min_us": 29.04576063156128,
+          "max_us": 29.04576063156128,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_shared",
+        "batch": 1,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "71e1237826b4c59a4d9c81dc00e209c23b4cb90aac9c74d8996c38a0fa5e0ca7",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.1432321071624756,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 214.32321071624756
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 2.140160083770752,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 214.0160083770752
+            }
+          ],
+          "median_us": 214.16960954666138,
+          "min_us": 214.0160083770752,
+          "max_us": 214.32321071624756,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 42.18368148803711,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 210.91840744018555
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 42.18355178833008,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 210.9177589416504
+            }
+          ],
+          "median_us": 210.91808319091797,
+          "min_us": 210.9177589416504,
+          "max_us": 210.91840744018555,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_shared",
+        "batch": 4,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "731b75a9f302589bfc7555cc53f4c7b2356e1f32cdbdd91cd897c0d71bc268af",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.9763840436935425,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 197.63840436935425
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 1.9733120203018188,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 197.33120203018188
+            }
+          ],
+          "median_us": 197.48480319976807,
+          "min_us": 197.33120203018188,
+          "max_us": 197.63840436935425,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 38.8935661315918,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 194.46783065795898
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 38.8935661315918,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 194.46783065795898
+            }
+          ],
+          "median_us": 194.46783065795898,
+          "min_us": 194.46783065795898,
+          "max_us": 194.46783065795898,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_shared",
+        "batch": 16,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "787fdc4a2d24d718e038b7841bf849dbae27dfd3944bddedf724a1df9d56c0b1",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 3.077120065689087,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 307.7120065689087
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 3.074143886566162,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 307.4143886566162
+            }
+          ],
+          "median_us": 307.56319761276245,
+          "min_us": 307.4143886566162,
+          "max_us": 307.7120065689087,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 60.77132797241211,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 303.85663986206055
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 60.937217712402344,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 304.6860885620117
+            }
+          ],
+          "median_us": 304.27136421203613,
+          "min_us": 303.85663986206055,
+          "max_us": 304.6860885620117,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_tile",
+        "batch": 1,
+        "length": 256,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "60a9075b656d848b38984a08e137874b7929149df2cdbaffbe9156910dd9ec9a",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 0.32256001234054565,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 32.256001234054565
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 0.319487988948822,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 31.948798894882202
+            }
+          ],
+          "median_us": 32.102400064468384,
+          "min_us": 31.948798894882202,
+          "max_us": 32.256001234054565,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 5.7876482009887695,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 28.938241004943848
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 5.788671970367432,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 28.943359851837158
+            }
+          ],
+          "median_us": 28.940800428390503,
+          "min_us": 28.938241004943848,
+          "max_us": 28.943359851837158,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_tile",
+        "batch": 1,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "71e1237826b4c59a4d9c81dc00e209c23b4cb90aac9c74d8996c38a0fa5e0ca7",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 2.1422080993652344,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 214.22080993652344
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 2.140160083770752,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 214.0160083770752
+            }
+          ],
+          "median_us": 214.11840915679932,
+          "min_us": 214.0160083770752,
+          "max_us": 214.22080993652344,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 42.19289779663086,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 210.9644889831543
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 42.191871643066406,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 210.95935821533203
+            }
+          ],
+          "median_us": 210.96192359924316,
+          "min_us": 210.95935821533203,
+          "max_us": 210.9644889831543,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_tile",
+        "batch": 4,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "731b75a9f302589bfc7555cc53f4c7b2356e1f32cdbdd91cd897c0d71bc268af",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 1.9824639558792114,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 198.24639558792114
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 1.9814399480819702,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 198.14399480819702
+            }
+          ],
+          "median_us": 198.19519519805908,
+          "min_us": 198.14399480819702,
+          "max_us": 198.24639558792114,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 39.0379524230957,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 195.18976211547852
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 39.034881591796875,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 195.17440795898438
+            }
+          ],
+          "median_us": 195.18208503723145,
+          "min_us": 195.17440795898438,
+          "max_us": 195.18976211547852,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      },
+      {
+        "mode": "gqa_splitkv_tile",
+        "batch": 16,
+        "length": 2049,
+        "dtype": "torch.float16",
+        "num_splits": 4,
+        "workspace_bytes": "descriptor-managed",
+        "eager_correctness": "PASS",
+        "graph_correctness": "PASS",
+        "input_hash": "787fdc4a2d24d718e038b7841bf849dbae27dfd3944bddedf724a1df9d56c0b1",
+        "eager": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 3.077120065689087,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 307.7120065689087
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 3.08240008354187,
+              "workload_calls": 10,
+              "formula": "elapsed_ms/workload_calls",
+              "normalized_us": 308.240008354187
+            }
+          ],
+          "median_us": 307.97600746154785,
+          "min_us": 307.7120065689087,
+          "max_us": 308.240008354187,
+          "workload_calls": 10,
+          "formula": "elapsed_ms/workload_calls"
+        },
+        "graph_batch": {
+          "samples": [
+            {
+              "sample": 0,
+              "elapsed_ms": 60.60851287841797,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 303.04256439208984
+            },
+            {
+              "sample": 1,
+              "elapsed_ms": 60.699649810791016,
+              "workload_calls": 2,
+              "formula": "elapsed_ms/(workloads_per_graph*graph_replays)",
+              "normalized_us": 303.4982490539551
+            }
+          ],
+          "median_us": 303.27040672302246,
+          "min_us": 303.04256439208984,
+          "max_us": 303.4982490539551,
+          "workload_calls": 2,
+          "formula": "elapsed_ms/workload_calls",
+          "workloads_per_graph": 100,
+          "graph_replays": 2,
+          "total_logical_workloads": 200,
+          "kernel_calls_per_workload": 2
+        },
+        "result": "PASS"
+      }
+    ],
+    "cpu_count_test": {
+      "calls_1": 1,
+      "calls_100": 100,
+      "existing_batch_object": {
+        "batch_invocations": 1,
+        "logical_calls": 100
+      },
+      "status": "PASS"
+    },
+    "round": 3,
+    "result": "PASS",
+    "graph_workloads": 100,
+    "graph_replays": 2
+  }
+]

@@ -10,7 +10,7 @@ def main():
     try:
         for dtype in (torch.float16, torch.bfloat16):
             for num_splits in (2, 4, 8):
-                for lengths in ([1],[7],[255],[256],[257],[2049],[7,256,2049]):
+                for lengths in ([1],[7],[8],[9],[255],[256],[257],[2049],[8192],[7,256,2049]):
                     batch = len(lengths); cap = (max(lengths)+PAGE-1)//PAGE
                     torch.manual_seed(20260906 + batch + max(lengths))
                     q = torch.randn(batch,32,128,device='cuda',dtype=dtype)
@@ -29,14 +29,14 @@ def main():
                     graph = torch.cuda.CUDAGraph(); base_q=q.clone(); base_k=k.clone(); base_v=v.clone()
                     with torch.cuda.graph(graph): call()
                     # Negative control: without replay, output remains sentinel.
-                    out.fill_(float('nan')); torch.cuda.synchronize(); skip_ok = bool(torch.isnan(out).all().item())
+                    out.fill_(float('nan')); torch.cuda.synchronize(); skip_metrics = check_output(out, ref1); skip_ok = skip_metrics['attention_correctness'] == 'FAIL'
                     q2 = torch.randn_like(q); k2 = torch.randn_like(k); v2 = torch.randn_like(v)
                     q.copy_(q2); k.copy_(k2); v.copy_(v2); lens2 = torch.tensor([max(1, x-1) for x in lengths],device='cuda',dtype=torch.int32); lens.copy_(lens2)
                     graph.replay(); torch.cuda.synchronize(); ref2 = reference(q2,k2,v2,table,lens2.tolist()); graph_ok = check_output(out,ref2)
                     run.add(dtype=str(dtype), lengths=lengths, batch=batch, capacity_pages=cap, num_splits=num_splits,
                         dispatch='splitkv_gqa_shared', eager_correctness=eager['attention_correctness'],
                         graph_correctness=graph_ok['attention_correctness'], graph_update_correctness=graph_ok['attention_correctness'],
-                        skip_replay_negative_control='PASS' if skip_ok else 'FAIL', eager_metrics=eager, graph_metrics=graph_ok,
+                        skip_replay_negative_control='PASS' if skip_ok else 'FAIL', skip_replay_metrics=skip_metrics, eager_metrics=eager, graph_metrics=graph_ok,
                         result='PASS' if eager['attention_correctness']=='PASS' and graph_ok['attention_correctness']=='PASS' and skip_ok else 'FAIL')
                     del graph; n.close()
         return run.finish()

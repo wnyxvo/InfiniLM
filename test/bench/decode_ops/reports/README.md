@@ -11,3 +11,5 @@
 - [Milestone 2A](milestone2A_report.md)：GQA-aware Split-KV 原型、完整 attention 消融与集成验证。
 
 - [Milestone 2B](milestone2B_report.md)：shared-KV GQA Split-KV kernel、Graph 正确性与完整 attention 消融。
+
+- [Milestone 2C](milestone2C_report.md)：GQA shared-KV tile-level online softmax 优化与验证。

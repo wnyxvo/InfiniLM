@@ -2,7 +2,7 @@
 
 本里程碑在 InfiniCore `ee2ca9c383af0b203ffaa842c276288756f41e2d`、InfiniLM `1c35eb42d5bb01aa8e6a74b18ccf4d708e93e655` 上实现可切换的 HD128 GQA shared-KV Split-KV CUDA kernel，范围为 Hq=32、Hkv=8、ratio=4、FP16/BF16。每个 CTA 对应一个 KV head、sequence 和 shard；四个 warp 分别处理四个 Q head。每个 token tile（8×128）由 CTA 协作加载到 shared K/V，四个 warp 在同步区间内复用该 tile，并各自维护 FP32 `(m,l,acc)`；现有 FP32 workspace/combine 保持不变。空 shard 写入 `m=-inf,l=0,acc=0`，页表和跨页尾部按 token 映射，所有 shared-memory barrier 由完整 CTA 执行。
 
-最终重建 prefix 为 `/data/InfiniTensor/phase2b-gqa-shared-fixed`，`lib/libinfiniop.so` SHA256 为 `7b7717ebaf96852a4edab49162535d968efab0710afd8fb1973ec2004904c303`。实现文件为 [kernel_v2.cuh](/data/InfiniTensor/InfiniCore/src/infiniop/ops/paged_attention/cuda/kernel_v2.cuh) 与 [paged_attention_hd128.cu](/data/InfiniTensor/InfiniCore/src/infiniop/ops/paged_attention/nvidia/paged_attention_hd128.cu)。开关为 `INFINIOP_FLASH_GQA_SHARED_SPLITKV=1`，同时需要 Split-KV、CTA、无 ALiBi 且 Hq=4×Hkv；dispatch 记录为 `splitkv_gqa_shared`。默认行为未改变。
+最终重建 prefix 为 `/data/InfiniTensor/phase2b-gqa-shared-archive`，`lib/libinfiniop.so` SHA256 为 `d06c9410c772a1ddd80e8f0932fe2bf31ef18b2578488ce28e8d067ea171cbd6`；archive 已重新生成并包含当前 cache object。实现文件为 [kernel_v2.cuh](/data/InfiniTensor/InfiniCore/src/infiniop/ops/paged_attention/cuda/kernel_v2.cuh) 与 [paged_attention_hd128.cu](/data/InfiniTensor/InfiniCore/src/infiniop/ops/paged_attention/nvidia/paged_attention_hd128.cu)。开关为 `INFINIOP_FLASH_GQA_SHARED_SPLITKV=1`，同时需要 Split-KV、CTA、无 ALiBi 且 Hq=4×Hkv；dispatch 记录为 `splitkv_gqa_shared`。默认行为未改变。
 
 ## 正确性
 
@@ -26,7 +26,7 @@ B=16,L=2049 的 2B shared-KV 为约 301.4 μs；该标量 shared-memory 原型�
 
 ## Sanitizer 与集成
 
-compute-sanitizer memcheck、racecheck、synccheck 代表矩阵均 PASS（0 errors / 0 hazards，证据目录分别为 `runs/m2b_gqa_shared_memcheck_20260906`、`runs/m2b_gqa_shared_racecheck_20260906`、`runs/m2b_gqa_shared_synccheck_20260906`）。KV Update standalone 通过。初始组合构建曾因 host link 只取 base archive 中旧的 `pagedCaching<T,512/1024/4096>`，缺少当前源码需要的 `pagedCaching<T,256,false,1>`，触发 `CUDA error: named symbol not found`；已修正 `build/attention.py`，将当前 cache object 显式加入最终 `.so`。修复后 `runs/m2b_integration_fixed_b4_20260906` 的 8 个 paged-caching workload 与 append+attention 均 PASS（target/cache/Graph 均 PASS）。整模型 E2E 为 `NOT_RUN`。
+compute-sanitizer memcheck、racecheck、synccheck 代表矩阵均 PASS（0 errors / 0 hazards，证据目录分别为 `runs/m2b_gqa_shared_memcheck_20260906`、`runs/m2b_gqa_shared_racecheck_20260906`、`runs/m2b_gqa_shared_synccheck_20260906`）。KV Update standalone 通过。初始组合构建曾因 host link 只取 base archive 中旧的 `pagedCaching<T,512/1024/4096>`，缺少当前源码需要的 `pagedCaching<T,256,false,1>`，触发 `CUDA error: named symbol not found`；已修正 `build/attention.py`，将当前 cache object 显式加入最终 `.so`。修复后 `runs/m2b_integration_archive_b4_20260906` 的 8 个 paged-caching workload 与 append+attention 均 PASS（target/cache/Graph 均 PASS）。整模型 E2E 为 `NOT_RUN`。
 
 ## 复现
 

@@ -1,0 +1,61 @@
+diff --git a/src/infiniop/ops/paged_attention/cuda/kernel_v2.cuh b/src/infiniop/ops/paged_attention/cuda/kernel_v2.cuh
+index 38b722eb..e4b8b688 100644
+--- a/src/infiniop/ops/paged_attention/cuda/kernel_v2.cuh
++++ b/src/infiniop/ops/paged_attention/cuda/kernel_v2.cuh
+@@ -616,23 +616,50 @@ __device__ void flashAttentionDecodeSplitKvSharedKernel(
+         }
+         __syncthreads();
+         if (active) {
++            // Tile-level online softmax: one m/l update and one historical
++            // accumulator rescale per tile, while retaining per-token weights.
++            float scores[TILE_TOKENS];
++            float probs[TILE_TOKENS];
++#pragma unroll
++            for (int j = 0; j < TILE_TOKENS; ++j) {
++                scores[j] = -INFINITY;
++                probs[j] = 0.0f;
++            }
+             for (int j = 0; j < tn; ++j) {
+                 float qk = 0.0f;
+ #pragma unroll
+                 for (int i = 0; i < DPT; ++i) qk += qreg[i] * static_cast<float>(sh_k[j][lane * DPT + i]);
+                 qk = warpReduceSum(qk);
+-                float alpha = 1.0f, beta = 0.0f;
+                 if (lane == 0) {
+                     float score = qk * scale_log2;
+                     if (alibi != 0.0f) score += alibi * static_cast<float>((tile + j) - (seq_len - 1)) * LOG2E;
+-                    const float mn = fmaxf(m, score);
+-                    alpha = exp2f(m - mn); beta = exp2f(score - mn); l = l * alpha + beta; m = mn;
++                    scores[j] = score;
+                 }
+-                alpha = __shfl_sync(0xffffffff, alpha, 0); beta = __shfl_sync(0xffffffff, beta, 0);
+-#pragma unroll
++            }
++            float tile_max = -INFINITY;
++            float alpha_shared = 1.0f;
++            if (lane == 0) {
++                for (int j = 0; j < tn; ++j) tile_max = fmaxf(tile_max, scores[j]);
++                const float m_new = fmaxf(m, tile_max);
++                const float alpha = exp2f(m - m_new);
++                alpha_shared = alpha;
++                float tile_sum = 0.0f;
++                for (int j = 0; j < tn; ++j) {
++                    probs[j] = exp2f(scores[j] - m_new);
++                    tile_sum += probs[j];
++                }
++                l = alpha * l + tile_sum;
++                m = m_new;
++            }
++            // Broadcast alpha computed before m was updated.
++            const float alpha = __shfl_sync(0xffffffff, alpha_shared, 0);
++            // Reconstruct the tile-normalized probabilities from lane 0's
++            // score array. This keeps only TILE_TOKENS scalar registers.
++            for (int j = 0; j < tn; ++j) {
++                const float p = __shfl_sync(0xffffffff, (lane == 0) ? probs[j] : 0.0f, 0);
+                 for (int i = 0; i < DPT; ++i) {
+                     const int dim = lane * DPT + i;
+-                    acc[i] = acc[i] * alpha + beta * static_cast<float>(sh_v[j][dim]);
++                    acc[i] = (j == 0 ? acc[i] * alpha : acc[i]) + p * static_cast<float>(sh_v[j][dim]);
+                 }
+             }
+         }
