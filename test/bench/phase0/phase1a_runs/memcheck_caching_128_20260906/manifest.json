@@ -1,0 +1,249 @@
+{
+  "run_id": "memcheck_caching_128_20260906",
+  "command": [
+    "test/bench/phase0/native_baseline.py",
+    "--caching-only",
+    "--quick",
+    "--fp16",
+    "--output",
+    "test/bench/phase0/phase1a_runs/memcheck_caching_128_20260906"
+  ],
+  "seed": 20260905,
+  "environment": {
+    "INFINI_ROOT": "/data/InfiniTensor/phase1a-cache-128",
+    "LD_LIBRARY_PATH": "/usr/local/cuda-12.8/compute-sanitizer:/data/InfiniTensor/phase1a-cache-128/lib:/root/.infini/lib:/usr/local/cuda/lib64",
+    "CUDA_HOME": "/usr/local/cuda"
+  },
+  "python": "3.12.3 (main, Nov  6 2024, 18:32:19) [GCC 13.2.0]",
+  "executable": "/data/InfiniTensor/.venv-infini/bin/python",
+  "torch": "2.9.1+cu128",
+  "torch_path": "/data/InfiniTensor/.venv-infini/lib/python3.12/site-packages/torch/__init__.py",
+  "cuda": "12.8",
+  "gpu": "_CudaDeviceProperties(name='NVIDIA GeForce RTX 4090', major=8, minor=9, total_memory=24330MB, multi_processor_count=128, uuid=aad8ca0f-fea2-6292-85b6-d2a48b194261, pci_bus_id=157, pci_device_id=0, pci_domain_id=0, L2_cache_size=72MB)",
+  "repos": {
+    "/data/InfiniTensor/InfiniLM": {
+      "sha": {
+        "command": [
+          "git",
+          "-C",
+          "/data/InfiniTensor/InfiniLM",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "2085ff4733fa5f5d17281e7af709fc72a622eb46\n",
+        "stderr": ""
+      },
+      "branch": {
+        "command": [
+          "git",
+          "-C",
+          "/data/InfiniTensor/InfiniLM",
+          "branch",
+          "--show-current"
+        ],
+        "returncode": 0,
+        "stdout": "feat\n",
+        "stderr": ""
+      },
+      "dirty": {
+        "command": [
+          "git",
+          "-C",
+          "/data/InfiniTensor/InfiniLM",
+          "status",
+          "--short"
+        ],
+        "returncode": 0,
+        "stdout": "?? test/bench/phase0/build_caching_isolated.py\n?? test/bench/phase0/caching_benchmark.py\n?? test/bench/phase0/phase1a_runs/\n",
+        "stderr": ""
+      },
+      "submodules": {
+        "command": [
+          "git",
+          "-C",
+          "/data/InfiniTensor/InfiniLM",
+          "submodule",
+          "status"
+        ],
+        "returncode": 0,
+        "stdout": " 5ed07097faa6c50199c4a3b66e5ed37d4fbfccc2 third_party/json (v3.11.2-374-g5ed07097f)\n 88a0e07ad5bb3e2651cd5613530b3f06a15fc400 third_party/spdlog (v1.2.1-2532-g88a0e07a)\n",
+        "stderr": ""
+      }
+    },
+    "/data/InfiniTensor/InfiniCore": {
+      "sha": {
+        "command": [
+          "git",
+          "-C",
+          "/data/InfiniTensor/InfiniCore",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "bd17d120b97de7bdf88a7b79a102e7088f656856\n",
+        "stderr": ""
+      },
+      "branch": {
+        "command": [
+          "git",
+          "-C",
+          "/data/InfiniTensor/InfiniCore",
+          "branch",
+          "--show-current"
+        ],
+        "returncode": 0,
+        "stdout": "feat\n",
+        "stderr": ""
+      },
+      "dirty": {
+        "command": [
+          "git",
+          "-C",
+          "/data/InfiniTensor/InfiniCore",
+          "status",
+          "--short"
+        ],
+        "returncode": 0,
+        "stdout": " M src/infiniop/ops/paged_caching/cuda/kernel.cuh\n M src/infiniop/ops/paged_caching/nvidia/paged_caching_nvidia.cu\n",
+        "stderr": ""
+      },
+      "submodules": {
+        "command": [
+          "git",
+          "-C",
+          "/data/InfiniTensor/InfiniCore",
+          "submodule",
+          "status"
+        ],
+        "returncode": 0,
+        "stdout": " c21a5b465dbdd94bdc246e32cf9c985f2ca01c9e submodules/InfiniCCL (v0.1.0-2-gc21a5b4)\n 47c1c4969c4312b4f15fc73928c72e4c262f79ce submodules/InfiniOps (remotes/origin/codex/build-plugin-contract-199-g47c1c49)\n b14539d0bdc3c4b79384d3c8805cbe915e40ad91 submodules/InfiniRT (b14539d)\n 087c84df83d254b5fb295a7a408f1a1d554085cf third_party/cutlass (v4.4.0-16-g087c84df)\n 10846960ca0793b993446f6dbaf696479c127a9d third_party/flash-attention (fa4-v4.0.0.beta4-45-g1084696)\n-99bbf1feb925ccfcbd0f01d7786543e8ce6f268b third_party/mate\n f1d748e5e3edfa4b1778edea003bac94781bc7b7 third_party/spdlog (v1.2.1-2526-gf1d748e5)\n",
+        "stderr": ""
+      }
+    }
+  },
+  "protocol": {
+    "warmup": 10,
+    "samples": 7,
+    "repeats": 100,
+    "cache": "repeated hot KV; no rotating KV",
+    "eager": "CUDA events on supplied current stream; includes CPU enqueue gaps",
+    "graph_batch": "100 native calls captured in torch CUDAGraph, 7 replay samples; not framework Graph",
+    "attention_tolerance": "BF16 atol=.005 rtol=.05; F16 atol=.001 rtol=.01; independent FP32 softmax/reference",
+    "scope": "direct native C API, no C++ provider"
+  },
+  "build_config": "{\n    __toolchains_linux_x86_64 = {\n        \"envs\",\n        \"gcc\",\n        \"yasm\",\n        \"nasm\",\n        \"fasm\",\n        \"cuda\",\n        \"go\",\n        \"rust\",\n        \"swift\",\n        \"gfortran\",\n        \"fpc\"\n    },\n    __toolchains_linux_x86_64_host = {\n        \"envs\",\n        \"gcc\",\n        \"yasm\",\n        \"nasm\",\n        \"fasm\",\n        \"cuda\",\n        \"go\",\n        \"rust\",\n        \"swift\",\n        \"gfortran\",\n        \"fpc\"\n    },\n    [\"ali-ppu\"] = false,\n    arch = \"x86_64\",\n    [\"ascend-npu\"] = false,\n    aten = true,\n    [\"bang-mlu-arch\"] = \"mtp_592\",\n    builddir = \"build\",\n    [\"cambricon-mlu\"] = false,\n    ccache = true,\n    ccl = true,\n    clean = true,\n    cpu = true,\n    cuda = \"/usr/local/cuda\",\n    cuda_arch = \"sm_89\",\n    cuda_sdkver = \"12.8\",\n    cudnn = true,\n    editable = false,\n    [\"flash-attn\"] = \"/data/InfiniTensor/InfiniCore/third_party/flash-attention\",\n    graph = true,\n    host = \"linux\",\n    [\"hygon-arch\"] = false,\n    [\"hygon-dcu\"] = false,\n    [\"iluvatar-arch\"] = \"ivcore20\",\n    [\"iluvatar-gpu\"] = false,\n    infiniops = false,\n    [\"infiniops-root\"] = \"submodules/InfiniOps\",\n    [\"infinirt-root\"] = \"\",\n    kind = \"static\",\n    [\"kunlun-xpu\"] = false,\n    [\"metax-gpu\"] = false,\n    mode = \"release\",\n    [\"moore-gpu\"] = false,\n    [\"moore-gpu-arch\"] = \"mp_31\",\n    [\"mutual-awareness\"] = false,\n    ndk_stdcxx = true,\n    ninetoothed = false,\n    [\"nv-gpu\"] = true,\n    omp = true,\n    plat = \"linux\",\n    [\"qy-gpu\"] = false,\n    [\"use-mc\"] = false,\n    [\"use-vendor-ops\"] = false\n}",
+  "tools": [
+    {
+      "command": [
+        "nvidia-smi"
+      ],
+      "returncode": 0,
+      "stdout": "Sun Sep  6 02:53:58 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |\n|-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA GeForce RTX 4090        Off |   00000000:9D:00.0 Off |                  Off |\n| 31%   30C    P2             46W /  450W |     514MiB /  24564MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n                                                                                         \n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n+-----------------------------------------------------------------------------------------+\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "nvcc",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Jan_15_19:20:09_PST_2025\nCuda compilation tools, release 12.8, V12.8.61\nBuild cuda_12.8.r12.8/compiler.35404655_0\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "g++",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "nsys",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "NVIDIA Nsight Systems version 2024.6.2.225-246235244400v0\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "ncu",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "NVIDIA (R) Nsight Compute Command Line Profiler\nCopyright (c) 2018-2024 NVIDIA Corporation\nVersion 2025.1.0.0 (build 35237751) (public-release)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "compute-sanitizer",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "NVIDIA (R) Compute Sanitizer\nCopyright (c) 2020-2025 NVIDIA Corporation\nVersion 2025.1.0.0 (build 35351055) (public-release)\n",
+      "stderr": ""
+    }
+  ],
+  "libraries": {
+    "/data/InfiniTensor/phase1a-cache-128/lib/libinfiniop.so": "cba73e0e23dd046211da23799be51d4678e01cd41bde6bd37b4e36586b263e4b",
+    "/data/InfiniTensor/phase1a-cache-128/lib/libinfinirt.so": "0b6f729cdc75c23d626e68028c81b8bc5a39394339b2216bfe2689f5b4286503",
+    "/data/InfiniTensor/InfiniCore/build/linux/x86_64/release/libinfiniop.so": "c659030a2ea2b51c8486ae18635ffe8d8273b79d12c81c76b7b0bc577c35a58e"
+  },
+  "loaded_libraries": [
+    "/data/InfiniTensor/phase1a-cache-128/lib/libinfiniop.so",
+    "/root/.infini/lib/libinfinirt.so"
+  ],
+  "models": {
+    "/root/huggingface/models/Qwen--Qwen3-4B/snapshots/master/config.json": {
+      "architectures": [
+        "Qwen3ForCausalLM"
+      ],
+      "attention_bias": false,
+      "attention_dropout": 0.0,
+      "bos_token_id": 151643,
+      "eos_token_id": 151645,
+      "head_dim": 128,
+      "hidden_act": "silu",
+      "hidden_size": 2560,
+      "initializer_range": 0.02,
+      "intermediate_size": 9728,
+      "max_position_embeddings": 40960,
+      "max_window_layers": 36,
+      "model_type": "qwen3",
+      "num_attention_heads": 32,
+      "num_hidden_layers": 36,
+      "num_key_value_heads": 8,
+      "rms_norm_eps": 1e-06,
+      "rope_scaling": null,
+      "rope_theta": 1000000,
+      "sliding_window": null,
+      "tie_word_embeddings": true,
+      "torch_dtype": "bfloat16",
+      "transformers_version": "4.51.0",
+      "use_cache": true,
+      "use_sliding_window": false,
+      "vocab_size": 151936
+    }
+  },
+  "script_hashes_at_run_start": {
+    "/data/InfiniTensor/InfiniLM/test/bench/phase0/caching_benchmark.py": "d0c72fd0df72fa4914d04970b3833b9e2dd8e2855b60cf54b2fea7fe1c229a85",
+    "/data/InfiniTensor/InfiniLM/test/bench/phase0/split_control_probe.py": "af13fb766814cff96c890d1a4153746da20fbf4a4031df01a9bab3a086af2d6b",
+    "/data/InfiniTensor/InfiniLM/test/bench/phase0/build_caching_isolated.py": "0e3a2bce599f49beef781ba823793406411f794c3313d4d393aa0cb7a4838c6c",
+    "/data/InfiniTensor/InfiniLM/test/bench/phase0/environment_audit.py": "f145c9445d4fd3bf5f542bf27b823586376f92d1612009a2d7d226a1ddd7af42",
+    "/data/InfiniTensor/InfiniLM/test/bench/phase0/summarize.py": "20122446aead8b0d726236fddaf7a4e52c5c469266af0d0ec1d6dacd0d756da1",
+    "/data/InfiniTensor/InfiniLM/test/bench/phase0/upstream_regression.py": "fcfe8bc668219dab278176e099163c64681d46f279075ee31a9d177afa79f46b",
+    "/data/InfiniTensor/InfiniLM/test/bench/phase0/gqa_regression.py": "f485cc668169604ffac4f0f62141b0eecacfa652f45006583b127fd272d8f941",
+    "/data/InfiniTensor/InfiniLM/test/bench/phase0/test_summarize.py": "47a9212ca1634aa8a5aa436bcd5a6cea2ceb6560b289e989d3dcd5be6a7dc305",
+    "/data/InfiniTensor/InfiniLM/test/bench/phase0/build_gqa_isolated.py": "32bb7796781fde3fe6f8e9819edf206f931d8ea946a37864e0986ef52376da65",
+    "/data/InfiniTensor/InfiniLM/test/bench/phase0/native_baseline.py": "d45c37309213172379974515b39b8a287c675e43d87454e3dd68cde9ee2a7f01",
+    "/data/InfiniTensor/InfiniLM/test/bench/phase0/correctness_support.py": "ec872d14d767866586f6dae895aa0e5c4c4ca9d1db3ce7cba29ebda216d05d6a",
+    "/data/InfiniTensor/InfiniLM/test/bench/phase0/provider_replay.py": "0b0ae4e25c31c489f794caa4cc664d18d291eb32b97fa2125fe8706232f0f3dd",
+    "/data/InfiniTensor/InfiniLM/test/bench/phase0/build_phase02_isolated.py": "6209c4d624c35833950315cdf1828838807fe85bfe91bf0f302fbd81e29a92eb"
+  },
+  "exit_code": 0,
+  "result": "PASS"
+}

@@ -42,3 +42,9 @@ __pycache__/
 !phase02_runs/*/archive_inventory.json
 !phase02_runs/*/tool.log
 !phase02_runs/archive_0p2a/archive_inventory.json
+!phase1a_runs/*/manifest.json
+!phase1a_runs/*/results.json
+!phase1a_runs/*/dispatch.log
+!phase1a_runs/*/summary.json
+!phase1a_runs/*/build.json
+!phase1a_runs/*/build.log

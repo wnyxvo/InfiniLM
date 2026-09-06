@@ -1,0 +1,8 @@
+{
+  "run_id": "fp16_256_round2_20260906",
+  "threads": "256",
+  "dtype": "fp16",
+  "calls_per_sample": 100,
+  "repeats": 10,
+  "result": "PASS"
+}

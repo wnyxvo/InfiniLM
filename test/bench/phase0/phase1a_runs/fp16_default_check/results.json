@@ -1,0 +1,141 @@
+{
+  "threads": "default",
+  "dtype": "fp16",
+  "env": "default",
+  "rows": [
+    {
+      "operation": "paged_caching",
+      "dtype": "fp16",
+      "threads": "default",
+      "tokens": 1,
+      "correctness": "PASS",
+      "cache_hash": "af0cc53e156e8d5eb7156be20a0df954e432589c6aaf57f4f19df2a6cfc47395",
+      "eager": {
+        "median_us": 13.72160017490387,
+        "min_us": 13.363200426101685,
+        "max_us": 14.591999351978302,
+        "samples_us": [
+          14.591999351978302,
+          13.72160017490387,
+          13.363200426101685
+        ]
+      },
+      "graph": {
+        "median_us": 1.7920000478625298,
+        "min_us": 1.7359999939799309,
+        "max_us": 2.7135999873280525,
+        "samples_us": [
+          2.7135999873280525,
+          1.7920000478625298,
+          1.7359999939799309
+        ]
+      },
+      "calls_per_sample": 20
+    },
+    {
+      "operation": "paged_caching",
+      "dtype": "fp16",
+      "threads": "default",
+      "tokens": 4,
+      "correctness": "PASS",
+      "cache_hash": "12113b3ae89e9f6013efbf90601eca60d75ba1199b14504662f3732dbd458a55",
+      "eager": {
+        "median_us": 13.316799700260162,
+        "min_us": 13.312000036239624,
+        "max_us": 13.568000495433807,
+        "samples_us": [
+          13.568000495433807,
+          13.316799700260162,
+          13.312000036239624
+        ]
+      },
+      "graph": {
+        "median_us": 1.740800030529499,
+        "min_us": 1.7343999817967415,
+        "max_us": 2.5087999179959297,
+        "samples_us": [
+          2.5087999179959297,
+          1.740800030529499,
+          1.7343999817967415
+        ]
+      },
+      "calls_per_sample": 20
+    },
+    {
+      "operation": "paged_caching",
+      "dtype": "fp16",
+      "threads": "default",
+      "tokens": 16,
+      "correctness": "PASS",
+      "cache_hash": "0553f2b3a5fff62b443a470b751b8a34a80f526a0115265e07490d4e364276a1",
+      "eager": {
+        "median_us": 13.673600554466248,
+        "min_us": 13.265599310398102,
+        "max_us": 13.771200180053711,
+        "samples_us": [
+          13.673600554466248,
+          13.771200180053711,
+          13.265599310398102
+        ]
+      },
+      "graph": {
+        "median_us": 1.8944000825285912,
+        "min_us": 1.8432000651955605,
+        "max_us": 2.662399969995022,
+        "samples_us": [
+          2.662399969995022,
+          1.8944000825285912,
+          1.8432000651955605
+        ]
+      },
+      "calls_per_sample": 20
+    },
+    {
+      "operation": "paged_caching",
+      "dtype": "fp16",
+      "threads": "default",
+      "tokens": 32,
+      "correctness": "PASS",
+      "cache_hash": "73f7130c47aa76ba448954ef43ec032c53fd3d417835e130dfed284a84e8ec03",
+      "eager": {
+        "median_us": 14.131200313568115,
+        "min_us": 13.568000495433807,
+        "max_us": 15.667200088500977,
+        "samples_us": [
+          13.568000495433807,
+          14.131200313568115,
+          15.667200088500977
+        ]
+      },
+      "graph": {
+        "median_us": 2.662399969995022,
+        "min_us": 2.611199952661991,
+        "max_us": 3.328000009059906,
+        "samples_us": [
+          3.328000009059906,
+          2.611199952661991,
+          2.662399969995022
+        ]
+      },
+      "calls_per_sample": 20
+    },
+    {
+      "operation": "append_attention",
+      "dtype": "fp16",
+      "threads": "default",
+      "tokens": 53,
+      "correctness": "PASS",
+      "eager": {
+        "median_us": 2.0479999482631683,
+        "min_us": 1.945599913597107,
+        "max_us": 2.252800017595291,
+        "samples_us": [
+          2.252800017595291,
+          2.0479999482631683,
+          1.945599913597107
+        ]
+      },
+      "calls_per_sample": 20
+    }
+  ]
+}

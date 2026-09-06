@@ -1,0 +1,8 @@
+{
+  "run_id": "default_fp16_quick",
+  "threads": "default",
+  "dtype": "fp16",
+  "calls_per_sample": 20,
+  "repeats": 3,
+  "result": "PASS"
+}
