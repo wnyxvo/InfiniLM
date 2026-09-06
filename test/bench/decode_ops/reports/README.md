@@ -13,3 +13,5 @@
 - [Milestone 2B](milestone2B_report.md)：shared-KV GQA Split-KV kernel、Graph 正确性与完整 attention 消融。
 
 - [Milestone 2C](milestone2C_report.md)：GQA shared-KV tile-level online softmax 优化与验证。
+
+- [Milestone 3A](milestone3A_report.md)：CTA Split-KV 容量策略与真实 InfiniCore Provider 集成。

@@ -1,0 +1,88 @@
+diff --git a/test/bench/decode_ops/benchmarks/attention.py b/test/bench/decode_ops/benchmarks/attention.py
+index 8e9ff2c..5b99321 100644
+--- a/test/bench/decode_ops/benchmarks/attention.py
++++ b/test/bench/decode_ops/benchmarks/attention.py
+@@ -21,6 +21,11 @@ def set_mode(mode):
+             os.environ.pop(key, None)
+     if mode == "production_default":
+         return
++    if mode in ("auto", "capacity_strategy"):
++        configure("default")
++        os.environ["INFINIOP_FLASH_DECODE_SPLITKV"] = "auto"
++        if mode == "capacity_strategy": os.environ["INFINIOP_FLASH_SPLITKV_STRATEGY"] = "capacity_v1"
++        return
+     configure("default")
+     os.environ.update({"INFINIOP_FLASH_DECODE_KERNEL": "cta",
+                        "INFINIOP_FLASH_GQA_FUSED": "0",
+@@ -40,7 +45,7 @@ def main():
+     p.add_argument('--output', required=True); p.add_argument('--samples', type=int, default=5)
+     p.add_argument('--graph-workloads', type=int, default=100); p.add_argument('--graph-replays', type=int, default=2); p.add_argument('--dtype', choices=('fp16','bf16'), default='fp16'); p.add_argument('--round', type=int, default=1)
+     args = p.parse_args(); torch.cuda.set_device(0); run = Run(args.output); rows = []
+-    modes = ('production_default','non_split_cta','gqa_fused','warp_splitkv','cta_splitkv','gqa_splitkv_2a','gqa_splitkv_shared','gqa_splitkv_tile')
++    modes = ('production_default','auto','capacity_strategy','non_split_cta','gqa_fused','warp_splitkv','cta_splitkv','gqa_splitkv_2a','gqa_splitkv_shared','gqa_splitkv_tile')
+     if args.round % 2 == 0: modes = tuple(reversed(modes))
+     try:
+         for mode in modes:
+diff --git a/test/bench/decode_ops/common/correctness_support.py b/test/bench/decode_ops/common/correctness_support.py
+index f53c34f..42bb1be 100644
+--- a/test/bench/decode_ops/common/correctness_support.py
++++ b/test/bench/decode_ops/common/correctness_support.py
+@@ -29,6 +29,7 @@ VARIANTS = {
+     'auto': {'DECODE_SPLITKV': 'auto'},
+     'cta': {'DECODE_SPLITKV': '0', 'GQA_FUSED': '0'},
+     'split2': {'NUM_SPLITS': '2'},
++    'strategy': {'DECODE_SPLITKV': 'auto'},
+ }
+ 
+ 
+@@ -127,6 +128,9 @@ def trace_call(call, variant):
+     call()
+     torch.cuda.synchronize()
+     config = configure(variant)
++    if variant == 'strategy':
++        os.environ['INFINIOP_FLASH_SPLITKV_STRATEGY'] = 'capacity_v1'
++        config['SPLITKV_STRATEGY'] = 'capacity_v1'
+     with capture_stderr() as f:
+         call()
+         torch.cuda.synchronize()
+diff --git a/test/bench/decode_ops/correctness/provider.py b/test/bench/decode_ops/correctness/provider.py
+index 3b88761..245e15f 100644
+--- a/test/bench/decode_ops/correctness/provider.py
++++ b/test/bench/decode_ops/correctness/provider.py
+@@ -8,7 +8,7 @@ import sys
+ 
+ if '--help' in sys.argv:
+     _p=argparse.ArgumentParser(description='Independent append and InfiniCore Graph verification')
+-    _p.add_argument('--output');_p.add_argument('--flash',action='store_true');_p.add_argument('--variant',choices=['gqa','auto','default','cta','split2'])
++    _p.add_argument('--output');_p.add_argument('--flash',action='store_true');_p.add_argument('--variant',choices=['gqa','auto','default','cta','split2','strategy'])
+     _p.parse_args();sys.exit(0)
+ 
+ import torch
+@@ -40,7 +40,7 @@ def main():
+     p=argparse.ArgumentParser()
+     p.add_argument('--output',required=True,help='New run directory (must not exist)')
+     p.add_argument('--flash',action='store_true')
+-    p.add_argument('--variant',choices=['gqa','auto','default','cta','split2'])
++    p.add_argument('--variant',choices=['gqa','auto','default','cta','split2','strategy'])
+     args=p.parse_args()
+     torch.cuda.set_device(0)
+     ic.set_device(ic.device('cuda',0))
+@@ -54,6 +54,7 @@ def main():
+         for dtype in [torch.float16,torch.bfloat16]:
+             for variant in variants:
+                 configure(variant)
++                if variant == 'strategy': os.environ['INFINIOP_FLASH_SPLITKV_STRATEGY'] = 'capacity_v1'
+                 torch.manual_seed(SEED)
+                 batch=4; pages_per_seq=2
+                 # Extra spare page per sequence allows a semantic relocation:
+@@ -90,8 +91,8 @@ def main():
+                     config,dispatch,trace=trace_call(attention,variant)
+                     with (run.path/'dispatch.log').open('a') as f:
+                         f.write(f'TRACE {dtype} {variant}\n{trace}\n')
+-                    want={'gqa':'cta_gqa_fused','auto':'cta_gqa_fused','cta':'cta_nosplit','default':'splitkv_cta','split2':'splitkv_cta'}[variant]
+-                    if dispatch.get('path')!=want:raise AssertionError(dispatch)
++                    want={'gqa':'cta_gqa_fused','auto':'cta_gqa_fused','cta':'cta_nosplit','default':'splitkv_cta','split2':'splitkv_cta'}
++                    if variant != 'strategy' and dispatch.get('path')!=want[variant]: raise AssertionError(dispatch)
+                 else:
+                     config=configure(variant);dispatch={'path':'builtin_FlashAttention; confirm with Nsight'}
+                 # Capture may run ops during warmup. Reset ACTUAL and expected

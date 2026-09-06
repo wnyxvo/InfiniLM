@@ -128,9 +128,6 @@ def trace_call(call, variant):
     call()
     torch.cuda.synchronize()
     config = configure(variant)
-    if variant == 'strategy':
-        os.environ['INFINIOP_FLASH_SPLITKV_STRATEGY'] = 'capacity_v1'
-        config['SPLITKV_STRATEGY'] = 'capacity_v1'
     with capture_stderr() as f:
         call()
         torch.cuda.synchronize()

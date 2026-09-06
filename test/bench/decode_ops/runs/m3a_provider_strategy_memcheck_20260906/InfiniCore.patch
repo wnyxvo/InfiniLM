@@ -1,0 +1,103 @@
+diff --git a/src/infiniop/ops/paged_attention/nvidia/paged_attention_hd128.cu b/src/infiniop/ops/paged_attention/nvidia/paged_attention_hd128.cu
+index 624a1981..3cbf60d3 100644
+--- a/src/infiniop/ops/paged_attention/nvidia/paged_attention_hd128.cu
++++ b/src/infiniop/ops/paged_attention/nvidia/paged_attention_hd128.cu
+@@ -37,6 +37,23 @@ inline int getSmCount() {
+ // dimension is tokens, not the number of pages. We use an upper bound for seqlen_k
+ // (max pages * page size), which matches common decode microbench where all seqs
+ // share the same cache length.
++
++// Capacity-only strategy for decode when no per-step host lengths are exposed.
++// It deliberately favors one split once batch parallelism is already ample.
++inline int chooseNumSplitsCapacityStrategy(size_t num_heads, size_t num_seqs,
++                                           size_t seqlen_k, int sm_count) {
++    if (sm_count <= 0 || num_heads == 0 || num_seqs == 0 || seqlen_k <= 256) return 1;
++    if (num_seqs >= 8) return 1;
++    if (num_seqs <= 2) {
++        if (seqlen_k >= 4096) return 8;
++        if (seqlen_k >= 1024) return 4;
++        return 2;
++    }
++    if (seqlen_k >= 2048) return 4;
++    if (seqlen_k >= 1024) return 2;
++    return 1;
++}
++
+ inline int chooseNumSplitsHeuristic(size_t num_heads, size_t num_seqs, size_t seqlen_k, int sm_count) {
+     if (sm_count <= 0) {
+         return 1;
+@@ -528,6 +545,8 @@ infiniStatus_t launch_decode_hd128_impl(
+     }
+     int num_splits = 4;
+     bool fixed_num_splits = true;
++    const char *strategy_env = std::getenv("INFINIOP_FLASH_SPLITKV_STRATEGY");
++    const bool use_capacity_strategy = strategy_env && std::strcmp(strategy_env, "capacity_v1") == 0;
+     if (const char *env = std::getenv("INFINIOP_FLASH_NUM_SPLITS")) {
+         if (std::strcmp(env, "auto") == 0) {
+             fixed_num_splits = false;
+@@ -570,6 +589,7 @@ infiniStatus_t launch_decode_hd128_impl(
+             int num_splits;
+             int fixed;
+             int gqa_fused;
++            int capacity_strategy;
+         };
+         static Sig last{};
+         static bool has_last = false;
+@@ -589,9 +609,10 @@ infiniStatus_t launch_decode_hd128_impl(
+             num_splits,
+             static_cast<int>(fixed_num_splits),
+             static_cast<int>(use_gqa_fused),
++            static_cast<int>(use_capacity_strategy),
+         };
+ 
+-        if (has_last && cur.path == last.path && cur.dtype == last.dtype && cur.heads == last.heads && cur.kv_heads == last.kv_heads && cur.seqs == last.seqs && cur.pbs == last.pbs && cur.max_blocks == last.max_blocks && cur.cta_tile == last.cta_tile && cur.cta_threads == last.cta_threads && cur.split == last.split && cur.split_auto == last.split_auto && cur.num_splits == last.num_splits && cur.fixed == last.fixed && cur.gqa_fused == last.gqa_fused) {
++        if (has_last && cur.path == last.path && cur.dtype == last.dtype && cur.heads == last.heads && cur.kv_heads == last.kv_heads && cur.seqs == last.seqs && cur.pbs == last.pbs && cur.max_blocks == last.max_blocks && cur.cta_tile == last.cta_tile && cur.cta_threads == last.cta_threads && cur.split == last.split && cur.split_auto == last.split_auto && cur.num_splits == last.num_splits && cur.fixed == last.fixed && cur.gqa_fused == last.gqa_fused && cur.capacity_strategy == last.capacity_strategy) {
+             return;
+         }
+         last = cur;
+@@ -599,11 +620,11 @@ infiniStatus_t launch_decode_hd128_impl(
+ 
+         fprintf(stderr,
+                 "[INFINIOP][paged_attention][hd128] dispatch: path=%s dtype=%d heads=%zu kv_heads=%zu seqs=%zu "
+-                "pbs=%zu max_blocks=%zu cta_tile=%d cta_threads=%d split=%d split_auto=%d num_splits=%d fixed=%d gqa_fused=%d\n",
++                "pbs=%zu max_blocks=%zu cta_tile=%d cta_threads=%d split=%d split_auto=%d num_splits=%d fixed=%d gqa_fused=%d capacity_strategy=%d\n",
+                 path, static_cast<int>(dtype), num_heads, num_kv_heads, num_seqs,
+                 page_block_size, max_num_blocks_per_seq, cta_tile, cta_threads,
+                 static_cast<int>(use_split), static_cast<int>(use_split_auto), num_splits, static_cast<int>(fixed_num_splits),
+-                static_cast<int>(use_gqa_fused));
++                static_cast<int>(use_gqa_fused), static_cast<int>(use_capacity_strategy));
+     };
+ 
+     // Split-kv auto mode: decide whether to split based on a heuristic.
+@@ -611,15 +632,17 @@ infiniStatus_t launch_decode_hd128_impl(
+         // Approximate seqlen_k by the per-seq KV capacity (paged KV upper bound).
+         const size_t seqlen_k = max_num_blocks_per_seq * page_block_size;
+         const int sm_count = getSmCount();
+-        num_splits = chooseNumSplitsHeuristic(num_heads, num_seqs, seqlen_k, sm_count);
++        num_splits = use_capacity_strategy
++            ? chooseNumSplitsCapacityStrategy(num_heads, num_seqs, seqlen_k, sm_count)
++            : chooseNumSplitsHeuristic(num_heads, num_seqs, seqlen_k, sm_count);
+         if (const char *dbg = std::getenv("INFINIOP_FLASH_DEBUG_SPLITS")) {
+             if (std::strcmp(dbg, "1") == 0 || std::strcmp(dbg, "true") == 0) {
+                 static size_t last_seqlen_k = 0;
+                 if (last_seqlen_k != seqlen_k) {
+                     last_seqlen_k = seqlen_k;
+                     fprintf(stderr,
+-                            "[INFINIOP][paged_attention] splitkv auto(mode): sm=%d heads=%zu seqs=%zu seqlen_k~%zu -> num_splits=%d\n",
+-                            sm_count, num_heads, num_seqs, seqlen_k, num_splits);
++                            "[INFINIOP][paged_attention] splitkv auto(mode): strategy=%s sm=%d heads=%zu seqs=%zu seqlen_k~%zu -> num_splits=%d\n",
++                            use_capacity_strategy ? "capacity_v1" : "heuristic", sm_count, num_heads, num_seqs, seqlen_k, num_splits);
+                 }
+             }
+         }
+@@ -677,7 +700,9 @@ infiniStatus_t launch_decode_hd128_impl(
+             // Approximate seqlen_k by the per-seq KV capacity (paged KV upper bound).
+             const size_t seqlen_k = max_num_blocks_per_seq * page_block_size;
+             const int sm_count = getSmCount();
+-            num_splits = chooseNumSplitsHeuristic(num_heads, num_seqs, seqlen_k, sm_count);
++            num_splits = use_capacity_strategy
++            ? chooseNumSplitsCapacityStrategy(num_heads, num_seqs, seqlen_k, sm_count)
++            : chooseNumSplitsHeuristic(num_heads, num_seqs, seqlen_k, sm_count);
+             if (const char *dbg = std::getenv("INFINIOP_FLASH_DEBUG_SPLITS")) {
+                 if (std::strcmp(dbg, "1") == 0 || std::strcmp(dbg, "true") == 0) {
+                     static size_t last_seqlen_k = 0;

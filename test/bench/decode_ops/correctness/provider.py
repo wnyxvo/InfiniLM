@@ -8,7 +8,7 @@ import sys
 
 if '--help' in sys.argv:
     _p=argparse.ArgumentParser(description='Independent append and InfiniCore Graph verification')
-    _p.add_argument('--output');_p.add_argument('--flash',action='store_true');_p.add_argument('--variant',choices=['gqa','auto','default','cta','split2'])
+    _p.add_argument('--output');_p.add_argument('--flash',action='store_true');_p.add_argument('--variant',choices=['gqa','auto','default','cta','split2','strategy'])
     _p.parse_args();sys.exit(0)
 
 import torch
@@ -40,7 +40,7 @@ def main():
     p=argparse.ArgumentParser()
     p.add_argument('--output',required=True,help='New run directory (must not exist)')
     p.add_argument('--flash',action='store_true')
-    p.add_argument('--variant',choices=['gqa','auto','default','cta','split2'])
+    p.add_argument('--variant',choices=['gqa','auto','default','cta','split2','strategy'])
     args=p.parse_args()
     torch.cuda.set_device(0)
     ic.set_device(ic.device('cuda',0))
@@ -54,6 +54,7 @@ def main():
         for dtype in [torch.float16,torch.bfloat16]:
             for variant in variants:
                 configure(variant)
+                if variant == 'strategy': os.environ['INFINIOP_FLASH_SPLITKV_STRATEGY'] = 'capacity_v1'
                 torch.manual_seed(SEED)
                 batch=4; pages_per_seq=2
                 # Extra spare page per sequence allows a semantic relocation:
@@ -90,8 +91,8 @@ def main():
                     config,dispatch,trace=trace_call(attention,variant)
                     with (run.path/'dispatch.log').open('a') as f:
                         f.write(f'TRACE {dtype} {variant}\n{trace}\n')
-                    want={'gqa':'cta_gqa_fused','auto':'cta_gqa_fused','cta':'cta_nosplit','default':'splitkv_cta','split2':'splitkv_cta'}[variant]
-                    if dispatch.get('path')!=want:raise AssertionError(dispatch)
+                    want={'gqa':'cta_gqa_fused','auto':'cta_gqa_fused','cta':'cta_nosplit','default':'splitkv_cta','split2':'splitkv_cta'}
+                    if variant != 'strategy' and dispatch.get('path')!=want[variant]: raise AssertionError(dispatch)
                 else:
                     config=configure(variant);dispatch={'path':'builtin_FlashAttention; confirm with Nsight'}
                 # Capture may run ops during warmup. Reset ACTUAL and expected

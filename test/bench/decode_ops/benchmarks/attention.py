@@ -21,6 +21,11 @@ def set_mode(mode):
             os.environ.pop(key, None)
     if mode == "production_default":
         return
+    if mode in ("auto", "capacity_strategy"):
+        configure("default")
+        os.environ["INFINIOP_FLASH_DECODE_SPLITKV"] = "auto"
+        if mode == "capacity_strategy": os.environ["INFINIOP_FLASH_SPLITKV_STRATEGY"] = "capacity_v1"
+        return
     configure("default")
     os.environ.update({"INFINIOP_FLASH_DECODE_KERNEL": "cta",
                        "INFINIOP_FLASH_GQA_FUSED": "0",
@@ -40,7 +45,7 @@ def main():
     p.add_argument('--output', required=True); p.add_argument('--samples', type=int, default=5)
     p.add_argument('--graph-workloads', type=int, default=100); p.add_argument('--graph-replays', type=int, default=2); p.add_argument('--dtype', choices=('fp16','bf16'), default='fp16'); p.add_argument('--round', type=int, default=1)
     args = p.parse_args(); torch.cuda.set_device(0); run = Run(args.output); rows = []
-    modes = ('production_default','non_split_cta','gqa_fused','warp_splitkv','cta_splitkv','gqa_splitkv_2a','gqa_splitkv_shared','gqa_splitkv_tile')
+    modes = ('production_default','auto','capacity_strategy','non_split_cta','gqa_fused','warp_splitkv','cta_splitkv','gqa_splitkv_2a','gqa_splitkv_shared','gqa_splitkv_tile')
     if args.round % 2 == 0: modes = tuple(reversed(modes))
     try:
         for mode in modes:
